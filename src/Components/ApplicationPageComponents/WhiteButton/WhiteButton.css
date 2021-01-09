@@ -10,6 +10,7 @@
     border: 1px solid #BDBDBD;
     border-radius: 4px;
     outline: none;
+    margin: 10px 0;
 }
 
 .WhiteButton:hover {

@@ -2,9 +2,9 @@ import React from 'react';
 import './Logo.css';
 
 
-const Logo = () => {
+const Logo = (props) => {
     return (
-        <div className="LogoFrame" />
+        <div onClick={props.logoLink} className="LogoFrame" />
     )
 }
 

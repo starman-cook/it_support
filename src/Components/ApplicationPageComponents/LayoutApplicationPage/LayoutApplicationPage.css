@@ -1,0 +1,12 @@
+.LayoutApplicationPage {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.LayoutApplicationPage_sidebar {
+    display: flex;
+    flex-direction: column;
+}
+.LayoutApplicationPage__prev-menu {
+    height: 518px;
+}

@@ -5,7 +5,7 @@ import './WhiteButton.css'
 const WhiteButton = (props) => {
     return (
         <>
-        <button disabled={props.disabled} className="WhiteButton" onClick={props.clicked}>{props.name}</button>
+        <button style={props.hide ? null: {"dispay" : "none", }} disabled={props.disabled} className="WhiteButton" onClick={props.clicked}>{props.name}</button>
         </>
     )
 }

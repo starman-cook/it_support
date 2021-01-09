@@ -1,0 +1,57 @@
+.SocialNetwork {
+    width: 370px;
+    height: 56px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.SocialNetwork__text {
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    margin-right: 8px;
+}
+
+.SocialNetwork__link {
+    width: 30px;
+    height: 30px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0 4px;
+}
+.SocialNetwork__instagram {
+    background: url('../../../assets//icons//ic_instagram.svg');
+}
+.SocialNetwork__facebook {
+    background: url('../../../assets//icons//ic_facebook.svg');
+}
+.SocialNetwork__linkedin {
+    background: url('../../../assets//icons//ic_linkedin.svg');
+}
+.SocialNetwork__youtube {
+    background: url('../../../assets//icons//ic_youtube.svg');
+}
+
+.SocialNetwork__instagram:hover {
+    background: url('../../../assets//icons//ic_instagram_red.svg');
+}
+.SocialNetwork__facebook:hover {
+    background: url('../../../assets//icons//ic_facebook_red.svg');
+}
+.SocialNetwork__linkedin:hover {
+    background: url('../../../assets//icons//ic_linkedin_red.svg');
+}
+.SocialNetwork__youtube:hover {
+    background: url('../../../assets//icons//ic_youtube_red.svg');
+}
+.SocialNetwork__link:active {
+    transform: scale(0.9);
+}

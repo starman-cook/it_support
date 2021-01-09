@@ -1,0 +1,21 @@
+.WhiteButton {
+    width: 370px;
+    height: 44px;
+    background: white;
+    cursor: pointer;
+    color: #BDBDBD;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    outline: none;
+}
+
+.WhiteButton:hover {
+    color: #E34A4E;
+    border-color: #E34A4E;
+}
+.WhiteButton:active {
+    transform: scale(0.99);
+}

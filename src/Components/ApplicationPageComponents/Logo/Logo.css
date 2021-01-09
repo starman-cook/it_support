@@ -1,0 +1,6 @@
+.LogoFrame {
+    width: 370px;
+    height: 300px;
+    border-radius: 8px;
+    background: white url('../../../assets//images/logo_L.svg')center no-repeat;
+}

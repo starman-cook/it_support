@@ -1,0 +1,22 @@
+.RedButton {
+    width: 330px;
+    height: 44px;
+    background: white;
+    cursor: pointer;
+    color: #E34A4E;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid #E34A4E;
+    border-radius: 4px;
+    outline: none;
+}
+
+.RedButton:hover {
+    color: white;
+    border-color: #E34A4E;
+    background: #E34A4E;
+}
+.RedButton:active {
+    transform: scale(0.99);
+}

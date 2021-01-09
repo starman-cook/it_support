@@ -1,0 +1,22 @@
+.BlueButton {
+    width: 200px;
+    height: 44px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    background: #4FC6E0;
+    border-radius: 4px;
+    outline: none;
+}
+
+.BlueButton:disabled {
+    background: rgba(79, 198, 224, 0.5);
+}
+
+.BlueButton:active {
+    transform: scale(0.99);
+}

@@ -3,11 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import ApplicationPageReducer from './Store/ApplicationPage/ApplicationPageReducer';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+const rootReducer = combineReducers({
+  ApplicationPage: ApplicationPageReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+const app = (
+  <Provider store={store}>
+    <BrowserRouter>
+          <App />
+    </BrowserRouter>
+  </Provider>
+)
+
+ReactDOM.render(app,
   document.getElementById('root')
 );
 

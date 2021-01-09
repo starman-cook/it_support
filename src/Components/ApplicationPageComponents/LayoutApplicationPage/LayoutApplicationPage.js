@@ -16,12 +16,12 @@ const LayoutApplicationPage = (props) => {
         <div className="LayoutApplicationPage">
             <div className="LayoutApplicationPage_sidebar">
                 <Logo 
-                    logoLink={goToApplication}
+                    logoLink={() => {goToApplication()}}
                 />
                 <div className="LayoutApplicationPage__prev-menu">{props.left}</div>
                 <WhiteButton 
                     name="Создать новую заявку"
-                    clicked={goToApplication}
+                    clicked={() => {goToApplication()}}
                 />
                 <WhiteButton  
                     name={"Посмотреть историю моих заявок"}

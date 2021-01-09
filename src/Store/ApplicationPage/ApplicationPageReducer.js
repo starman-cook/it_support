@@ -1,5 +1,5 @@
 const initialState = {
-
+    departments: ["main dep", "office dep", "some other dep"]
 };
 
 const ApplicationPageReducer = (state = initialState, action) => {

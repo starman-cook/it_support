@@ -8,6 +8,11 @@
     justify-content: center;
     margin: 10px 0;
 }
+.SocialNetwork__aTag {
+    text-decoration: none;
+    display: inline-block;
+    height: 30px;
+}
 
 .SocialNetwork__text {
     font-size: 18px;
@@ -23,7 +28,6 @@
     background-position: center center;
     background-repeat: no-repeat;
     display: inline-block;
-    text-decoration: none;
     cursor: pointer;
     margin: 0 4px;
 }

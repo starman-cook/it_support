@@ -1,0 +1,231 @@
+.ApplicationForm {
+    width: 770px;
+    height: 1012px;
+    background: white;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 50px 70px;
+}
+.ApplicationForm__title {
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 45px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    margin: 0;
+    padding: 0;
+}
+.ApplicationForm__title-name {
+    font-weight: bold;
+}
+.ApplicationForm__inputTitle {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+}
+.ApplicationForm__input {
+    color: #4D525B;
+    width: 630px;
+    height: 44px;
+    background: white;
+    border: 1px solid #C0C0C0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 11px 22px;
+}
+.ApplicationForm__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__input::-moz-placeholder { /* Firefox 19+ */
+    color:  #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__input:-ms-input-placeholder { /* IE 10+ */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__input:-moz-placeholder { /* Firefox 18- */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__input-select {
+    cursor: pointer;
+    color: #C0C0C0;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    background: url('../../../assets//icons//ic_arrow_select.svg')center right no-repeat;
+}
+.ApplicationForm__input-select:hover {
+    background: url('../../../assets//icons//ic_arrow_select_red.svg')center right no-repeat;
+}
+.ApplicationForm__input-select:active {
+    background: url('../../../assets//icons//ic_arrow_select_red.svg')center right no-repeat;
+}
+option:not(:checked) { 
+    color: #C0C0C0; 
+}
+option:checked { 
+    color: #4D525B; 
+}
+
+.ApplicationForm__input-optionDefault {
+    display: none;
+}
+.ApplicationForm__inputMessage {
+    width: 630px;
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #C0C0C0;
+    border-radius: 4px;
+    resize: none;
+    min-height: 240px;
+}
+.ApplicationForm__inputMessage::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+.ApplicationForm__inputMessage::-moz-placeholder { /* Firefox 19+ */
+    color:  #C0C0C0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+.ApplicationForm__inputMessage:-ms-input-placeholder { /* IE 10+ */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+.ApplicationForm__inputMessage:-moz-placeholder { /* Firefox 18- */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+.ApplicationForm__downloadBlock {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.ApplicationForm__inputFile {
+    display: none;
+}
+.ApplicationForm__fileIcon {
+    cursor: pointer;
+    width: 30px;
+    height: 27px;
+    margin-right: 10px;
+    background: url('../../../assets//icons/ic_add_file.svg')center no-repeat;
+}
+.ApplicationForm__fileName {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.ApplicationForm__question {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    background: url('../../../assets//icons/ic_question.svg')6px 4px  no-repeat, url('../../../assets//icons/ic_question_frame.svg')center center no-repeat;  
+}
+.ApplicationForm__question--modal {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 217px;
+    padding: 0 20px;
+    border: 1px solid #E34A4E;
+    background: white;
+    border-radius: 4px;
+}
+.ApplicationForm__question--modal-text {
+    color: #4D525B;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+}
+.ApplicationForm__fileIcon:hover {
+    background: url('../../../assets//icons/ic_add_file_red.svg')center no-repeat;
+}
+.ApplicationForm__fileName:hover {
+    color: #E34A4E;
+}
+.ApplicationForm__question:hover {
+    background: url('../../../assets//icons/ic_question_red.svg')6px 4px  no-repeat, url('../../../assets//icons/ic_question_frame_red.svg')center center no-repeat;  
+}
+
+
+.ApplicationForm__teamViewerTitle {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+}
+.ApplicationForm__teamViewer-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ApplicationForm__teamViewer-combine {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+}
+.ApplicationForm__inputPassword {
+    width: 358px;
+    height: 44px;
+    border: 1px solid #C0C0C0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0 22px;
+}
+.ApplicationForm__inputPassword::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__inputPassword::-moz-placeholder { /* Firefox 19+ */
+    color:  #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__inputPassword:-ms-input-placeholder { /* IE 10+ */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__inputPassword:-moz-placeholder { /* Firefox 18- */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplicationForm__eye {
+    cursor: pointer;
+    width: 28px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: url('../../../assets//icons/ic_eye_password.svg')center no-repeat;
+}
+.ApplicationForm__eye:hover {
+    background: url('../../../assets//icons/ic_eye_password_red.svg')center no-repeat;
+}
+.ApplicationForm__eye:active {
+    transform: translate(0, -50%) scale(0.9);
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router';
+import ApplicationForm from '../../Components/ApplicationPageComponents/ApplicationForm/ApplicationForm';
 import LayoutApplicationPage from '../../Components/ApplicationPageComponents/LayoutApplicationPage/LayoutApplicationPage';
 import PreviousApplicationMenu from '../../Components/ApplicationPageComponents/PreviousApplicationMenu/PreviousApplicationMenu';
 
@@ -14,6 +15,8 @@ const ApplicationPage = () => {
     const name = "Не работает вай-фай";
     let description = "";
     const title = "Предыдущая заявка";
+    let center;
+
 
     if (isBackInProgress) {
         description = `Заявка ${id_number} вернулась в работу, ИТ-специалист свяжется с вами в ближайшее время`;
@@ -33,9 +36,16 @@ const ApplicationPage = () => {
         />
     )
 
+    center = (
+        <ApplicationForm 
+            buttonClicked={alert("ustal")}
+        />
+    )
+
     return (
         <LayoutApplicationPage
-        left={leftSide}
+            left={leftSide}
+            center={center}
         >
             <Switch>
 

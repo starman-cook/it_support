@@ -12,10 +12,12 @@ const ApplicationDetails = (props) => {
     const dispatch = useDispatch();
     const comments = useSelector(state => state.ApplicationPage.comments); //Получить все комментарии по ID
     const [oneComment, setOneComment] = useState();
+    const [messageClassToggle, setMessageClassToggle] = useState("messageClassToggleHidden");
+    const [messageClassButtonText, setMessageClassButtonText] = useState('показать подробнее');
 
     const department = "Удаленная поддержка"; // Получить по id
     const subject = 'Не работает почта'; // Получить по id
-    const message = 'Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что это началось после того...'; // Получить по id
+    const message = 'Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что это началось после того // Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что это началось после того  // ни не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что это началось после того // Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что эт после '; // Получить по id
     let allComments;
     if (comments) {
         allComments = (
@@ -45,9 +47,19 @@ const ApplicationDetails = (props) => {
         dispatch(addComment(obj));
         setOneComment('');
     }
+    const textShowToggle = () => {
+        if (messageClassToggle === 'messageClassToggleHidden') {
+            setMessageClassToggle('messageClassToggleOpen');
+            setMessageClassButtonText('скрыть текст');
+        } else {
+            setMessageClassToggle('messageClassToggleHidden');
+            setMessageClassButtonText('показать подробнее');
+        }
+    }
 
     let centerComponent;
 
+     // possible statusses 'new' 'in_progress' 'complete' 'canceled'
     if (status === 'new') {
         centerComponent = (
         <div className="ApplecationDetails">
@@ -62,10 +74,11 @@ const ApplicationDetails = (props) => {
                     <p className="ApplecationDetails__text">{subject}</p>
                 </div>
             </div>
-
                 <p className="ApplecationDetails__text--title">Подробности</p>
+            <div className={messageClassToggle}>
                 <p className="ApplecationDetails__text">{message}</p>
-
+                <div onClick={textShowToggle} className="ApplecationDetails__message--button"><span className="ApplecationDetails__text">... </span>{messageClassButtonText}</div>
+            </div>
                 <textarea value={oneComment} placeholder="Если вы хотите дополнить заявку, напишите комментарий" onChange={(event) => {textAreaHandler(event)}} className="ApplecationDetails__textarea"></textarea>
                 <div className="ApplecationDetails__btn">
                     <BlueButton 

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Switch, useHistory } from 'react-router';
 import ApplicationDetails from '../../Components/ApplicationPageComponents/ApplicationDetails/ApplicationDetails';
 import ApplicationForm from '../../Components/ApplicationPageComponents/ApplicationForm/ApplicationForm';
+import ApplicationStatus from '../../Components/ApplicationPageComponents/ApplicationStatus/ApplicationStatus';
 import LayoutApplicationPage from '../../Components/ApplicationPageComponents/LayoutApplicationPage/LayoutApplicationPage';
 import PreviousApplicationMenu from '../../Components/ApplicationPageComponents/PreviousApplicationMenu/PreviousApplicationMenu';
 import SpecialitsWindowStatus from '../../Components/ApplicationPageComponents/SpecialitsWindowStatus/SpecialitsWindowStatus';
@@ -131,7 +132,12 @@ const ApplicationPage = (props) => {
             )
     }
     if (id) {
-        leftSide = (<div>LEFT</div>)
+        leftSide = (
+            <ApplicationStatus 
+                status={status}
+                id={id}
+            />
+        )
     } else {
         leftSide = (
             <PreviousApplicationMenu 

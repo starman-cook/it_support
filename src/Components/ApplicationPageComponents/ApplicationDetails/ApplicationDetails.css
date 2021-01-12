@@ -48,6 +48,8 @@
     line-height: 25px;
     letter-spacing: 0.01em;
     color: #4D525B;
+    padding: 0;
+    margin: 0;
 }
 .ApplecationDetails__textarea {
     width: 630px;
@@ -91,3 +93,32 @@
     font-size: 18px;
     line-height: 23px;
   }
+
+
+.ApplecationDetails__message--button {
+    color: #C0C0C0;
+    font-size: 12px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: right;
+    background: linear-gradient(to right, rgba(255,255,255, 0.3), white 80%);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+.messageClassToggleHidden {
+      height: 125px;
+      margin-bottom: 50px;
+      position: relative;
+      overflow: hidden;
+  }
+.messageClassToggleOpen {
+      margin-bottom: 50px;
+      position: relative;
+}
+.messageClassToggleOpen > .ApplecationDetails__message--button {
+    margin-bottom: 50px;
+    background: none;
+    position: relative;
+}

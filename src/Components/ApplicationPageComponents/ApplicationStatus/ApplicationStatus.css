@@ -1,0 +1,68 @@
+.ApplicationStatus {
+    margin-top: 49px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.ApplicationStatus__lineBlock {
+    display: flex;
+    margin-right: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+.ApplicationStatus__circle {
+    width: 38px;
+    height: 38px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    background: #E34A4E;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ApplicationStatus__circle--check {
+    background: #E34A4E url('../../../assets//icons/ic_check.svg')center no-repeat;
+}
+.ApplicationStatus__line {
+    width: 2px;
+    height: 70px;
+}
+
+.ApplicationStatus__textBlock {
+    margin-top: 9px;
+    width: 290px;
+}
+/* .ApplicationStatus__textItem {} */
+.ApplicationStatus__title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    padding: 0;
+    margin: 0;
+}
+.ApplicationStatus__text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    padding: 0;
+    margin: 0 0 25px 0;
+}
+.ApplicationStatus__unactive {
+    color: rgba(77, 82, 91, 0.5);
+}
+.ApplicationStatus__unactive--circle {
+    background: white;
+}
+.ApplicationStatus__text--pushDown {
+    margin-bottom: 45px;
+}

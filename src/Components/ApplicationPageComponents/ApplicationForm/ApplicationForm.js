@@ -55,7 +55,7 @@ const ApplicationForm = (props) => {
                     <BlueButton 
                         name={props.buttonName}
                         type="submit"
-                        disabled={props.disabled}
+                        isDisabled={props.isDisabled}
                     />
                 </div>
             </form>

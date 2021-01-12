@@ -21,6 +21,16 @@ const ApplicationPage = () => {
     let center;
     const userName = "Светлана";
 
+
+
+    const [inputState, setInputState] = useState({
+        subject: '',
+        department: '',
+        message: '',
+        password: '',
+        file: ''
+    })
+
     if (isBackInProgress) {
         description = `Заявка ${id_number} вернулась в работу, ИТ-специалист свяжется с вами в ближайшее время`;
         buttonName = "Посмотреть заявку в новом окне";
@@ -45,9 +55,19 @@ const ApplicationPage = () => {
     }
     const chooseFile = (event) => {
         setFileNameState(event.target.files[0].name);
+        setInputState(prevState => {
+            return {...prevState, "file": event}
+        });
     }
     const activateFileInput = () => {
         refFile.current.click();
+    }
+
+    const inputHandler = (event) => {
+        const {name, value} = event.target;
+        setInputState(prevState => {
+            return {...prevState, [name]: value}
+        });
     }
 
     let leftSide = (
@@ -63,6 +83,30 @@ const ApplicationPage = () => {
     if (fileNameState.trim() === '') {
         setFileNameState('Выберите файл')
     }
+
+    const submitFormHandler = (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+        Object.keys(inputState).forEach(key => {
+            formData.append(key, inputState[key]);
+        })
+        console.log(formData); // Отправка формы заявки с файлом или без файла
+    }
+
+    const isDisabled = () => {
+        let result = false;
+        Object.keys(inputState).forEach(key => {
+            if (key !== "file") {
+                console.log(inputState[key])
+
+                if (!inputState[key] ) {
+                    result = true;
+                }
+            }
+        });
+        return result;
+    }
+    let a = isDisabled();
     
     center = (
         <ApplicationForm 
@@ -71,19 +115,19 @@ const ApplicationPage = () => {
 
             subjectTitle={"Тема*"}
             subjectName="subject"
-            // subjectChange
+            subjectChange={(event) => {inputHandler(event)}}
             subjectRequired={true}
             subjectPlaceholder={"Опишите кратко суть проблемы"}
 
             departmentTitle={"Отдел*"}
             departmentName="department"
-            // departmentChange
+            departmentChange={(event) => {inputHandler(event)}}
             departmentRequired={true}
             departmentPlaceholder={"В какой отдел отправить заявку?"}
 
             messageTitle={"Сообщение"}
             messageName="message"
-            // messageChange
+            messageChange={(event) => {inputHandler(event)}}
             messageRequired={true}
             messagePlaceholder={"Расскажите побробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
 
@@ -99,14 +143,14 @@ const ApplicationPage = () => {
             textTeamViewer={"Пароль от TeamViewer"}
             showPassword={isShowPassword}
             passwordName="password"
-            // passwordChange
+            passwordChange={(event) => {inputHandler(event)}}
             passwordRequired={false}
             passwordPlaceholder={"Введите пароль"}
             toggleShowPassword={toogleShowPassword}
 
             buttonName={"Отправить заявку"}
-            submitClicked={() => {alert("Submit works")}}
-            // disabled
+            submitClicked={(event) => {submitFormHandler(event)}}
+            isDisabled={a}
 
         />
     )

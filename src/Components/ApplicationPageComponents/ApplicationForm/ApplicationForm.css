@@ -57,7 +57,7 @@
   }
 .ApplicationForm__input-select {
     cursor: pointer;
-    color: #C0C0C0;
+    color: #4D525B;
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
@@ -69,12 +69,12 @@
 .ApplicationForm__input-select:active {
     background: url('../../../assets//icons//ic_arrow_select_red.svg')center right no-repeat;
 }
-option:not(:checked) { 
-    color: #C0C0C0; 
+/* option:not(:checked) { 
+    color: #4D525B;
 }
 option:checked { 
     color: #4D525B; 
-}
+} */
 
 .ApplicationForm__input-optionDefault {
     display: none;

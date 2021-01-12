@@ -6,6 +6,7 @@ function App() {
   <Switch>
     <Route path="/" exact component={ApplicationPage} />
     <Route path="/application" exact component={ApplicationPage} />
+    <Route path="/application/:id" component={ApplicationPage} />
   </Switch>
   </>
   );

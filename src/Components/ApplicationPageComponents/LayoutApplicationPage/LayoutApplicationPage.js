@@ -22,6 +22,7 @@ const LayoutApplicationPage = (props) => {
                 <WhiteButton 
                     name="Создать новую заявку"
                     clicked={() => {goToApplication()}}
+                    hide={props.hideButton}
                 />
                 <WhiteButton  
                     name={"Посмотреть историю моих заявок"}

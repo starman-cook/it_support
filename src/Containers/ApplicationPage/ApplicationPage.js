@@ -1,15 +1,25 @@
-import React, { useRef, useState } from 'react';
-import { Switch } from 'react-router';
+import React, { useEffect, useRef, useState } from 'react';
+import { Switch, useHistory } from 'react-router';
+import ApplicationDetails from '../../Components/ApplicationPageComponents/ApplicationDetails/ApplicationDetails';
 import ApplicationForm from '../../Components/ApplicationPageComponents/ApplicationForm/ApplicationForm';
 import LayoutApplicationPage from '../../Components/ApplicationPageComponents/LayoutApplicationPage/LayoutApplicationPage';
 import PreviousApplicationMenu from '../../Components/ApplicationPageComponents/PreviousApplicationMenu/PreviousApplicationMenu';
+import SpecialitsWindowStatus from '../../Components/ApplicationPageComponents/SpecialitsWindowStatus/SpecialitsWindowStatus';
 
 
-const ApplicationPage = () => {
+const ApplicationPage = (props) => {
+
+    const id = props.match.params.id;
+    const status = 'new' // Получить статус заявки при запросе данных заявки
+    // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
+
     const refFile = useRef();
+    const history = useHistory();
     const [fileNameState, setFileNameState] = useState("");
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [showQuestion, setShowQuestion] = useState(false);
+    const [submitDisabled, setSubmitDisabled] = useState(true);
+
 
     let isBackInProgress = false;
     let buttonName ="";
@@ -19,6 +29,8 @@ const ApplicationPage = () => {
     let description = "";
     const title = "Предыдущая заявка";
     let center;
+    let top;
+    let leftSide;
     const userName = "Светлана";
 
 
@@ -70,18 +82,18 @@ const ApplicationPage = () => {
         });
     }
 
-    let leftSide = (
-        <PreviousApplicationMenu 
-            title={title}
-            name={name}
-            date={date}
-            description={description}
-            buttonName={buttonName}
-            clicked={() => {alert("it works")}}
-        />
-    )
+    
     if (fileNameState.trim() === '') {
         setFileNameState('Выберите файл')
+    }
+    const clearInputState = () => {
+        setInputState({
+            subject: '',
+            department: '',
+            message: '',
+            password: '',
+            file: ''
+        });
     }
 
     const submitFormHandler = (event) => {
@@ -90,75 +102,107 @@ const ApplicationPage = () => {
         Object.keys(inputState).forEach(key => {
             formData.append(key, inputState[key]);
         })
-        console.log(formData); // Отправка формы заявки с файлом или без файла
+        // console.log(formData);
+         // Отправка формы заявки с файлом или без файла
+        clearInputState();
+        history.push('application/idgoeshere') //add query params to get application by id
     }
 
     const isDisabled = () => {
-        let result = false;
+        setSubmitDisabled(false);
         Object.keys(inputState).forEach(key => {
             if (key !== "file") {
-                console.log(inputState[key])
-
                 if (!inputState[key] ) {
-                    result = true;
+                    setSubmitDisabled(true);
                 }
             }
         });
-        return result;
     }
-    let a = isDisabled();
-    
-    center = (
-        <ApplicationForm 
-            userName={userName}
-            greetings={"здравствуйте! Опишите свою проблему"}
+    useEffect(() => {
+        isDisabled();
+    }, [inputState]);
 
-            subjectTitle={"Тема*"}
-            subjectName="subject"
-            subjectChange={(event) => {inputHandler(event)}}
-            subjectRequired={true}
-            subjectPlaceholder={"Опишите кратко суть проблемы"}
-
-            departmentTitle={"Отдел*"}
-            departmentName="department"
-            departmentChange={(event) => {inputHandler(event)}}
-            departmentRequired={true}
-            departmentPlaceholder={"В какой отдел отправить заявку?"}
-
-            messageTitle={"Сообщение"}
-            messageName="message"
-            messageChange={(event) => {inputHandler(event)}}
-            messageRequired={true}
-            messagePlaceholder={"Расскажите побробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
-
-            fileClicked={(event) => {chooseFile(event)}}
-            iconClick={activateFileInput}
-            fileRef={refFile}
-            fileName={fileNameState}
-            inputFileName="file"
-            questionShow={hoverShowQuestion}
-            questionHide={hoverHideQuestion}
-            showQuestionModal={showQuestion}
-            questionText={"Регистрационный номер заявки"}
-            textTeamViewer={"Пароль от TeamViewer"}
-            showPassword={isShowPassword}
-            passwordName="password"
-            passwordChange={(event) => {inputHandler(event)}}
-            passwordRequired={false}
-            passwordPlaceholder={"Введите пароль"}
-            toggleShowPassword={toogleShowPassword}
-
-            buttonName={"Отправить заявку"}
-            submitClicked={(event) => {submitFormHandler(event)}}
-            isDisabled={a}
-
+    if (id) {
+        top = (
+        <SpecialitsWindowStatus 
+            status={status}
+            id={id}
         />
-    )
+            )
+    }
+    if (id) {
+        leftSide = (<div>LEFT</div>)
+    } else {
+        leftSide = (
+            <PreviousApplicationMenu 
+                title={title}
+                name={name}
+                date={date}
+                description={description}
+                buttonName={buttonName}
+                clicked={() => {alert("it works")}}
+            />
+    )}
+
+    if (id) {
+        center = (<ApplicationDetails 
+            status={status}
+            id={id}
+        />)
+    } else {
+        center = (
+            <ApplicationForm 
+                userName={userName}
+                greetings={"здравствуйте! Опишите свою проблему"}
+
+                subjectTitle={"Тема*"}
+                subjectName="subject"
+                subjectChange={(event) => {inputHandler(event)}}
+                subjectRequired={true}
+                subjectPlaceholder={"Опишите кратко суть проблемы"}
+
+                departmentTitle={"Отдел*"}
+                departmentName="department"
+                departmentChange={(event) => {inputHandler(event)}}
+                departmentRequired={true}
+                departmentPlaceholder={"В какой отдел отправить заявку?"}
+
+                messageTitle={"Сообщение"}
+                messageName="message"
+                messageChange={(event) => {inputHandler(event)}}
+                messageRequired={true}
+                messagePlaceholder={"Расскажите побробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
+
+                fileClicked={(event) => {chooseFile(event)}}
+                iconClick={activateFileInput}
+                fileRef={refFile}
+                fileName={fileNameState}
+                inputFileName="file"
+                questionShow={hoverShowQuestion}
+                questionHide={hoverHideQuestion}
+                showQuestionModal={showQuestion}
+                questionText={"Регистрационный номер заявки"}
+                textTeamViewer={"Пароль от TeamViewer"}
+                showPassword={isShowPassword}
+                passwordName="password"
+                passwordChange={(event) => {inputHandler(event)}}
+                passwordRequired={false}
+                passwordPlaceholder={"Введите пароль"}
+                toggleShowPassword={toogleShowPassword}
+
+                buttonName={"Отправить заявку"}
+                submitClicked={(event) => {submitFormHandler(event)}}
+                isDisabled={submitDisabled}
+
+            />
+    )}
 
     return (
         <LayoutApplicationPage
             left={leftSide}
             center={center}
+            top={top}
+            hideButton={!id}
         >
             <Switch>
 

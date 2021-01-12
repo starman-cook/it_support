@@ -34,6 +34,11 @@
     box-sizing: border-box;
     border-radius: 4px;
     padding: 11px 22px;
+    outline: none;
+}
+.ApplicationForm__input:focus {
+    border: 1px solid #E34A4E;
+    border-radius: 4px;
 }
 .ApplicationForm__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #C0C0C0;
@@ -87,6 +92,11 @@ option:checked {
     border-radius: 4px;
     resize: none;
     min-height: 240px;
+    outline: none;
+}
+.ApplicationForm__inputMessage:focus {
+    border: 1px solid #E34A4E;
+    border-radius: 4px;
 }
 .ApplicationForm__inputMessage::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #C0C0C0;
@@ -192,6 +202,11 @@ option:checked {
     border-radius: 4px;
     box-sizing: border-box;
     padding: 0 22px;
+    outline: none;
+}
+.ApplicationForm__inputPassword:focus {
+    border: 1px solid #E34A4E;
+    border-radius: 4px;
 }
 .ApplicationForm__inputPassword::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #C0C0C0;

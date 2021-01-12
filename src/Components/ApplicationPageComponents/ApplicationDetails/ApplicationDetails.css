@@ -1,0 +1,93 @@
+.Comment {
+    background: #C0C0C0;
+    border-radius: 8px;
+    padding: 10px;
+    box-sizing: border-box;
+    min-height: 100px;
+    width: 400px;
+    margin: 10px 0;
+}
+.Comment__date {}
+.Comment__content {}
+
+
+.ApplecationDetails {
+    width: 770px;
+    min-height: 683px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 30px 70px;
+    box-sizing: border-box;
+    margin-top: 30px;
+}
+.ApplecationDetails__title {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #C53437;
+    margin: 0 0 10px 0;
+}
+.ApplecationDetails__head {
+    display: flex;
+}
+.ApplecationDetails__head--sides {
+    margin-right: 88px;
+}
+.ApplecationDetails__text--title {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+
+}
+.ApplecationDetails__text {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+}
+.ApplecationDetails__textarea {
+    width: 630px;
+    height: 160px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #C0C0C0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    outline: none;
+    margin-bottom: 20px;
+    resize: none;
+}
+.ApplecationDetails__textarea:focus {
+    border: 1px solid #E34A4E;
+}
+.ApplecationDetails__btn {
+    width: 630px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ApplecationDetails__textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplecationDetails__textarea::-moz-placeholder { /* Firefox 19+ */
+    color:  #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplecationDetails__textarea:-ms-input-placeholder { /* IE 10+ */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.ApplecationDetails__textarea:-moz-placeholder { /* Firefox 18- */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }

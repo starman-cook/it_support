@@ -6,8 +6,8 @@ const ApplicationStatus = (props) => {
     const status = props.status;
     const id = props.id;
     let leftSide;
-    let specialistFound = false;
-    let jobDone = false;
+    let specialistFound = false; //take from state?
+    let jobDone = false; //take from state?
 
      // possible statusses 'new' 'in_progress' 'complete' 'canceled'
     if (status === 'new') {
@@ -15,11 +15,11 @@ const ApplicationStatus = (props) => {
         <div className="ApplicationStatus">
 
             <div className="ApplicationStatus__lineBlock">
-                <div className="ApplicationStatus__circle ApplicationStatus__circle--check" />
+                <div className="ApplicationStatus__circle" />
                 <div className={`ApplicationStatus__line ${specialistFound ? null : "ApplicationStatus__unactive--circle"}`} />
-                <div className={`ApplicationStatus__circle ${specialistFound ? null : "ApplicationStatus__unactive ApplicationStatus__unactive--circle"}`}>2</div>
+                <div className={`ApplicationStatus__circle ${specialistFound ? null : "ApplicationStatus__unactive ApplicationStatus__unactive--circle"}`}>{specialistFound ? null : "2"}</div>
                 <div className={`ApplicationStatus__line ${jobDone ? null : "ApplicationStatus__unactive--circle"}`} />
-                <div className={`ApplicationStatus__circle ${jobDone ? null : "ApplicationStatus__unactive ApplicationStatus__unactive--circle"}`}>3</div>
+                <div className={`ApplicationStatus__circle ${jobDone ? null : "ApplicationStatus__unactive ApplicationStatus__unactive--circle"}`}>{jobDone ? null : "3"}</div>
             </div>
 
             <div className="ApplicationStatus__textBlock">

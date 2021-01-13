@@ -18,18 +18,18 @@
     line-height: 25px;
     text-align: center;
     letter-spacing: 0.01em;
-    background: #E34A4E;
+    background: #E34A4E url('../../../assets//icons/ic_check.svg')center no-repeat;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgba(77, 82, 91, 0.5);
 }
-.ApplicationStatus__circle--check {
-    background: #E34A4E url('../../../assets//icons/ic_check.svg')center no-repeat;
-}
+
 .ApplicationStatus__line {
     width: 2px;
     height: 70px;
+    background: #E34A4E;
 }
 
 .ApplicationStatus__textBlock {

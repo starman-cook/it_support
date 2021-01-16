@@ -11,6 +11,7 @@ import SpecialitsWindowStatus from '../../Components/ApplicationPageComponents/S
 const ApplicationPage = (props) => {
 
     const id = props.match.params.id;
+    const idInTitle = `№ IT-${id}`;
     const status = 'new' // Получить статус заявки при запросе данных заявки
     // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
 
@@ -136,8 +137,8 @@ const ApplicationPage = (props) => {
                 id={id}
                 newApplicationl={false}
                 specialistFound={false}
-                jobDone={true}
-                isCanceled={false}
+                jobDone={false}
+                isCanceled={true}
                 name={"Александра Панарина"}
                 photo={"https://avatars2.githubusercontent.com/u/65975704?s=460&u=ea538732c997f1f0b979f66944210941c508a703&v=4"}
                 phone={"+7 727 390 1112"}
@@ -149,9 +150,9 @@ const ApplicationPage = (props) => {
         leftSide = (
             <ApplicationStatus 
                 id={id}
-                specialistFound={false}
+                specialistFound={true}
                 jobDone={false}
-                isCanceled={false}
+                isCanceled={true}
                 
             />
         )
@@ -171,6 +172,9 @@ const ApplicationPage = (props) => {
         center = (<ApplicationDetails 
             status={status}
             id={id}
+            idInTitle={idInTitle}
+            jobDone={false}
+            isCanceled={true}
         />)
     } else {
         center = (

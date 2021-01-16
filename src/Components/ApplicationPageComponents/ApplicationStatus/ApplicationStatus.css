@@ -66,3 +66,21 @@
 .ApplicationStatus__text--pushDown {
     margin-bottom: 45px;
 }
+
+/* WHEN CANCELED */
+.ApplicationStatus__canceled {
+    background: #828282 url('../../../assets//icons/ic_check.svg')center no-repeat;
+}
+.ApplicationStatus__link--whenCanceled {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    text-decoration-line: underline;
+    color: #E34A4E;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.ApplicationStatus__link--whenCanceled:active {
+    color: #4D525B;
+}

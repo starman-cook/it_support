@@ -17,8 +17,8 @@ const ApplicationStatus = (props) => {
                 <div className="ApplicationStatus__circle" />
                 <div className={`ApplicationStatus__line ${specialistFound ? null : "ApplicationStatus__unactive--circle"}`} />
                 <div className={`ApplicationStatus__circle ${specialistFound ? null : "ApplicationStatus__unactive ApplicationStatus__unactive--circle"}`}>{specialistFound ? null : "2"}</div>
-                <div className={`ApplicationStatus__line ${jobDone ? null : "ApplicationStatus__unactive--circle"}`} />
-                <div className={`ApplicationStatus__circle ${jobDone ? null : "ApplicationStatus__unactive ApplicationStatus__unactive--circle"}`}>{jobDone ? null : "3"}</div>
+                <div className={`ApplicationStatus__line ${jobDone || isCanceled ? null : "ApplicationStatus__unactive--circle"}`} />
+                <div className={`ApplicationStatus__circle ${jobDone || isCanceled ? null : "ApplicationStatus__unactive ApplicationStatus__unactive--circle"} ${isCanceled ? "ApplicationStatus__canceled" : null}`}>{jobDone || isCanceled ? null : "3"}</div>
             </div>
 
             <div className="ApplicationStatus__textBlock">
@@ -30,10 +30,18 @@ const ApplicationStatus = (props) => {
                     <h3 className={`ApplicationStatus__title ${specialistFound ? null : "ApplicationStatus__unactive"}`}>ИТ-специалист назначен</h3>
                     <p className={`ApplicationStatus__text ApplicationStatus__text--pushDown ${specialistFound ? null : "ApplicationStatus__unactive"}`}>Наш сотрудник скоро свяжется с вами и решит проблему</p>
                 </div>
+                {isCanceled 
+                    ? 
+                <div className="ApplicationStatus__textItem">
+                    <h3 className="ApplicationStatus__title" >Заявка отменена</h3>
+                    <p className="ApplicationStatus__link--whenCanceled">Вернуть заявку в работу</p>
+                </div>
+                    :
                 <div className="ApplicationStatus__textItem">
                     <h3 className={`ApplicationStatus__title ${jobDone ? null : "ApplicationStatus__unactive"}`}>Заявка закрыта</h3>
                     <p className={`ApplicationStatus__text ${jobDone ? null : "ApplicationStatus__unactive"}`}>Поделитесь с нами обратной связью</p>
                 </div>
+            }
             </div>
         </div>
         );

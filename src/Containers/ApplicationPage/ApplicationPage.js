@@ -135,8 +135,8 @@ const ApplicationPage = (props) => {
             <SpecialitsWindowStatus 
                 id={id}
                 newApplicationl={false}
-                specialistFound={true}
-                jobDone={false}
+                specialistFound={false}
+                jobDone={true}
                 isCanceled={false}
                 name={"Александра Панарина"}
                 photo={"https://avatars2.githubusercontent.com/u/65975704?s=460&u=ea538732c997f1f0b979f66944210941c508a703&v=4"}

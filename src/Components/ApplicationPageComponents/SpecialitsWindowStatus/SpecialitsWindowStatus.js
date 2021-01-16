@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import BlueButton from '../BlueButton/BlueButton';
 import './SpecialitsWindowStatus.css';
 
 
@@ -12,7 +13,12 @@ const SpecialitsWindowStatus = (props) => {
     let topComponent;
     const [seconds, setSeconds] = useState("00");
     const [minutes, setMinutes] = useState(15);
-   
+    const [oneComment, setOneComment] = useState();
+    const [isComment, setIsComment] = useState(false);
+    const [isLike, setIsLike] = useState(false);
+    const [isDisLike, setIsDisLike] = useState(false);
+
+    let leaveCommentBlock;
     let timer = null;
     let newApplication = props.newApplicationl
     let specialistFound = props.specialistFound;
@@ -48,7 +54,69 @@ const SpecialitsWindowStatus = (props) => {
         })
     }
     }, []);
-  
+
+    const applyComment = () => {
+        if (oneComment === undefined || oneComment.trim() === '') {
+            return;
+        }
+        setIsComment(true);
+    }
+    const textAreaHandler = (event) => {
+        setOneComment(event.target.value);
+    }
+    const isLikeHandler = () => {
+        setIsLike(true);
+    }
+    const isDisLikeHandler = () => {
+        setIsDisLike(true);
+    }
+    if (!isComment) {
+    leaveCommentBlock = (
+        <div className="leaveCommentBlock">
+            {!isLike && !isDisLike 
+                ? 
+            <div className="leaveCommentBlock__likeBlock">
+                <div onClick={isLikeHandler} className="leaveCommentBlock__icon leaveCommentBlock__icon--like" />
+                <div onClick={isDisLikeHandler} className="leaveCommentBlock__icon leaveCommentBlock__icon--dislike" />
+            </div> 
+                : 
+            <div className="isCommentBlock--likeOrNot">
+                {isLike ? <div className="isCommentBlock__like" /> : null}
+                {isDisLike ? <div className="isCommentBlock__dislike" /> : null}
+            </div>}
+
+            
+            <div className="leaveCommentBlock__commentBlock">
+                <textarea value={oneComment} placeholder="Напишите краткий отзыв" onChange={(event) => {textAreaHandler(event)}} className="leaveCommentBlock__textarea"></textarea>
+                    <div className="leaveCommentBlock__btn">
+                        <BlueButton
+                            name="Отправить отзыв"
+                            clicked={() => {applyComment()}}
+                        />
+                    </div>
+            </div>
+        </div>
+    )} else {
+        leaveCommentBlock = (
+            <div className="isCommentBlock">
+                {!isLike && !isDisLike 
+                        ? 
+                    <div className="leaveCommentBlock__likeBlock">
+                        <div onClick={isLikeHandler} className="leaveCommentBlock__icon leaveCommentBlock__icon--like" />
+                        <div onClick={isDisLikeHandler} className="leaveCommentBlock__icon leaveCommentBlock__icon--dislike" />
+                    </div> 
+                        : 
+                    <div className="isCommentBlock--likeOrNot">
+                        {isLike ? <div className="isCommentBlock__like" /> : null}
+                        {isDisLike ? <div className="isCommentBlock__dislike" /> : null}
+                    </div>}
+                <div className="isCommentBlock__textBlock">
+                    <h2 className="isCommentBlock__title">Отзыв пользователя:</h2>
+                    <p className="isCommentBlock__text">{oneComment}</p>
+                </div>
+            </div>
+        )
+    }
 
    
 
@@ -77,8 +145,8 @@ const SpecialitsWindowStatus = (props) => {
 
                     <div className="SpecialistWindow__textBlock">
                         {specialistFound ? <h3 className="SpecialistWindow__title--small">Скоро с вами свяжется</h3> : null}
-                        {jobDone ? <p className="SpecialistWindow__text">Оцените работу ИТ-специалиста, если нужно — напишите краткий отзыв, нам будет приятно. </p> : null}
-                        {isCanceled ? <p className="SpecialistWindow__text">Оцените работу ИТ-специалиста, если нужно — напишите краткий отзыв, нам будет приятно. </p> : null}
+                        {jobDone ? <p className="SpecialistWindow__text SpecialistWindow__text--pushDown">Оцените работу ИТ-специалиста, если нужно — напишите краткий отзыв, нам будет приятно. </p> : null}
+                        {isCanceled ? <p className="SpecialistWindow__text SpecialistWindow__text--pushDown">Оцените работу ИТ-специалиста, если нужно — напишите краткий отзыв, нам будет приятно. </p> : null}
                     
                         <div className="SpecialistWindow__nameAndPhone">
                             <h3 className="SpecialistWindow__name">
@@ -92,6 +160,7 @@ const SpecialitsWindowStatus = (props) => {
                     </div>
 
                 </div>
+                {jobDone || isCanceled ? leaveCommentBlock : null}
             </div>
         )
     }

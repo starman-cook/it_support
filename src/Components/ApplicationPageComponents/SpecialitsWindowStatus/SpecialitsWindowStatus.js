@@ -14,10 +14,13 @@ const SpecialitsWindowStatus = (props) => {
     const [minutes, setMinutes] = useState(15);
    
     let timer = null;
-
+    let newApplication = props.newApplicationl
+    let specialistFound = props.specialistFound;
+    let jobDone = props.jobDone;
+    let isCanceled = props.isCanceled;
 
     useEffect(() => {
-       
+       if (newApplication) {
         if (timerDuration > 0 && !timer) {
             timer = setInterval(() => {
                 let seconds = (timerDuration % 60000) / 1000;
@@ -43,6 +46,7 @@ const SpecialitsWindowStatus = (props) => {
         return(() => {
             clearInterval(timer)
         })
+    }
     }, []);
   
 
@@ -50,7 +54,7 @@ const SpecialitsWindowStatus = (props) => {
 
 
     // possible statusses 'new' 'in_progress' 'complete' 'canceled'
-    if (status === 'new')
+    if (newApplication) {
     topComponent = (
         <div className="StatusNew">
             <h2 className="StatusNew__title">Получили вашу заявку, спасибо!</h2>
@@ -61,7 +65,36 @@ const SpecialitsWindowStatus = (props) => {
                 <span className="StatusNew__time StatusNew__time--numbers">{seconds}</span>
             </div>
         </div>
-    )
+    )} else {
+        topComponent = (
+            <div className="SpecialistWindow">
+                <h2 className={`SpecialistWindow__title ${specialistFound ? "color-orange" : ""} ${jobDone ? "color-green" : ""} ${isCanceled ? "color-grey" : ""}`}>{specialistFound ? "Заявка в работе" : ""}{jobDone ? "Заявка закрыта" : ""}{isCanceled ? "Заявка отменена" : ""}</h2>
+            
+                <div className="SpecialistWindow__content">
+                    <div className="SpecialistWindow__avatar--frame">
+                        <img className="SpecialistWindow__avatar--image" src={props.photo} alt={props.name} />
+                    </div>
+
+                    <div className="SpecialistWindow__textBlock">
+                        {specialistFound ? <h3 className="SpecialistWindow__title--small">Скоро с вами свяжется</h3> : null}
+                        {jobDone ? <p className="SpecialistWindow__text">Оцените работу ИТ-специалиста, если нужно — напишите краткий отзыв, нам будет приятно. </p> : null}
+                        {isCanceled ? <p className="SpecialistWindow__text">Оцените работу ИТ-специалиста, если нужно — напишите краткий отзыв, нам будет приятно. </p> : null}
+                    
+                        <div className="SpecialistWindow__nameAndPhone">
+                            <h3 className="SpecialistWindow__name">
+                                {props.name}
+                            </h3>
+                            <p className="SpecialistWindow__text">
+                                {props.phone}
+                            </p>
+                        </div>
+                        <p className="SpecialistWindow__text">{props.specialistId}</p>
+                    </div>
+
+                </div>
+            </div>
+        )
+    }
     return (
         <>
             {topComponent}

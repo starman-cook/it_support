@@ -22,7 +22,8 @@ const ApplicationPage = (props) => {
     const [submitDisabled, setSubmitDisabled] = useState(true);
 
 
-    let isBackInProgress = false;
+    const [isBackInProgress, setIsBackInProgress] = useState(false);
+
     let buttonName ="";
     const id_number = "№IT-051120-0375649";
     const date = "03.11.2019, 10:50";
@@ -97,6 +98,10 @@ const ApplicationPage = (props) => {
         });
     }
 
+    const isBackInProgressHandler = () => {
+        setIsBackInProgress(true);
+    }
+
     const submitFormHandler = (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -104,6 +109,7 @@ const ApplicationPage = (props) => {
             formData.append(key, inputState[key]);
         })
         // console.log(formData);
+        setIsBackInProgress(false);
          // Отправка формы заявки с файлом или без файла
         clearInputState();
         history.push('application/idgoeshere') //add query params to get application by id
@@ -119,23 +125,34 @@ const ApplicationPage = (props) => {
             }
         });
     }
+
     useEffect(() => {
         isDisabled();
     }, [inputState]);
 
     if (id) {
         top = (
-        <SpecialitsWindowStatus 
-            status={status}
-            id={id}
+            <SpecialitsWindowStatus 
+                id={id}
+                newApplicationl={false}
+                specialistFound={true}
+                jobDone={false}
+                isCanceled={false}
+                name={"Александра Панарина"}
+                photo={"https://avatars2.githubusercontent.com/u/65975704?s=460&u=ea538732c997f1f0b979f66944210941c508a703&v=4"}
+                phone={"+7 727 390 1112"}
+                specialistId={"IT 152"}
         />
             )
     }
     if (id) {
         leftSide = (
             <ApplicationStatus 
-                status={status}
                 id={id}
+                specialistFound={false}
+                jobDone={false}
+                isCanceled={false}
+                
             />
         )
     } else {
@@ -146,7 +163,7 @@ const ApplicationPage = (props) => {
                 date={date}
                 description={description}
                 buttonName={buttonName}
-                clicked={() => {alert("it works")}}
+                clicked={isBackInProgressHandler}
             />
     )}
 

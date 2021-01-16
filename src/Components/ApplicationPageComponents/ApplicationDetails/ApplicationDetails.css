@@ -7,11 +7,11 @@
     width: 400px;
     margin: 10px 0;
 }
-.Comment__date {}
-.Comment__content {}
+/* .Comment__date {}
+.Comment__content {} */
 
 
-.ApplecationDetails {
+.ApplicationDetails {
     width: 770px;
     min-height: 683px;
     background: #FFFFFF;
@@ -20,7 +20,7 @@
     box-sizing: border-box;
     margin-top: 30px;
 }
-.ApplecationDetails__title {
+.ApplicationDetails__title {
     font-weight: bold;
     font-size: 30px;
     line-height: 38px;
@@ -28,13 +28,13 @@
     color: #C53437;
     margin: 0 0 10px 0;
 }
-.ApplecationDetails__head {
+.ApplicationDetails__head {
     display: flex;
 }
-.ApplecationDetails__head--sides {
+.ApplicationDetails__head--sides {
     margin-right: 88px;
 }
-.ApplecationDetails__text--title {
+.ApplicationDetails__text--title {
     font-weight: bold;
     font-size: 20px;
     line-height: 25px;
@@ -42,7 +42,7 @@
     color: #4D525B;
 
 }
-.ApplecationDetails__text {
+.ApplicationDetails__text {
     font-weight: normal;
     font-size: 20px;
     line-height: 25px;
@@ -51,7 +51,7 @@
     padding: 0;
     margin: 0;
 }
-.ApplecationDetails__textarea {
+.ApplicationDetails__textarea {
     width: 630px;
     height: 160px;
     padding: 20px;
@@ -64,38 +64,38 @@
     margin-bottom: 20px;
     resize: none;
 }
-.ApplecationDetails__textarea:focus {
+.ApplicationDetails__textarea:focus {
     border: 1px solid #E34A4E;
 }
-.ApplecationDetails__btn {
+.ApplicationDetails__btn {
     width: 630px;
     display: flex;
     justify-content: flex-end;
 }
 
-.ApplecationDetails__textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.ApplicationDetails__textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #C0C0C0;
     font-size: 18px;
     line-height: 23px;
   }
-.ApplecationDetails__textarea::-moz-placeholder { /* Firefox 19+ */
+.ApplicationDetails__textarea::-moz-placeholder { /* Firefox 19+ */
     color:  #C0C0C0;
     font-size: 18px;
     line-height: 23px;
   }
-.ApplecationDetails__textarea:-ms-input-placeholder { /* IE 10+ */
+.ApplicationDetails__textarea:-ms-input-placeholder { /* IE 10+ */
     color: #C0C0C0;
     font-size: 18px;
     line-height: 23px;
   }
-.ApplecationDetails__textarea:-moz-placeholder { /* Firefox 18- */
+.ApplicationDetails__textarea:-moz-placeholder { /* Firefox 18- */
     color: #C0C0C0;
     font-size: 18px;
     line-height: 23px;
   }
 
 
-.ApplecationDetails__message--button {
+.ApplicationDetails__message--button {
     color: #C0C0C0;
     font-size: 12px;
     cursor: pointer;

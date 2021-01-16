@@ -62,25 +62,25 @@ const ApplicationDetails = (props) => {
      // possible statusses 'new' 'in_progress' 'complete' 'canceled'
     if (status === 'new') {
         centerComponent = (
-        <div className="ApplecationDetails">
-            <h2 className="ApplecationDetails__title">Детали заявки</h2>
-            <div className="ApplecationDetails__head">
-                <div className="ApplecationDetails__head--sides">
-                    <p className="ApplecationDetails__text--title">Ответсвенный отдел</p>
-                    <p className="ApplecationDetails__text">{department}</p>
+        <div className="ApplicationDetails">
+            <h2 className="ApplicationDetails__title">Детали заявки</h2>
+            <div className="ApplicationDetails__head">
+                <div className="ApplicationDetails__head--sides">
+                    <p className="ApplicationDetails__text--title">Ответственный отдел</p>
+                    <p className="ApplicationDetails__text">{department}</p>
                 </div>
-                <div className="ApplecationDetails__head--sides">
-                    <p className="ApplecationDetails__text--title">Тема</p>
-                    <p className="ApplecationDetails__text">{subject}</p>
+                <div className="ApplicationDetails__head--sides">
+                    <p className="ApplicationDetails__text--title">Тема</p>
+                    <p className="ApplicationDetails__text">{subject}</p>
                 </div>
             </div>
-                <p className="ApplecationDetails__text--title">Подробности</p>
+                <p className="ApplicationDetails__text--title">Подробности</p>
             <div className={messageClassToggle}>
-                <p className="ApplecationDetails__text">{message}</p>
-                <div onClick={textShowToggle} className="ApplecationDetails__message--button"><span className="ApplecationDetails__text">... </span>{messageClassButtonText}</div>
+                <p className="ApplicationDetails__text">{message}</p>
+                <div onClick={textShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{messageClassButtonText}</div>
             </div>
-                <textarea value={oneComment} placeholder="Если вы хотите дополнить заявку, напишите комментарий" onChange={(event) => {textAreaHandler(event)}} className="ApplecationDetails__textarea"></textarea>
-                <div className="ApplecationDetails__btn">
+                <textarea value={oneComment} placeholder="Если вы хотите дополнить заявку, напишите комментарий" onChange={(event) => {textAreaHandler(event)}} className="ApplicationDetails__textarea"></textarea>
+                <div className="ApplicationDetails__btn">
                     <BlueButton 
                         name="Отправить сообщение"
                         clicked={() => {applyComment()}}

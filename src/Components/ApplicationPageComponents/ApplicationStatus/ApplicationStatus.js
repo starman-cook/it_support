@@ -3,14 +3,13 @@ import './ApplicationStatus.css';
 
 
 const ApplicationStatus = (props) => {
-    const status = props.status;
     const id = props.id;
     let leftSide;
-    let specialistFound = false; //take from state?
-    let jobDone = false; //take from state?
+    let specialistFound = props.specialistFound; //take from state?
+    let jobDone = props.jobDone; //take from state?
+    let isCanceled = props.isCanceled;
 
      // possible statusses 'new' 'in_progress' 'complete' 'canceled'
-    if (status === 'new') {
         leftSide = (
         <div className="ApplicationStatus">
 
@@ -37,7 +36,7 @@ const ApplicationStatus = (props) => {
                 </div>
             </div>
         </div>
-        )};
+        );
 
     return (
         <>

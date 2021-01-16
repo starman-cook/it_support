@@ -1,0 +1,87 @@
+
+.ErrorWindow {
+    /* background: radial-gradient(36.76% 69.74% at 23.14% 32.37%, #E34A4E 0%, #C53437 100%), #C4C4C4; */
+    background:#C53437 url('../../../assets/images/rectangle-error-page.png');
+    background-position: top right;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+}
+.ErrorWindow__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 300px;
+}
+.ErrorWindow__title {
+    font-weight: bold;
+    font-size: 60px;
+    line-height: 75px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+.ErrorWindow__text {
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 45px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+.ErrorWindow__link {
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 45px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-bottom: 1px solid white;
+}
+.ErrorWindow__contacts {
+    display: flex;
+}
+.ErrorWindow__contactSide {
+    margin-right: 80px;
+}
+.ErrorWindow__phone {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+.ErrorWindow__city {
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+.ErrorWindow__socialNetwork {
+    display: flex;
+    align-items: center;
+}
+.ErrorWindow__textSocial {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    margin-right: 21px;
+}
+.ErrorWindow__icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 9px;
+}
+.ErrorWindow__icon--instagram {
+    background: url('../../../assets/icons/ic-instagram-white.svg')center no-repeat;
+}
+.ErrorWindow__icon--facebook {
+    background: url('../../../assets/icons/ic-facebook-white.svg')center no-repeat;
+}
+.ErrorWindow__icon--linkedin {
+    background: url('../../../assets/icons/ic-linked-white.svg')center no-repeat;
+}
+.ErrorWindow__icon--youtube {
+    background: url('../../../assets/icons/ic-youtube-white.svg')center no-repeat;
+}

@@ -5,7 +5,7 @@ const Button = (props) => {
     return (
         <button
             onClick={props.clicked}
-            className="ButtonLogin"
+            className={`ButtonLogin ${props.class}`}
             style={{width: `${props.width}px`}}
         >
             {props.name}

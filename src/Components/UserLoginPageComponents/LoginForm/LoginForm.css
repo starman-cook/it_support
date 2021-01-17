@@ -9,7 +9,7 @@
     line-height: 33px;
     letter-spacing: 0.01em;
     color: #000000;
-    margin: 48px 0 20px 0;
+    margin: 48px 0 3px 0;
 }
 .LoginForm__formContent {
     display: flex;
@@ -23,7 +23,7 @@
     border: 1px solid #C0C0C0;
     box-sizing: border-box;
     border-radius: 4px;
-    margin-bottom: 17px;
+    margin-top: 17px;
     padding: 10px 16px;
     outline: none;
 }
@@ -79,6 +79,24 @@
     border: 1px solid #E34A4E;
     border-radius: 4px;
 }
-.LoginForm__input--pushDown {
-    margin-bottom: 34px;
+.LoginForm__input--pushUp {
+    margin-top: 34px;
+}
+.LoginForm__errorText {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 13px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #9E071E;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, 0);
+}
+.LoginForm__errorFrame {
+    width: 100%;
+    position: relative;
 }

@@ -4,9 +4,9 @@ import './HelperInfo.css';
 const HelperInfo = (props) => {
     return (
         <div className="HelperInfo">
-            <p className="HelperInfo__text">{props.question}</p>
+            <p style={props.grey ? {color: "#BDBDBD"} : null} className="HelperInfo__text">{props.question}</p>
             <a className="HelperInfo__link" href={props.link}>{props.textLink}</a>
-            <p className="HelperInfo__text">{props.contacts}</p>
+            <p style={props.grey ? {color: "#BDBDBD"} : null} className="HelperInfo__text">{props.contacts}</p>
 
             <div className="HelperInfo__socialBlock">
                 <a href={props.instagram} className="HelperInfo__icon HelperInfo__instagram"></a>

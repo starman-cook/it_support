@@ -1,0 +1,106 @@
+.PhoneInput {
+    width: 304px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.PhoneInput__title {
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 33px;
+    letter-spacing: 0.01em;
+    color: #000000;
+    margin: 34px 0 8px 0;
+}
+.PhoneInput__text {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    width: 300px;
+}
+.PhoneInput__inputPiece {
+    height: 30px;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #828282;
+    border: none;
+    transform: translate(0, 3px);
+    outline: none;
+}
+.PhoneInput__phoneBlock {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    justify-content: space-between;
+}
+/* .PhoneInput__inputs {} */
+.PhoneInput__phoneText {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #828282;
+}
+.PhoneInput__inputPiece--short {
+    width: 35px;
+}
+.PhoneInput__inputPiece--long {
+    width: 55px;
+}
+
+.PhoneInput__inputPiece::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #828282;
+    position: relative;
+    top: 5px;
+    letter-spacing: 8px;
+    padding: 5px;
+  }
+.PhoneInput__inputPiece::-moz-placeholder { /* Firefox 19+ */
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #828282;
+    position: relative;
+    top: 5px;
+    letter-spacing: 8px;
+    padding: 5px;
+  }
+.PhoneInput__inputPiece:-ms-input-placeholder { /* IE 10+ */
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #828282;
+    position: relative;
+    top: 5px;
+    letter-spacing: 8px;
+    padding: 5px;
+  }
+.PhoneInput__inputPiece:-moz-placeholder { /* Firefox 18- */
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #828282;
+    position: relative;
+    top: 5px;
+    letter-spacing: 8px;
+    padding: 5px;
+  }

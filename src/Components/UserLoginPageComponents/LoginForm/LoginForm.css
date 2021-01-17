@@ -1,0 +1,84 @@
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.LoginForm__title {
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 33px;
+    letter-spacing: 0.01em;
+    color: #000000;
+    margin: 48px 0 20px 0;
+}
+.LoginForm__formContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.LoginForm__input {
+    width: 316px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #C0C0C0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-bottom: 17px;
+    padding: 10px 16px;
+    outline: none;
+}
+.LoginForm__checkbox {
+    margin-top: 15px;
+    display: none;
+}
+.LoginForm__checkbox--text {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.01em;
+    color: #828282;
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+}
+.LoginForm__checkbox--text::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('../../../assets//icons/ic-remember-frame.svg') center no-repeat;
+    margin-right: 7px;
+}
+.LoginForm__checkbox:checked ~ .LoginForm__checkbox--text::before {
+    background:url('../../../assets/icons/ic-remember-me.svg')center no-repeat,
+               url('../../../assets//icons/ic-remember-frame.svg') center no-repeat;
+}
+
+.LoginForm__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.LoginForm__input::-moz-placeholder { /* Firefox 19+ */
+    color:  #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.LoginForm__input:-ms-input-placeholder { /* IE 10+ */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+.LoginForm__input:-moz-placeholder { /* Firefox 18- */
+    color: #C0C0C0;
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+.LoginForm__input:focus {
+    border: 1px solid #E34A4E;
+    border-radius: 4px;
+}
+.LoginForm__input--pushDown {
+    margin-bottom: 34px;
+}

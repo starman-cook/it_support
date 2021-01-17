@@ -1,0 +1,15 @@
+.AuthenticationModal {
+    width: 394px;
+    min-height: 300px;
+    margin: 76px auto 0;
+    background: white;
+    border-radius: 8px;
+    padding: 46px 42px 25px 42px;
+}
+.AuthenticationModal__logo {
+    width: 104px;
+    height: 97px;
+    margin: 0 auto;
+
+    background: url('../../../assets/images/logo_L.svg')center / contain no-repeat;
+}

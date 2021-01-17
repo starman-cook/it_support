@@ -1,0 +1,108 @@
+.SmsInput {
+    width: 304px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.SmsInput__title {
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 33px;
+    letter-spacing: 0.01em;
+    color: #000000;
+    margin: 34px 0 8px 0;
+}
+.SmsInput__text {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    width: 300px;
+}
+.SmsInput__text--bold {
+    font-weight: bold;
+}
+.SmsInput__text--small {
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 13px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+}
+.SmsInput__text--red {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #E34A4E;
+    margin: 0;
+}
+
+.SmsInput__phoneBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.SmsInput__inputPiece {
+    width: 61px;
+    height: 74px;
+    background: #FFFFFF;
+    border: 2px solid #C0C0C0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 63px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+}
+
+
+.SmsInput__inputPiece::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 63px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+  }
+.SmsInput__inputPiece::-moz-placeholder { /* Firefox 19+ */
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 63px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+  }
+.SmsInput__inputPiece:-ms-input-placeholder { /* IE 10+ */
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 63px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+  }
+.SmsInput__inputPiece:-moz-placeholder { /* Firefox 18- */
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 63px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+  }

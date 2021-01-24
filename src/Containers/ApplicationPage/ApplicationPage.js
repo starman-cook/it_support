@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Switch, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import ApplicationDetails from '../../Components/ApplicationPageComponents/ApplicationDetails/ApplicationDetails';
 import ApplicationForm from '../../Components/ApplicationPageComponents/ApplicationForm/ApplicationForm';
 import ApplicationStatus from '../../Components/ApplicationPageComponents/ApplicationStatus/ApplicationStatus';
@@ -71,7 +71,7 @@ const ApplicationPage = (props) => {
     const chooseFile = (event) => {
         setFileNameState(event.target.files[0].name);
         setInputState(prevState => {
-            return {...prevState, "file": event}
+            return {...prevState, "file": event.target.files[0]}
         });
     }
     const activateFileInput = () => {
@@ -231,9 +231,6 @@ const ApplicationPage = (props) => {
             top={top}
             hideButton={!id}
         >
-            <Switch>
-
-            </Switch>
         </LayoutApplicationPage>
     )
 }

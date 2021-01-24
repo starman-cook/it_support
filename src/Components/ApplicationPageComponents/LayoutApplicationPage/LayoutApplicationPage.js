@@ -10,8 +10,12 @@ const LayoutApplicationPage = (props) => {
 
 
     const goToApplication = () => {
-        history.push("/application")
-    }
+        history.push("/application");
+    };
+    const goToHistoryOfApplications = () => {
+        history.push("/search");
+    };
+
     return (
         <div className="LayoutApplicationPage">
             <div className="LayoutApplicationPage_sidebar">
@@ -26,7 +30,7 @@ const LayoutApplicationPage = (props) => {
                 />
                 <WhiteButton  
                     name={"Посмотреть историю моих заявок"}
-                    // clicked={}
+                    clicked={() => {goToHistoryOfApplications()}}
                 />
                 <SocialNetworkLinks 
                     introText={"Мы в социальных сетях"}

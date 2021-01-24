@@ -60,7 +60,24 @@ const LayoutSearchResults = (props) => {
                 {props.children}
             </main>
             <footer className="LayoutSearchResults__footer">
-
+                <p className="LayoutSearchResults__footerText">Фильтры:</p>
+                {props.isFilter ?
+                    <div className="LayoutSearchResults__filters">
+                        {props.filters}
+                        <p onClick={props.resetFilters} className="LayoutSearchResults__resetText">Сбросить все фильтры</p>
+                    </div>
+                    :
+                    <p className="LayoutSearchResults__footerText">фильтры не включены</p>
+                }
+                {props.morePages ? 
+                    <div className="LayoutSearchResults__paginationBlock">
+                        <div onClick={props.paginationClickLeft} className="LayoutSearchResults__arrowBtn LayoutSearchResults__arrowBtn--left" />
+                        <div onClick={props.paginationClickRight} className="LayoutSearchResults__arrowBtn LayoutSearchResults__arrowBtn--right" />
+                    <div className="LayoutSearchResults__pagesNumbersBlock">
+                        {props.pagesNumbers}
+                    </div>
+                    </div>
+                : null}
             </footer>
         </div>
     )

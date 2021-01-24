@@ -5,6 +5,7 @@
     left: 0;
     right: 0;
     background: rgba(50, 50, 50, 0.5);
+    cursor: pointer;
 }
 .Modal {
     background: red;
@@ -14,4 +15,49 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+.FilterElement {
+    background: #FFFFFF;
+    border-radius: 11px;
+    font-weight: normal;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 12px;
+}
+.FilterElement__plus {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.01em;
+    color: #828282;
+    margin: 0 3px;
+}
+
+.PaginationNumber {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    cursor: pointer;
+    margin: 0 20px 0 0;
+    user-select: none;
+}
+.PaginationNumber--defaultActive {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.PaginationDots {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    margin: 0 20px 0 0;
+    user-select: none;
 }

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import LayoutSearchResults from '../../Components/SearchResultsComponents/LayoutSearchResults/LayoutSearchResults';
+import ResultsTableWorker from '../../Components/SearchResultsComponents/ResultsTableWorker/ResultsTableWorker';
 import './SearchResultsPage.css';
 
 const SearchResultsPage = () => {
 
+    const role = "user"; // При логине проверяем если пользователь руководитель или работник, и выводим соответствующий ResultsTable
     const isFilter = true;
     const dateStart = 'ДД/ММ/ГГ';
     const dateEnd = 'ДД/ММ/ГГ';
@@ -22,7 +24,7 @@ const SearchResultsPage = () => {
     let pagesNumbers = 23; // получать количество страниц для пагинации и кидать число в цикл, чтобы получить массив, нужен для отрисовки
    
 
-
+    let tableView;
     let allPages;
     const filters = ['статус', 'отдел']; // после выбора фильтров они попадают в массив
     let allFilters;
@@ -113,14 +115,14 @@ const SearchResultsPage = () => {
                 }
                  // Если активная страница выше чем максимум - 3
                  else if (activePage > pagesNumbers - 3) {
-                    arr[0] = 1;
-                    arr[1] = 2
-                    arr[2] = "...";
-                    arr[3] = pagesNumbers - 4;
-                    arr[4] = pagesNumbers - 3;
-                    arr[5] = pagesNumbers - 2;
-                    arr[6] = pagesNumbers - 1;
-                    arr[7] = pagesNumbers;
+                            arr[0] = 1;
+                            arr[1] = 2
+                            arr[2] = "...";
+                            arr[3] = pagesNumbers - 4;
+                            arr[4] = pagesNumbers - 3;
+                            arr[5] = pagesNumbers - 2;
+                            arr[6] = pagesNumbers - 1;
+                            arr[7] = pagesNumbers;
         }
                 allPages = arr.map((el, i) => {  
                     return (
@@ -161,9 +163,18 @@ const paginationLeft = () => {
 };
 
 
+if (role === "user") {
+    tableView = (
+    <>
+        <ResultsTableWorker />
+    </>);
+}
+
+
 
 
     if (filters.length !== 0) {
+        // Внизу страницы отображются активные фильтры, здесь они и рисуются
         allFilters = filters.map((el, i) => {
             return (
                 <div className="LayoutSearchResults__filters" key={el}>
@@ -213,6 +224,7 @@ const paginationLeft = () => {
                         MODAL
                     </div>
                 </div>: null}
+                {tableView}
             </LayoutSearchResults>
     )
 }

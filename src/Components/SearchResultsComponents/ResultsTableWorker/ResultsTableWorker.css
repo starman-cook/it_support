@@ -1,0 +1,50 @@
+.ResultsTableWorker {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+.ResultsTableWorker__filtersBlock {
+    height: 47px;
+    background: #E0E0E0;
+    border-radius: 8px 8px 0px 0px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.ResultsTableWorker__filterWithIcon {
+    display: flex;
+    align-items: center;
+}
+.ResultsTableWorker__filterText {
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.01em;
+    color: #333333;
+}
+.ResultsTableWorker__filterIcon {
+    width: 16px;
+    height: 16px;
+    background: url('../../../assets//icons//ic-nail-filter.svg')center/cover no-repeat;
+    transform: translate(10px, 2px);
+    cursor: pointer;
+}
+
+.ResultsTableWorker__filter--status {
+    margin-left: 30px;
+    flex-basis: 15%;
+}
+.ResultsTableWorker__filter--subject {
+    flex-basis: 16%;
+}
+.ResultsTableWorker__filter--department {
+    flex-basis: 19%;
+}
+.ResultsTableWorker__filter--specialist {
+    flex-basis: 19%;
+}
+/* .ResultsTableWorker__filter--results {} */
+
+
+.ResultsTableWorker__filterIcon--active {
+    background: url('../../../assets//icons//ic-nail-filter-active.svg')center/cover no-repeat;
+} 
+

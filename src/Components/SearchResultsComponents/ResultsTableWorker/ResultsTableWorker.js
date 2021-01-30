@@ -21,11 +21,11 @@ const ResultsTableWorker = (props) => {
 
     const toggleStatusModal = () => {
         setIsStatusModal(!isStatusModal);
-        alert('test, this will be modal status')
+        setIsDepartmentModal(false);
     }
     const toggleDepartmentModal = () => {
         setIsDepartmentModal(!isDepartmentModal);
-        alert('test, this will be modal department')
+        setIsStatusModal(false);
     }
     
     // Болванки для демонстрации списка, потом заменить на полученные данные с сервера
@@ -48,8 +48,8 @@ const ResultsTableWorker = (props) => {
         specialist: "Александра Панарина",
         specialistId:"IT 152",
         content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "like",
-        isComment: true,
+        classLikeDislike: null,
+        isComment: false,
         comment: 'Comment',
     }, {
         date: "03. 11. 2019, 10:50",
@@ -59,7 +59,7 @@ const ResultsTableWorker = (props) => {
         specialist: "Александра Панарина",
         specialistId:"IT 152",
         content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "like",
+        classLikeDislike: null,
         isComment: true,
         comment: 'Comment',
     }, {
@@ -70,7 +70,7 @@ const ResultsTableWorker = (props) => {
         specialist: "Александра Панарина",
         specialistId:"IT 152",
         content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "like",
+        classLikeDislike: "dislike",
         isComment: true,
         comment: 'Comment',
     }, {
@@ -82,7 +82,7 @@ const ResultsTableWorker = (props) => {
         specialistId:"IT 152",
         content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
         classLikeDislike: "like",
-        isComment: true,
+        isComment: false,
         comment: 'Comment',
     }];
     // END OF SAMPLES
@@ -90,6 +90,8 @@ const ResultsTableWorker = (props) => {
 
     if (applications) {
         allApplications = applications.map((el, i) => {
+
+            const content = el.content.substring(0, 50) + "...";
             return <ResultsItemWorker 
                 key={i}
                 isLastFrame={applications.length - 1 === i}
@@ -100,7 +102,7 @@ const ResultsTableWorker = (props) => {
                 department={el.department}
                 specialist={el.specialist}
                 specialistId={el.specialistId}
-                contentShort={"asd"}
+                contentShort={content}
                 index={i}
                 classLikeDislike={el.classLikeDislike}
                 isComment={el.isComment}
@@ -115,16 +117,16 @@ const ResultsTableWorker = (props) => {
 
     return (
         <div className="ResultsTableWorker">
-            {/* <ModalDepartment /> */}
-            {/* <ModalStatus /> */}
             <div className="ResultsTableWorker__filtersBlock">
                 <div className="ResultsTableWorker__filterWithIcon ResultsTableWorker__filter--status">
                     <p className="ResultsTableWorker__filterText">Дата/статус</p>
+                     {isStatusModal ? <ModalStatus close={toggleStatusModal} /> : null}
                     <div onClick={toggleStatusModal} className={`ResultsTableWorker__filterIcon ${isFilterStatus ? "ResultsTableWorker__filterIcon--active" : null}`} />
                 </div>
                 <p className="ResultsTableWorker__filterText ResultsTableWorker__filter--subject">Тема</p>
                 <div className="ResultsTableWorker__filterWithIcon ResultsTableWorker__filter--department">
                     <p className="ResultsTableWorker__filterText">Отдел</p>
+                    {isDepartmentModal ? <ModalDepartment close={toggleDepartmentModal} /> : null}
                     <div onClick={toggleDepartmentModal} className={`ResultsTableWorker__filterIcon ${isFilterDepartment ? "ResultsTableWorker__filterIcon--active" : null}`} />
                 </div>
                 <p className="ResultsTableWorker__filterText ResultsTableWorker__filter--specialist">ИТ-специалист</p>

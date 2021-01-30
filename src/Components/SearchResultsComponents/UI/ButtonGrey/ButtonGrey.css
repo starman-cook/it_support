@@ -1,0 +1,17 @@
+.ButtonGrey {
+    width: 112px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #BDBDBD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 19px 0;
+    cursor: pointer;
+    user-select: none;
+}

@@ -13,16 +13,21 @@ const ResultsItemWorker = (props) => {
     }
 
     const toggleSeeDetailsRed = (event) => {
-        const el = document.getElementsByClassName('ResultsItemWorker__seeDetails');
-        for (let i = 0; i < el.length; i++) {
+        const setDetailsElement = document.getElementsByClassName('ResultsItemWorker__seeDetails');
+        const likeDislikeElement = document.getElementsByClassName('ResultsItemWorker__icon--widthLikeDislike');
+
+        for (let i = 0; i < setDetailsElement.length; i++) {
             if (i === props.index) {
-                if (el[i].style.display === 'block') {
-                        el[i].style.display = 'none';
+                if (setDetailsElement[i].style.display === 'block') {
+                        setDetailsElement[i].style.display = 'none';
+                        likeDislikeElement[i].style.marginLeft = '30px';
                 } else {
-                    el[i].style.display = 'block';
+                    setDetailsElement[i].style.display = 'block';
+                    likeDislikeElement[i].style.marginLeft = '100px';
                 }
             } else {
-                el[i].style.display = 'none';
+                setDetailsElement[i].style.display = 'none';
+                likeDislikeElement[i].style.marginLeft = '30px';
             }
         }
     }
@@ -46,7 +51,7 @@ const ResultsItemWorker = (props) => {
             <div className="ResultsItemWorker__resultBlock">
                 <p className="ResultsItemWorker__text ResultsItemWorker__text--pushRight">{props.contentShort}</p>
                 
-                <div style={{paddingTop: '14px'}} className="ResultsItemWorker__resultBlock--icons">
+                <div className="ResultsItemWorker__resultBlock--icons">
                     <div className={`ResultsItemWorker__icon--widthLikeDislike ResultsItemWorker__icon--${props.classLikeDislike}`} />
                         <div className={`${props.isComment ? "ResultsItemWorker__comment" : null} ResultsItemWorker__comment--width`} onMouseEnter={props.isComment ? hoverShowQuestion: null} onMouseLeave={props.isComment ? hoverHideQuestion : null}>
                             <div style={showQuestion ? {"display" : "block"} : {"display" : "none"}} className="ResultsItemWorker__comment--modal">

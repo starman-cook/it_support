@@ -1,0 +1,94 @@
+.ModalStatus__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.ModalStatus {
+    width: 205px;
+    background: #4FC6E0;;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0 8px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: absolute;
+    top: 45px;
+    left: 100px;
+    z-index: 2;
+}
+.ModalStatus__content {
+    background: #FFFFFF;
+    border-radius: 0 0 8px 8px;
+}
+.ModalStatus__header {
+    width: 205px;
+    height: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ModalStatus__header--text {
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+.ModalStatus__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ModalStatus__label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.ModalStatus__input{
+    margin-top: 15px;
+    display: none;
+}
+.ModalStatus__status {
+    display: block;
+    width: 109px;
+    height: 16px;
+    border-radius: 11px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+.ModalStatus__label--icon::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../../../assets//icons/ic-remember-frame.svg') center / cover no-repeat;
+    margin-right: 7px;
+}
+.ModalStatus__input:checked ~ .ModalStatus__label--icon::before {
+    background:url('../../../assets/icons/ic-check-black.svg')center / cover no-repeat,
+               url('../../../assets//icons/ic-remember-frame.svg') center / cover no-repeat;
+}
+.ModalStatus__status--planned {
+    background: #E82024;
+}
+.ModalStatus__status--inProgress {
+    background: #F3BB1C;
+}
+.ModalStatus__status--completed {
+    background: #3CC13B;
+}
+.ModalStatus__status--canceled {
+    background: #828282;
+}

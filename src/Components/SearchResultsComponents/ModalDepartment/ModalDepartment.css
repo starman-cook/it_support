@@ -1,0 +1,78 @@
+.ModalDepartment__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.ModalDepartment {
+    width: 245px;
+    background: #4FC6E0;;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0 8px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: absolute;
+    top: 45px;
+    left: 50px;
+    z-index: 2;
+}
+.ModalDepartment__content {
+    background: #FFFFFF;
+    border-radius: 0 0 8px 8px;
+}
+.ModalDepartment__header {
+    width: 205px;
+    height: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ModalDepartment__header--text {
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+.ModalDepartment__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ModalDepartment__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.ModalDepartment__input{
+    margin-top: 15px;
+    display: none;
+}
+.ModalDepartment__department {
+    display: block;
+    width: 158px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    color: #333333;
+    margin-left: 10px;
+}
+.ModalDepartment__label--icon::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../../../assets//icons/ic-remember-frame.svg') center / cover no-repeat;
+    margin-right: 7px;
+}
+.ModalDepartment__input:checked ~ .ModalDepartment__label--icon::before {
+    background:url('../../../assets/icons/ic-check-black.svg')center / cover no-repeat,
+               url('../../../assets//icons/ic-remember-frame.svg') center / cover no-repeat;
+}

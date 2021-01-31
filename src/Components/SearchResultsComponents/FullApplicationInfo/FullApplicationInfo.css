@@ -1,0 +1,384 @@
+/* .FullApplicationInfo {} */
+.FullApplicationInfo__close {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    background: url('../../../assets//icons/ic-close-blue.svg')center / cover no-repeat;
+    right: -18px;
+    top: -18px;
+    cursor: pointer;
+}
+.FullApplicationInfo__header {
+    margin: 28px auto;
+    max-width: 1018px;
+    display: flex;
+    align-items: flex-start;
+    background: white;
+    padding: 0 0 14px 0;
+    border-radius: 8px;
+    position: relative;
+}
+
+
+
+.FullApplicationInfo__text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    margin: 0;
+}
+
+.FullApplicationInfo__image {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    margin-right: 14px;
+}
+
+
+.ResultsItemWorker__text--red {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    color: #E34A4E;
+    margin: 0;
+}
+.ResultsItemWorker__applicationId {
+    display: flex;
+    align-items: center;
+}
+.ResultsItemWorker__text--applicationId {
+    font-weight: bold;
+}
+.FullApplicationInfo__workerIdBlock--imageBlock {
+    display: flex;
+    align-items: flex-start;
+}
+
+.FullApplicationInfo__status {
+    display: block;
+    width: 109px;
+    height: 16px;
+    border-radius: 11px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    margin: 6px 0 0 0;
+    user-select: none;
+}
+.FullApplicationInfo__statusDateBlock {
+    padding-top: 14px;
+    margin-left: 30px;
+    flex-basis: 25%;
+}
+.FullApplicationInfo__ApplicationIdBlock {
+    padding-top: 14px;
+    flex-basis: 25%;
+}
+
+.FullApplicationInfo__workerIdBlock {
+    width: 280px;
+    padding-top: 14px;
+}
+
+.FullApplicationInfo__workerIdAndQuestionBlock {
+    display: flex;
+    flex-direction: column;
+
+}
+.FullApplicationInfo__question--icon {
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+    position: relative;
+    background: url('../../../assets//icons/ic_question.svg')2px 3px  no-repeat;
+    background-size: 8px 8px;
+    border: 1px solid #4D525B;
+    border-radius: 50%;
+    margin-left: 3px;
+}
+.FullApplicationInfo__question--icon:hover {
+    background: url('../../../assets//icons/ic_question_red.svg')2px 3px  no-repeat;
+    border: 1px solid #E34A4E;
+    background-size: 8px 8px;
+}
+.FullApplicationInfo__specialistIdBlock {
+    display: flex;
+    align-items: center;
+}
+.FullApplicationInfo__likeAndCommentBlock {
+    padding-top: 14px;
+}
+.FullApplicationInfo__id {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #BDBDBD;
+    margin: 0;
+}
+
+
+.FullApplicationInfo__likeAndCommentBlock--icons {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.FullApplicationInfo__icon--widthLikeDislike {
+    width: 38px;
+    height: 38px;
+    margin-left: 30px;
+    background-size: 38px;
+}
+.FullApplicationInfo__icon--like {
+    background: url('../../../assets/icons/icon-like__active.svg')center / contain no-repeat;
+}
+.FullApplicationInfo__icon--dislike {
+    background: url('../../../assets/icons/icon-dislike__active.svg')center / contain no-repeat;
+}
+
+
+.FullApplicationInfo__text--pushRight {
+    margin-right: auto;
+}
+
+.FullApplicationInfo__comment {
+    cursor: pointer;
+    background: url('../../../assets//icons/ic-comment.svg')center  no-repeat;  
+    background-size: 24px;
+}
+.FullApplicationInfo__comment--width {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin: 0 8px;
+}
+.FullApplicationInfo__comment--modal {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 217px;
+    padding: 0 20px;
+    border: 1px solid #E34A4E;
+    background: white;
+    border-radius: 4px;
+}
+.FullApplicationInfo__comment--modal-text {
+    color: #4D525B;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+}
+.FullApplicationInfo__comment:hover {
+    background: url('../../../assets//icons/ic-comment-active.svg')center  no-repeat;  
+    background-size: 24px;
+
+}
+
+.FullApplicationInfo__content--left {
+    width: 672px;
+    height: 440px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 30px 70px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+.FullApplicationInfo__content__title {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #C53437;
+    margin: 0 0 10px 0;
+}
+.FullApplicationInfo__content__head {
+    display: flex;
+}
+.FullApplicationInfo__content__head--sides {
+    margin-right: 88px;
+}
+.FullApplicationInfo__content__text--title {
+    width: 200px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    margin: 23px 0 0 0;
+}
+.FullApplicationInfo__content__text {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+    color: #4D525B;
+    padding: 0;
+    margin: 5px 0 0 0;
+}
+
+.FullApplicationInfo__content {
+    display: flex;
+    align-items: flex-start;
+    max-width: 1018px;
+    margin: 0 auto;
+}
+.FullApplicationInfo__title {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: 0.01em;
+    color: #C53437;
+    margin: 0 0 10px 0;
+}
+.FullApplicationInfo__content--left::-webkit-scrollbar-track
+{
+	border: 5px solid white;
+	background-color: #b2bec3;
+}
+
+.FullApplicationInfo__content--left::-webkit-scrollbar
+{
+	width: 15px;
+	background-color: #dfe6e9;
+}
+
+.FullApplicationInfo__content--left::-webkit-scrollbar-thumb
+{
+	background-color: #4FC6E0;
+	border-radius: 20px;
+}
+
+.FullApplicationInfo__content--right {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    height: 440px;
+}
+.FullApplicationInfo__fileImage {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+}
+.FullApplicationInfo__fileImage--canvas {
+    border-radius: 8px;
+    overflow: hidden;
+}
+.FullApplicationInfo__backToWorkLink {
+    margin: auto 0 0 0;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    text-decoration-line: underline;
+    color: #E34A4E;
+    cursor: pointer;
+}
+
+.FullApplicationInfo__footer {
+    max-width: 1018px;
+    margin: 38px auto;
+    display: flex;
+    justify-content: space-between;
+}
+.FullApplicationInfo__btnLeft {
+    width: 504px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.FullApplicationInfo__arrowLeft {
+    width: 5px;
+    height: 11px;
+    margin-left: 17px;
+    background: url('../../../assets/icons/ic-arrow-left-grey.svg')center / cover no-repeat;
+}
+.FullApplicationInfo__btnTextLeft {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #BDBDBD;
+    margin: 0 auto;
+}
+.FullApplicationInfo__btnLeft:hover {
+    background: #BDBDBD;
+}
+.FullApplicationInfo__btnLeft:hover > .FullApplicationInfo__arrowLeft {
+    background: url('../../../assets/icons/ic-arrow-left-white.svg')center / cover no-repeat;
+}
+.FullApplicationInfo__btnLeft:hover > .FullApplicationInfo__btnTextLeft {
+    color: white;
+}
+
+.FullApplicationInfo__btnRight {
+    width: 504px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.FullApplicationInfo__arrowRight {
+    width: 5px;
+    height: 11px;
+    margin-right: 17px;
+    background: url('../../../assets/icons/ic-arrow-right-grey.svg')center / cover no-repeat;
+}
+.FullApplicationInfo__btnTextRight {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #BDBDBD;
+    margin: 0 auto;
+}
+
+.FullApplicationInfo__btnRight:hover {
+    background: #BDBDBD;
+}
+.FullApplicationInfo__btnRight:hover > .FullApplicationInfo__arrowRight {
+    background: url('../../../assets/icons/ic-arrow-right-white.svg')center / cover no-repeat;
+}
+.FullApplicationInfo__btnRight:hover > .FullApplicationInfo__btnTextRight {
+    color: white;
+}
+
+.FullApplicationInfo__fileImage--modal {
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0, 0.4);
+}
+.FullApplicationInfo__fileImage--modalCanvas {
+    margin: 30px auto;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

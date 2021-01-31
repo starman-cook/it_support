@@ -47,7 +47,7 @@
     border-radius: 0 0 8px 8px;
     border: none;
 }
-.ResultsItemWorker_statusDateBlock {
+.ResultsItemWorker__statusDateBlock {
     padding-top: 14px;
     margin-left: 30px;
     flex-basis: 15%;
@@ -60,6 +60,18 @@
     letter-spacing: 0.01em;
     color: #4D525B;
     margin: 0;
+}
+.ResultsItemWorker__text--subject {
+    width: 120px;
+}
+.ResultsItemWorker__text--workerName {
+    width: 140px;
+}
+.ResultsItemWorker__text--department {
+    width: 180px;
+}
+.ResultsItemWorker__text--specialistName {
+    width: 180px;
 }
 
 .ResultsItemWorker__status {
@@ -77,6 +89,10 @@
     color: #FFFFFF;
     margin: 6px 0 0 0;
     user-select: none;
+}
+.ResultsItemWorker__workerIdBlock {
+    flex-basis: 15%;
+    padding-top: 14px;
 }
 .ResultsItemWorker__subjectBlock {
     padding-top: 14px;
@@ -114,6 +130,7 @@
 .ResultsItemWorker__icon--widthLikeDislike {
     width: 24px;
     height: 44px;
+    margin-left: 30px;
 }
 .ResultsItemWorker__icon--like {
     background: url('../../../../assets/icons/icon-like__active.svg')center / contain no-repeat;
@@ -130,7 +147,7 @@
     align-items: center;
     top: 0;
     bottom: 0;
-    right: 0;
+    right: -1px;
     display: none;
     background: linear-gradient(180deg, #C53437 0%, #E34A52 100%), #E34A4E;
     position: absolute;

@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router';
 import ErrorWindow from './Components/ApplicationPageComponents/ErrorWindow/ErrorWindow';
+import FullApplicationInfo from './Components/SearchResultsComponents/FullApplicationInfo/FullApplicationInfo';
 import ApplicationPage from './Containers/ApplicationPage/ApplicationPage';
 import SearchResultsPage from './Containers/SearchResultsPage/SearchResultsPage';
 import UserLoginPage from './Containers/UserLoginPage/UserLoginPage';
@@ -13,6 +14,7 @@ function App() {
     <Route path="/application/:id" component={ApplicationPage} />
     <Route path="/error" component={ErrorWindow} />
     <Route path="/search" component={SearchResultsPage} />
+    <Route path="/fullinfo/:id" component={FullApplicationInfo} />
   </Switch>
   </>
   );

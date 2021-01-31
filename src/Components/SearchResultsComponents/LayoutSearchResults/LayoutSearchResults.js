@@ -1,13 +1,18 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import './LayoutSearchResults.css';
 
 
 const LayoutSearchResults = (props) => {
+    const history = useHistory();
+    const goToApplications = () => {
+        history.push('/application')
+    }
 
     return (
         <div className="LayoutSearchResults">
             <header className="LayoutSearchResults__header">
-                <div className="LayoutSearchResults__logo" />
+                <div onClick={goToApplications} className="LayoutSearchResults__logo" />
                 <div className="LayoutSearchResults__contactPhoneBlock">
                     <h2 className="LayoutSearchResults__boldText">+7 727 390 11 12</h2>
                     <p className="LayoutSearchResults__headerHelperText">служба поддержки пользователей</p>

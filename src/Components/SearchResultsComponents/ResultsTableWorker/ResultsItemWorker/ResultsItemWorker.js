@@ -34,18 +34,26 @@ const ResultsItemWorker = (props) => {
 
     return (
         <div onClick={(event) => {toggleSeeDetailsRed(event)}} className={`ResultsItemWorker ${ props.isLastFrame ? "ResultsItemWorker--last" : null}`}>
-            <div className="ResultsItemWorker_statusDateBlock">
+            <div className="ResultsItemWorker__statusDateBlock">
                 <p className="ResultsItemWorker__text">{props.date}</p>
                 <p style={{background: props.statusColor}} className="ResultsItemWorker__status">{props.status}</p>
             </div>
+
+            {props.isDirector ? 
+            <div className="ResultsItemWorker__workerIdBlock">
+                <p className="ResultsItemWorker__text ResultsItemWorker__text--workerName">{props.worker}</p>
+                <p className="ResultsItemWorker__id">{props.workerId}</p>
+            </div>
+            : null}
+
             <div className="ResultsItemWorker__subjectBlock">
-                <p className="ResultsItemWorker__text">{props.subject}</p>
+                <p className="ResultsItemWorker__text ResultsItemWorker__text--subject">{props.subject}</p>
             </div>
             <div className="ResultsItemWorker__departmentBlock">
-                <p className="ResultsItemWorker__text">{props.department}</p>
+                <p className="ResultsItemWorker__text ResultsItemWorker__text--department">{props.department}</p>
             </div>
             <div className="ResultsItemWorker__specialistIdBlock">
-                <p className="ResultsItemWorker__text">{props.specialist}</p>
+                <p className="ResultsItemWorker__text ResultsItemWorker__text--specialistName">{props.specialist}</p>
                 <p className="ResultsItemWorker__id">{props.specialistId}</p>
             </div>
             <div className="ResultsItemWorker__resultBlock">

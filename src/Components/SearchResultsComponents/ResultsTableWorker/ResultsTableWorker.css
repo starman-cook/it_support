@@ -43,7 +43,13 @@
 .ResultsTableWorker__filter--specialist {
     flex-basis: 19%;
 }
-/* .ResultsTableWorker__filter--results {} */
+.ResultsTableWorker__filter--worker {
+    flex-basis: 15%;
+    position: relative;
+}
+.ResultsTableWorker__filter--results {
+    flex-basis: 28.5%;
+}
 
 
 .ResultsTableWorker__filterIcon--active {

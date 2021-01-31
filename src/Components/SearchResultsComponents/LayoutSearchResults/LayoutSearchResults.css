@@ -1,4 +1,6 @@
-/* .LayoutSearchResults {} */
+.LayoutSearchResults {
+    margin-bottom: 100px;
+}
 .LayoutSearchResults__header {
     max-width: 1170px;
     min-height: 109px;
@@ -12,6 +14,7 @@
     justify-content: space-between;
 }
 .LayoutSearchResults__logo {
+    cursor: pointer;
     width: 77px;
     height: 72px;
     background: url('../../../assets/images/logo_L.svg')center /contain no-repeat;

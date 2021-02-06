@@ -1,19 +1,20 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import Logo from '../Logo/Logo';
 import SocialNetworkLinks from '../SocialNetworkLinks/SocialNetworkLinks';
 import WhiteButton from '../WhiteButton/WhiteButton';
 import './LayoutApplicationPage.css';
+import {push} from 'connected-react-router';
+import {useDispatch} from "react-redux";
 
 const LayoutApplicationPage = (props) => {
-    const history = useHistory();
+    const dispatch = useDispatch();
 
 
     const goToApplication = () => {
-        history.push("/application");
+        dispatch(push("/application"));
     };
     const goToHistoryOfApplications = () => {
-        history.push("/search");
+        dispatch(push("/search"));
     };
 
     return (

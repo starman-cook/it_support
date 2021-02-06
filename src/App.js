@@ -14,7 +14,7 @@ function App() {
     <Route path="/application/:id" component={ApplicationPage} />
     <Route path="/error" component={ErrorWindow} />
     <Route path="/search" component={SearchResultsPage} />
-    <Route path="/fullinfo/:id" component={FullApplicationInfo} />
+    {/*<Route path="/fullinfo" component={FullApplicationInfo} />*/}
   </Switch>
   </>
   );

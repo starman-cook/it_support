@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LayoutSearchResults from '../../Components/SearchResultsComponents/LayoutSearchResults/LayoutSearchResults';
 import ResultsTableWorker from '../../Components/SearchResultsComponents/ResultsTableWorker/ResultsTableWorker';
 import './SearchResultsPage.css';
+import axios from "../../axiosApi";
 
 const SearchResultsPage = () => {
 
-    const role = "user"; // При логине проверяем если пользователь руководитель или работник, и выводим соответствующий ResultsTable
     const isFilter = true;
     const dateStart = 'ДД/ММ/ГГ';
     const dateEnd = 'ДД/ММ/ГГ';
@@ -17,7 +17,11 @@ const SearchResultsPage = () => {
     const [dateBtnValue, setDateBtnValue] = useState("");
     // dateBtnValue Получаем текст из кнопки (вчера, месяц и прочее), потом с помощью условий выводим на экран результаты по выбраным датам
     const [calendarModal, setCalendarModal] = useState(false);
-    
+
+    useEffect(() => {
+        const response = axios.get('/events');
+        console.log(response);
+    }, []);
     
     
     const [activePage, setActivePage] = useState(1);
@@ -163,12 +167,12 @@ const paginationLeft = () => {
 };
 
 
-if (role === "user") {
+
     tableView = (
     <>
         <ResultsTableWorker />
     </>);
-}
+
 
 
 

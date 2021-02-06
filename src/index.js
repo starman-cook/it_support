@@ -3,25 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import ApplicationPageReducer from './Store/ApplicationPage/ApplicationPageReducer';
-import thunk from 'redux-thunk';
+// import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+// import ApplicationsReducer from './Store/ApplicationsReducer/applicationsReducer';
+// import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import {ConnectedRouter} from 'connected-react-router';
+import store, {history} from "./Store/configStore";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootReducer = combineReducers({
-  ApplicationPage: ApplicationPageReducer
-});
+// const rootReducer = combineReducers({
+//   ApplicationPage: ApplicationsReducer
+// });
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
-          <App />
-    </BrowserRouter>
+      <ConnectedRouter history={history}>
+            <App/>
+      </ConnectedRouter>
   </Provider>
 )
 

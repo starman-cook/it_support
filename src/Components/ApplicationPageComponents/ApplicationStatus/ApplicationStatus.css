@@ -18,7 +18,7 @@
     line-height: 25px;
     text-align: center;
     letter-spacing: 0.01em;
-    background: #E34A4E url('../../../assets//icons/ic_check.svg')center no-repeat;
+    background: #E34A4E url('../../../assets/icons/ic_check.svg')center no-repeat;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -69,7 +69,7 @@
 
 /* WHEN CANCELED */
 .ApplicationStatus__canceled {
-    background: #828282 url('../../../assets//icons/ic_check.svg')center no-repeat;
+    background: #828282 url('../../../assets/icons/ic_check.svg')center no-repeat;
 }
 .ApplicationStatus__link--whenCanceled {
     font-weight: bold;

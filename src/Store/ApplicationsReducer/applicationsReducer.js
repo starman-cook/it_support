@@ -1,0 +1,188 @@
+import { ADD_COMMENT } from "./applicationsActionTypes";
+
+const initialState = {
+    departments: ["main dep", "office dep", "some other dep"],
+    comments: [],
+    applications: [{
+        date: "03. 11. 2019, 10:50",
+        status: "запланировано",
+        subject:"Най",
+        department: "Уа",
+        specialist: "Ана",
+        specialistId:"IT",
+        solution: "Б ",
+        classLikeDislike: "like",
+        isComment: true,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    },{
+        date: "03. 11. 2019, 10:50",
+        status: "в работе",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправ Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправ",
+        classLikeDislike: null,
+        isComment: false,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "завершено",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: null,
+        isComment: true,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "отменено",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: "dislike",
+        isComment: true,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "запланировано",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: "like",
+        isComment: false,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "запланировано",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: "like",
+        isComment: true,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "в работе",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: null,
+        isComment: false,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "завершено",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: null,
+        isComment: true,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "отменено",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: "dislike",
+        isComment: true,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }, {
+        date: "03. 11. 2019, 10:50",
+        status: "запланировано",
+        subject:"Не работает вайфай",
+        department: "Удаленная поддержка",
+        specialist: "Александра Панарина",
+        specialistId:"IT 152",
+        solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
+        classLikeDislike: "like",
+        isComment: false,
+        comment: 'Comment',
+        worker: 'Примерный рабочий',
+        workerId: "ID 3245875",
+        specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
+        applicationId: "IT-011220-039862",
+        problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал."
+    }]
+};
+
+const applicationsReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case ADD_COMMENT:
+            return {...state, comments: [...state.comments, action.value]}
+        default:
+            return state;
+    }
+};
+
+export default applicationsReducer;

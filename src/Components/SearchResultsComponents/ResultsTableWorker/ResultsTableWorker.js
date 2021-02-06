@@ -5,13 +5,13 @@ import ModalStatus from '../ModalStatus/ModalStatus';
 import NoResults from '../NoResults/NoResults';
 import ResultsItemWorker from './ResultsItemWorker/ResultsItemWorker';
 import './ResultsTableWorker.css';
-import { useHistory } from 'react-router';
-
+import {useDispatch, useSelector} from "react-redux";
+import {push} from 'connected-react-router'
+import FullApplicationInfo from "../FullApplicationInfo/FullApplicationInfo";
 
 const ResultsTableWorker = (props) => {
-    const history = useHistory();
-
-
+    const [indexForModal, setIndexForModal] = useState();
+    const dispatch = useDispatch();
     let allApplications;
     const user = {
         role: 'director'
@@ -25,7 +25,8 @@ const ResultsTableWorker = (props) => {
     const [isStatusModal, setIsStatusModal] = useState(false);
     const [isDepartmentModal, setIsDepartmentModal] = useState(false);
     const [isWorkerModal, setIsWorkerModal] = useState(false);
-
+    const [isFullInfoModal, setIsFullInfoModal] = useState((false));
+    const [oneApplication, setOneApplication] = useState({});
 
     const toggleStatusModal = () => {
         setIsStatusModal(!isStatusModal);
@@ -42,150 +43,21 @@ const ResultsTableWorker = (props) => {
         setIsStatusModal(false);
         setIsDepartmentModal(false);
     }
-    const goToSeeFullApplicationInfo = (id) => {
-        history.push(`/fullinfo/${id}`)
+    const seeFullApplicationInfo = (index) => {
+        setIndexForModal(index)
+        setOneApplication(applications[index]);
+        setIsFullInfoModal(!isFullInfoModal);
+        // Здесь делаем запрос на сурвер через диспатч и созраняем в редаксе полную инфу одной заявки
     }
     // Болванки для демонстрации списка, потом заменить на полученные данные с сервера
-    const applications = [
-    {
-        date: "03. 11. 2019, 10:50",
-        status: "запланировано",
-        subject:"Най",
-        department: "Уа",
-        specialist: "Ана",
-        specialistId:"IT",
-        content: "Б ",
-        classLikeDislike: "like",
-        isComment: true,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    },{
-        date: "03. 11. 2019, 10:50",
-        status: "в работе",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: null,
-        isComment: false,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "завершено",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: null,
-        isComment: true,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "отменено",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "dislike",
-        isComment: true,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "запланировано",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "like",
-        isComment: false,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "запланировано",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "like",
-        isComment: true,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "в работе",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: null,
-        isComment: false,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "завершено",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: null,
-        isComment: true,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "отменено",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "dislike",
-        isComment: true,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }, {
-        date: "03. 11. 2019, 10:50",
-        status: "запланировано",
-        subject:"Не работает вайфай",
-        department: "Удаленная поддержка",
-        specialist: "Александра Панарина",
-        specialistId:"IT 152",
-        content: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-        classLikeDislike: "like",
-        isComment: false,
-        comment: 'Comment',
-        worker: 'Примерный рабочий',
-        workerId: "ID 3245875"
-    }
-];
+    const applications = useSelector(state => state.applications.applications);
     // END OF SAMPLES
 
 
     if (applications.length > 0) {
         allApplications = applications.map((el, i) => {
 
-            const content = el.content.substring(0, 50) + "...";
+            const solution = el.solution.substring(0, 50) + "...";
             return <ResultsItemWorker 
                 key={i}
                 isLastFrame={applications.length - 1 === i}
@@ -196,11 +68,11 @@ const ResultsTableWorker = (props) => {
                 department={el.department}
                 specialist={el.specialist}
                 specialistId={el.specialistId}
-                contentShort={content}
+                contentShort={solution}
                 index={i}
                 classLikeDislike={el.classLikeDislike}
                 isComment={el.isComment}
-                openSeeDetails={() => {goToSeeFullApplicationInfo(i)}}
+                openSeeDetails={() => {seeFullApplicationInfo(i)}}
                 isDirector={user.role === 'director'}
                 workerId={el.workerId}
                 worker={el.worker}
@@ -212,7 +84,24 @@ const ResultsTableWorker = (props) => {
         )
     }
 
+    const goLeft = () => {
+        const index = indexForModal - 1;
+        setIndexForModal(index);
+        setOneApplication(applications[index]);
 
+        console.log(applications)
+        console.log(indexForModal)
+    };
+    const goRight = () => {
+        const index = indexForModal + 1;
+        setIndexForModal(index);
+        setOneApplication(applications[index]);
+        console.log(oneApplication)
+        console.log(applications)
+        console.log(indexForModal)
+
+
+    };
 
 
 
@@ -244,7 +133,18 @@ const ResultsTableWorker = (props) => {
                 <p className="ResultsTableWorker__filterText ResultsTableWorker__filter--results">Результат</p>
             
             </div>
-
+            {isFullInfoModal ?
+                <>
+                <div className="FullInfoModalBg" onClick={() => {seeFullApplicationInfo(indexForModal)}} />
+                    <FullApplicationInfo
+                        // index={idForModal}
+                        clickToClose={() => {seeFullApplicationInfo(indexForModal)}}
+                        application={oneApplication}
+                        goLeft={goLeft}
+                        goRight={goRight}
+                    />
+                </>:
+                null}
             {allApplications}
         </div>
     )

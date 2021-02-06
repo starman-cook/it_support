@@ -73,12 +73,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('../../../assets//icons/ic-remember-frame.svg') center / cover no-repeat;
+    background: url('../../../assets/icons/ic-remember-frame.svg') center / cover no-repeat;
     margin-right: 7px;
 }
 .ModalStatus__input:checked ~ .ModalStatus__label--icon::before {
     background:url('../../../assets/icons/ic-check-black.svg')center / cover no-repeat,
-               url('../../../assets//icons/ic-remember-frame.svg') center / cover no-repeat;
+               url('../../../assets/icons/ic-remember-frame.svg') center / cover no-repeat;
 }
 .ModalStatus__status--planned {
     background: #E82024;

@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 import BlueButton from '../BlueButton/BlueButton';
 import './SpecialitsWindowStatus.css';
 
 
-
 const SpecialitsWindowStatus = (props) => {
     let timerDuration = 900000; //15 минут
-    const history = useHistory();
     const status = props.status;
     const id = props.id;
     let topComponent;

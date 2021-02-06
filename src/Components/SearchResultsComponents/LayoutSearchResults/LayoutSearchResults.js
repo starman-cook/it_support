@@ -1,12 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import './LayoutSearchResults.css';
-
+import {push} from 'connected-react-router';
+import {useDispatch} from "react-redux";
 
 const LayoutSearchResults = (props) => {
-    const history = useHistory();
+    const dispatch = useDispatch();
     const goToApplications = () => {
-        history.push('/application')
+        dispatch(push('/application'));
     }
 
     return (

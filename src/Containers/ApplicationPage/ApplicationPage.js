@@ -1,22 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router';
 import ApplicationDetails from '../../Components/ApplicationPageComponents/ApplicationDetails/ApplicationDetails';
 import ApplicationForm from '../../Components/ApplicationPageComponents/ApplicationForm/ApplicationForm';
 import ApplicationStatus from '../../Components/ApplicationPageComponents/ApplicationStatus/ApplicationStatus';
 import LayoutApplicationPage from '../../Components/ApplicationPageComponents/LayoutApplicationPage/LayoutApplicationPage';
 import PreviousApplicationMenu from '../../Components/ApplicationPageComponents/PreviousApplicationMenu/PreviousApplicationMenu';
 import SpecialitsWindowStatus from '../../Components/ApplicationPageComponents/SpecialitsWindowStatus/SpecialitsWindowStatus';
-
+import {push} from 'connected-react-router'
+import {useDispatch} from "react-redux";
 
 const ApplicationPage = (props) => {
-
+    const dispatch = useDispatch();
     const id = props.match.params.id;
     const idInTitle = `№ IT-${id}`;
     const status = 'new' // Получить статус заявки при запросе данных заявки
     // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
 
     const refFile = useRef();
-    const history = useHistory();
     const [fileNameState, setFileNameState] = useState("");
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [showQuestion, setShowQuestion] = useState(false);
@@ -113,7 +112,7 @@ const ApplicationPage = (props) => {
         setIsBackInProgress(false);
          // Отправка формы заявки с файлом или без файла
         clearInputState();
-        history.push('application/idgoeshere') //add query params to get application by id
+        dispatch(push('application/idgoeshere')); //add query params to get application by id
     }
 
     const isDisabled = () => {

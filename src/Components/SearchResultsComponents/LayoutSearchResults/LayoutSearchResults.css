@@ -70,7 +70,7 @@
     height: 20px;
     cursor: pointer;
     position: relative;
-    background: url('../../../assets//icons/ic_question.svg')6px 4px  no-repeat, url('../../../assets//icons/ic_question_frame.svg')center center no-repeat;  
+    background: url('../../../assets/icons/ic_question.svg')6px 4px  no-repeat, url('../../../assets/icons/ic_question_frame.svg')center center no-repeat;
 }
 .LayoutSearchResults__question--modal {
     position: absolute;
@@ -91,7 +91,7 @@
     text-align: center;
 }
 .LayoutSearchResults__question:hover {
-    background: url('../../../assets//icons/ic_question_red.svg')6px 4px  no-repeat, url('../../../assets//icons/ic_question_frame_red.svg')center center no-repeat;  
+    background: url('../../../assets/icons/ic_question_red.svg')6px 4px  no-repeat, url('../../../assets/icons/ic_question_frame_red.svg')center center no-repeat;
 }
 
 

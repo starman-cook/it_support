@@ -1,9 +1,20 @@
-/* .FullApplicationInfo {} */
+ .FullApplicationInfo {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     max-width: 1076px;
+     margin: 30px auto;
+     background: #f3f6f9;
+     padding: 5px 25px;
+     border-radius: 10px;
+     z-index: 5;
+ }
 .FullApplicationInfo__close {
     position: absolute;
     width: 11px;
     height: 11px;
-    background: url('../../../assets//icons/ic-close-blue.svg')center / cover no-repeat;
+    background: url('../../../assets/icons/ic-close-blue.svg')center / cover no-repeat;
     right: -18px;
     top: -18px;
     cursor: pointer;
@@ -100,14 +111,14 @@
     height: 13px;
     cursor: pointer;
     position: relative;
-    background: url('../../../assets//icons/ic_question.svg')2px 3px  no-repeat;
+    background: url('../../../assets/icons/ic_question.svg')2px 3px  no-repeat;
     background-size: 8px 8px;
     border: 1px solid #4D525B;
     border-radius: 50%;
     margin-left: 3px;
 }
 .FullApplicationInfo__question--icon:hover {
-    background: url('../../../assets//icons/ic_question_red.svg')2px 3px  no-repeat;
+    background: url('../../../assets/icons/ic_question_red.svg')2px 3px  no-repeat;
     border: 1px solid #E34A4E;
     background-size: 8px 8px;
 }
@@ -153,7 +164,7 @@
 
 .FullApplicationInfo__comment {
     cursor: pointer;
-    background: url('../../../assets//icons/ic-comment.svg')center  no-repeat;  
+    background: url('../../../assets/icons/ic-comment.svg')center  no-repeat;
     background-size: 24px;
 }
 .FullApplicationInfo__comment--width {
@@ -181,7 +192,7 @@
     text-align: center;
 }
 .FullApplicationInfo__comment:hover {
-    background: url('../../../assets//icons/ic-comment-active.svg')center  no-repeat;  
+    background: url('../../../assets/icons/ic-comment-active.svg')center  no-repeat;
     background-size: 24px;
 
 }
@@ -374,11 +385,16 @@
     left: 0;
     right: 0;
     background: rgba(0,0,0, 0.4);
+    z-index: 6;
 }
 .FullApplicationInfo__fileImage--modalCanvas {
-    margin: 30px auto;
+    position: fixed;
     max-width: 1000px;
     display: flex;
     justify-content: center;
     align-items: center;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 7;
 }

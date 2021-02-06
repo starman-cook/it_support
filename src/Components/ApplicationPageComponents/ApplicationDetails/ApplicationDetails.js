@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComment } from '../../../Store/ApplicationPage/ApplicationPageActions';
+import { addComment } from '../../../Store/ApplicationsReducer/applicationsActions';
 import BlueButton from '../BlueButton/BlueButton';
 import './ApplicationDetails.css';
 
@@ -10,7 +10,7 @@ const ApplicationDetails = (props) => {
     const status = props.status;
     const id = props.id;
     const dispatch = useDispatch();
-    const comments = useSelector(state => state.ApplicationPage.comments); //Получить все комментарии по ID
+    const comments = useSelector(state => state.applications.comments); //Получить все комментарии по ID
     const [oneComment, setOneComment] = useState();
     const [messageClassToggle, setMessageClassToggle] = useState("messageClassToggleHidden");
     const [messageClassButtonText, setMessageClassButtonText] = useState('показать подробнее');

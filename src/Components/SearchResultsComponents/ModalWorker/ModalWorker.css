@@ -53,7 +53,7 @@
     cursor: pointer;
     width: 12px;
     height: 10px;
-    background: url('../../../assets//icons/ic-wrap-worker-search.svg')center / cover no-repeat;
+    background: url('../../../assets/icons/ic-wrap-worker-search.svg')center / cover no-repeat;
 }
 .ModalWorker__resultsItem {
     font-weight: normal;

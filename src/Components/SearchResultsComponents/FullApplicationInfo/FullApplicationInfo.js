@@ -71,6 +71,38 @@ const FullApplicationInfo = (props) => {
     // const goRight = () => {
     //     setIndex(index + 1);
     // }
+    // let color;
+    // let date;
+    // let status;
+    // let applicationId;
+    // let specialistPhoto;
+    // let specialist;
+    // let specialistId;
+    // let workerId;
+    // let classLikeDislike;
+    // let isComment;
+    // let department;
+    // let subject;
+    // let solution;
+    // let fileImage;
+    // let problem;
+    // if (application) {
+    //     color = application.status === 'запланировано' ? "#E82024" : application.status === 'в работе' ? "#F3BB1C" : application.status === 'завершено' ? "#3CC13B" : application.status === 'отменено' ? '#828282' : null;
+    //     date = application.date;
+    //     status = application.status;
+    //     applicationId = application.applicationId;
+    //     specialistPhoto = application.specialistPhoto;
+    //     specialist = application.specialist;
+    //     specialistId = application.specialistId;
+    //     workerId = application.workerId;
+    //     classLikeDislike = application.classLikeDislike;
+    //     isComment = application.isComment;
+    //     department = application.department;
+    //     subject = application.subject;
+    //     solution = application.solution;
+    //     fileImage = application.fileImage;
+    //     problem = application.problem;
+    // }
     let color;
     let date;
     let status;
@@ -87,21 +119,21 @@ const FullApplicationInfo = (props) => {
     let fileImage;
     let problem;
     if (application) {
-        color = application.status === 'запланировано' ? "#E82024" : application.status === 'в работе' ? "#F3BB1C" : application.status === 'завершено' ? "#3CC13B" : application.status === 'отменено' ? '#828282' : null;
-        date = application.date;
+        color = application.status === 'Запланировано' ? "#E82024" : application.status === 'В работе' ? "#F3BB1C" : application.status === 'Завершено' ? "#3CC13B" : application.status === 'Отменено' ? '#828282' : null;
+        date = application.dateCreate;
         status = application.status;
-        applicationId = application.applicationId;
-        specialistPhoto = application.specialistPhoto;
-        specialist = application.specialist;
-        specialistId = application.specialistId;
-        workerId = application.workerId;
-        classLikeDislike = application.classLikeDislike;
-        isComment = application.isComment;
-        department = application.department;
+        applicationId = application.number;
+        specialistPhoto = application.implementer['photo'];
+        specialist = application.implementer['name'];
+        specialistId = application.implementer['id'];
+        workerId = application.employee['id'];
+        classLikeDislike = application.rating === 1 ? "like" : "dislike";
+        isComment = true;
+        department = application.departament;
         subject = application.subject;
-        solution = application.solution;
-        fileImage = application.fileImage;
-        problem = application.problem;
+        solution = application.outcome;
+        fileImage = application.images[0];
+        problem = application.details;
     }
 
     return (

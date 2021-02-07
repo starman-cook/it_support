@@ -116,6 +116,7 @@
     border: 1px solid #4D525B;
     border-radius: 50%;
     margin-left: 3px;
+    margin-top: 2px;
 }
 .FullApplicationInfo__question--icon:hover {
     background: url('../../../assets/icons/ic_question_red.svg')2px 3px  no-repeat;

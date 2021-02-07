@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ModalWorker from '../ModalWorker/ModalWorker';
 import ModalDepartment from '../ModalDepartment/ModalDepartment';
 import ModalStatus from '../ModalStatus/ModalStatus';
@@ -8,10 +8,35 @@ import './ResultsTableWorker.css';
 import {useDispatch, useSelector} from "react-redux";
 import {push} from 'connected-react-router'
 import FullApplicationInfo from "../FullApplicationInfo/FullApplicationInfo";
+import {getTenApplications} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 const ResultsTableWorker = (props) => {
-    const [indexForModal, setIndexForModal] = useState();
     const dispatch = useDispatch();
+
+    // const body = {
+    //     clientId: "1267-02-00020",
+    //     hash: "68ace46062c33b61ac87a05e44a48198",
+    //     filter: {
+    //         date: {
+    //             from: "20200101",
+    //             to: "20201231 "
+    //         },
+    //         status: [],
+    //         employee: " ",
+    //         departament: [],
+    //         number: ""
+    //     },
+    //     limit: 10,
+    //     start: 0
+    // }
+    const data = useSelector(state => state.applications.data);
+
+    useEffect(() => {
+        dispatch(getTenApplications(data));
+    }, [data]);
+
+
+    const [indexForModal, setIndexForModal] = useState();
     let allApplications;
     const user = {
         role: 'director'
@@ -47,60 +72,80 @@ const ResultsTableWorker = (props) => {
         setIndexForModal(index)
         setOneApplication(applications[index]);
         setIsFullInfoModal(!isFullInfoModal);
-        // Здесь делаем запрос на сурвер через диспатч и созраняем в редаксе полную инфу одной заявки
+        // Здесь делаем запрос на сервер через диспатч и созраняем в редаксе полную инфу одной заявки
     }
-    // Болванки для демонстрации списка, потом заменить на полученные данные с сервера
     const applications = useSelector(state => state.applications.applications);
-    // END OF SAMPLES
 
-
-    if (applications.length > 0) {
+    if (applications !== null) {
         allApplications = applications.map((el, i) => {
 
-            const solution = el.solution.substring(0, 50) + "...";
-            return <ResultsItemWorker 
-                key={i}
-                isLastFrame={applications.length - 1 === i}
-                statusColor={el.status === 'запланировано' ? "#E82024" : el.status === 'в работе' ? "#F3BB1C" : el.status === 'завершено' ? "#3CC13B" : el.status === 'отменено' ? '#828282' : null}
-                date={el.date}
-                status={el.status}
-                subject={el.subject}
-                department={el.department}
-                specialist={el.specialist}
-                specialistId={el.specialistId}
-                contentShort={solution}
-                index={i}
-                classLikeDislike={el.classLikeDislike}
-                isComment={el.isComment}
-                openSeeDetails={() => {seeFullApplicationInfo(i)}}
-                isDirector={user.role === 'director'}
-                workerId={el.workerId}
-                worker={el.worker}
-            />
+            const status = el.status;
+            const solution = el.outcome.substring(0, 50) + "...";
+                    return <ResultsItemWorker
+                        key={el._id}
+                        isLastFrame={applications.length - 1 === i}
+                        statusColor={status === 'Запланировано' ? "#E82024" : status === 'В работе' ? "#F3BB1C" : status === 'Завершено' ? "#3CC13B" : status === 'Отменено' ? '#828282' : null}
+                        date={el.dateCreate}
+                        status={status}
+                        subject={el.subject}
+                        department={el.departament}
+                        specialist={el.implementer['name']}
+                        specialistId={el.implementer['id']}
+                        contentShort={solution}
+                        index={i}
+                        classLikeDislike={el.rating['value'] === 1 ? "like" : "dislike"}
+                        isComment={el.rating['comment']}
+                        openSeeDetails={() => {seeFullApplicationInfo(i)}}
+                        isDirector={user.role === 'director'}
+                        workerId={el.employee['id']}
+                        worker={el.employee['name']}
+                    />
         });
-    } else {
+    }else {
         allApplications = (
             <NoResults />
         )
     }
+    // if (applications.length > 0) {
+    //     allApplications = applications.map((el, i) => {
+    //
+    //         const solution = el.solution.substring(0, 50) + "...";
+    //         return <ResultsItemWorker
+    //             key={i}
+    //             isLastFrame={applications.length - 1 === i}
+    //             statusColor={el.status === 'запланировано' ? "#E82024" : el.status === 'в работе' ? "#F3BB1C" : el.status === 'завершено' ? "#3CC13B" : el.status === 'отменено' ? '#828282' : null}
+    //             date={el.date}
+    //             status={el.status}
+    //             subject={el.subject}
+    //             department={el.department}
+    //             specialist={el.specialist}
+    //             specialistId={el.specialistId}
+    //             contentShort={solution}
+    //             index={i}
+    //             classLikeDislike={el.classLikeDislike}
+    //             isComment={el.isComment}
+    //             openSeeDetails={() => {seeFullApplicationInfo(i)}}
+    //             isDirector={user.role === 'director'}
+    //             workerId={el.workerId}
+    //             worker={el.worker}
+    //         />
+    //     });
+    // } else {
+    //     allApplications = (
+    //         <NoResults />
+    //     )
+    // }
 
     const goLeft = () => {
+        // потом будет проверка на то что если start в оффсете будет 0 и индекс 0 тогда стоп.
         const index = indexForModal - 1;
         setIndexForModal(index);
         setOneApplication(applications[index]);
-
-        console.log(applications)
-        console.log(indexForModal)
     };
     const goRight = () => {
         const index = indexForModal + 1;
         setIndexForModal(index);
         setOneApplication(applications[index]);
-        console.log(oneApplication)
-        console.log(applications)
-        console.log(indexForModal)
-
-
     };
 
 

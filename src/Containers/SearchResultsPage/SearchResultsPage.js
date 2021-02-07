@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import LayoutSearchResults from '../../Components/SearchResultsComponents/LayoutSearchResults/LayoutSearchResults';
 import ResultsTableWorker from '../../Components/SearchResultsComponents/ResultsTableWorker/ResultsTableWorker';
 import './SearchResultsPage.css';
-import axios from "../../axiosApi";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    changePagination,
+    inputFilterDateFrom,
+    inputFilterDateTo
+} from "../../Store/ApplicationsReducer/applicationsActions";
+import moment from 'moment';
 
 const SearchResultsPage = () => {
-
+    const dispatch = useDispatch();
     const isFilter = true;
     const dateStart = 'ДД/ММ/ГГ';
     const dateEnd = 'ДД/ММ/ГГ';
@@ -14,18 +20,13 @@ const SearchResultsPage = () => {
     const companyName = "ТОО 'Секс Пистоллз'";
     const companyLogo = "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg";
     const [showQuestion, setShowQuestion] = useState(false);
-    const [dateBtnValue, setDateBtnValue] = useState("");
-    // dateBtnValue Получаем текст из кнопки (вчера, месяц и прочее), потом с помощью условий выводим на экран результаты по выбраным датам
     const [calendarModal, setCalendarModal] = useState(false);
 
-    useEffect(() => {
-        const response = axios.get('/events');
-        console.log(response);
-    }, []);
     
     
     const [activePage, setActivePage] = useState(1);
-    let pagesNumbers = 23; // получать количество страниц для пагинации и кидать число в цикл, чтобы получить массив, нужен для отрисовки
+    const count = useSelector(state => state.applications.count);
+    let pagesNumbers = Math.ceil(count / 10); // получать количество страниц для пагинации и кидать число в цикл, чтобы получить массив, нужен для отрисовки
    
 
     let tableView;
@@ -47,9 +48,48 @@ const SearchResultsPage = () => {
         }
         event.target.style.color = 'white';
         event.target.style.background = '#E34A4E';
-        setDateBtnValue(event.target.textContent);
+        // let date = new Date();
+        // let year = date.getFullYear();
+        // let month = date.getMonth() + 1;
+        // if (month < 10) {
+        //     month = "0" + month;
+        // }
+        // let day = date.getDate()
+        // if (day < 10) {
+        //     day = "0" + day;
+        // }
+        // const today = `${year}${month}${day}`
         if (event.target.textContent === 'Период') {
             setCalendarModal(true);
+        } else {
+            let today = moment().format("YYYYMMDD");
+            let chosenDate;
+            dispatch(changePagination(0));
+            setActivePage(1);
+            switch (event.target.textContent) {
+                case "Сегодня":
+                    chosenDate = today;
+                    break;
+                case "Вчера":
+                    chosenDate = moment().subtract(1, 'days').format("YYYYMMDD");
+                    break;
+                case "Неделя":
+                    chosenDate = moment().subtract(7, 'days').format("YYYYMMDD");
+                    break;
+                case "Месяц":
+                    chosenDate = moment().subtract(1, 'months').format("YYYYMMDD");
+                    break;
+                case "Квавтал":
+                    chosenDate = moment().subtract(3, 'months').format("YYYYMMDD");
+                    break;
+                case "Полугодие":
+                    chosenDate = moment().subtract(6, 'months').format("YYYYMMDD");
+                    break;
+                default:
+                    break;
+            }
+            dispatch(inputFilterDateFrom(chosenDate));
+            dispatch(inputFilterDateTo(today));
         }
     }
 
@@ -142,29 +182,47 @@ const SearchResultsPage = () => {
 countPagination();
 
     const choosePage = (event) => {
+        // const el = document.getElementsByClassName('PaginationNumber');
+        // for (let i = 0; i < el.length; i++) {
+        //     el[i].style.fontSize = '14px';
+        //     el[i].style.textDecoration = 'none';
+        //     el[i].style.fontWeight = 'normal';
+        // }
+        // event.target.style.fontSize = '18px';
+        // event.target.style.fontWeight = 'bold';
+        // event.target.style.textDecoration = 'underline';
+
+        setActivePage(parseInt(event.target.textContent));
+        countPagination();
+        // colorActivePage();
+    }
+    const colorActivePage = () => {
         const el = document.getElementsByClassName('PaginationNumber');
         for (let i = 0; i < el.length; i++) {
             el[i].style.fontSize = '14px';
             el[i].style.textDecoration = 'none';
             el[i].style.fontWeight = 'normal';
         }
-        event.target.style.fontSize = '18px';
-        event.target.style.fontWeight = 'bold';
-        event.target.style.textDecoration = 'underline';
+        el[activePage - 1].style.fontSize = '18px';
+        el[activePage - 1].style.fontWeight = 'bold';
+        el[activePage - 1].style.textDecoration = 'underline';
+        // console.log(el[0]);
+    }
 
-        setActivePage(parseInt(event.target.textContent));
-        countPagination();
-    }
-const paginationRight = () => {
-    if (activePage !== pagesNumbers) {
-        setActivePage(activePage + 1);
-    }
-};
-const paginationLeft = () => {
-    if (activePage !== 1) {
-        setActivePage(activePage - 1);
-    }
-};
+    const paginationRight = () => {
+        if (activePage !== pagesNumbers) {
+            setActivePage(activePage + 1);
+            countPagination();
+            // colorActivePage();
+        }
+    };
+    const paginationLeft = () => {
+        if (activePage !== 1) {
+            setActivePage(activePage - 1);
+            countPagination();
+            // colorActivePage();
+        }
+    };
 
 
 
@@ -190,7 +248,16 @@ const paginationLeft = () => {
             )
         })
     }
+    useEffect(() => {
+        const el = document.getElementsByClassName('PaginationNumber');
+        if (el[0]) {
+            colorActivePage();
+        }
+    }, [activePage]);
 
+    useEffect(() => {
+        dispatch(changePagination((activePage - 1) * 10));
+    }, [activePage]);
 
     return (
             <LayoutSearchResults

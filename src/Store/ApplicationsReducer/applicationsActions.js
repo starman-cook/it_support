@@ -3,7 +3,7 @@ import {
     CHANGE_PAGINATION, CHANGE_STATUS,
     GET_COUNT_AMOUNT,
     GET_TEN_APPLICATIONS, INIT_FILTERS,
-    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_PAGE
+    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE
 } from "./applicationsActionTypes";
 import axios from "../../axiosApi";
 
@@ -12,6 +12,7 @@ export const getTenApplicationsSuccess = (value) => ({type: GET_TEN_APPLICATIONS
 export const getCountAmount = (value) => ({type: GET_COUNT_AMOUNT, value});
 export const inputFilterDateFrom = (value) => ({type: INPUT_FILTER_DATE_FROM, value});
 export const inputFilterDateTo = (value) => ({type: INPUT_FILTER_DATE_TO, value});
+export const setActiveFilters = (value) => ({type: SET_ACTIVE_FILTERS, value});
 
 export const changePagination = (value) => ({type: CHANGE_PAGINATION, value});
 

@@ -3,7 +3,7 @@ import {
     CHANGE_PAGINATION, CHANGE_STATUS,
     GET_COUNT_AMOUNT,
     GET_TEN_APPLICATIONS, INIT_FILTERS,
-    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_PAGE
+    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 
@@ -28,7 +28,8 @@ const initialState = {
         limit: 10,
         start: 0
     },
-    activePage: 1
+    activePage: 1,
+    activeFilters: []
 };
 
 const applicationsReducer = (state = initialState, action) => {
@@ -110,6 +111,8 @@ const applicationsReducer = (state = initialState, action) => {
             })
         case SET_ACTIVE_PAGE:
             return {...state, activePage: action.value};
+        case SET_ACTIVE_FILTERS:
+            return {...state, activeFilters: action.value}
         default:
             return state;
     }

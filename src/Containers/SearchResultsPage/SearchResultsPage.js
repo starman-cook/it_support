@@ -6,31 +6,34 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     changePagination,
     inputFilterDateFrom,
-    inputFilterDateTo, setActivePage
+    inputFilterDateTo, setActiveFilters, setActivePage
 } from "../../Store/ApplicationsReducer/applicationsActions";
 import moment from 'moment';
 
 const SearchResultsPage = () => {
     const dispatch = useDispatch();
-    let filtersCheck = {
-        isFilterStatus: useSelector(state => state.applications.data['filter'].status.length > 0) ? "статус" : null,
-        isFilterDepartment: useSelector(state => state.applications.data['filter'].departament.length > 0) ? "отдел" : null,
-        isFilterWorker: useSelector(state => state.applications.data['filter'].employee.trim() !== '') ? "сотрудник" : null,
-        isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null
-    }
+    // let filtersCheck = {
+    //     isFilterStatus: useSelector(state => state.applications.data['filter'].status.length > 0) ? "статус" : null,
+    //     isFilterDepartment: useSelector(state => state.applications.data['filter'].departament.length > 0) ? "отдел" : null,
+    //     isFilterWorker: useSelector(state => state.applications.data['filter'].employee.trim() !== '') ? "сотрудник" : null,
+    //     isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null
+    // }
 
-
-    const [filters, setFilters] = useState([]); // после выбора фильтров они попадают в массив
-    useEffect(() => {
-        let arr = [];
-        Object.keys(filtersCheck).map(el => {
-            if (filtersCheck[el]) {
-                arr.push(filtersCheck[el]);
-            }
-            setFilters(arr);
-        })
-    }, [filtersCheck]);
-    const isFilter = filters.length > 0;
+    let filters = useSelector(state => state.applications.activeFilters);
+    // const [filters, setFilters] = useState([]); // после выбора фильтров они попадают в массив
+    // useEffect(() => {
+    //     let arr = [];
+    //     Object.keys(filtersCheck).map(el => {
+    //         if (filtersCheck[el]) {
+    //             arr.push(filtersCheck[el]);
+    //         }
+    //         // setFilters(arr);
+    //     })
+    //     console.log(arr)
+    //     dispatch(setActiveFilters(arr));
+    //
+    // }, [dispatch]);
+    // const isFilter = filters.length > 0;
     const dateStart = 'ДД/ММ/ГГ';
     const dateEnd = 'ДД/ММ/ГГ';
     const  equipmentId = "175674";
@@ -297,7 +300,7 @@ countPagination();
                 questionText={"Укажите регистрационный номер заявки для быстрого поиска"}
             
 
-                isFilter={isFilter}
+                isFilter={filters.length > 0}
                 filters={allFilters}
                 morePages={true}
                 paginationClickLeft={paginationLeft}

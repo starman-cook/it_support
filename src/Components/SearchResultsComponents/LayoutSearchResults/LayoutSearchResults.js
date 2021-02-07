@@ -2,7 +2,12 @@ import React from 'react';
 import './LayoutSearchResults.css';
 import {push} from 'connected-react-router';
 import {useDispatch} from "react-redux";
-import {changeNumber, initFilters, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
+import {
+    changeNumber,
+    initFilters,
+    setActiveFilters,
+    setActivePage
+} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 const LayoutSearchResults = (props) => {
     const dispatch = useDispatch();
@@ -15,6 +20,7 @@ const LayoutSearchResults = (props) => {
     }
     const initFiltersHandler = () => {
         dispatch(initFilters());
+        dispatch(setActiveFilters([]));
     }
 
     return (

@@ -1,9 +1,9 @@
 import {
-    ADD_COMMENT,
-    CHANGE_PAGINATION,
+    ADD_COMMENT, CHANGE_DEPARTMENT, CHANGE_EMPLOYEE, CHANGE_NUMBER,
+    CHANGE_PAGINATION, CHANGE_STATUS,
     GET_COUNT_AMOUNT,
-    GET_TEN_APPLICATIONS,
-    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO
+    GET_TEN_APPLICATIONS, INIT_FILTERS,
+    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_PAGE
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 
@@ -27,7 +27,8 @@ const initialState = {
         },
         limit: 10,
         start: 0
-    }
+    },
+    activePage: 1
 };
 
 const applicationsReducer = (state = initialState, action) => {
@@ -63,7 +64,52 @@ const applicationsReducer = (state = initialState, action) => {
                 data: {
                     start: {$set: action.value}
                 }
+            });
+        case CHANGE_STATUS:
+            return update(state, {
+                data: {
+                    filter: {
+                        status: {$set: action.value}
+                    }
+                }
+            });
+        case CHANGE_DEPARTMENT:
+            return update(state, {
+                data: {
+                    filter: {
+                        departament: {$set: action.value}
+                    }
+                }
+            });
+        case CHANGE_EMPLOYEE:
+            return update(state, {
+                data: {
+                    filter: {
+                        employee: {$set: action.value}
+                    }
+                }
+            });
+        case CHANGE_NUMBER:
+            return update(state, {
+                data: {
+                    filter: {
+                        number: {$set: action.value}
+                    }
+                }
+            });
+        case INIT_FILTERS:
+            return update(state, {
+                data: {
+                    filter: {
+                        status: {$set: []},
+                        departament: {$set: []},
+                        employee: {$set: ''},
+                        number: {$set: ''}
+                    }
+                }
             })
+        case SET_ACTIVE_PAGE:
+            return {...state, activePage: action.value};
         default:
             return state;
     }

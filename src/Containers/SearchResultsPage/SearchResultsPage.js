@@ -6,13 +6,31 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     changePagination,
     inputFilterDateFrom,
-    inputFilterDateTo
+    inputFilterDateTo, setActivePage
 } from "../../Store/ApplicationsReducer/applicationsActions";
 import moment from 'moment';
 
 const SearchResultsPage = () => {
     const dispatch = useDispatch();
-    const isFilter = true;
+    let filtersCheck = {
+        isFilterStatus: useSelector(state => state.applications.data['filter'].status.length > 0) ? "статус" : null,
+        isFilterDepartment: useSelector(state => state.applications.data['filter'].departament.length > 0) ? "отдел" : null,
+        isFilterWorker: useSelector(state => state.applications.data['filter'].employee.trim() !== '') ? "сотрудник" : null,
+        isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null
+    }
+
+
+    const [filters, setFilters] = useState([]); // после выбора фильтров они попадают в массив
+    useEffect(() => {
+        let arr = [];
+        Object.keys(filtersCheck).map(el => {
+            if (filtersCheck[el]) {
+                arr.push(filtersCheck[el]);
+            }
+            setFilters(arr);
+        })
+    }, [filtersCheck]);
+    const isFilter = filters.length > 0;
     const dateStart = 'ДД/ММ/ГГ';
     const dateEnd = 'ДД/ММ/ГГ';
     const  equipmentId = "175674";
@@ -24,14 +42,14 @@ const SearchResultsPage = () => {
 
     
     
-    const [activePage, setActivePage] = useState(1);
+    // const [activePage, setActivePage] = useState(1);
+    const activePage = useSelector(state => state.applications.activePage);
     const count = useSelector(state => state.applications.count);
     let pagesNumbers = Math.ceil(count / 10); // получать количество страниц для пагинации и кидать число в цикл, чтобы получить массив, нужен для отрисовки
    
 
     let tableView;
     let allPages;
-    const filters = ['статус', 'отдел']; // после выбора фильтров они попадают в массив
     let allFilters;
     const hoverShowQuestion = () => {
         setShowQuestion(true);
@@ -65,7 +83,7 @@ const SearchResultsPage = () => {
             let today = moment().format("YYYYMMDD");
             let chosenDate;
             dispatch(changePagination(0));
-            setActivePage(1);
+            dispatch(setActivePage(1));
             switch (event.target.textContent) {
                 case "Сегодня":
                     chosenDate = today;
@@ -79,7 +97,7 @@ const SearchResultsPage = () => {
                 case "Месяц":
                     chosenDate = moment().subtract(1, 'months').format("YYYYMMDD");
                     break;
-                case "Квавтал":
+                case "Квартал":
                     chosenDate = moment().subtract(3, 'months').format("YYYYMMDD");
                     break;
                 case "Полугодие":
@@ -192,7 +210,7 @@ countPagination();
         // event.target.style.fontWeight = 'bold';
         // event.target.style.textDecoration = 'underline';
 
-        setActivePage(parseInt(event.target.textContent));
+        dispatch(setActivePage(parseInt(event.target.textContent)));
         countPagination();
         // colorActivePage();
     }
@@ -211,14 +229,14 @@ countPagination();
 
     const paginationRight = () => {
         if (activePage !== pagesNumbers) {
-            setActivePage(activePage + 1);
+            dispatch(setActivePage(activePage + 1));
             countPagination();
             // colorActivePage();
         }
     };
     const paginationLeft = () => {
         if (activePage !== 1) {
-            setActivePage(activePage - 1);
+            dispatch(setActivePage(activePage - 1));
             countPagination();
             // colorActivePage();
         }
@@ -281,11 +299,11 @@ countPagination();
 
                 isFilter={isFilter}
                 filters={allFilters}
-                // resetFilters
                 morePages={true}
                 paginationClickLeft={paginationLeft}
                 paginationClickRight={paginationRight}
                 pagesNumbers={allPages}
+
             >
                 {calendarModal ? 
                 <div>

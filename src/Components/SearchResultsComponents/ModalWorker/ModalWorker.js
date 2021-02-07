@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './ModalWorker.css';
+import {useDispatch} from "react-redux";
+import {changeEmployee, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
 const ModalWorker = (props) => {
-
+   const dispatch = useDispatch();
    const [inputState, setInputState] = useState('');
    const [showResults, setShowResults] = useState(false);
-   const [resultValue, setResultValue] = useState(''); 
 
    // введенные данные с каждым кликом отправляют запрос и получают данные из списка сотрудников компании
     const inputChange = (event) => {
@@ -18,10 +19,11 @@ const ModalWorker = (props) => {
         setShowResults(false);
     };
     const getResultValue = (event) => {
-        setResultValue(event.target.innerText);
+        dispatch(changeEmployee(event.target.innerText));
+        dispatch(setActivePage(1));
     }
     const workers = [
-        {name: "Some name"},{name: "Some name"},{name: "Some name"},{name: "Some name"}
+        {name: "Цой"},{name: "Some name"},{name: "Some name"},{name: "Some name"}
     ]
     let allWorkerSearchResults;
 

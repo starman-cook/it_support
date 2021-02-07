@@ -43,9 +43,9 @@ const ResultsTableWorker = (props) => {
     }
     // ResultsTableWorker__filterIcon--active
     // В редаксе будут хранится фильтры, по отдельности статус и отдел, все что будет выбрано в модальном окне попдает в стэйт и иконка закрашивается в черный
-    const isFilterStatus = true;
-    const isFilterDepartment = false;
-    const isFilterWorker = false;
+    const isFilterStatus = useSelector(state => state.applications.data['filter'].status.length > 0);
+    const isFilterDepartment = useSelector(state => state.applications.data['filter'].departament.length > 0);
+    const isFilterWorker = useSelector(state => state.applications.data['filter'].employee.trim() !== '');
 
     const [isStatusModal, setIsStatusModal] = useState(false);
     const [isDepartmentModal, setIsDepartmentModal] = useState(false);

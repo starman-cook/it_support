@@ -2,11 +2,19 @@ import React from 'react';
 import './LayoutSearchResults.css';
 import {push} from 'connected-react-router';
 import {useDispatch} from "react-redux";
+import {changeNumber, initFilters, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 const LayoutSearchResults = (props) => {
     const dispatch = useDispatch();
     const goToApplications = () => {
         dispatch(push('/application'));
+    }
+    const inputValue = (event) => {
+        dispatch(changeNumber(event.target.value));
+        dispatch(setActivePage(1));
+    }
+    const initFiltersHandler = () => {
+        dispatch(initFilters());
     }
 
     return (
@@ -45,7 +53,7 @@ const LayoutSearchResults = (props) => {
 
                 <div className="LayoutSearchResults__idDateBlock">
                     <p className="LayoutSearchResults__hashKey">#</p>
-                    <input placeholder="ПОИСК ПО НОМЕРУ ЗАЯВКИ" className="LayoutSearchResults__idInput" type="text" onChange={props.idInputOnChange} />
+                    <input placeholder="ПОИСК ПО НОМЕРУ ЗАЯВКИ" className="LayoutSearchResults__idInput" type="text" onChange={(event) => {inputValue(event)}} />
                     
                     <div className="LayoutSearchResults__question" onMouseEnter={props.questionShow} onMouseLeave={props.questionHide}>
                         <div style={props.showQuestionModal ? {"display" : "block"} : {"display" : "none"}} className="LayoutSearchResults__question--modal">
@@ -69,7 +77,7 @@ const LayoutSearchResults = (props) => {
                 {props.isFilter ?
                     <div className="LayoutSearchResults__filters">
                         {props.filters}
-                        <p onClick={props.resetFilters} className="LayoutSearchResults__resetText">Сбросить все фильтры</p>
+                        <p onClick={initFiltersHandler} className="LayoutSearchResults__resetText">Сбросить все фильтры</p>
                     </div>
                     :
                     <p className="LayoutSearchResults__footerText">фильтры не включены</p>

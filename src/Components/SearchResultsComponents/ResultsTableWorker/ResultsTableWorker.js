@@ -127,7 +127,7 @@ const ResultsTableWorker = (props) => {
                         specialistId={el.implementer['id']}
                         contentShort={solution}
                         index={i}
-                        classLikeDislike={el.rating['value'] === 1 ? "like" : el.rating['value'] === 0 ? "dislike" : ''}
+                        classLikeDislike={el.rating['value'] === 1 ? "like" : el.rating['value'] === -1 ? "dislike" : ''}
                         isComment={el.rating['comment']}
                         openSeeDetails={() => {seeFullApplicationInfo(i)}}
                         isDirector={user.role === 'director'}

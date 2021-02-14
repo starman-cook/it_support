@@ -1,12 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import AuthenticationModal from '../../Components/UserLoginPageComponents/AuthenticationModal/AuthenticationModal';
 import HelperInfo from '../../Components/UserLoginPageComponents/HelperInfo/HelperInfo';
 import LoginForm from '../../Components/UserLoginPageComponents/LoginForm/LoginForm';
 import PhoneInput from '../../Components/UserLoginPageComponents/PhoneInput/PhoneInput';
 import SmsInput from '../../Components/UserLoginPageComponents/SmsInput/SmsInput';
+import {useDispatch, useSelector} from "react-redux";
+import {saveUser, sendPhone, sendSms, setLoginStatus} from "../../Store/UsersReducer/usersActions";
 
 
-const UserLoginPage = () => {
+const UserLoginPage = (props) => {
+    const dispatch = useDispatch();
+    // const id = "1267-02-00020";
+    // const id = "1240-02-00044";
+    const id = props.match.params.id;
+    console.log("ID SAMPLE: 1240-02-00044")
     const [phoneCode, setPhoneCode] = useState("");
     const [phoneA, setPhoneA] = useState("");
     const [phoneB, setPhoneB] = useState("");
@@ -17,10 +24,28 @@ const UserLoginPage = () => {
     const [sms3, setSms3] = useState("");
     const [sms4, setSms4] = useState("");
 
+    useEffect(() => {
+        if (sms1 && sms2 && sms3 && sms4) {
+            const smsAndIdNumber = {
+                _id: id,
+                sms: `${sms1}${sms2}${sms3}${sms4}`
+            }
+            dispatch(sendSms(smsAndIdNumber));
+        }
+    }, [sms1, sms2,  sms3, sms4]);
 
+    useEffect(() => {
+        dispatch(saveUser(id))
+    }, [dispatch]);
+
+    const sendPhoneHandler = async () => {
+        let phoneNumber = `+7${phoneCode}${phoneA}${phoneB}${phoneC}`
+        await dispatch(sendPhone({phone: phoneNumber}, id));
+        await dispatch(setLoginStatus("sms"));
+    }
     // const refPhone = useRef();
 
-    const status = "sms";
+    const status = useSelector(state => state.users.loginStatus);
     let grey = false;
     let loginContent;
     let question;
@@ -163,6 +188,7 @@ const UserLoginPage = () => {
                 // phoneOnChange={(event) => {phoneOnChangeHandler(event)}}
                 buttonName={"запросить SMS-пароль"}
                 buttonWidth={"303"}
+                clicked={sendPhoneHandler}
             >
                 <div className="PhoneInput__phoneBlock">
                     <p className="PhoneInput__phoneText">+7 (</p>

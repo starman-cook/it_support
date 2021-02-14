@@ -49,7 +49,7 @@ const LayoutSearchResults = (props) => {
                     <h2 className="LayoutSearchResults__bigNotBoldText">{props.companyName}</h2>
                     <p className="LayoutSearchResults__headerHelperText">наименование организации</p>
                 </div>
-                <div className="LayoutSearchResults__companyLogo" style={{background: `url(${props.companyLogo})center / contain no-repeat`}} />
+                <div className="LayoutSearchResults__companyLogo" style={{background: `url(data:image/jpg;base64,${props.companyLogo})center / contain no-repeat`}} />
             </header>
             
             <div className="LayoutSearchResults__dateEngine">

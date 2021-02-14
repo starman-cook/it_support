@@ -3,7 +3,7 @@ import {
     CHANGE_PAGINATION, CHANGE_STATUS,
     GET_COUNT_AMOUNT,
     GET_TEN_APPLICATIONS, INIT_FILTERS,
-    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE
+    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SAVE_HASH, SAVE_ID, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE
 } from "./applicationsActionTypes";
 import axios from "../../axiosApi";
 
@@ -24,10 +24,13 @@ export const initFilters = () => ({type: INIT_FILTERS});
 
 export const setActivePage = (value) => ({type: SET_ACTIVE_PAGE, value});
 
+export const saveHash = (value) => ({type: SAVE_HASH, value});
+export const  saveId = (value) => ({type: SAVE_ID, value});
+
 export const getTenApplications = (data) => {
     return async dispatch => {
         try {
-            await axios.post('/CRM_16_06_2020/hs/Events/method/history', data)
+            await axios.post('/CRM/hs/Events/method/history', data)
                 .then(response => {
                     dispatch(getTenApplicationsSuccess(response.data.events));
                     dispatch(getCountAmount(response.data.count));

@@ -127,7 +127,8 @@ const FullApplicationInfo = (props) => {
         specialist = application.implementer['name'];
         specialistId = application.implementer['id'];
         workerId = application.employee['id'];
-        classLikeDislike = application.rating === 1 ? "like" : "dislike";
+        classLikeDislike = application.rating['value'] === 1 ? "like" : application.rating['value'] === -1 ? "dislike" : "";
+
         isComment = true;
         department = application.departament;
         subject = application.subject;

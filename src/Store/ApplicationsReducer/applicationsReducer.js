@@ -3,7 +3,8 @@ import {
     CHANGE_PAGINATION, CHANGE_STATUS,
     GET_COUNT_AMOUNT,
     GET_TEN_APPLICATIONS, INIT_FILTERS,
-    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE
+    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE,
+    SAVE_HASH, SAVE_ID,
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 
@@ -13,8 +14,8 @@ const initialState = {
     applications: [],
     count: 0,
     data: {
-        clientId: "1267-02-00020",
-        hash: "68ace46062c33b61ac87a05e44a48198",
+        clientId: "1240-02-00044",
+        hash: "4be9fd6e92f21fc38674ec51d5e4d237",
         filter: {
             date: {
                 from: "20200101",
@@ -34,6 +35,18 @@ const initialState = {
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SAVE_ID:
+            return update(state, {
+                data: {
+                    clientId: {$set: action.value}
+                }
+            });
+        case SAVE_HASH:
+            return update(state, {
+                data: {
+                    hash: {$set: action.value}
+                }
+        });
         case ADD_COMMENT:
             return {...state, comments: [...state.comments, action.value]};
         case GET_TEN_APPLICATIONS:

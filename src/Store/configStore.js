@@ -5,12 +5,16 @@ import thunkMiddleware from 'redux-thunk';
 
 
 import applicationsReducer from "./ApplicationsReducer/applicationsReducer";
+import companyDataReducer from "./CompanyDataReducer/companyDataReducer";
+import usersReducer from "./UsersReducer/usersReducer";
 
 export const history = createBrowserHistory();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
+    company: companyDataReducer,
     applications: applicationsReducer,
+    users: usersReducer,
     router: connectRouter(history)
 });
 

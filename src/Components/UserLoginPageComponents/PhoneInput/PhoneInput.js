@@ -10,9 +10,10 @@ const PhoneInput = (props) => {
             <div className="PhoneInput__inputs">
                 {props.children}
             </div>
-            <Button 
+            <Button
+                clicked={props.clicked}
                 name={props.buttonName}
-                width={props.ButtonWidth}
+                width={props.buttonWidth}
             />
         </div>
     )

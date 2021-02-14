@@ -9,6 +9,7 @@ import {
     inputFilterDateTo, setActiveFilters, setActivePage
 } from "../../Store/ApplicationsReducer/applicationsActions";
 import moment from 'moment';
+import {getCompanyData} from "../../Store/CompanyDataReducer/companyActions";
 
 const SearchResultsPage = () => {
     const dispatch = useDispatch();
@@ -34,12 +35,24 @@ const SearchResultsPage = () => {
     //
     // }, [dispatch]);
     // const isFilter = filters.length > 0;
+
+    useEffect(() => {
+        dispatch(getCompanyData('aad6d2c1b77801e269628f235dd7cbaa'));
+    }, [dispatch]);
+
     const dateStart = 'ДД/ММ/ГГ';
     const dateEnd = 'ДД/ММ/ГГ';
-    const  equipmentId = "175674";
-    const workerName = "Сид Вишес";
-    const companyName = "ТОО 'Секс Пистоллз'";
-    const companyLogo = "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg";
+    const company = useSelector(state => state.company.companyData);
+    let equipmentId;
+    let workerName;
+    let companyName;
+    if (company) {
+        equipmentId = company.director ? company.director.id : "";
+        workerName = "Сид Вишес"; // с базы не приходит контактного лица(((
+        companyName =  company.company;
+    }
+
+    const companyLogo = useSelector(state => state.company.companyData['logo']);
     const [showQuestion, setShowQuestion] = useState(false);
     const [calendarModal, setCalendarModal] = useState(false);
 

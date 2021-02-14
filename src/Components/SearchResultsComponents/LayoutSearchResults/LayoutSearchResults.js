@@ -4,7 +4,7 @@ import {push} from 'connected-react-router';
 import {useDispatch} from "react-redux";
 import {
     changeNumber,
-    initFilters,
+    initFilters, inputFilterDateFrom,
     setActiveFilters,
     setActivePage
 } from "../../../Store/ApplicationsReducer/applicationsActions";
@@ -20,7 +20,13 @@ const LayoutSearchResults = (props) => {
     }
     const initFiltersHandler = () => {
         dispatch(initFilters());
+        dispatch(inputFilterDateFrom("20200101"));
         dispatch(setActiveFilters([]));
+        const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
+        for (let i = 0; i < el.length; i++) {
+            el[i].style.color = '#E34A4E';
+            el[i].style.background = 'white';
+        }
     }
 
     return (

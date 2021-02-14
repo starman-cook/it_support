@@ -49,7 +49,7 @@ const SearchResultsPage = () => {
     const activePage = useSelector(state => state.applications.activePage);
     const count = useSelector(state => state.applications.count);
     let pagesNumbers = Math.ceil(count / 10); // получать количество страниц для пагинации и кидать число в цикл, чтобы получить массив, нужен для отрисовки
-   
+
 
     let tableView;
     let allPages;
@@ -233,14 +233,14 @@ countPagination();
     const paginationRight = () => {
         if (activePage !== pagesNumbers) {
             dispatch(setActivePage(activePage + 1));
-            countPagination();
+            // countPagination();
             // colorActivePage();
         }
     };
     const paginationLeft = () => {
         if (activePage !== 1) {
             dispatch(setActivePage(activePage - 1));
-            countPagination();
+            // countPagination();
             // colorActivePage();
         }
     };
@@ -302,7 +302,7 @@ countPagination();
 
                 isFilter={filters.length > 0}
                 filters={allFilters}
-                morePages={true}
+                morePages={Math.ceil(count / 10) > 1}
                 paginationClickLeft={paginationLeft}
                 paginationClickRight={paginationRight}
                 pagesNumbers={allPages}

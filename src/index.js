@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import {ConnectedRouter} from 'connected-react-router';
 import store, {history} from "./Store/configStore";
-
+import axios from './axiosApi';
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // const rootReducer = combineReducers({
@@ -18,6 +18,16 @@ import store, {history} from "./Store/configStore";
 // });
 
 // const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+
+axios.interceptors.request.use(req => {
+    try {
+        req.headers['Authorization'] = store.getState().users.user ?  store.getState().users.user.token : ''
+    } catch (err) {
+        console.log(err);
+    }
+    return req;
+});
+
 
 const app = (
   <Provider store={store}>

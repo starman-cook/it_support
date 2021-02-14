@@ -50,12 +50,14 @@ const ResultsTableWorker = (props) => {
     const isFilterStatus = useSelector(state => state.applications.data['filter'].status.length > 0);
     const isFilterDepartment = useSelector(state => state.applications.data['filter'].departament.length > 0);
     const isFilterWorker = useSelector(state => state.applications.data['filter'].employee.trim() !== '');
+    const filters = useSelector(state => state.applications.data['filter']);
 
     let filtersCheck = {
         isFilterStatus: useSelector(state => state.applications.data['filter'].status.length > 0) ? "статус" : null,
         isFilterDepartment: useSelector(state => state.applications.data['filter'].departament.length > 0) ? "отдел" : null,
         isFilterWorker: useSelector(state => state.applications.data['filter'].employee.trim() !== '') ? "сотрудник" : null,
-        isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null
+        isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null,
+        isFilterDate: useSelector(state => state.applications.data['filter'].date.from !== "20200101" ? "дата" : null)
     }
 
     const showFilters = () => {
@@ -66,10 +68,14 @@ const ResultsTableWorker = (props) => {
             }
             // setFilters(arr);
         })
-        console.log(arr)
+        console.log("FILTERS ", arr)
         dispatch(setActiveFilters(arr));
 
     };
+    useEffect(() => {
+        showFilters();
+        console.log('SHOWING FILTERS');
+    }, [filters]);
 
 
     const [isStatusModal, setIsStatusModal] = useState(false);
@@ -82,25 +88,25 @@ const ResultsTableWorker = (props) => {
         setIsStatusModal(!isStatusModal);
         setIsDepartmentModal(false);
         setIsWorkerModal(false);
-        showFilters();
+        // showFilters();
     }
     const toggleDepartmentModal = () => {
         setIsDepartmentModal(!isDepartmentModal);
         setIsStatusModal(false);
         setIsWorkerModal(false);
-        showFilters();
+        // showFilters();
     }
     const toggleWorkerModal = () => {
         setIsWorkerModal(!isWorkerModal);
         setIsStatusModal(false);
         setIsDepartmentModal(false);
-        showFilters();
+        // showFilters();
     }
     const seeFullApplicationInfo = (index) => {
         setIndexForModal(index)
         setOneApplication(applications[index]);
         setIsFullInfoModal(!isFullInfoModal);
-        // Здесь делаем запрос на сервер через диспатч и созраняем в редаксе полную инфу одной заявки
+
     }
     const applications = useSelector(state => state.applications.applications);
 
@@ -166,11 +172,11 @@ const ResultsTableWorker = (props) => {
     const currentPage = useSelector(state => state.applications.data['start']);
     // console.log(currentPage)
     const goLeft = async () => {
-        dispatch(setActivePage((currentPage + 10) / 10));
 
         // потом будет проверка на то что если start в оффсете будет 0 и индекс 0 тогда стоп.
         if (indexForModal <= 0 && currentPage == 0) return;
-        else {
+        dispatch(setActivePage((currentPage + 10) / 10));
+
             if (indexForModal <=0) {
                 // ПРИХОДИТСЯ КЛИКАТЬ ДВАЖДЫ НА ГРАНИЦАХ, ПОКА НЕ ЗНАЮ КАК РЕШИТЬ
                 // ВНИМАНИЕ ЕСЛИ КОЛИЧЕСТВО ВЫВОДАЩИХ СТРАНИЦ БУДЕТ НЕ 10 ТО ЗДЕСЬ ТОЖЕ ПОМЕНЯТЬ ЧИСЛО, ЛУЧШЕ ПО ВОЗМОЖНОСТИ В ОТДЕЛЬНУЮ ПЕРЕМЕННУЮ ЭТО ЧИСЛО ЗАПИСАТЬ
@@ -184,16 +190,13 @@ const ResultsTableWorker = (props) => {
             const index = indexForModal - 1;
             setIndexForModal(index);
             setOneApplication(applications[index]);
-        }
-
-
     };
     const activePage = useSelector(state => state.applications.activePage)
     const count = useSelector(state => state.applications.count);
     const goRight = async () => {
-        dispatch(setActivePage((currentPage + 10) / 10));
         if (indexForModal >= applications.length - 1 && activePage >= Math.ceil(count / 10)) return;
-        else {
+        dispatch(setActivePage((currentPage + 10) / 10));
+
             if (indexForModal >=9) {
                 // ПРИХОДИТСЯ КЛИКАТЬ ДВАЖДЫ НА ГРАНИЦАХ, ПОКА НЕ ЗНАЮ КАК РЕШИТЬ
                 // ВНИМАНИЕ ЕСЛИ КОЛИЧЕСТВО ВЫВОДАЩИХ СТРАНИЦ БУДЕТ НЕ 10 ТО ЗДЕСЬ ТОЖЕ ПОМЕНЯТЬ ЧИСЛО, ЛУЧШЕ ПО ВОЗМОЖНОСТИ В ОТДЕЛЬНУЮ ПЕРЕМЕННУЮ ЭТО ЧИСЛО ЗАПИСАТЬ
@@ -207,7 +210,7 @@ const ResultsTableWorker = (props) => {
             const index = indexForModal + 1;
             setIndexForModal(index);
             setOneApplication(applications[index]);
-        }
+
     };
 
 

@@ -160,7 +160,7 @@ const FullApplicationInfo = (props) => {
 
                     <div className="FullApplicationInfo__workerIdBlock">
                         <div className="FullApplicationInfo__workerIdBlock--imageBlock">
-                            <div className="FullApplicationInfo__image" style={{background: `#E34A4E  url(${specialistPhoto})center / cover no-repeat`}} />
+                            <div className="FullApplicationInfo__image" style={{background: `#E34A4E  url(data:image/jpg;base64,${specialistPhoto})center / cover no-repeat`}} />
 
                             <div className="FullApplicationInfo__workerIdAndQuestionBlock">
                                 <p className="FullApplicationInfo__text">{specialist}</p>

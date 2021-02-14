@@ -82,7 +82,7 @@ const ResultsTableWorker = (props) => {
     const [isDepartmentModal, setIsDepartmentModal] = useState(false);
     const [isWorkerModal, setIsWorkerModal] = useState(false);
     const [isFullInfoModal, setIsFullInfoModal] = useState((false));
-    const [oneApplication, setOneApplication] = useState({});
+    // const [oneApplication, setOneApplication] = useState({});
 
     const toggleStatusModal = () => {
         setIsStatusModal(!isStatusModal);
@@ -104,7 +104,7 @@ const ResultsTableWorker = (props) => {
     }
     const seeFullApplicationInfo = (index) => {
         setIndexForModal(index)
-        setOneApplication(applications[index]);
+        // setOneApplication(applications[index]);
         setIsFullInfoModal(!isFullInfoModal);
 
     }
@@ -127,7 +127,7 @@ const ResultsTableWorker = (props) => {
                         specialistId={el.implementer['id']}
                         contentShort={solution}
                         index={i}
-                        classLikeDislike={el.rating['value'] === 1 ? "like" : "dislike"}
+                        classLikeDislike={el.rating['value'] === 1 ? "like" : el.rating['value'] === 0 ? "dislike" : ''}
                         isComment={el.rating['comment']}
                         openSeeDetails={() => {seeFullApplicationInfo(i)}}
                         isDirector={user.role === 'director'}
@@ -171,45 +171,61 @@ const ResultsTableWorker = (props) => {
     // }
     const currentPage = useSelector(state => state.applications.data['start']);
     // console.log(currentPage)
+    useEffect(() => {
+        dispatch(setActivePage((currentPage + 10) / 10));
+        if (indexForModal >=9) {
+            setIndexForModal(0);
+        }
+        if (indexForModal <=0) {
+            setIndexForModal(9);
+        }
+    }, [currentPage]);
+
+    // useEffect(() => {
+    //     if (indexForModal >=9) {
+    //         setIndexForModal(0);
+    //         setOneApplication(applications[0]);
+    //     }
+    // }, [indexForModal]);
+
     const goLeft = async () => {
 
         // потом будет проверка на то что если start в оффсете будет 0 и индекс 0 тогда стоп.
         if (indexForModal <= 0 && currentPage == 0) return;
-        dispatch(setActivePage((currentPage + 10) / 10));
 
             if (indexForModal <=0) {
                 // ПРИХОДИТСЯ КЛИКАТЬ ДВАЖДЫ НА ГРАНИЦАХ, ПОКА НЕ ЗНАЮ КАК РЕШИТЬ
                 // ВНИМАНИЕ ЕСЛИ КОЛИЧЕСТВО ВЫВОДАЩИХ СТРАНИЦ БУДЕТ НЕ 10 ТО ЗДЕСЬ ТОЖЕ ПОМЕНЯТЬ ЧИСЛО, ЛУЧШЕ ПО ВОЗМОЖНОСТИ В ОТДЕЛЬНУЮ ПЕРЕМЕННУЮ ЭТО ЧИСЛО ЗАПИСАТЬ
                 await dispatch(changePagination(currentPage - 10));
-                await setIndexForModal(10);
-                console.log (applications);
+                // await setIndexForModal(10);
+                // console.log (applications);
                 // await dispatch(getTenApplications(data));
                 // await setOneApplication(applications[9]);
                 return
             }
             const index = indexForModal - 1;
             setIndexForModal(index);
-            setOneApplication(applications[index]);
+            // setOneApplication(applications[index]);
     };
     const activePage = useSelector(state => state.applications.activePage)
     const count = useSelector(state => state.applications.count);
     const goRight = async () => {
         if (indexForModal >= applications.length - 1 && activePage >= Math.ceil(count / 10)) return;
-        dispatch(setActivePage((currentPage + 10) / 10));
 
             if (indexForModal >=9) {
                 // ПРИХОДИТСЯ КЛИКАТЬ ДВАЖДЫ НА ГРАНИЦАХ, ПОКА НЕ ЗНАЮ КАК РЕШИТЬ
                 // ВНИМАНИЕ ЕСЛИ КОЛИЧЕСТВО ВЫВОДАЩИХ СТРАНИЦ БУДЕТ НЕ 10 ТО ЗДЕСЬ ТОЖЕ ПОМЕНЯТЬ ЧИСЛО, ЛУЧШЕ ПО ВОЗМОЖНОСТИ В ОТДЕЛЬНУЮ ПЕРЕМЕННУЮ ЭТО ЧИСЛО ЗАПИСАТЬ
                 await dispatch(changePagination(currentPage + 10));
-                await setIndexForModal(-1);
-                console.log (applications);
+                // await setIndexForModal(0);
+                // console.log (applications);
+                // setOneApplication(applications[0]);
                 // await dispatch(getTenApplications(data));
                 // await setOneApplication(applications[0]);
                 return
             }
             const index = indexForModal + 1;
             setIndexForModal(index);
-            setOneApplication(applications[index]);
+            // setOneApplication(applications[index]);
 
     };
 
@@ -249,7 +265,8 @@ const ResultsTableWorker = (props) => {
                     <FullApplicationInfo
                         // index={idForModal}
                         clickToClose={() => {seeFullApplicationInfo(indexForModal)}}
-                        application={oneApplication}
+                        // application={oneApplication}
+                        application={applications[indexForModal]}
                         goLeft={goLeft}
                         goRight={goRight}
                     />

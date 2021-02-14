@@ -50,6 +50,7 @@ const SearchResultsPage = () => {
     const count = useSelector(state => state.applications.count);
 
     let pagesNumbers = Math.ceil(count / 10); // получать количество страниц для пагинации и кидать число в цикл, чтобы получить массив, нужен для отрисовки
+    // let pagesNumbers = 14;
 
 
     let tableView;
@@ -225,22 +226,28 @@ countPagination();
             el[i].style.textDecoration = 'none';
             el[i].style.fontWeight = 'normal';
         }
-        if (activePage < 4) {
+        if (pagesNumbers <= 8) {
             el[activePage - 1].style.fontSize = '18px';
             el[activePage - 1].style.fontWeight = 'bold';
             el[activePage - 1].style.textDecoration = 'underline';
-        } else if (activePage === pagesNumbers) {
-            el[6].style.fontSize = '18px';
-            el[6].style.fontWeight = 'bold';
-            el[6].style.textDecoration = 'underline';
-        } else if (activePage > pagesNumbers - 3) {
-            el[activePage % 6].style.fontSize = '18px';
-            el[activePage % 6].style.fontWeight = 'bold';
-            el[activePage % 6].style.textDecoration = 'underline';
         } else {
-            el[3].style.fontSize = '18px';
-            el[3].style.fontWeight = 'bold';
-            el[3].style.textDecoration = 'underline';
+            if (activePage < 4) {
+                el[activePage - 1].style.fontSize = '18px';
+                el[activePage - 1].style.fontWeight = 'bold';
+                el[activePage - 1].style.textDecoration = 'underline';
+            } else if (activePage === pagesNumbers) {
+                el[6].style.fontSize = '18px';
+                el[6].style.fontWeight = 'bold';
+                el[6].style.textDecoration = 'underline';
+            } else if (activePage > pagesNumbers - 3) {
+                el[6 - (pagesNumbers - activePage)].style.fontSize = '18px';
+                el[6 - (pagesNumbers - activePage)].style.fontWeight = 'bold';
+                el[6 - (pagesNumbers - activePage)].style.textDecoration = 'underline';
+            } else {
+                el[3].style.fontSize = '18px';
+                el[3].style.fontWeight = 'bold';
+                el[3].style.textDecoration = 'underline';
+            }
         }
         // console.log(el[0]);
     }

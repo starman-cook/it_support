@@ -118,10 +118,12 @@ const FullApplicationInfo = (props) => {
     let solution;
     let fileImage;
     let problem;
+    let allProblems = [];
+    let workerName;
     if (application) {
         color = application.status === 'Запланировано' ? "#E82024" : application.status === 'В работе' ? "#F3BB1C" : application.status === 'Завершено' ? "#3CC13B" : application.status === 'Отменено' ? '#828282' : null;
         date = application.dateCreate;
-        status = application.status;
+        status = application.status.toLowerCase();
         applicationId = application.number;
         specialistPhoto = application.implementer['photo'];
         specialist = application.implementer['name'];
@@ -129,14 +131,18 @@ const FullApplicationInfo = (props) => {
         workerId = application.employee['id'];
         classLikeDislike = application.rating['value'] === 1 ? "like" : application.rating['value'] === -1 ? "dislike" : "";
 
-        isComment = true;
+        isComment = application.rating['comment'];
         department = application.departament;
         subject = application.subject;
         solution = application.outcome;
         fileImage = application.images[0];
-        problem = application.details;
+        problem = application.details.split("\n");
+        workerName = application.employee.name;
+        allProblems = problem.map(el => {
+            return <p className="FullApplicationInfo__content__text">{el}</p>
+        });
     }
-
+    console.log(application);
     return (
         <>
             <div className="FullApplicationInfo">
@@ -180,7 +186,7 @@ const FullApplicationInfo = (props) => {
                     </div>
 
                     <div className="FullApplicationInfo__workerIdBlock">
-                        <p className="FullApplicationInfo__text">{specialist}</p>
+                        <p className="FullApplicationInfo__text">{workerName}</p>
                         <p className="FullApplicationInfo__id">{workerId}</p>
                     </div>
 
@@ -211,10 +217,9 @@ const FullApplicationInfo = (props) => {
                                 <p className="FullApplicationInfo__content__text">{subject}</p>
                             </div>
                         </div>
-                        <p className="FullApplicationInfo__content__text--title">Подробности</p>
+                        {problem.length > 1 ? <p className="FullApplicationInfo__content__text--title">Подробности</p> : null}
                         <div>
-                            <p className="FullApplicationInfo__content__text">{problem}</p>
-
+                            {allProblems}
                         </div>
 
 

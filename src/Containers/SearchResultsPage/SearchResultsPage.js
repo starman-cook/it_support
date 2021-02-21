@@ -20,7 +20,12 @@ const SearchResultsPage = () => {
     //     isFilterWorker: useSelector(state => state.applications.data['filter'].employee.trim() !== '') ? "сотрудник" : null,
     //     isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null
     // }
-
+    const [period, setPeriod] = useState({
+        start: 'ДД/ММ/ГГ',
+        startOrigin: 'ДД/ММ/ГГ',
+        end: 'ДД/ММ/ГГ',
+        endOrigin: 'ДД/ММ/ГГ'
+    });
     let filters = useSelector(state => state.applications.activeFilters);
     // const [filters, setFilters] = useState([]); // после выбора фильтров они попадают в массив
     // useEffect(() => {
@@ -42,8 +47,8 @@ const SearchResultsPage = () => {
         dispatch(getCompanyData(hash));
     }, [dispatch]);
 
-    const dateStart = 'ДД/ММ/ГГ';
-    const dateEnd = 'ДД/ММ/ГГ';
+    const dateStart = period.startOrigin;
+    const dateEnd = period.endOrigin;
     const company = useSelector(state => state.company.companyData);
     let equipmentId;
     let workerName;
@@ -317,6 +322,24 @@ countPagination();
         dispatch(changePagination((activePage - 1) * 10));
     }, [activePage]);
 
+
+    const inputStartDateValue = (event) => {
+        const value = event.target.value.replace(new RegExp("-", "g"), '');
+        setPeriod(prevState => {
+            return {...prevState, start: value, startOrigin: event.target.value}
+        })
+    }
+    const inputEndDateValue = (event) => {
+        const value = event.target.value.replace(new RegExp("-", "g"), '');
+        setPeriod(prevState => {
+            return {...prevState, end: value,endOrigin: event.target.value}
+        })
+    }
+    const acceptDatePeriod = () => {
+        dispatch(inputFilterDateFrom(period.start));
+        dispatch(inputFilterDateTo(period.end));
+        closeModal();
+    }
     return (
             <LayoutSearchResults
                 equipmentId={equipmentId}
@@ -347,10 +370,11 @@ countPagination();
             >
                 {calendarModal ? 
                 <div>
-                    <div onClick={closeModal} className="Modal__bg" />
-                    <div className="Modal">
-                        <button>BTN</button>
-                        MODAL
+                    <div onClick={closeModal} className="ModalPeriod__bg" />
+                    <div className="ModalPeriod">
+                        <input className="ModalPeriod__input" onChange={(event) => {inputStartDateValue(event)}} type={"date"}/>
+                        <input className="ModalPeriod__input" onChange={(event) => {inputEndDateValue(event)}} type={"date"}/>
+                        <button onClick={acceptDatePeriod}>Принять</button>
                     </div>
                 </div>: null}
                 {tableView}

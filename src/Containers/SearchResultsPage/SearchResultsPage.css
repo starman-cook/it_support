@@ -1,4 +1,4 @@
-.Modal__bg {
+.ModalPeriod__bg {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -6,8 +6,12 @@
     right: 0;
     background: rgba(50, 50, 50, 0.5);
     cursor: pointer;
+    z-index: 3;
 }
-.Modal {
+.ModalPeriod__input {
+    padding: 20px;
+}
+.ModalPeriod {
     background: red;
     width: 500px;
     height: 500px;
@@ -15,6 +19,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    z-index: 4;
 }
 .FilterElement {
     background: #FFFFFF;

@@ -21,7 +21,7 @@ const ModalWorker = (props) => {
         dispatch(changeEmployee(code));
         dispatch(setActivePage(1));
     }
-   
+
     const workers = useSelector(state => state.company.employees);
     const [filtered, setFiltered] = useState([]);
     let allWorkerSearchResults;

@@ -23,38 +23,38 @@ const middleware = [
     routerMiddleware(history)
 ];
 
-// const saveToLocalStorage = state => {
-//     try {
-//         const serializedState = JSON.stringify(state);
-//         localStorage.setItem('state', serializedState);
-//     } catch (e) {
-//         console.log('Error save state');
-//     }
-// };
+const saveToLocalStorage = state => {
+    try {
+        const serializedState = JSON.stringify(state);
+        localStorage.setItem('state', serializedState);
+    } catch (e) {
+        console.log('Error save state');
+    }
+};
 
-// const loadFromLocalStorage = () => {
-//     try {
-//         const serializedState = localStorage.getItem('state');
-//         if (serializedState === null) {
-//             return undefined;
-//         }
-//
-//         return JSON.parse(serializedState);
-//     } catch (e) {
-//         return undefined;
-//     }
-// };
+const loadFromLocalStorage = () => {
+    try {
+        const serializedState = localStorage.getItem('state');
+        if (serializedState === null) {
+            return undefined;
+        }
+
+        return JSON.parse(serializedState);
+    } catch (e) {
+        return undefined;
+    }
+};
 const enhancers = composeEnhancers(applyMiddleware(...middleware));
-// const persistedState = loadFromLocalStorage();
+const persistedState = loadFromLocalStorage();
 
-const store = createStore(rootReducer, enhancers);
+const store = createStore(rootReducer, persistedState, enhancers);
 
-// store.subscribe(() => {
-//     saveToLocalStorage({
-//         users: {
-//             user: store.getState().users.user
-//         }
-//     })
-// });
+store.subscribe(() => {
+    saveToLocalStorage({
+        applications: {
+            ...store.getState().applications, data: store.getState().applications.data
+        }
+    })
+});
 
 export default store;

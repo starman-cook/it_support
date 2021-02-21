@@ -11,6 +11,16 @@ const WithLoader = (WrappedComponent, axios) => {
         intercept = useMemo(() => {
             axios.interceptors.request.use((req) => {
                     setLoader(true);
+
+                    // Условие чтобы остановить спиннер если ответ не приходит, проверрить при других обстоятельствах
+                const time = setTimeout(() => {
+                    if (req.maxBodyLength === -1) {
+                        setLoader(false);
+                        return req;
+                    };
+                },1000);
+
+
                     return req;
                 });
             axios.interceptors.response.use(resp => {

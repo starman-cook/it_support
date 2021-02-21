@@ -21,7 +21,11 @@ import axios from './axiosApi';
 
 axios.interceptors.request.use(req => {
     try {
-        req.headers['Authorization'] = store.getState().users.user ?  store.getState().users.user.token : ''
+
+        // Проверить на работоспособность.
+        // req.headers['Authorization'] = store.getState().users.user ?  store.getState().users.user.token : ''
+        req.params.id = store.getState().applications.data ? store.getState().applications.data['clientId'] : '';
+        req.params.hash = store.getState().applications.data ? store.getState().applications.data['hash'] : '';
     } catch (err) {
         console.log(err);
     }

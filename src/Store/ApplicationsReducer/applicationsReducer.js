@@ -8,14 +8,18 @@ import {
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 
+
+//ID SAMPLE    1240-02-00044
+//HASH SAMPLE  4be9fd6e92f21fc38674ec51d5e4d237
+// aad6d2c1b77801e269628f235dd7cbaa hash from 1240 doesnt work
 const initialState = {
     departments: ["main dep", "office dep", "some other dep"],
     comments: [],
     applications: [],
     count: 0,
     data: {
-        clientId: "1240-02-00044",
-        hash: "4be9fd6e92f21fc38674ec51d5e4d237",
+        clientId: "",
+        hash: "",
         filter: {
             date: {
                 from: "20200101",

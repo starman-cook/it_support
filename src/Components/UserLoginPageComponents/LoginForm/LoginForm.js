@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import './LoginForm.css';
 
 const LoginForm = (props) => {
+
     return (
         <div className="LoginForm">
             <h3 className="LoginForm__title">{props.title}</h3>
@@ -22,7 +23,7 @@ const LoginForm = (props) => {
                         name={props.buttonName}
                         width={props.buttonWidth}
                     />
-                    <label name="remebmer" for="remember">
+                    <label name="remember" for="remember">
                         <input ref={props.refCheckbox} className="LoginForm__checkbox" id="remember" name="remember" onChange={props.checkOnChange} type="checkbox" />
                         <p className="LoginForm__checkbox--text">Запомнить меня</p>
                     </label>

@@ -5,7 +5,7 @@ import LoginForm from '../../Components/UserLoginPageComponents/LoginForm/LoginF
 import PhoneInput from '../../Components/UserLoginPageComponents/PhoneInput/PhoneInput';
 import SmsInput from '../../Components/UserLoginPageComponents/SmsInput/SmsInput';
 import {useDispatch, useSelector} from "react-redux";
-import {saveUser, sendPhone, sendSms, setLoginStatus} from "../../Store/UsersReducer/usersActions";
+import {loginUser, saveUser, sendPhone, sendSms, setLoginStatus} from "../../Store/UsersReducer/usersActions";
 
 
 const UserLoginPage = (props) => {
@@ -13,6 +13,11 @@ const UserLoginPage = (props) => {
     // const id = "1267-02-00020";
     // const id = "1240-02-00044";
     const id = props.match.params.id;
+    useEffect(() => {
+        if (id) {
+            dispatch(setLoginStatus("phone"));
+        }
+    }, [id]);
     console.log("ID SAMPLE: 1240-02-00044")
     const [phoneCode, setPhoneCode] = useState("");
     const [phoneA, setPhoneA] = useState("");
@@ -227,6 +232,24 @@ const UserLoginPage = (props) => {
             </PhoneInput>
         )
     }
+
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    });
+    const inputValue = (event) => {
+        const {name, value} = event.target;
+        setUser(prevState => {
+            return {...prevState, [name]: value}
+        });
+    }
+    const submitLoginUser = (event) => {
+        event.preventDefault();
+        dispatch(loginUser(user.username, user.password));
+    }
+    const usernameError = useSelector(state => state.users.usernameLoginError);
+    const passwordError = useSelector(state => state.users.passwordLoginError);
+
     if (status === "login") {
         question = "Не помните данные для входа?";
         link = "#";
@@ -235,12 +258,12 @@ const UserLoginPage = (props) => {
         loginContent = (
             <LoginForm 
                 title={"Личный кабинет клиента"}
-                // submit
-                // loginOnChange
-                // passwordOnChange
+                submit={(event) => {submitLoginUser(event)}}
+                loginOnChange={(event) => {inputValue(event)}}
+                passwordOnChange={(event) => {inputValue(event)}}
                 // checkOnChange
-                errorUsername={true}
-                errorPassword={true}
+                errorUsername={usernameError}
+                errorPassword={passwordError}
                 buttonName={"войти"}
                 buttonWidth={"142"}
                 // refCheckbox

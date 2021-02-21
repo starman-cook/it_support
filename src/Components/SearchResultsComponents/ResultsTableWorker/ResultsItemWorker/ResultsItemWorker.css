@@ -1,6 +1,6 @@
 .ResultsItemWorker__comment {
     cursor: pointer;
-    background: url('../../../../assets//icons/ic-comment.svg')center  no-repeat;  
+    background: url('../../../../assets/icons/ic-comment.svg')center  no-repeat;
 }
 .ResultsItemWorker__comment--width {
     position: relative;
@@ -27,7 +27,7 @@
     text-align: center;
 }
 .ResultsItemWorker__comment:hover {
-    background: url('../../../../assets//icons/ic-comment-active.svg')center  no-repeat;  
+    background: url('../../../../assets/icons/ic-comment-active.svg')center  no-repeat;
 }
 
 
@@ -111,7 +111,7 @@
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 0.01em;
-    color: #BDBDBD;
+    color: #949494;
     margin: 6px 0 0 0;
 }
 .ResultsItemWorker__resultBlock {

@@ -9,10 +9,10 @@ import {
 const initialState = {
     user: null,
     loginStatus: 'login',
-    usernameLoginError: "",
-    passwordLoginError: "",
-    phoneLoginError: "",
-    smsLoginError: "",
+    usernameLoginError: null,
+    passwordLoginError: null,
+    phoneLoginError: null,
+    smsLoginError: null,
     hash: ""
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './LayoutSearchResults.css';
 import {push} from 'connected-react-router';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     changeNumber,
     initFilters, inputFilterDateFrom,
@@ -11,6 +11,8 @@ import {
 
 const LayoutSearchResults = (props) => {
     const dispatch = useDispatch();
+    const company = useSelector(state => state.company.companyData);
+
     const goToApplications = () => {
         dispatch(push('/application'));
     }
@@ -35,15 +37,15 @@ const LayoutSearchResults = (props) => {
                 <div onClick={goToApplications} className="LayoutSearchResults__logo" />
                 <div className="LayoutSearchResults__contactPhoneBlock">
                     <h2 className="LayoutSearchResults__boldText">+7 727 390 11 12</h2>
-                    <p className="LayoutSearchResults__headerHelperText">служба поддержки пользователей</p>
+                    <p className="LayoutSearchResults__headerHelperText LayoutSearchResults__headerHelperText--left">служба поддержки пользователей</p>
                 </div>
                 <div className="LayoutSearchResults__idHeaderBlock">
                     <h2 className="LayoutSearchResults__boldText">{props.equipmentId}</h2>
-                    <p className="LayoutSearchResults__headerHelperText">ID оборудования</p>
+                    <p className="LayoutSearchResults__headerHelperText LayoutSearchResults__headerHelperText--left">ID оборудования</p>
                 </div>
                 <div className="LayoutSearchResults__NameBlock">
                     <h2 className="LayoutSearchResults__bigNotBoldText">{props.workerName}</h2>
-                    <p className="LayoutSearchResults__headerHelperText">контактное лицо</p>
+                    {!company.director ? <p className="LayoutSearchResults__headerHelperText">контактное лицо</p> : null}
                 </div>
                 <div className="LayoutSearchResults__CompanyBlock">
                     <h2 className="LayoutSearchResults__bigNotBoldText">{props.companyName}</h2>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ModalWorker.css';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changeEmployee, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
@@ -11,26 +11,28 @@ const ModalWorker = (props) => {
 
    // введенные данные с каждым кликом отправляют запрос и получают данные из списка сотрудников компании
     const inputChange = (event) => {
-        const {name, value} = event.target;
-        setInputState({name: value});
+        setInputState(event.target.value);
         setShowResults(true);
     }
     const hideResults = () => {
         setShowResults(false);
     };
-    const getResultValue = (event) => {
-        dispatch(changeEmployee(event.target.innerText));
+    const getResultValue = (event, code) => {
+        dispatch(changeEmployee(code));
         dispatch(setActivePage(1));
     }
-    const workers = [
-        {name: "Цой"},{name: "Some name"},{name: "Some name"},{name: "Some name"}
-    ]
+   
+    const workers = useSelector(state => state.company.employees);
+    const [filtered, setFiltered] = useState([]);
     let allWorkerSearchResults;
+    useEffect(() => {
+        setFiltered(workers.filter(el => el.name.includes(inputState)));
+    }, [inputState]);
 
-    if (workers.length != 0) {
+    if (filtered.length !== 0) {
         allWorkerSearchResults = (<div className="ModalWorker__results">
-            {workers.map((el, i) => {
-                return <p key={i} onClick={(event) => {getResultValue(event)}} className="ModalWorker__resultsItem">{el.name}</p>
+            {filtered.map((el, i) => {
+                return <p key={i} onClick={(event) => {getResultValue(event, el.code)}} className="ModalWorker__resultsItem">{el.name}</p>
              })}
         </div>
         )}

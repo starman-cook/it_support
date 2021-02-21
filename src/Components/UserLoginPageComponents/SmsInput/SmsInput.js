@@ -17,6 +17,7 @@ const SmsInput = (props) => {
             {props.error ? <Button 
                 name={props.buttonName}
                 width={props.ButtonWidth}
+                clicked={props.clicked}
             /> : <p className="SmsInput__text--small">запросить SMS-пароль  повторно можно будет через {props.time} секунд</p>}
         </div>
     )

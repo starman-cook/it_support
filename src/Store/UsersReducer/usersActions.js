@@ -34,9 +34,11 @@ export const sendPhone = (phoneNumber, id) => {
         try {
             const response = await axios.post(`/users/${id}`, phoneNumber);
             console.log(response.data);
+            await dispatch(setLoginStatus("sms"));
+
         } catch (err) {
-            console.log(err);
-            dispatch(phoneLoginError(err.response));
+            console.log("PHONE ERROR ", err);
+            dispatch(phoneLoginError(err.response.status));
         }
     }
 }
@@ -50,8 +52,8 @@ export const sendSms = (smsAndId) => {
             // await dispatch(saveId(response.data.clientId));
             await dispatch(push('/search'));
         } catch (err) {
-            console.log(err);
-            dispatch(smsLoginError(err.response.data.result));
+            console.log("SMS ", err);
+            dispatch(smsLoginError(err.response.status));
         }
     }
 }

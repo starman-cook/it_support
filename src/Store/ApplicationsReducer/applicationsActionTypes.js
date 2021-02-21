@@ -20,3 +20,6 @@ export const SET_ACTIVE_FILTERS = 'SET_ACTIVE_FILTERS';
 
 export const SAVE_HASH = 'SAVE_HASH';
 export const SAVE_ID = 'SAVE_ID';
+
+
+

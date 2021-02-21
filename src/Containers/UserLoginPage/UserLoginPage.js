@@ -40,14 +40,33 @@ const UserLoginPage = (props) => {
     }, [sms1, sms2,  sms3, sms4]);
 
     useEffect(() => {
-        dispatch(saveUser(id))
+        localStorage.clear();
+        dispatch(saveUser(id));
     }, [dispatch]);
 
-    const sendPhoneHandler = async () => {
-        let phoneNumber = `+7${phoneCode}${phoneA}${phoneB}${phoneC}`
-        await dispatch(sendPhone({phone: phoneNumber}, id));
-        await dispatch(setLoginStatus("sms"));
+    const phoneError = useSelector(state => state.users.phoneLoginError);
+    const smsError = useSelector(state => state.users.smsLoginError);
+
+    const sendPhoneByPressEnter = async (event) => {
+        if(event.key === 'Enter'){
+            event.preventDefault();
+            let phoneNumber = `+7${phoneCode}${phoneA}${phoneB}${phoneC}`;
+            await dispatch(sendPhone({phone: phoneNumber}, id));
+        }
     }
+
+    const sendPhoneHandler = async () => {
+        let phoneNumber = `+7${phoneCode}${phoneA}${phoneB}${phoneC}`;
+        await dispatch(sendPhone({phone: phoneNumber}, id));
+    }
+    const resendSmsHandler = () => {
+        sendPhoneHandler();
+        setSms1('');
+        setSms2('');
+        setSms3('');
+        setSms4('');
+    }
+
     // const refPhone = useRef();
 
     const status = useSelector(state => state.users.loginStatus);
@@ -139,14 +158,16 @@ const UserLoginPage = (props) => {
         loginContent = (
             <SmsInput
                 time={"15"}
-                wrongPassword={false}
-                error={false}
+                wrongPassword={smsError}
+                error={smsError}
                 buttonName={"запросить SMS повторно"}
                 buttonWidth={"303"}
                 phone={`+7 ${phoneCode} *** ** ${phoneC}`}
+                clicked={(event) => {resendSmsHandler(event)}}
             >
                   <div className="SmsInput__phoneBlock">
                     <input
+                        value={sms1}
                         placeholder="_"
                         className="SmsInput__inputPiece"
                         type="text"
@@ -154,6 +175,7 @@ const UserLoginPage = (props) => {
                         maxLength={1}
                         onChange={handleChangeSms} />
                     <input
+                        value={sms2}
                         placeholder="_"
                         className="SmsInput__inputPiece"
                         type="text"
@@ -161,6 +183,7 @@ const UserLoginPage = (props) => {
                         maxLength={1}
                         onChange={handleChangeSms} />
                     <input
+                        value={sms3}
                         placeholder="_"
                         className="SmsInput__inputPiece"
                         type="text"
@@ -168,6 +191,7 @@ const UserLoginPage = (props) => {
                         maxLength={1}
                         onChange={handleChangeSms} />
                     <input
+                        value={sms4}
                         placeholder="_"
                         className="SmsInput__inputPiece"
                         type="text"
@@ -186,7 +210,7 @@ const UserLoginPage = (props) => {
         contacts = "или позвоните на +7 707 390 11 12, и мы что-нибудь придумаем.";
         loginContent = (
             <PhoneInput
-                // error
+                error={phoneError}
                 // refPhone={refPhone}
                 // phoneModel={"+7 444"}
                 // activateInput={activateInput}
@@ -198,6 +222,7 @@ const UserLoginPage = (props) => {
                 <div className="PhoneInput__phoneBlock">
                     <p className="PhoneInput__phoneText">+7 (</p>
                     <input
+                        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}
                         placeholder="---"
                         className="PhoneInput__inputPiece PhoneInput__inputPiece--long"
                         type="text"
@@ -206,6 +231,7 @@ const UserLoginPage = (props) => {
                         onChange={handleChangePhone} />
                     <p className="PhoneInput__phoneText">) </p>
                     <input
+                        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}
                         placeholder="---"
                         className="PhoneInput__inputPiece PhoneInput__inputPiece--long"
                         type="text"
@@ -214,6 +240,7 @@ const UserLoginPage = (props) => {
                         onChange={handleChangePhone} />
                     <p className="PhoneInput__phoneText"> - </p>
                     <input
+                        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}
                         placeholder="--"
                         className="PhoneInput__inputPiece PhoneInput__inputPiece--short"
                         type="text"
@@ -222,6 +249,7 @@ const UserLoginPage = (props) => {
                         onChange={handleChangePhone} />
                     <p className="PhoneInput__phoneText"> - </p>
                     <input
+                        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}
                         placeholder="--"
                         className="PhoneInput__inputPiece PhoneInput__inputPiece--short"
                         type="text"
@@ -247,6 +275,17 @@ const UserLoginPage = (props) => {
         event.preventDefault();
         dispatch(loginUser(user.username, user.password));
     }
+
+    const submitLoginByEnterButton = (event) => {
+        // Number 13 is the "Enter" key on the keyboard
+        if(event.key === 'Enter'){
+            event.preventDefault();
+
+            dispatch(loginUser(user.username, user.password));
+
+        }
+    };
+
     const usernameError = useSelector(state => state.users.usernameLoginError);
     const passwordError = useSelector(state => state.users.passwordLoginError);
 
@@ -258,6 +297,7 @@ const UserLoginPage = (props) => {
         loginContent = (
             <LoginForm 
                 title={"Личный кабинет клиента"}
+                keyPress={(event) => {submitLoginByEnterButton(event)}}
                 submit={(event) => {submitLoginUser(event)}}
                 loginOnChange={(event) => {inputValue(event)}}
                 passwordOnChange={(event) => {inputValue(event)}}

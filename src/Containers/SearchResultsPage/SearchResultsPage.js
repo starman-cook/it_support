@@ -6,10 +6,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     changePagination,
     inputFilterDateFrom,
-    inputFilterDateTo, setActiveFilters, setActivePage
+    inputFilterDateTo, setActivePage
 } from "../../Store/ApplicationsReducer/applicationsActions";
 import moment from 'moment';
 import {getCompanyData} from "../../Store/CompanyDataReducer/companyActions";
+import {push} from 'connected-react-router';
 
 const SearchResultsPage = () => {
     const dispatch = useDispatch();
@@ -35,9 +36,10 @@ const SearchResultsPage = () => {
     //
     // }, [dispatch]);
     // const isFilter = filters.length > 0;
-
+    const hash = useSelector(state => state.applications.data.hash)
     useEffect(() => {
-        dispatch(getCompanyData('aad6d2c1b77801e269628f235dd7cbaa'));
+        if (!hash) return dispatch(push('/login'));
+        dispatch(getCompanyData(hash));
     }, [dispatch]);
 
     const dateStart = 'ДД/ММ/ГГ';
@@ -47,8 +49,8 @@ const SearchResultsPage = () => {
     let workerName;
     let companyName;
     if (company) {
-        equipmentId = company.director ? company.director.id : "";
-        workerName = "Сид Вишес"; // с базы не приходит контактного лица(((
+        equipmentId = company.director ? company.director.id : company.employee ? company.employee.id : "";
+        workerName = company.employee ? company.employee.name : '';
         companyName =  company.company;
     }
 

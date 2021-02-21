@@ -13,6 +13,7 @@ import {
     getTenApplications,
     setActiveFilters, setActivePage
 } from "../../../Store/ApplicationsReducer/applicationsActions";
+import {getAllDepartments, getAllEmployees} from "../../../Store/CompanyDataReducer/companyActions";
 
 const ResultsTableWorker = (props) => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const ResultsTableWorker = (props) => {
     // }
     const data = useSelector(state => state.applications.data);
 
+
     useEffect(() => {
         dispatch(getTenApplications(data));
     }, [data]);
@@ -42,9 +44,17 @@ const ResultsTableWorker = (props) => {
 
     const [indexForModal, setIndexForModal] = useState();
     let allApplications;
-    const user = {
-        role: 'director'
-    }
+    const company = useSelector(state => state.company.companyData);
+
+    useEffect(() => {
+        console.log("COMPANY ",company)
+        if (company) {
+            dispatch(getAllDepartments(company.departments));
+            if (company.director) {
+                dispatch(getAllEmployees(company.director.employees));
+            }
+        }
+    }, [company]);
     // ResultsTableWorker__filterIcon--active
     // В редаксе будут хранится фильтры, по отдельности статус и отдел, все что будет выбрано в модальном окне попдает в стэйт и иконка закрашивается в черный
     const isFilterStatus = useSelector(state => state.applications.data['filter'].status.length > 0);
@@ -120,7 +130,7 @@ const ResultsTableWorker = (props) => {
                         isLastFrame={applications.length - 1 === i}
                         statusColor={status === 'Запланировано' ? "#E82024" : status === 'В работе' ? "#F3BB1C" : status === 'Завершено' ? "#3CC13B" : status === 'Отменено' ? '#828282' : null}
                         date={el.dateCreate}
-                        status={status}
+                        status={status.toLowerCase()}
                         subject={el.subject}
                         department={el.departament}
                         specialist={el.implementer['name']}
@@ -130,7 +140,7 @@ const ResultsTableWorker = (props) => {
                         classLikeDislike={el.rating['value'] === 1 ? "like" : el.rating['value'] === -1 ? "dislike" : ''}
                         isComment={el.rating['comment']}
                         openSeeDetails={() => {seeFullApplicationInfo(i)}}
-                        isDirector={user.role === 'director'}
+                        isDirector={!!company.director}
                         workerId={el.employee['id']}
                         worker={el.employee['name']}
                     />
@@ -241,7 +251,7 @@ const ResultsTableWorker = (props) => {
                     <div onClick={toggleStatusModal} className={`ResultsTableWorker__filterIcon ${isFilterStatus ? "ResultsTableWorker__filterIcon--active" : null}`} />
                 </div>
 
-                {user.role === 'director' ? <div className="ResultsTableWorker__filterWithIcon ResultsTableWorker__filter--worker">
+                {company.director ? <div className="ResultsTableWorker__filterWithIcon ResultsTableWorker__filter--worker">
                     <p className="ResultsTableWorker__filterText">Сотрудник</p>
                      {isWorkerModal ? <ModalWorker close={toggleWorkerModal} /> : null}
                     <div onClick={toggleWorkerModal} className={`ResultsTableWorker__filterIcon ${isFilterWorker ? "ResultsTableWorker__filterIcon--active" : null}`} />

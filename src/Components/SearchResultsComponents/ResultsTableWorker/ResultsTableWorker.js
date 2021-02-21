@@ -67,7 +67,7 @@ const ResultsTableWorker = (props) => {
         isFilterDepartment: useSelector(state => state.applications.data['filter'].departament.length > 0) ? "отдел" : null,
         isFilterWorker: useSelector(state => state.applications.data['filter'].employee.trim() !== '') ? "сотрудник" : null,
         isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null,
-        isFilterDate: useSelector(state => state.applications.data['filter'].date.from !== "20200101" ? "дата" : null)
+        isFilterDate: useSelector(state => state.applications.isFilterDateActive ? "дата" : null)
     }
 
     const showFilters = () => {
@@ -201,7 +201,7 @@ const ResultsTableWorker = (props) => {
     const goLeft = async () => {
 
         // потом будет проверка на то что если start в оффсете будет 0 и индекс 0 тогда стоп.
-        if (indexForModal <= 0 && currentPage == 0) return;
+        if (indexForModal <= 0 && currentPage === 0) return;
 
             if (indexForModal <=0) {
                 // ПРИХОДИТСЯ КЛИКАТЬ ДВАЖДЫ НА ГРАНИЦАХ, ПОКА НЕ ЗНАЮ КАК РЕШИТЬ
@@ -279,6 +279,8 @@ const ResultsTableWorker = (props) => {
                         application={applications[indexForModal]}
                         goLeft={goLeft}
                         goRight={goRight}
+                        first={indexForModal <= 0 && currentPage === 0}
+                        last={indexForModal >= applications.length - 1 && activePage >= Math.ceil(count / 10)}
                     />
                 </>:
                 null}
@@ -286,6 +288,7 @@ const ResultsTableWorker = (props) => {
         </div>
     )
 }
+
 
 
 export default ResultsTableWorker;

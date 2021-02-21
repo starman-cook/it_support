@@ -11,12 +11,13 @@ function App() {
   <>
   <Switch>
     {/*<Route path="/:id" exact component={UserLoginPage} />*/}
+    <Route path="/" exact component={SearchResultsPage} />
+    <Route path="/search" exact component={SearchResultsPage} />
     <Route path="/login" exact component={UserLoginPage} />
     <Route path="/login/:id" exact component={UserLoginPage} />
     <Route path="/application" exact component={ApplicationPage} />
     <Route path="/application/:id" component={ApplicationPage} />
     <Route path="/error" component={ErrorWindow} />
-    <Route path="/search" component={SearchResultsPage} />
     {/*<Route path="/fullinfo" component={FullApplicationInfo} />*/}
   </Switch>
   </>

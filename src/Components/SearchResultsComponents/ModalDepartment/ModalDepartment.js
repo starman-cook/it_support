@@ -20,6 +20,7 @@ const ModalDepartment = (props) => {
             }
         dispatch(changeDepartment(arr));
         dispatch(setActivePage(1));
+        props.close();
         });
     }
 

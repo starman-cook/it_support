@@ -116,6 +116,7 @@ const FullApplicationInfo = (props) => {
     let department;
     let subject;
     let solution;
+    let allSolution = [];
     let fileImage;
     let problem;
     let allProblems = [];
@@ -134,7 +135,10 @@ const FullApplicationInfo = (props) => {
         isComment = application.rating['comment'];
         department = application.departament;
         subject = application.subject;
-        solution = application.outcome;
+        solution = application.outcome.split("\n");
+        allSolution = solution.map(el => {
+            return <p className="FullApplicationInfo__content__text">{el}</p>
+        });
         fileImage = application.images[0];
         problem = application.details.split("\n");
         workerName = application.employee.name;
@@ -225,7 +229,7 @@ const FullApplicationInfo = (props) => {
 
                         <p className="FullApplicationInfo__content__text--title">Результат</p>
                         <div >
-                            <p className="FullApplicationInfo__content__text">{solution}</p>
+                            {allSolution}
                         </div>
 
 
@@ -240,25 +244,25 @@ const FullApplicationInfo = (props) => {
                         </div>
 
 
-                        <p className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p>
+                        {status === "завершено" || status === "отменено" ? <p className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
                     </div>
                 </div>
 
 
                 <div className="FullApplicationInfo__footer" >
-                    <div className="FullApplicationInfo__btnLeft" onClick={props.goLeft}>
-                        <div className="FullApplicationInfo__arrowLeft" />
-                        <p className="FullApplicationInfo__btnTextLeft">
-                            Вернуться к предыдущей заявке
-                        </p>
-                    </div>
+                    {!props.first ? <div className="FullApplicationInfo__btnLeft" onClick={props.goLeft}>
+                                        <div className="FullApplicationInfo__arrowLeft" />
+                                        <p className="FullApplicationInfo__btnTextLeft">
+                                            Вернуться к предыдущей заявке
+                                        </p>
+                                    </div> : null}
 
-                    <div className="FullApplicationInfo__btnRight" onClick={props.goRight}>
-                        <p className="FullApplicationInfo__btnTextRight">
-                            Перейти к следующей заявке
-                        </p>
-                        <div className="FullApplicationInfo__arrowRight" />
-                    </div>
+                    {!props.last ? <div className="FullApplicationInfo__btnRight" onClick={props.goRight}>
+                                        <p className="FullApplicationInfo__btnTextRight">
+                                            Перейти к следующей заявке
+                                        </p>
+                                        <div className="FullApplicationInfo__arrowRight" />
+                                    </div> : null}
                 </div>
             </div>
             {isFileImageModal ? <div onClick={toggleModalImage} className="FullApplicationInfo__fileImage--modal">

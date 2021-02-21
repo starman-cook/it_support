@@ -75,9 +75,28 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0 0 8px 8px;
     width: 378px;
+    height: 378px;
+    overflow-y: scroll;
     min-height: 171px;
     position: absolute;
     top: 45px;
     box-sizing: border-box;
     padding: 13px 0;
+}
+.ModalWorker__results::-webkit-scrollbar-track
+{
+    border: 5px solid white;
+    background-color: #b2bec3;
+}
+
+.ModalWorker__results::-webkit-scrollbar
+{
+    width: 8px;
+    background-color: #dfe6e9;
+}
+
+.ModalWorker__results::-webkit-scrollbar-thumb
+{
+    background-color: #4FC6E0;
+    border-radius: 20px;
 }

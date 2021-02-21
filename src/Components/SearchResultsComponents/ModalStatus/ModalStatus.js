@@ -45,6 +45,7 @@ const ModalStatus = (props) => {
             }
             dispatch(changeStatus(arr));
             dispatch(setActivePage(1));
+            props.close();
         })
     }
 

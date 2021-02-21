@@ -4,10 +4,10 @@ import {
     GET_COUNT_AMOUNT,
     GET_TEN_APPLICATIONS, INIT_FILTERS,
     INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE,
-    SAVE_HASH, SAVE_ID
+    SAVE_HASH, SAVE_ID, IS_FILTER_DATE_ACTIVE
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
-
+import moment from "moment";
 
 //ID SAMPLE    1240-02-00044
 //HASH SAMPLE  4be9fd6e92f21fc38674ec51d5e4d237
@@ -22,7 +22,7 @@ const initialState = {
         filter: {
             date: {
                 from: "20200101",
-                to: "20201231 "
+                to: moment().format('YYYYMMDD')
             },
             status: [],
             employee: " ",
@@ -33,11 +33,14 @@ const initialState = {
         start: 0
     },
     activePage: 1,
-    activeFilters: []
+    activeFilters: [],
+    isFilterDateActive: false
 };
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case IS_FILTER_DATE_ACTIVE:
+            return {...state, isFilterDateActive: action.value};
         case SAVE_ID:
             return update(state, {
                 data: {

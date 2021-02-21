@@ -22,4 +22,4 @@ export const SAVE_HASH = 'SAVE_HASH';
 export const SAVE_ID = 'SAVE_ID';
 
 
-
+export const IS_FILTER_DATE_ACTIVE = 'IS_FILTER_DATE_ACTIVE';

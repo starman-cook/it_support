@@ -1,9 +1,20 @@
 import {
-    ADD_COMMENT, CHANGE_DEPARTMENT, CHANGE_EMPLOYEE, CHANGE_NUMBER,
-    CHANGE_PAGINATION, CHANGE_STATUS,
+    ADD_COMMENT,
+    CHANGE_DEPARTMENT,
+    CHANGE_EMPLOYEE,
+    CHANGE_NUMBER,
+    CHANGE_PAGINATION,
+    CHANGE_STATUS,
     GET_COUNT_AMOUNT,
-    GET_TEN_APPLICATIONS, INIT_FILTERS,
-    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SAVE_HASH, SAVE_ID, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE
+    GET_TEN_APPLICATIONS,
+    INIT_FILTERS,
+    INPUT_FILTER_DATE_FROM,
+    INPUT_FILTER_DATE_TO,
+    IS_FILTER_DATE_ACTIVE,
+    SAVE_HASH,
+    SAVE_ID,
+    SET_ACTIVE_FILTERS,
+    SET_ACTIVE_PAGE
 } from "./applicationsActionTypes";
 import axios from "../../axiosApi";
 
@@ -26,6 +37,8 @@ export const setActivePage = (value) => ({type: SET_ACTIVE_PAGE, value});
 
 export const saveHash = (value) => ({type: SAVE_HASH, value});
 export const  saveId = (value) => ({type: SAVE_ID, value});
+
+export const isFilterDateActive = (value) => ({type: IS_FILTER_DATE_ACTIVE, value});
 
 export const getTenApplications = (data) => {
     return async dispatch => {

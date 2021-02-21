@@ -22,6 +22,7 @@
 .LayoutSearchResults__contactPhoneBlock {
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
     flex-basis: 25%;
 }
 .LayoutSearchResults__boldText {
@@ -47,14 +48,17 @@
 
 .LayoutSearchResults__idHeaderBlock {
     display: flex;
+    flex-basis: 20%;
     flex-direction: column;
 }
 .LayoutSearchResults__NameBlock {
     display: flex;
+    flex-basis: 30%;
     flex-direction: column;
 }
 .LayoutSearchResults__CompanyBlock {
     display: flex;
+    flex-basis: 30%;
     flex-direction: column;
 }
 .LayoutSearchResults__companyLogo {

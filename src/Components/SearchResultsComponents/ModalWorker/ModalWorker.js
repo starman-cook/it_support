@@ -7,7 +7,7 @@ import {changeEmployee, setActivePage} from "../../../Store/ApplicationsReducer/
 const ModalWorker = (props) => {
    const dispatch = useDispatch();
    const [inputState, setInputState] = useState('');
-   const [showResults, setShowResults] = useState(false);
+   const [showResults, setShowResults] = useState(true);
 
    // введенные данные с каждым кликом отправляют запрос и получают данные из списка сотрудников компании
     const inputChange = (event) => {
@@ -20,6 +20,7 @@ const ModalWorker = (props) => {
     const getResultValue = (event, code) => {
         dispatch(changeEmployee(code));
         dispatch(setActivePage(1));
+        props.close();
     }
 
     const workers = useSelector(state => state.company.employees);

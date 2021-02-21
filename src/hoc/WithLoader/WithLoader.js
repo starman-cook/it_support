@@ -5,28 +5,31 @@ const WithLoader = (WrappedComponent, axios) => {
     
 
     return function Comp(props) {
+        let time;
         let intercept;
         const [loader, setLoader] = useState(false);
 
         intercept = useMemo(() => {
+            // clearTimeout(time);
             axios.interceptors.request.use((req) => {
                     setLoader(true);
 
                     // Условие чтобы остановить спиннер если ответ не приходит, проверрить при других обстоятельствах
-                const time = setTimeout(() => {
+                time = setTimeout(() => {
                     if (req.maxBodyLength === -1) {
                         setLoader(false);
-                        return req;
                     };
-                },1000);
+                },3500);
 
 
                     return req;
                 });
+
             axios.interceptors.response.use(resp => {
-                    setLoader(false);
-                    return resp;
+                        setLoader(false);
+                        return resp;
                 });
+            clearTimeout(time);
         }, []);
 
 

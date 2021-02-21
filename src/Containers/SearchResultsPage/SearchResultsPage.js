@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     changePagination,
     inputFilterDateFrom,
-    inputFilterDateTo, setActivePage
+    inputFilterDateTo, isFilterDateActive, setActivePage
 } from "../../Store/ApplicationsReducer/applicationsActions";
 import moment from 'moment';
 import {getCompanyData} from "../../Store/CompanyDataReducer/companyActions";
@@ -83,12 +83,21 @@ const SearchResultsPage = () => {
         setShowQuestion(false);
     }
 
+    const [deactivateBtnDate, setDeactivateBtn] = useState({});
+    // const isFilterDate = useSelector(state => state.applications.isFilterDateActive);
     const chooseDateBtnSimple = (event) => {
         const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
         for (let i = 0; i < el.length; i++) {
             el[i].style.color = '#E34A4E';
             el[i].style.background = 'white';
         }
+        const innerText = event.target.textContent;
+        if (deactivateBtnDate[innerText]) {
+            setDeactivateBtn({});
+            deactivateDateFilter();
+           return;
+        }
+        setDeactivateBtn({[event.target.textContent]: true});
         event.target.style.color = 'white';
         event.target.style.background = '#E34A4E';
         // let date = new Date();
@@ -102,14 +111,14 @@ const SearchResultsPage = () => {
         //     day = "0" + day;
         // }
         // const today = `${year}${month}${day}`
-        if (event.target.textContent === 'Период') {
+        if (innerText === 'Период') {
             setCalendarModal(true);
         } else {
             let today = moment().format("YYYYMMDD");
             let chosenDate;
             dispatch(changePagination(0));
             dispatch(setActivePage(1));
-            switch (event.target.textContent) {
+            switch (innerText) {
                 case "Сегодня":
                     chosenDate = today;
                     break;
@@ -133,6 +142,16 @@ const SearchResultsPage = () => {
             }
             dispatch(inputFilterDateFrom(chosenDate));
             dispatch(inputFilterDateTo(today));
+            dispatch(isFilterDateActive(true));
+        }
+    }
+    const deactivateDateFilter =  () => {
+         dispatch(isFilterDateActive(false));
+         dispatch(inputFilterDateFrom("20200101"));
+        const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
+        for (let i = 0; i < el.length; i++) {
+            el[i].style.color = '#E34A4E';
+            el[i].style.background = 'white';
         }
     }
 

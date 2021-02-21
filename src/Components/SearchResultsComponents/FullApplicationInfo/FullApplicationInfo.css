@@ -316,6 +316,7 @@
     align-items: center;
     transition: 0.2s;
     cursor: pointer;
+    margin-right: auto;
 }
 .FullApplicationInfo__arrowLeft {
     width: 5px;
@@ -353,6 +354,7 @@
     align-items: center;
     transition: 0.2s;
     cursor: pointer;
+    margin-left: auto;
 }
 .FullApplicationInfo__arrowRight {
     width: 5px;

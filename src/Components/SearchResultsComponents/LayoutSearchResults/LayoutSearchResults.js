@@ -4,7 +4,7 @@ import {push} from 'connected-react-router';
 import {useDispatch, useSelector} from "react-redux";
 import {
     changeNumber,
-    initFilters, inputFilterDateFrom, isFilterDateActive,
+    initFilters, inputFilterDateFrom, inputFilterDateTo, isFilterDateActive,
     setActiveFilters,
     setActivePage
 } from "../../../Store/ApplicationsReducer/applicationsActions";
@@ -23,9 +23,11 @@ const LayoutSearchResults = (props) => {
         dispatch(setActivePage(1));
     }
     const initFiltersHandler = () => {
+        localStorage.removeItem('employeeFilterName');
         dispatch(initFilters());
         dispatch(isFilterDateActive(false));
-        dispatch(inputFilterDateFrom("20200101"));
+        dispatch(inputFilterDateFrom(""));
+        dispatch(inputFilterDateTo(""));
         dispatch(setActiveFilters([]));
         const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
         for (let i = 0; i < el.length; i++) {
@@ -43,8 +45,8 @@ const LayoutSearchResults = (props) => {
                     <p className="LayoutSearchResults__headerHelperText LayoutSearchResults__headerHelperText--left">служба поддержки пользователей</p>
                 </div>
                 <div className="LayoutSearchResults__idHeaderBlock">
-                    <h2 className="LayoutSearchResults__boldText">{props.equipmentId}</h2>
-                    <p className="LayoutSearchResults__headerHelperText LayoutSearchResults__headerHelperText--left">ID оборудования</p>
+                    <h2 className="LayoutSearchResults__boldText LayoutSearchResults__boldText--center">{props.equipmentId}</h2>
+                    <p className="LayoutSearchResults__headerHelperText">ID оборудования</p>
                 </div>
                 <div className="LayoutSearchResults__NameBlock">
                     <h2 className="LayoutSearchResults__bigNotBoldText">{props.workerName}</h2>

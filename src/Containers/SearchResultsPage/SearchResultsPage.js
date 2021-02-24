@@ -147,7 +147,8 @@ const SearchResultsPage = () => {
     }
     const deactivateDateFilter =  () => {
          dispatch(isFilterDateActive(false));
-         dispatch(inputFilterDateFrom("20200101"));
+         dispatch(inputFilterDateFrom(""));
+         dispatch(inputFilterDateTo(""));
         const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
         for (let i = 0; i < el.length; i++) {
             el[i].style.color = '#E34A4E';
@@ -355,6 +356,7 @@ countPagination();
         })
     }
     const acceptDatePeriod = () => {
+        dispatch(setActivePage(1));
         dispatch(inputFilterDateFrom(period.start));
         dispatch(inputFilterDateTo(period.end));
         closeModal();

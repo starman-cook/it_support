@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ButtonGrey from '../UI/ButtonGrey/ButtonGrey';
 import './ModalDepartment.css';
 import {changeDepartment, changeStatus, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
@@ -10,7 +10,16 @@ const ModalDepartment = (props) => {
     const [inputState, setInputState] = useState({});
 
     const departments = useSelector(state => state.company.departments);
-
+    const statusActiveFilters = useSelector(state => state.applications.data.filter.departament);
+    useEffect(() => {
+        let obj = {};
+        departments.map(el => {
+            if (statusActiveFilters.includes(el.code)) {
+                obj[el.name] = el.code;
+            }
+        })
+        setInputState(obj);
+    }, []);
     const showDepartmentSearchResults = (event) => {
         event.preventDefault();
         let arr = [];
@@ -41,7 +50,7 @@ const ModalDepartment = (props) => {
     if (departments.length) {
         allDepartments = departments.map(el => {
            return   <label className="ModalDepartment__label">
-                       <input name={el.name} className="ModalDepartment__input" onChange={(event) => {inputChange(event, el.code)}} type="checkbox" />
+                       <input checked={inputState[el.name]}  name={el.name} className="ModalDepartment__input" onChange={(event) => {inputChange(event, el.code)}} type="checkbox" />
                        <div  className="ModalDepartment__label--icon"/>
                        <p className="ModalDepartment__department">{el.name}</p>
                    </label>

@@ -5,13 +5,13 @@ import './ApplicationForm.css';
 
 const ApplicationForm = (props) => {
 
-    const departments = useSelector(state => state.applications.departments);
+    const departments = useSelector(state => state.company.departments);
 
     let options = (
         departments.map(el => {
             return <option
             key={el}
-            >{el}</option>
+            >{el.name}</option>
         })
     ) 
 

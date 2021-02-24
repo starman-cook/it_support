@@ -21,8 +21,8 @@ const initialState = {
         hash: "",
         filter: {
             date: {
-                from: "20200101",
-                to: moment().format('YYYYMMDD')
+                from: "",
+                to: ""
             },
             status: [],
             employee: " ",

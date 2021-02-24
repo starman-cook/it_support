@@ -6,7 +6,7 @@ import {changeEmployee, setActivePage} from "../../../Store/ApplicationsReducer/
 
 const ModalWorker = (props) => {
    const dispatch = useDispatch();
-   const [inputState, setInputState] = useState('');
+   const [inputState, setInputState] = useState(localStorage.getItem("employeeFilterName") || "");
    const [showResults, setShowResults] = useState(true);
 
    // введенные данные с каждым кликом отправляют запрос и получают данные из списка сотрудников компании
@@ -18,6 +18,7 @@ const ModalWorker = (props) => {
         setShowResults(false);
     };
     const getResultValue = (event, code) => {
+        localStorage.setItem('employeeFilterName', event.target.dataset.name);
         dispatch(changeEmployee(code));
         dispatch(setActivePage(1));
         props.close();
@@ -33,7 +34,7 @@ const ModalWorker = (props) => {
     if (filtered.length !== 0) {
         allWorkerSearchResults = (<div className="ModalWorker__results">
             {filtered.map((el, i) => {
-                return <p key={i} onClick={(event) => {getResultValue(event, el.code)}} className="ModalWorker__resultsItem">{el.name}</p>
+                return <p data-name={el.name} key={i} onClick={(event) => {getResultValue(event, el.code)}} className="ModalWorker__resultsItem">{el.name}</p>
              })}
         </div>
         )}
@@ -42,7 +43,7 @@ const ModalWorker = (props) => {
         <>
         <div onClick={props.close} className="ModalWorker__bg" />
             <div className="ModalWorker">
-                <input onChange={(event) => {inputChange(event)}} className="ModalWorker__input" type="text" placeholder="Введите имя сотрудника" />
+                <input value={inputState} onChange={(event) => {inputChange(event)}} className="ModalWorker__input" type="text" placeholder="Введите имя сотрудника" />
                 <div className="ModalWorker__arrowBtn" onClick={hideResults} />
                 {showResults ? allWorkerSearchResults : null}
             </div>

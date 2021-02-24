@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import ButtonGrey from '../UI/ButtonGrey/ButtonGrey';
 import './ModalStatus.css';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changeStatus, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
 const ModalStatus = (props) => {
     const dispatch = useDispatch();
+    const statusActiveFilters = useSelector(state => state.applications.data.filter.status);
+
+    useEffect(() => {
+        setInputState({
+            planned: statusActiveFilters.includes("Запланировано"),
+            inProgress: statusActiveFilters.includes("В работе"),
+            completed: statusActiveFilters.includes("Завершено"),
+            canceled: statusActiveFilters.includes("Отменено")
+        });
+    }, []);
     const [inputState, setInputState] = useState({
         planned: null,
         inProgress: null,
@@ -59,25 +69,25 @@ const ModalStatus = (props) => {
                 <div className="ModalStatus__content">
                     <form className="ModalStatus__form" onSubmit={(event) => {showStatusSearchResults(event)}}>
                         <label className="ModalStatus__label">
-                            <input name="planned" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
+                            <input checked={inputState.planned} name="planned" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
                             <div  className="ModalStatus__label--icon"/>
                             <p className="ModalStatus__status ModalStatus__status--planned">запланировано</p>
                         </label>
 
                         <label className="ModalStatus__label">
-                            <input name="inProgress" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
+                            <input checked={inputState.inProgress} name="inProgress" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
                             <div  className="ModalStatus__label--icon"/>
                             <p className="ModalStatus__status ModalStatus__status--inProgress">в работе</p>
                         </label>
 
                         <label className="ModalStatus__label">
-                            <input name="completed" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
+                            <input checked={inputState.completed} name="completed" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
                             <div  className="ModalStatus__label--icon"/>
                             <p className="ModalStatus__status ModalStatus__status--completed">завершено</p>
                         </label>
 
                         <label className="ModalStatus__label">
-                            <input name="canceled" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
+                            <input checked={inputState.canceled} name="canceled" className="ModalStatus__input" onChange={(event) => {inputChange(event)}} type="checkbox" />
                             <div  className="ModalStatus__label--icon"/>
                             <p className="ModalStatus__status ModalStatus__status--canceled">отменено</p>
                         </label>

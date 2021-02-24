@@ -121,6 +121,7 @@ const FullApplicationInfo = (props) => {
     let problem;
     let allProblems = [];
     let workerName;
+    let isProblem = false;
     if (application) {
         color = application.status === 'Запланировано' ? "#E82024" : application.status === 'В работе' ? "#F3BB1C" : application.status === 'Завершено' ? "#3CC13B" : application.status === 'Отменено' ? '#828282' : null;
         date = application.dateCreate;
@@ -145,6 +146,7 @@ const FullApplicationInfo = (props) => {
         allProblems = problem.map(el => {
             return <p className="FullApplicationInfo__content__text">{el}</p>
         });
+        isProblem = problem.length > 1;
     }
     console.log(application);
     return (
@@ -221,7 +223,7 @@ const FullApplicationInfo = (props) => {
                                 <p className="FullApplicationInfo__content__text">{subject}</p>
                             </div>
                         </div>
-                        {problem.length > 1 ? <p className="FullApplicationInfo__content__text--title">Подробности</p> : null}
+                        {isProblem ? <p className="FullApplicationInfo__content__text--title">Подробности</p> : null}
                         <div>
                             {allProblems}
                         </div>

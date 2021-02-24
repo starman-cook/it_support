@@ -33,6 +33,9 @@
     letter-spacing: 0.01em;
     color: #4D525B;
 }
+.LayoutSearchResults__boldText--center {
+    text-align: center;
+}
 .LayoutSearchResults__headerHelperText {
     font-weight: normal;
     font-size: 10px;

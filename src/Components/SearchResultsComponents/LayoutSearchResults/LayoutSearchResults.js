@@ -82,9 +82,9 @@ const LayoutSearchResults = (props) => {
                 </div>
 
                 <div className="LayoutSearchResults__chooseDateBlock">
-                        <div className="LayoutSearchResults__inputDate" >{props.dateValueStart}</div>
-                        <p className="LayoutSearchResults__dash">-</p>
                         <div className="LayoutSearchResults__inputDate" >{props.dateValueEnd}</div>
+                        <p className="LayoutSearchResults__dash">-</p>
+                        <div className="LayoutSearchResults__inputDate" >{props.dateValueStart}</div>
                 </div>
 
             </div>

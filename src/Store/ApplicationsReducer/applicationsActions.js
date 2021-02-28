@@ -4,7 +4,7 @@ import {
     CHANGE_EMPLOYEE,
     CHANGE_NUMBER,
     CHANGE_PAGINATION,
-    CHANGE_STATUS,
+    CHANGE_STATUS, FIRST_CALENDAR_DAY_IN_RANGE,
     GET_COUNT_AMOUNT,
     GET_TEN_APPLICATIONS,
     INIT_FILTERS,
@@ -12,7 +12,7 @@ import {
     INPUT_FILTER_DATE_TO,
     IS_FILTER_DATE_ACTIVE,
     SAVE_HASH,
-    SAVE_ID,
+    SAVE_ID, SECOND_CALENDAR_DAY_IN_RANGE,
     SET_ACTIVE_FILTERS,
     SET_ACTIVE_PAGE
 } from "./applicationsActionTypes";
@@ -39,6 +39,9 @@ export const saveHash = (value) => ({type: SAVE_HASH, value});
 export const  saveId = (value) => ({type: SAVE_ID, value});
 
 export const isFilterDateActive = (value) => ({type: IS_FILTER_DATE_ACTIVE, value});
+
+export const setFirstCalendarDay = (value) => ({type: FIRST_CALENDAR_DAY_IN_RANGE, value});
+export const setSecondCalendarDay = (value) => ({type: SECOND_CALENDAR_DAY_IN_RANGE, value});
 
 export const getTenApplications = (data) => {
     return async dispatch => {

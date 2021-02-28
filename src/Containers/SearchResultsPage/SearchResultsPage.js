@@ -11,6 +11,7 @@ import {
 import moment from 'moment';
 import {getCompanyData} from "../../Store/CompanyDataReducer/companyActions";
 import {push} from 'connected-react-router';
+import ModalPeriod from "../../Components/SearchResultsComponents/ModalPeriod/ModalPeriod";
 
 const SearchResultsPage = () => {
     const dispatch = useDispatch();
@@ -46,9 +47,19 @@ const SearchResultsPage = () => {
         if (!hash) return dispatch(push('/login'));
         dispatch(getCompanyData(hash));
     }, [dispatch]);
+    useEffect(() => {
+        if (!filters.includes('дата')) {
+            setPeriod(prevState => {
+                return {...prevState, startOrigin: 'ДД/ММ/ГГ', endOrigin: 'ДД/ММ/ГГ'}
+            });
+        }
+    }, [filters]);
 
-    const dateStart = period.startOrigin;
-    const dateEnd = period.endOrigin;
+    const dateFromState = useSelector(state => state.applications.data.filter.date);
+    console.log("DATE ", dateFromState)
+
+    const dateStart = filters.includes('дата') ?  [dateFromState.from.slice(0, 4), "-", dateFromState.from.slice(4, 6), "-", dateFromState.from.slice(6)].join('') : period.startOrigin;
+    const dateEnd = filters.includes('дата') ?  [dateFromState.to.slice(0, 4), "-", dateFromState.to.slice(4, 6), "-", dateFromState.to.slice(6)].join('') : period.endOrigin;
     const company = useSelector(state => state.company.companyData);
     let equipmentId;
     let workerName;
@@ -143,8 +154,14 @@ const SearchResultsPage = () => {
             dispatch(inputFilterDateFrom(chosenDate));
             dispatch(inputFilterDateTo(today));
             dispatch(isFilterDateActive(true));
+            const formatStartDate = [today.slice(0, 4), "-", today.slice(4, 6), "-", today.slice(6)].join('');
+            const formatEndDate = [chosenDate.slice(0, 4), "-", chosenDate.slice(4, 6), "-", chosenDate.slice(6)].join('');
+            setPeriod(prevState => {
+                return {...prevState, startOrigin: formatStartDate, endOrigin: formatEndDate}
+            });
         }
     }
+
     const deactivateDateFilter =  () => {
          dispatch(isFilterDateActive(false));
          dispatch(inputFilterDateFrom(""));
@@ -343,18 +360,18 @@ countPagination();
     }, [activePage]);
 
 
-    const inputStartDateValue = (event) => {
-        const value = event.target.value.replace(new RegExp("-", "g"), '');
-        setPeriod(prevState => {
-            return {...prevState, start: value, startOrigin: event.target.value}
-        })
-    }
-    const inputEndDateValue = (event) => {
-        const value = event.target.value.replace(new RegExp("-", "g"), '');
-        setPeriod(prevState => {
-            return {...prevState, end: value,endOrigin: event.target.value}
-        })
-    }
+    // const inputStartDateValue = (event) => {
+    //     const value = event.target.value.replace(new RegExp("-", "g"), '');
+    //     setPeriod(prevState => {
+    //         return {...prevState, start: value, startOrigin: event.target.value}
+    //     })
+    // }
+    // const inputEndDateValue = (event) => {
+    //     const value = event.target.value.replace(new RegExp("-", "g"), '');
+    //     setPeriod(prevState => {
+    //         return {...prevState, end: value,endOrigin: event.target.value}
+    //     })
+    // }
     const acceptDatePeriod = () => {
         dispatch(setActivePage(1));
         dispatch(inputFilterDateFrom(period.start));
@@ -389,15 +406,16 @@ countPagination();
                 pagesNumbers={allPages}
 
             >
-                {calendarModal ? 
-                <div>
-                    <div onClick={closeModal} className="ModalPeriod__bg" />
-                    <div className="ModalPeriod">
-                        <input className="ModalPeriod__input" onChange={(event) => {inputStartDateValue(event)}} type={"date"}/>
-                        <input className="ModalPeriod__input" onChange={(event) => {inputEndDateValue(event)}} type={"date"}/>
-                        <button onClick={acceptDatePeriod}>Принять</button>
-                    </div>
-                </div>: null}
+                {calendarModal ?
+                    <ModalPeriod
+                        closeModal={closeModal}
+                        acceptDatePeriod={acceptDatePeriod}
+                        // inputStartDateValue={(event) => {inputStartDateValue(event)}}
+                        // inputEndDateValue={(event) => {inputEndDateValue(event)}}
+                        dateValueStart={period.startOrigin}
+                        dateValueEnd={period.endOrigin}
+                    />
+               : null}
                 {tableView}
             </LayoutSearchResults>
     )

@@ -4,7 +4,7 @@ import {
     GET_COUNT_AMOUNT,
     GET_TEN_APPLICATIONS, INIT_FILTERS,
     INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE,
-    SAVE_HASH, SAVE_ID, IS_FILTER_DATE_ACTIVE
+    SAVE_HASH, SAVE_ID, IS_FILTER_DATE_ACTIVE, FIRST_CALENDAR_DAY_IN_RANGE, SECOND_CALENDAR_DAY_IN_RANGE
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 import moment from "moment";
@@ -13,6 +13,8 @@ import moment from "moment";
 //HASH SAMPLE  4be9fd6e92f21fc38674ec51d5e4d237
 // aad6d2c1b77801e269628f235dd7cbaa hash from 1240 doesnt work
 const initialState = {
+    firstCalendarRangeDay: 0,
+    secondCalendarRangeDay: 0,
     comments: [],
     applications: [],
     count: 0,
@@ -39,6 +41,10 @@ const initialState = {
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case FIRST_CALENDAR_DAY_IN_RANGE:
+            return {...state, firstCalendarRangeDay: action.value};
+        case SECOND_CALENDAR_DAY_IN_RANGE:
+            return {...state, secondCalendarRangeDay: action.value};
         case IS_FILTER_DATE_ACTIVE:
             return {...state, isFilterDateActive: action.value};
         case SAVE_ID:

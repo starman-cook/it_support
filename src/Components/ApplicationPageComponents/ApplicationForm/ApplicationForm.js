@@ -1,18 +1,30 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import BlueButton from '../BlueButton/BlueButton';
 import './ApplicationForm.css';
 
 const ApplicationForm = (props) => {
 
-    const departments = useSelector(state => state.company.departments);
+    // const departments = useSelector(state => state.company.departments);
 
     let options = (
-        departments.map(el => {
-            return <option
-            key={el}
-            >{el.name}</option>
-        })
+        // departments.map(el => {
+        //     return <option
+        //     key={el}
+        //     >{el.name}</option>
+        // })
+        <>
+            {/*<option value="0">В какой отдел отправить заявку?</option>*/}
+            <option value="1">Удаленная поддержка</option>
+            <option value="2">Выездные специалисты</option>
+            <option value="3">Сервисный центр</option>
+            <option value="4">Обслуживание серверов</option>
+            <option value="5">Поддержка 1С</option>
+            <option value="6">Продажи</option>
+            <option value="7">Разработка и поддержка сайтов</option>
+            <option value="8">Бухгалтерия</option>
+            <option value="9">Я не знаю</option>
+        </>
     ) 
 
     return (

@@ -1,10 +1,23 @@
 import {
-    ADD_COMMENT, CHANGE_DEPARTMENT, CHANGE_EMPLOYEE, CHANGE_NUMBER,
-    CHANGE_PAGINATION, CHANGE_STATUS,
+    ADD_COMMENT,
+    CHANGE_DEPARTMENT,
+    CHANGE_EMPLOYEE,
+    CHANGE_NUMBER,
+    CHANGE_PAGINATION,
+    CHANGE_STATUS,
     GET_COUNT_AMOUNT,
-    GET_TEN_APPLICATIONS, INIT_FILTERS,
-    INPUT_FILTER_DATE_FROM, INPUT_FILTER_DATE_TO, SET_ACTIVE_FILTERS, SET_ACTIVE_PAGE,
-    SAVE_HASH, SAVE_ID, IS_FILTER_DATE_ACTIVE, FIRST_CALENDAR_DAY_IN_RANGE, SECOND_CALENDAR_DAY_IN_RANGE
+    GET_TEN_APPLICATIONS,
+    INIT_FILTERS,
+    INPUT_FILTER_DATE_FROM,
+    INPUT_FILTER_DATE_TO,
+    SET_ACTIVE_FILTERS,
+    SET_ACTIVE_PAGE,
+    SAVE_HASH,
+    SAVE_ID,
+    IS_FILTER_DATE_ACTIVE,
+    FIRST_CALENDAR_DAY_IN_RANGE,
+    SECOND_CALENDAR_DAY_IN_RANGE,
+    GET_LAST_APPLICATION
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 import moment from "moment";
@@ -13,6 +26,7 @@ import moment from "moment";
 //HASH SAMPLE  4be9fd6e92f21fc38674ec51d5e4d237
 // aad6d2c1b77801e269628f235dd7cbaa hash from 1240 doesnt work
 const initialState = {
+    lastApplication: null,
     firstCalendarRangeDay: 0,
     secondCalendarRangeDay: 0,
     comments: [],
@@ -41,6 +55,8 @@ const initialState = {
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_LAST_APPLICATION:
+            return {...state, lastApplication: action.value};
         case FIRST_CALENDAR_DAY_IN_RANGE:
             return {...state, firstCalendarRangeDay: action.value};
         case SECOND_CALENDAR_DAY_IN_RANGE:

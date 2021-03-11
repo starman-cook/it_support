@@ -13,6 +13,7 @@ import {
     setFirstCalendarDay,
     setSecondCalendarDay
 } from "../../../Store/ApplicationsReducer/applicationsActions";
+import Calendar from "react-calendar";
 
 // Import Calendar
 // import  Calendar  from 'react-calendar';
@@ -341,7 +342,7 @@ console.log(first + "   " + second);
 
                     <button  className="RedButton--inCalendar" onClick={submitDates}>Показать заявки</button>
                 </div>
-                {oneCalendar}
+                {/*{oneCalendar}*/}
     {/*///////////////////////*/}
     {/*            <div>*/}
     {/*                /!* Base calendar component *!/*/}
@@ -364,55 +365,34 @@ console.log(first + "   " + second);
     {/*                />*/}
     {/*            </div>*/}
     {/*            /////////////////////////////*/}
-    {/*            <div>*/}
-    {/*                <Calendar*/}
-    {/*                    className={"CalendarTest"}*/}
-    {/*                    selectRange={true}*/}
-    {/*                    maxDate={new Date()}*/}
-    {/*                    view ={"month"}*/}
-    {/*                    // maxDetail={"year"}*/}
-    {/*                    locale={"ru-RU"}*/}
-    {/*                    // nextLabel={""}*/}
-    {/*                    // next2Label={""}*/}
-    {/*                    // prevLabel={""}*/}
-    {/*                    // prev2Label={""}*/}
-    {/*                    returnValue={"range"}*/}
-    {/*                    showNavigation={true}*/}
-    {/*                    // showDoubleView={true}*/}
-    {/*                    // minDate дата крайней последней заявки, чтобы ограничить выбор периода*/}
-    {/*                    // tileClassName !!!!!! class important!!!*/}
-    {/*                    // navigationAriaLabel={"go up"}*/}
-    {/*                    onChange={() => {alert("Works calendar")}}*/}
-    {/*                    // activeStartDate={new Date()}*/}
-    {/*                    // value={new Date()}*/}
-    {/*                    // defaultValue={props.inputEndDateValue}*/}
-    {/*                />*/}
-    {/*                <Calendar*/}
-    {/*                    className={"CalendarTest"}*/}
-    {/*                    selectRange={true}*/}
-    {/*                    maxDate={new Date()}*/}
-    {/*                    view ={"month"}*/}
-    {/*                    // maxDetail={"year"}*/}
-    {/*                    locale={"ru-RU"}*/}
-    {/*                    // nextLabel={""}*/}
-    {/*                    // next2Label={""}*/}
-    {/*                    // prevLabel={""}*/}
-    {/*                    // prev2Label={""}*/}
-    {/*                    returnValue={"range"}*/}
-    {/*                    showNavigation={true}*/}
-    {/*                    // allowPartialRange  to pick dates from several calendars?*/}
-    {/*                    // showDoubleView={true}*/}
-    {/*                    // minDate дата крайней последней заявки, чтобы ограничить выбор периода*/}
-    {/*                    // tileClassName !!!!!! class important!!!*/}
-    {/*                    // navigationAriaLabel={"go up"}*/}
-    {/*                    onChange={() => {alert("Works calendar")}}*/}
-    {/*                    // activeStartDate={new Date()}*/}
-    {/*                    // value={new Date()}*/}
-    {/*                    // defaultValue={props.inputEndDateValue}*/}
-    {/*                />*/}
-    {/*            </div>*/}
+                <div>
+                    <Calendar
+                        className={"CalendarTest"}
+                        selectRange={true}
+                        maxDate={new Date()}
+                        view ={"month"}
+                        // maxDetail={"year"}
+                        locale={"ru-RU"}
+                        // nextLabel={""}
+                        // next2Label={""}
+                        // prevLabel={""}
+                        // prev2Label={""}
+                        returnValue={"range"}
+                        showNavigation={true}
+                        showDoubleView={true}
+                        // minDate дата крайней последней заявки, чтобы ограничить выбор периода
+                        // tileClassName !!!!!! class important!!!
+                        tileClassName={"CalendarTest2"}
+                        // navigationAriaLabel={"go up"}
+                        onChange={() => {alert("Works calendar")}}
+                        // activeStartDate={new Date()}
+                        // value={new Date()}
+                        // defaultValue={props.inputEndDateValue}
+                    />
 
-                {/*<input className="ModalPeriod__input" onChange={props.inputStartDateValue} type={"date"}/>*/}
+                </div>
+
+                {/*<input className="ModalPeriod__input" onChange={props. } type={"date"}/>*/}
                 {/*<input className="ModalPeriod__input" onChange={props.inputEndDateValue} type={"date"}/>*/}
                 {/*<button onClick={props.acceptDatePeriod}>Принять</button>*/}
             </div>

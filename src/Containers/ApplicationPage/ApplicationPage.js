@@ -6,11 +6,17 @@ import LayoutApplicationPage from '../../Components/ApplicationPageComponents/La
 import PreviousApplicationMenu from '../../Components/ApplicationPageComponents/PreviousApplicationMenu/PreviousApplicationMenu';
 import SpecialitsWindowStatus from '../../Components/ApplicationPageComponents/SpecialitsWindowStatus/SpecialitsWindowStatus';
 import {push} from 'connected-react-router'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    getLastApplication,
+    postNewApplication,
+    setApplicationBackInProgress
+} from "../../Store/ApplicationsReducer/applicationsActions";
 
 const ApplicationPage = (props) => {
     const dispatch = useDispatch();
     const id = props.match.params.id;
+    // const id = '353-01-00858';
     const idInTitle = `№ IT-${id}`;
     const status = 'new' // Получить статус заявки при запросе данных заявки
     // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
@@ -20,14 +26,13 @@ const ApplicationPage = (props) => {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [showQuestion, setShowQuestion] = useState(false);
     const [submitDisabled, setSubmitDisabled] = useState(true);
-
+    const [isApplicationSent, setIsApplicationsSent] = useState(false);
 
     const [isBackInProgress, setIsBackInProgress] = useState(false);
 
     let buttonName ="";
-    const id_number = "№IT-051120-0375649";
-    const date = "03.11.2019, 10:50";
-    const name = "Не работает вай-фай";
+    // const id_number = "№IT-051120-0375649";
+
     let description = "";
     const title = "Предыдущая заявка";
     let center;
@@ -35,18 +40,28 @@ const ApplicationPage = (props) => {
     let leftSide;
     const userName = "Светлана";
 
+    const lastApplication = useSelector(state => state.applications.lastApplication);
+    // const date = "03.11.2019, 10:50";
+    // const name = "Не работает вай-фай";
+
+
+    useEffect(() => {
+        dispatch(getLastApplication(id));
+        setIsApplicationsSent(false);
+    }, [dispatch]);
 
 
     const [inputState, setInputState] = useState({
-        subject: '',
-        department: '',
-        message: '',
-        password: '',
-        file: ''
+        id: id,
+        title: '',
+        catid: '',
+        body: '',
+        tvpass: '',
+        images: ''
     })
 
     if (isBackInProgress) {
-        description = `Заявка ${id_number} вернулась в работу, ИТ-специалист свяжется с вами в ближайшее время`;
+        description = `Заявка вернулась в работу, ИТ-специалист свяжется с вами в ближайшее время`;
         buttonName = "Посмотреть заявку в новом окне";
     } else {
         buttonName = "Вернуть в работу";
@@ -70,8 +85,9 @@ const ApplicationPage = (props) => {
     const chooseFile = (event) => {
         setFileNameState(event.target.files[0].name);
         setInputState(prevState => {
-            return {...prevState, "file": event.target.files[0]}
+            return {...prevState, "images": event.target.files[0]}
         });
+        console.log("INPUT STATE: ", inputState);
     }
     const activateFileInput = () => {
         refFile.current.click();
@@ -90,16 +106,20 @@ const ApplicationPage = (props) => {
     }
     const clearInputState = () => {
         setInputState({
-            subject: '',
-            department: '',
-            message: '',
-            password: '',
-            file: ''
+            id: id,
+            title: '',
+            catid: '',
+            body: '',
+            tvpass: '',
+            images: ''
         });
     }
 
     const isBackInProgressHandler = () => {
-        setIsBackInProgress(true);
+        if (!isBackInProgress) {
+            setIsBackInProgress(true);
+            dispatch(setApplicationBackInProgress(lastApplication.ref));
+        }
     }
 
     const submitFormHandler = (event) => {
@@ -108,17 +128,19 @@ const ApplicationPage = (props) => {
         Object.keys(inputState).forEach(key => {
             formData.append(key, inputState[key]);
         })
-        // console.log(formData);
+        dispatch(postNewApplication(formData));
+        console.log(inputState);
         setIsBackInProgress(false);
          // Отправка формы заявки с файлом или без файла
         clearInputState();
-        dispatch(push('application/idgoeshere')); //add query params to get application by id
+        setIsApplicationsSent(true);
+        dispatch(push(`/application/${id}`)); //add query params to get application by id
     }
 
     const isDisabled = () => {
         setSubmitDisabled(false);
         Object.keys(inputState).forEach(key => {
-            if (key !== "file") {
+            if (key !== "images" && key !== "tvpass") {
                 if (!inputState[key] ) {
                     setSubmitDisabled(true);
                 }
@@ -130,7 +152,7 @@ const ApplicationPage = (props) => {
         isDisabled();
     }, [inputState]);
 
-    if (id) {
+    if (isApplicationSent) {
         top = (
             <SpecialitsWindowStatus 
                 id={id}
@@ -145,7 +167,7 @@ const ApplicationPage = (props) => {
         />
             )
     }
-    if (id) {
+    if (isApplicationSent) {
         leftSide = (
             <ApplicationStatus 
                 id={id}
@@ -155,19 +177,19 @@ const ApplicationPage = (props) => {
                 
             />
         )
-    } else {
+    } else if (lastApplication) {
         leftSide = (
             <PreviousApplicationMenu 
                 title={title}
-                name={name}
-                date={date}
+                name={lastApplication.topic}
+                date={lastApplication.date}
                 description={description}
                 buttonName={buttonName}
                 clicked={isBackInProgressHandler}
             />
     )}
 
-    if (id) {
+    if (isApplicationSent) {
         center = (<ApplicationDetails 
             status={status}
             id={id}
@@ -182,19 +204,19 @@ const ApplicationPage = (props) => {
                 greetings={"здравствуйте! Опишите свою проблему"}
 
                 subjectTitle={"Тема*"}
-                subjectName="subject"
+                subjectName="title"
                 subjectChange={(event) => {inputHandler(event)}}
                 subjectRequired={true}
                 subjectPlaceholder={"Опишите кратко суть проблемы"}
 
                 departmentTitle={"Отдел*"}
-                departmentName="department"
+                departmentName="catid"
                 departmentChange={(event) => {inputHandler(event)}}
                 departmentRequired={true}
                 departmentPlaceholder={"В какой отдел отправить заявку?"}
 
                 messageTitle={"Сообщение"}
-                messageName="message"
+                messageName="body"
                 messageChange={(event) => {inputHandler(event)}}
                 messageRequired={true}
                 messagePlaceholder={"Расскажите побробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
@@ -210,7 +232,7 @@ const ApplicationPage = (props) => {
                 questionText={"Регистрационный номер заявки"}
                 textTeamViewer={"Пароль от TeamViewer"}
                 showPassword={isShowPassword}
-                passwordName="password"
+                passwordName="tvpass"
                 passwordChange={(event) => {inputHandler(event)}}
                 passwordRequired={false}
                 passwordPlaceholder={"Введите пароль"}
@@ -228,7 +250,7 @@ const ApplicationPage = (props) => {
             left={leftSide}
             center={center}
             top={top}
-            hideButton={!id}
+            hideButton={!isApplicationSent}
         >
         </LayoutApplicationPage>
     )

@@ -41,7 +41,9 @@ const UserLoginPage = (props) => {
 
     useEffect(() => {
         localStorage.clear();
-        dispatch(saveUser(id));
+        if (id) {
+            dispatch(saveUser(id));
+        }
     }, [dispatch]);
 
     const phoneError = useSelector(state => state.users.phoneLoginError);

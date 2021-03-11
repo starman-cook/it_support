@@ -16,7 +16,11 @@ const LayoutSearchResults = (props) => {
     const company = useSelector(state => state.company.companyData);
 
     const goToApplications = () => {
-        dispatch(push('/application'));
+        if (company.employee) {
+            dispatch(push(`/application/${company.employee.id}`));
+        } else if (company.director) {
+            dispatch(push(`/application/${company.director.id}`));
+        }
     }
     const inputValue = (event) => {
         dispatch(changeNumber(event.target.value));

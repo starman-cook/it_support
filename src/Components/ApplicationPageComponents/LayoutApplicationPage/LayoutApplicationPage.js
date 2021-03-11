@@ -4,14 +4,23 @@ import SocialNetworkLinks from '../SocialNetworkLinks/SocialNetworkLinks';
 import WhiteButton from '../WhiteButton/WhiteButton';
 import './LayoutApplicationPage.css';
 import {push} from 'connected-react-router';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router";
+// import queryString from 'query-string';
 
 const LayoutApplicationPage = (props) => {
     const dispatch = useDispatch();
-
+    const history = useHistory();
+    // const id = props;
+    let id = history.location.pathname.split('/')[2];
+    console.log("QUERY TEST ", id);
 
     const goToApplication = () => {
-        dispatch(push("/application"));
+        if (id) {
+            dispatch(push(`/application/${id}`));
+        } else {
+            dispatch(push(`/application/anonymous`));
+        }
     };
     const goToHistoryOfApplications = () => {
         dispatch(push("/search"));

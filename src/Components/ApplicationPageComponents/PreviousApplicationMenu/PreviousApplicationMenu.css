@@ -52,6 +52,7 @@
     height: 14px;
     background: url('../../../assets/icons/ic_check_red.svg') center no-repeat;
     margin-right: 21px;
+    padding: 0 5px;
 }
 .PreviousApplicationMenu__description {
     font-weight: bold;

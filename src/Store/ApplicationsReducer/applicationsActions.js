@@ -5,7 +5,7 @@ import {
     CHANGE_NUMBER,
     CHANGE_PAGINATION,
     CHANGE_STATUS, FIRST_CALENDAR_DAY_IN_RANGE,
-    GET_COUNT_AMOUNT,
+    GET_COUNT_AMOUNT, GET_LAST_APPLICATION,
     GET_TEN_APPLICATIONS,
     INIT_FILTERS,
     INPUT_FILTER_DATE_FROM,
@@ -17,6 +17,7 @@ import {
     SET_ACTIVE_PAGE
 } from "./applicationsActionTypes";
 import axios from "../../axiosApi";
+import axiosTest from 'axios';
 
 export const addComment = (value) => ({type: ADD_COMMENT, value});
 export const getTenApplicationsSuccess = (value) => ({type: GET_TEN_APPLICATIONS, value});
@@ -51,8 +52,46 @@ export const getTenApplications = (data) => {
                     dispatch(getTenApplicationsSuccess(response.data.events));
                     dispatch(getCountAmount(response.data.count));
                 });
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
         }
     }
 }
+export const getLastApplicationSuccess = (value) => ({type: GET_LAST_APPLICATION, value});
+
+
+export const getLastApplication = (id) => {
+    return async dispatch => {
+        try {
+            const response = await axios.get(`/CRM/hs/event/method/lastevent/?id=${id}`);
+            dispatch(getLastApplicationSuccess(response.data));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const postNewApplication = (data) => {
+    return async dispatch => {
+        try {
+            const response = await axios.post('/CRM/hs/event/method/create', data);
+            // const response = await axiosTest.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
+            console.log("RESPONSE! ", response);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+}
+
+// не работает((((
+export const setApplicationBackInProgress = (id) => {
+    return async dispatch => {
+        try {
+            await axios.get(`/CRM/hs/eventupdate/?document=${id}`);
+            // await axiosTest.get(`https://itsupport.kz/itsp2/eventupdate/proxy.php?document=${id}`);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+

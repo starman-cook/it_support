@@ -6,6 +6,10 @@ import './LayoutApplicationPage.css';
 import {push} from 'connected-react-router';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
+import {
+    getCurrentApplicationData,
+    getHashOfTheLastApplication
+} from "../../../Store/ApplicationsReducer/applicationsActions";
 // import queryString from 'query-string';
 
 const LayoutApplicationPage = (props) => {
@@ -21,6 +25,8 @@ const LayoutApplicationPage = (props) => {
         } else {
             dispatch(push(`/application/anonymous`));
         }
+        dispatch(getHashOfTheLastApplication(""))
+        dispatch(getCurrentApplicationData(""))
     };
     const goToHistoryOfApplications = () => {
         dispatch(push("/search"));

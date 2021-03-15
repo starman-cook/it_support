@@ -8,6 +8,8 @@ import SpecialitsWindowStatus from '../../Components/ApplicationPageComponents/S
 import {push} from 'connected-react-router'
 import {useDispatch, useSelector} from "react-redux";
 import {
+    addDetailsToApplicationInProcess,
+    getCurrentApplicationData,
     getLastApplication,
     postNewApplication,
     setApplicationBackInProgress
@@ -18,8 +20,10 @@ const ApplicationPage = (props) => {
     const id = props.match.params.id;
     // const id = '353-01-00858';
     const idInTitle = `№ IT-${id}`;
-    const status = 'new' // Получить статус заявки при запросе данных заявки
+    const status = 'new' // Получить статус заявки при запросе данных заявки !!! Пока не пригодилось, работает и без этого
     // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
+    const applicationHash = useSelector(state => state.applications.newApplicationHash)
+    const [oneComment, setOneComment] = useState("");
 
     const refFile = useRef();
     const [fileNameState, setFileNameState] = useState("");
@@ -41,6 +45,7 @@ const ApplicationPage = (props) => {
     const userName = "Светлана";
 
     const lastApplication = useSelector(state => state.applications.lastApplication);
+    const currentApplication = useSelector(state => state.applications.currentApplicationData);
     // const date = "03.11.2019, 10:50";
     // const name = "Не работает вай-фай";
 
@@ -49,7 +54,15 @@ const ApplicationPage = (props) => {
         dispatch(getLastApplication(id));
         setIsApplicationsSent(false);
     }, [dispatch]);
-
+    useEffect(() => {
+        // if (oneComment.trim() === '') {
+            console.log('Maybe STOP?')
+            if (applicationHash) {
+                dispatch(getCurrentApplicationData(applicationHash));
+                // dispatch(getCurrentApplicationData("a2b2892b03f27e4841ce52a23452c5ce"));
+            }
+        // }
+    }, [applicationHash])
 
     const [inputState, setInputState] = useState({
         id: id,
@@ -57,7 +70,7 @@ const ApplicationPage = (props) => {
         catid: '',
         body: '',
         tvpass: '',
-        images: ''
+        // images: ''
     })
 
     if (isBackInProgress) {
@@ -111,10 +124,12 @@ const ApplicationPage = (props) => {
             catid: '',
             body: '',
             tvpass: '',
-            images: ''
+            // images: ''
         });
     }
 
+
+    // не работает((((
     const isBackInProgressHandler = () => {
         if (!isBackInProgress) {
             setIsBackInProgress(true);
@@ -122,19 +137,28 @@ const ApplicationPage = (props) => {
         }
     }
 
-    const submitFormHandler = (event) => {
-        event.preventDefault();
-        const formData = new FormData();
-        Object.keys(inputState).forEach(key => {
-            formData.append(key, inputState[key]);
-        })
-        dispatch(postNewApplication(formData));
-        console.log(inputState);
-        setIsBackInProgress(false);
-         // Отправка формы заявки с файлом или без файла
-        clearInputState();
+    const submitFormHandler = async (event) => {
+        event.preventDefault()
+        let inputStateCopy = {...inputState}
+        inputStateCopy.body += "<br />"
+
+        await dispatch(postNewApplication(inputStateCopy))
         setIsApplicationsSent(true);
-        dispatch(push(`/application/${id}`)); //add query params to get application by id
+        clearInputState();
+        setIsBackInProgress(false);
+        // await dispatch(getCurrentApplicationData(applicationHash));
+        // event.preventDefault();
+        // const formData = new FormData();
+        // Object.keys(inputState).forEach(key => {
+        //     formData.append(key, inputState[key]);
+        // })
+        // dispatch(postNewApplication(formData));
+        // console.log(inputState);
+        // setIsBackInProgress(false);
+        //  // Отправка формы заявки с файлом или без файла
+        // clearInputState();
+        // setIsApplicationsSent(true);
+        // dispatch(push(`/application/${id}`)); //add query params to get application by id
     }
 
     const isDisabled = () => {
@@ -147,33 +171,67 @@ const ApplicationPage = (props) => {
             }
         });
     }
+    const textAreaHandler = (event) => {
+        setOneComment(event.target.value);
+    }
+    const applyComment = () => {
+        if (oneComment === undefined || oneComment.trim() === '') {
+            return;
+        }
+
+        const obj = {
+            document: applicationHash,
+            body: `<br />${oneComment}<br />`
+        }
+        dispatch(addDetailsToApplicationInProcess(obj));
+        setOneComment('');
+        dispatch(getCurrentApplicationData(applicationHash));
+    }
 
     useEffect(() => {
         isDisabled();
     }, [inputState]);
 
-    if (isApplicationSent) {
+    const parseTimerTime = (totalTime) => {
+        const timeArray = totalTime.split(":")
+        return ((parseInt(timeArray[0]*60)) + parseInt(timeArray[1]))*1000
+
+    }
+
+    // interval is a bad idea
+    // let interval;
+    // if (currentApplication.timer ? currentApplication.timer !== "expired": null) {
+    //     interval = setInterval(() => {
+    //         dispatch(getLastApplication(applicationHash))
+    //     }, 10000)
+    // } else {
+    //     clearInterval(interval);
+    // }
+
+
+    if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
         top = (
             <SpecialitsWindowStatus 
                 id={id}
-                newApplicationl={false}
-                specialistFound={false}
-                jobDone={false}
-                isCanceled={true}
-                name={"Александра Панарина"}
-                photo={"https://avatars2.githubusercontent.com/u/65975704?s=460&u=ea538732c997f1f0b979f66944210941c508a703&v=4"}
-                phone={"+7 727 390 1112"}
-                specialistId={"IT 152"}
+                timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
+                newApplication={currentApplication.timer ? currentApplication.timer !== "expired" : false}
+                specialistFound={currentApplication.timer ? currentApplication.timer.trim() === "expired" : null}
+                jobDone={currentApplication.status === 'Выполнено'}
+                isCanceled={currentApplication.status === 'Отменено'}
+                name={currentApplication.contactperson ? currentApplication.contactperson : null}
+                photo={currentApplication.image ? `data:image/jpg;base64, ${currentApplication.image}` : null}
+                phone={currentApplication.phonenumber ? currentApplication.phonenumber : null}
+                specialistId={currentApplication.contactperson ? currentApplication.contactperson.split(" ")[0] : null}
         />
             )
     }
-    if (isApplicationSent) {
+    if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
         leftSide = (
             <ApplicationStatus 
                 id={id}
-                specialistFound={true}
-                jobDone={false}
-                isCanceled={true}
+                specialistFound={currentApplication.timer ? currentApplication.timer.trim() === "expired" : null}
+                jobDone={currentApplication.status === 'Выполнено'}
+                isCanceled={currentApplication.status === 'Отменено'}
                 
             />
         )
@@ -188,14 +246,23 @@ const ApplicationPage = (props) => {
                 clicked={isBackInProgressHandler}
             />
     )}
-
-    if (isApplicationSent) {
-        center = (<ApplicationDetails 
+//264 letters
+    if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
+        center = (<ApplicationDetails
+            department={currentApplication.division}
+            subject={currentApplication.topic}
+            message={currentApplication.body}
+            result={currentApplication.eventresult}
+            showDetailsButton={currentApplication.body ? currentApplication.body.length > 100 : null}
+            showResultButton={currentApplication.eventresult ? currentApplication.eventresult.length > 100 : null}
             status={status}
-            id={id}
+            oneComment={oneComment}
+            onChangeComment={(event) => {textAreaHandler(event)}}
+            submitComment={applyComment}
+            // id={id}
             idInTitle={idInTitle}
-            jobDone={false}
-            isCanceled={true}
+            jobDone={currentApplication.status === 'Выполнено'}
+            isCanceled={currentApplication.status === 'Отменено'}
         />)
     } else {
         center = (
@@ -250,7 +317,7 @@ const ApplicationPage = (props) => {
             left={leftSide}
             center={center}
             top={top}
-            hideButton={!isApplicationSent}
+            hideButton={currentApplication ?  !currentApplication.result : true}
         >
         </LayoutApplicationPage>
     )

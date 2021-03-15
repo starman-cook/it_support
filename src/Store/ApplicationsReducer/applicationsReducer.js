@@ -17,7 +17,7 @@ import {
     IS_FILTER_DATE_ACTIVE,
     FIRST_CALENDAR_DAY_IN_RANGE,
     SECOND_CALENDAR_DAY_IN_RANGE,
-    GET_LAST_APPLICATION
+    GET_LAST_APPLICATION, GET_HASH_OF_THE_LAST_APPLICATION, GET_CURRENT_APPLICATION_DATA
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 import moment from "moment";
@@ -29,7 +29,9 @@ const initialState = {
     lastApplication: null,
     firstCalendarRangeDay: 0,
     secondCalendarRangeDay: 0,
-    comments: [],
+    newApplicationHash: null,
+    currentApplicationData: null,
+    // comments: [],
     applications: [],
     count: 0,
     data: {
@@ -55,6 +57,10 @@ const initialState = {
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_CURRENT_APPLICATION_DATA:
+            return {...state, currentApplicationData: action.value}
+        case GET_HASH_OF_THE_LAST_APPLICATION:
+            return {...state, newApplicationHash: action.value}
         case GET_LAST_APPLICATION:
             return {...state, lastApplication: action.value};
         case FIRST_CALENDAR_DAY_IN_RANGE:
@@ -75,8 +81,8 @@ const applicationsReducer = (state = initialState, action) => {
                     hash: {$set: action.value}
                 }
         });
-        case ADD_COMMENT:
-            return {...state, comments: [...state.comments, action.value]};
+        // case ADD_COMMENT:
+        //     return {...state, comments: [...state.comments, action.value]};
         case GET_TEN_APPLICATIONS:
             return {...state, applications: action.value};
         case GET_COUNT_AMOUNT:

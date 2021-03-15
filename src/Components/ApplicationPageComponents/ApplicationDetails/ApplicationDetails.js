@@ -1,60 +1,46 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComment } from '../../../Store/ApplicationsReducer/applicationsActions';
+// import { addComment } from '../../../Store/ApplicationsReducer/applicationsActions';
 import BlueButton from '../BlueButton/BlueButton';
 import './ApplicationDetails.css';
+import {addDetailsToApplicationInProcess} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
 const ApplicationDetails = (props) => {
 
     const status = props.status;
-    const id = props.id;
+    // const id = props.id;
     const dispatch = useDispatch();
-    const comments = useSelector(state => state.applications.comments); //Получить все комментарии по ID
-    const [oneComment, setOneComment] = useState();
+    // const comments = useSelector(state => state.applications.comments); //Получить все комментарии по ID
     const [messageClassToggle, setMessageClassToggle] = useState("messageClassToggleHidden");
     const [messageClassButtonText, setMessageClassButtonText] = useState('показать подробнее');
 
     const [resultClassToggle, setResultClassToggle] = useState("messageClassToggleHidden");
     const [resultClassButtonText, setResultClassButtonText] = useState('показать подробнее');
+    // const applicationHash = useSelector(state => state.applications.newApplicationHash)
 
     let jobDone = props.jobDone;
     let isCanceled = props.isCanceled;
 
+    const department = props.department; // Получить по id
+    const subject = props.subject; // Получить по id
+    const message = props.message;
+    const result = props.result;
+    // let allComments;
+    // if (comments) {
+    //     allComments = (
+    //         comments.map(el => {
+    //             return <div
+    //                 key={el.id}
+    //                 className="Comment"
+    //             >
+    //                 <p className="Comment__date">{`${el.date}`}</p>
+    //                 <p className="Comment__content">{`${el.content}`}</p>
+    //             </div>
+    //         })
+    // )}
 
-    const department = "Удаленная поддержка"; // Получить по id
-    const subject = 'Не работает почта'; // Получить по id
-    const message = 'Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что это началось после того // Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что это началось после того  // ни не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что это началось после того // Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал. Хочу заметить, что эт после '; // Получить по id
-    const result = 'Были введены неправильные настройки VPN. Исправили настройки на каждом компьтере в отделе, почта снова работает. Почистили корпоративную почту от спама и рассылок. Просим вас регулярно приводить в порядок почтовое хранилище и избавляться от лишних файлов во избежание падения почтовых серверов... показать больше // Были введены неправильные настройки VPN. Исправили настройки на каждом компьтере в отделе, почта снова работает. Почистили корпоративную почту от спама и рассылок. Просим вас регулярно приводить в порядок почтовое хранилище и избавляться от лишних файлов во избежание падения почтовых серверов... показать больше';
-    let allComments;
-    if (comments) {
-        allComments = (
-            comments.map(el => {
-                return <div
-                    key={el.id}
-                    className="Comment"
-                >
-                    <p className="Comment__date">{`${el.date}`}</p>
-                    <p className="Comment__content">{`${el.content}`}</p>
-                </div>
-            })
-    )}
 
-    const textAreaHandler = (event) => {
-        setOneComment(event.target.value);
-    }
-    const applyComment = () => {
-        if (oneComment === undefined || oneComment.trim() === '') {
-            return;
-        }
-        const obj = {
-            id: Math.random(),
-            date: new Date(),
-            content: oneComment
-        }
-        dispatch(addComment(obj));
-        setOneComment('');
-    }
     const textShowToggle = () => {
         if (messageClassToggle === 'messageClassToggleHidden') {
             setMessageClassToggle('messageClassToggleOpen');
@@ -93,8 +79,8 @@ const ApplicationDetails = (props) => {
             </div>
                 <p className="ApplicationDetails__text--title">Подробности</p>
             <div className={messageClassToggle}>
-                <p className="ApplicationDetails__text">{message}</p>
-                <div onClick={textShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{messageClassButtonText}</div>
+                <div dangerouslySetInnerHTML={{__html: `<p className="ApplicationDetails__text">${message}<p>`}} className="ApplicationDetails__text" ></div>
+                {props.showDetailsButton ? <div onClick={textShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{messageClassButtonText}</div> : null}
             </div>
             {jobDone || isCanceled
                     ?
@@ -102,19 +88,19 @@ const ApplicationDetails = (props) => {
                      <p className="ApplicationDetails__text--title">Результат</p>
                     <div className={resultClassToggle}>
                         <p className="ApplicationDetails__text">{result}</p>
-                        <div onClick={resultShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{resultClassButtonText}</div>
+                        {props.showResultButton ? <div onClick={resultShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{resultClassButtonText}</div> : null}
                     </div>
                 </>
                     :
                 <>
-                    <textarea value={oneComment} placeholder="Если вы хотите дополнить заявку, напишите комментарий" onChange={(event) => {textAreaHandler(event)}} className="ApplicationDetails__textarea"></textarea>
+                    <textarea value={props.oneComment} placeholder="Если вы хотите дополнить заявку, напишите комментарий" onChange={props.onChangeComment} className="ApplicationDetails__textarea" />
                     <div className="ApplicationDetails__btn">
                         <BlueButton 
                             name="Отправить сообщение"
-                            clicked={() => {applyComment()}}
+                            clicked={props.submitComment}
                         />
                     </div>
-                    {allComments}
+                    {/*{allComments}*/}
                 </> 
             }
         </div>

@@ -4,7 +4,7 @@ import './SpecialitsWindowStatus.css';
 
 
 const SpecialitsWindowStatus = (props) => {
-    let timerDuration = 900000; //15 минут
+    let timerDuration = props.timerDuration; //15 минут
     const status = props.status;
     const id = props.id;
     let topComponent;
@@ -17,7 +17,7 @@ const SpecialitsWindowStatus = (props) => {
 
     let leaveCommentBlock;
     let timer = null;
-    let newApplication = props.newApplicationl
+    let newApplication = props.newApplication
     let specialistFound = props.specialistFound;
     let jobDone = props.jobDone;
     let isCanceled = props.isCanceled;

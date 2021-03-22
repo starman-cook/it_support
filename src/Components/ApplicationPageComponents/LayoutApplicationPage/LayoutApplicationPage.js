@@ -19,34 +19,34 @@ const LayoutApplicationPage = (props) => {
     let id = history.location.pathname.split('/')[2];
     console.log("QUERY TEST ", id);
 
-    const goToApplication = () => {
-        if (id) {
-            dispatch(push(`/application/${id}`));
-        } else {
-            dispatch(push(`/application/anonymous`));
-        }
-        dispatch(getHashOfTheLastApplication(""))
-        dispatch(getCurrentApplicationData(""))
-    };
-    const goToHistoryOfApplications = () => {
-        dispatch(push("/search"));
-    };
+    // const goToApplication = () => {
+    //     if (id) {
+    //         dispatch(push(`/application/${id}`));
+    //     } else {
+    //         dispatch(push(`/application/anonymous`));
+    //     }
+    //     dispatch(getHashOfTheLastApplication(""))
+    //     dispatch(getCurrentApplicationData(""))
+    // };
+    // const goToHistoryOfApplications = () => {
+    //     dispatch(push("/search"));
+    // };
 
     return (
         <div className="LayoutApplicationPage">
             <div className="LayoutApplicationPage_sidebar">
                 <Logo 
-                    logoLink={() => {goToApplication()}}
+                    logoLink={props.createNewApplication}
                 />
                 <div className="LayoutApplicationPage__prev-menu">{props.left}</div>
                 <WhiteButton 
                     name="Создать новую заявку"
-                    clicked={() => {goToApplication()}}
+                    clicked={props.createNewApplication}
                     hide={props.hideButton}
                 />
                 <WhiteButton  
                     name={"Посмотреть историю моих заявок"}
-                    clicked={() => {goToHistoryOfApplications()}}
+                    clicked={props.goToApplicationHistory}
                 />
                 <SocialNetworkLinks 
                     introText={"Мы в социальных сетях"}

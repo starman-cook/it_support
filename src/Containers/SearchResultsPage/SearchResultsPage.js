@@ -4,7 +4,7 @@ import ResultsTableWorker from '../../Components/SearchResultsComponents/Results
 import './SearchResultsPage.css';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    changePagination,
+    changePagination, clearMyInteval,
     inputFilterDateFrom,
     inputFilterDateTo, isFilterDateActive, setActivePage
 } from "../../Store/ApplicationsReducer/applicationsActions";
@@ -12,6 +12,8 @@ import moment from 'moment';
 import {getCompanyData} from "../../Store/CompanyDataReducer/companyActions";
 import {push} from 'connected-react-router';
 import ModalPeriod from "../../Components/SearchResultsComponents/ModalPeriod/ModalPeriod";
+import axios from "../../axiosApi";
+import WithLoader from '../../hoc/WithLoader/WithLoader';
 
 const SearchResultsPage = () => {
     const dispatch = useDispatch();
@@ -44,6 +46,7 @@ const SearchResultsPage = () => {
     // const isFilter = filters.length > 0;
     const hash = useSelector(state => state.applications.data.hash)
     useEffect(() => {
+        dispatch(clearMyInteval())
         if (!hash) return dispatch(push('/login'));
         dispatch(getCompanyData(hash));
     }, [dispatch]);
@@ -421,4 +424,4 @@ countPagination();
     )
 }
 
-export default SearchResultsPage;
+export default WithLoader(SearchResultsPage, axios());

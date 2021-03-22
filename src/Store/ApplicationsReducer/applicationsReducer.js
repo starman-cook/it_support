@@ -17,7 +17,7 @@ import {
     IS_FILTER_DATE_ACTIVE,
     FIRST_CALENDAR_DAY_IN_RANGE,
     SECOND_CALENDAR_DAY_IN_RANGE,
-    GET_LAST_APPLICATION, GET_HASH_OF_THE_LAST_APPLICATION, GET_CURRENT_APPLICATION_DATA
+    GET_LAST_APPLICATION, GET_HASH_OF_THE_LAST_APPLICATION, GET_CURRENT_APPLICATION_DATA, SET_INTERVAL, CLEAR_INTERVAL
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 import moment from "moment";
@@ -26,6 +26,7 @@ import moment from "moment";
 //HASH SAMPLE  4be9fd6e92f21fc38674ec51d5e4d237
 // aad6d2c1b77801e269628f235dd7cbaa hash from 1240 doesnt work
 const initialState = {
+    interval: null,
     lastApplication: null,
     firstCalendarRangeDay: 0,
     secondCalendarRangeDay: 0,
@@ -57,6 +58,10 @@ const initialState = {
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case CLEAR_INTERVAL:
+            return {...state, interval: clearInterval(state.interval)}
+        case SET_INTERVAL:
+            return {...state, interval: action.value}
         case GET_CURRENT_APPLICATION_DATA:
             return {...state, currentApplicationData: action.value}
         case GET_HASH_OF_THE_LAST_APPLICATION:

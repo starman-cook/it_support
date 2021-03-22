@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import ApplicationDetails from '../../Components/ApplicationPageComponents/ApplicationDetails/ApplicationDetails';
 import ApplicationForm from '../../Components/ApplicationPageComponents/ApplicationForm/ApplicationForm';
 import ApplicationStatus from '../../Components/ApplicationPageComponents/ApplicationStatus/ApplicationStatus';
@@ -9,10 +9,10 @@ import {push} from 'connected-react-router'
 import {useDispatch, useSelector} from "react-redux";
 import {
     addDetailsToApplicationInProcess,
-    getCurrentApplicationData,
+    getCurrentApplicationData, getHashOfTheLastApplication,
     getLastApplication,
     postNewApplication,
-    setApplicationBackInProgress
+    setApplicationBackInProgress, setMyInterval
 } from "../../Store/ApplicationsReducer/applicationsActions";
 
 const ApplicationPage = (props) => {
@@ -30,7 +30,7 @@ const ApplicationPage = (props) => {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [showQuestion, setShowQuestion] = useState(false);
     const [submitDisabled, setSubmitDisabled] = useState(true);
-    const [isApplicationSent, setIsApplicationsSent] = useState(false);
+    // const [isApplicationSent, setIsApplicationsSent] = useState(false);
 
     const [isBackInProgress, setIsBackInProgress] = useState(false);
 
@@ -50,10 +50,10 @@ const ApplicationPage = (props) => {
     // const name = "Не работает вай-фай";
 
 
-    useEffect(() => {
-        dispatch(getLastApplication(id));
-        setIsApplicationsSent(false);
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getLastApplication(id));
+    //     setIsApplicationsSent(false);
+    // }, [dispatch]);
     useEffect(() => {
         // if (oneComment.trim() === '') {
             console.log('Maybe STOP?')
@@ -143,7 +143,7 @@ const ApplicationPage = (props) => {
         inputStateCopy.body += "<br />"
 
         await dispatch(postNewApplication(inputStateCopy))
-        setIsApplicationsSent(true);
+        // setIsApplicationsSent(true);
         clearInputState();
         setIsBackInProgress(false);
         // await dispatch(getCurrentApplicationData(applicationHash));
@@ -198,18 +198,82 @@ const ApplicationPage = (props) => {
 
     }
 
-    // interval is a bad idea
-    // let interval;
-    // if (currentApplication.timer ? currentApplication.timer !== "expired": null) {
-    //     interval = setInterval(() => {
-    //         dispatch(getLastApplication(applicationHash))
-    //     }, 10000)
-    // } else {
-    //     clearInterval(interval);
-    // }
+
+    // let testInterval = useMemo(() => {
+    //     if (currentApplication.timer ? currentApplication.timer !== "expired": null) {
+    //         interval = setInterval(() => {
+    //             dispatch(getCurrentApplicationData(applicationHash))
+    //             console.log("Maybe Stop")
+    //
+    //         }, 10000)
+    //
+    //     } else {
+    //         clearInterval(interval);
+    //         console.log("Maybe Stop")
+    //
+    //     }
+    //     return interval
+    // }, [currentApplication.timer])
+    let interval = useRef();
+
+    useEffect(() => {
+
+        if (currentApplication.timer !== "expired" && !interval.current && applicationHash) {
+            interval.current = setInterval( () => {
+                dispatch(getCurrentApplicationData(applicationHash))
+                console.log("Maybe Stop")
+
+                dispatch(setMyInterval(interval.current))
+            }, 10000)
+
+        }
+        else {
+
+            clearInterval(interval.current);
+            console.log("Maybe Stop")
+        }
+        return () => {
+
+            clearInterval(interval.current);
+        }
+    }, [applicationHash])
+
+    const goToApplication = () => {
+        if (id) {
+            dispatch(push(`/application/${id}`));
+        } else {
+            dispatch(push(`/application/anonymous`));
+        }
+        clearInterval(interval.current);
+        dispatch(getHashOfTheLastApplication(""))
+        dispatch(getCurrentApplicationData(""))
+    };
+    const goToHistoryOfApplications = () => {
+        clearInterval(interval.current);
+        dispatch(getCurrentApplicationData(""))
+        dispatch(push("/search"));
+    };
+
+   // useEffect(() => {
+   //     console.log("Maybe Stop")
+   //     let interval
+   //     if (currentApplication.timer ? currentApplication.timer !== "expired": null) {
+   //         interval = setInterval(() => {
+   //             dispatch(getCurrentApplicationData(applicationHash))
+   //             console.log("Maybe Stop")
+   //
+   //         }, 10000)
+   //
+   //     } else {
+   //         clearInterval(interval);
+   //         console.log("Maybe Stop")
+   //
+   //     }
+   // }, [])
 
 
-    if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
+    // if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
+    if (currentApplication ? currentApplication.result : null) {
         top = (
             <SpecialitsWindowStatus 
                 id={id}
@@ -225,7 +289,8 @@ const ApplicationPage = (props) => {
         />
             )
     }
-    if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
+    // if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
+    if (currentApplication ? currentApplication.result : null) {
         leftSide = (
             <ApplicationStatus 
                 id={id}
@@ -247,7 +312,8 @@ const ApplicationPage = (props) => {
             />
     )}
 //264 letters
-    if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
+//     if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
+    if (currentApplication ? currentApplication.result : null) {
         center = (<ApplicationDetails
             department={currentApplication.division}
             subject={currentApplication.topic}
@@ -314,6 +380,8 @@ const ApplicationPage = (props) => {
 
     return (
         <LayoutApplicationPage
+            goToApplicationHistory={goToHistoryOfApplications}
+            createNewApplication={goToApplication}
             left={leftSide}
             center={center}
             top={top}

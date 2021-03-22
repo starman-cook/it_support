@@ -24,4 +24,5 @@ function App() {
   );
 }
 
-export default WithLoader(App, axios);
+// export default WithLoader(App, axios);
+export default App;

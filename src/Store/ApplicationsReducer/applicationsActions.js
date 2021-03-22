@@ -4,7 +4,7 @@ import {
     CHANGE_EMPLOYEE,
     CHANGE_NUMBER,
     CHANGE_PAGINATION,
-    CHANGE_STATUS, FIRST_CALENDAR_DAY_IN_RANGE,
+    CHANGE_STATUS, CLEAR_INTERVAL, FIRST_CALENDAR_DAY_IN_RANGE,
     GET_COUNT_AMOUNT, GET_CURRENT_APPLICATION_DATA, GET_HASH_OF_THE_LAST_APPLICATION, GET_LAST_APPLICATION,
     GET_TEN_APPLICATIONS,
     INIT_FILTERS,
@@ -14,7 +14,7 @@ import {
     SAVE_HASH,
     SAVE_ID, SECOND_CALENDAR_DAY_IN_RANGE,
     SET_ACTIVE_FILTERS,
-    SET_ACTIVE_PAGE
+    SET_ACTIVE_PAGE, SET_INTERVAL
 } from "./applicationsActionTypes";
 import axios from "../../axiosApi";
 import axiosTest from 'axios';
@@ -48,6 +48,8 @@ export const getHashOfTheLastApplication = (value) => ({type: GET_HASH_OF_THE_LA
 
 export const getCurrentApplicationDataSuccess = (value) => ({type: GET_CURRENT_APPLICATION_DATA, value});
 
+export const setMyInterval = (value) => ({type: SET_INTERVAL, value});
+export const clearMyInteval = () => ({type: CLEAR_INTERVAL});
 
     export const getTenApplications = (data) => {
     return async dispatch => {

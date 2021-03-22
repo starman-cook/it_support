@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 // import { useSelector } from 'react-redux';
 import BlueButton from '../BlueButton/BlueButton';
 import './ApplicationForm.css';
+import axios from "../../../axiosApi";
+import WithLoader from '../../../hoc/WithLoader/WithLoader';
+import {getCurrentApplicationData} from "../../../Store/ApplicationsReducer/applicationsActions";
+import {useDispatch} from "react-redux";
+
 
 const ApplicationForm = (props) => {
-
+    const dispatch = useDispatch()
     // const departments = useSelector(state => state.company.departments);
-
+    useEffect(() => {
+        dispatch(getCurrentApplicationData(""))
+    }, [])
     let options = (
         // departments.map(el => {
         //     return <option
@@ -64,7 +71,7 @@ const ApplicationForm = (props) => {
                         <input className="ApplicationForm__inputPassword" type={props.showPassword ? "text" : "password"} name={props.passwordName} onChange={props.passwordChange} required={props.passwordRequired} placeholder={props.passwordPlaceholder} />
                         <div className="ApplicationForm__eye" onClick={props.toggleShowPassword} />
                     </div>
-                    <BlueButton 
+                    <BlueButton
                         name={props.buttonName}
                         type="submit"
                         isDisabled={props.isDisabled}
@@ -75,4 +82,4 @@ const ApplicationForm = (props) => {
     )
 }
 
-export default ApplicationForm;
+export default WithLoader(ApplicationForm, axios);

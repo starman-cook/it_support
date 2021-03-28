@@ -18,11 +18,11 @@ import {
 const ApplicationPage = (props) => {
     const dispatch = useDispatch();
     const id = props.match.params.id;
-    // const id = '353-01-00858';
     const idInTitle = `№ IT-${id}`;
     const status = 'new' // Получить статус заявки при запросе данных заявки !!! Пока не пригодилось, работает и без этого
     // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
-    const applicationHash = useSelector(state => state.applications.newApplicationHash)
+    // const applicationHash = useSelector(state => state.applications.newApplicationHash)
+    const applicationHash = props.match.params.hash;
     const [oneComment, setOneComment] = useState("");
 
     const refFile = useRef();
@@ -30,12 +30,12 @@ const ApplicationPage = (props) => {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [showQuestion, setShowQuestion] = useState(false);
     const [submitDisabled, setSubmitDisabled] = useState(true);
-    // const [isApplicationSent, setIsApplicationsSent] = useState(false);
+
 
     const [isBackInProgress, setIsBackInProgress] = useState(false);
 
     let buttonName ="";
-    // const id_number = "№IT-051120-0375649";
+
 
     let description = "";
     const title = "Предыдущая заявка";
@@ -46,22 +46,17 @@ const ApplicationPage = (props) => {
 
     const lastApplication = useSelector(state => state.applications.lastApplication);
     const currentApplication = useSelector(state => state.applications.currentApplicationData);
-    // const date = "03.11.2019, 10:50";
-    // const name = "Не работает вай-фай";
 
 
-    // useEffect(() => {
-    //     dispatch(getLastApplication(id));
-    //     setIsApplicationsSent(false);
-    // }, [dispatch]);
+
     useEffect(() => {
-        // if (oneComment.trim() === '') {
+        dispatch(getLastApplication(id));
+    }, [dispatch]);
+    useEffect(() => {
             console.log('Maybe STOP?')
             if (applicationHash) {
                 dispatch(getCurrentApplicationData(applicationHash));
-                // dispatch(getCurrentApplicationData("a2b2892b03f27e4841ce52a23452c5ce"));
             }
-        // }
     }, [applicationHash])
 
     const [inputState, setInputState] = useState({
@@ -142,7 +137,7 @@ const ApplicationPage = (props) => {
         let inputStateCopy = {...inputState}
         inputStateCopy.body += "<br />"
 
-        await dispatch(postNewApplication(inputStateCopy))
+        await dispatch(postNewApplication(inputStateCopy, id))
         // setIsApplicationsSent(true);
         clearInputState();
         setIsBackInProgress(false);
@@ -218,7 +213,7 @@ const ApplicationPage = (props) => {
 
     useEffect(() => {
 
-        if (currentApplication.timer !== "expired" && !interval.current && applicationHash) {
+        if (currentApplication ? (currentApplication.timer !== "expired" && !interval.current && applicationHash) : false) {
             interval.current = setInterval( () => {
                 dispatch(getCurrentApplicationData(applicationHash))
                 console.log("Maybe Stop")
@@ -240,9 +235,9 @@ const ApplicationPage = (props) => {
 
     const goToApplication = () => {
         if (id) {
-            dispatch(push(`/application/${id}`));
+            dispatch(push(`/application/${id}/new`));
         } else {
-            dispatch(push(`/application/anonymous`));
+            dispatch(push(`/application/anonymous/new`));
         }
         clearInterval(interval.current);
         dispatch(getHashOfTheLastApplication(""))
@@ -278,14 +273,25 @@ const ApplicationPage = (props) => {
             <SpecialitsWindowStatus 
                 id={id}
                 timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
+                timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
+                // newApplication={false}
                 newApplication={currentApplication.timer ? currentApplication.timer !== "expired" : false}
+                // specialistFound={false}
                 specialistFound={currentApplication.timer ? currentApplication.timer.trim() === "expired" : null}
+                // jobDone={true}
                 jobDone={currentApplication.status === 'Выполнено'}
+                // isCanceled={false}
                 isCanceled={currentApplication.status === 'Отменено'}
                 name={currentApplication.contactperson ? currentApplication.contactperson : null}
                 photo={currentApplication.image ? `data:image/jpg;base64, ${currentApplication.image}` : null}
                 phone={currentApplication.phonenumber ? currentApplication.phonenumber : null}
                 specialistId={currentApplication.contactperson ? currentApplication.contactperson.split(" ")[0] : null}
+                hashApp={applicationHash}
+
+                isLike={currentApplication ? currentApplication.rate === 1 : false}
+                isDislike={currentApplication ? currentApplication.rate === -1 : false}
+                commentResult={currentApplication ? !!currentApplication.comment: false}
+                commentText={currentApplication ? currentApplication.comment: false}
         />
             )
     }
@@ -297,7 +303,7 @@ const ApplicationPage = (props) => {
                 specialistFound={currentApplication.timer ? currentApplication.timer.trim() === "expired" : null}
                 jobDone={currentApplication.status === 'Выполнено'}
                 isCanceled={currentApplication.status === 'Отменено'}
-                
+                backInProgress={isBackInProgressHandler}
             />
         )
     } else if (lastApplication) {

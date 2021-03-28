@@ -17,7 +17,8 @@ import {
     SET_ACTIVE_PAGE, SET_INTERVAL
 } from "./applicationsActionTypes";
 import axios from "../../axiosApi";
-import axiosTest from 'axios';
+import axiosOriginal from 'axios';
+import {push} from "connected-react-router";
 
 // export const addComment = (value) => ({type: ADD_COMMENT, value});
 export const getTenApplicationsSuccess = (value) => ({type: GET_TEN_APPLICATIONS, value});
@@ -78,12 +79,13 @@ export const getLastApplication = (id) => {
     }
 }
 
-export const postNewApplication = (data) => {
+export const postNewApplication = (data, id) => {
     return async dispatch => {
         try {
             const response = await axios.post('/CRM/hs/event/method/create', data);
             dispatch(getHashOfTheLastApplication(response.data.eventID))
             // const response = await axiosTest.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
+            dispatch(push(`/application/${id}/${response.data.eventID}`))
             console.log("RESPONSE! ", response.data);
         } catch(err) {
             console.log(err);
@@ -120,6 +122,26 @@ export const setApplicationBackInProgress = (id) => {
         try {
             await axios.get(`/CRM/hs/eventupdate/?document=${id}`);
             // await axiosTest.get(`https://itsupport.kz/itsp2/eventupdate/proxy.php?document=${id}`);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const leaveTheRate = (data) => {
+    return async dispatch => {
+        try {
+            await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=updateEventRate', data)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const addTheCommentToSpecialist = (data) => {
+    return async dispatch => {
+        try {
+            await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=updateEventComment', data)
         } catch (err) {
             console.log(err);
         }

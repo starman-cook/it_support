@@ -17,9 +17,9 @@ const LayoutSearchResults = (props) => {
 
     const goToApplications = () => {
         if (company.employee) {
-            dispatch(push(`/application/${company.employee.id}`));
+            dispatch(push(`/application/${company.employee.id}/new`));
         } else if (company.director) {
-            dispatch(push(`/application/${company.director.id}`));
+            dispatch(push(`/application/${company.director.id}/new`));
         }
     }
     const inputValue = (event) => {

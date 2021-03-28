@@ -34,7 +34,7 @@ const ApplicationStatus = (props) => {
                     ? 
                 <div className="ApplicationStatus__textItem">
                     <h3 className="ApplicationStatus__title" >Заявка отменена</h3>
-                    <p className="ApplicationStatus__link--whenCanceled">Вернуть заявку в работу</p>
+                    <p onClick={props.backInProgress} className="ApplicationStatus__link--whenCanceled">Вернуть заявку в работу</p>
                 </div>
                     :
                 <div className="ApplicationStatus__textItem">

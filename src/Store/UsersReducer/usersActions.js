@@ -61,6 +61,7 @@ export const sendSms = (smsAndId) => {
 export const loginUser = (login, password) => {
     return async dispatch => {
         try {
+            // const response = await axios.get(`/CRM/hs/authorizationLP/method/Login/?Login=${encodeURIComponent(login)}&Password=${encodeURIComponent(password)}`);
             const response = await axios.get(`/CRM/hs/authorizationLP/method/Login/?Login=${login}&Password=${password}`);
             await dispatch(saveHash(response.data.hash));
             // await dispatch(saveId(response.data.clientId));
@@ -69,8 +70,13 @@ export const loginUser = (login, password) => {
         } catch (err) {
             console.log(err.response);
             // добавить условие какая именно ошибка прилетела
-            dispatch(usernameLoginError(err.response.data.result));
-            dispatch(passwordLoginError(err.response.data.result));
+            try {
+                dispatch(usernameLoginError(err.response.data.result));
+                dispatch(passwordLoginError(err.response.data.result));
+            } catch (err) {
+                console.log(err)
+            }
+
 
         }
     }

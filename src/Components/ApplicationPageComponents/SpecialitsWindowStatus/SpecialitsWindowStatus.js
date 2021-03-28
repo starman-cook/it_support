@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import BlueButton from '../BlueButton/BlueButton';
 import './SpecialitsWindowStatus.css';
+import {useDispatch} from "react-redux";
+import {addTheCommentToSpecialist, leaveTheRate} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
 const SpecialitsWindowStatus = (props) => {
     let timerDuration = props.timerDuration; //15 минут
+    const dispatch = useDispatch();
     const status = props.status;
     const id = props.id;
     let topComponent;
@@ -14,6 +17,7 @@ const SpecialitsWindowStatus = (props) => {
     const [isComment, setIsComment] = useState(false);
     const [isLike, setIsLike] = useState(false);
     const [isDisLike, setIsDisLike] = useState(false);
+    const hash = props.hashApp
 
     let leaveCommentBlock;
     let timer = null;
@@ -56,16 +60,53 @@ const SpecialitsWindowStatus = (props) => {
         if (oneComment === undefined || oneComment.trim() === '') {
             return;
         }
+        let obj ={
+            document: props.hashApp,
+            message: oneComment
+        }
+        dispatch(addTheCommentToSpecialist(obj))
         setIsComment(true);
     }
     const textAreaHandler = (event) => {
         setOneComment(event.target.value);
     }
+    useEffect(() => {
+        if (props.isLike) setIsLike(true)
+        else if (props.isDislike) setIsDisLike(true)
+        else {
+            setIsLike(false)
+            setIsDisLike(false)
+        }
+    }, [dispatch])
+
+    useEffect(() => {
+        if (props.isLike) setIsLike(true)
+        else if (props.isDislike) setIsDisLike(true)
+        else {
+            setIsLike(false)
+            setIsDisLike(false)
+        }
+        if (props.commentResult) {
+            setIsComment(true)
+            setOneComment(props.commentText)
+        }
+    }, [dispatch])
+
     const isLikeHandler = () => {
         setIsLike(true);
+        const obj={
+            document: props.hashApp,
+            rate: 1
+        }
+        dispatch(leaveTheRate(obj))
     }
     const isDisLikeHandler = () => {
         setIsDisLike(true);
+        const obj={
+            document: props.hashApp,
+            rate: -1
+        }
+        dispatch(leaveTheRate(obj))
     }
     if (!isComment) {
     leaveCommentBlock = (

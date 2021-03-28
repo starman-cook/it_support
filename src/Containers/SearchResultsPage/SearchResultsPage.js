@@ -17,12 +17,7 @@ import WithLoader from '../../hoc/WithLoader/WithLoader';
 
 const SearchResultsPage = () => {
     const dispatch = useDispatch();
-    // let filtersCheck = {
-    //     isFilterStatus: useSelector(state => state.applications.data['filter'].status.length > 0) ? "статус" : null,
-    //     isFilterDepartment: useSelector(state => state.applications.data['filter'].departament.length > 0) ? "отдел" : null,
-    //     isFilterWorker: useSelector(state => state.applications.data['filter'].employee.trim() !== '') ? "сотрудник" : null,
-    //     isFilterNumber: useSelector(state => state.applications.data['filter'].number !== '') ? "id заявки" : null
-    // }
+
     const [period, setPeriod] = useState({
         start: 'ДД/ММ/ГГ',
         startOrigin: 'ДД/ММ/ГГ',
@@ -30,36 +25,30 @@ const SearchResultsPage = () => {
         endOrigin: 'ДД/ММ/ГГ'
     });
     let filters = useSelector(state => state.applications.activeFilters);
-    // const [filters, setFilters] = useState([]); // после выбора фильтров они попадают в массив
-    // useEffect(() => {
-    //     let arr = [];
-    //     Object.keys(filtersCheck).map(el => {
-    //         if (filtersCheck[el]) {
-    //             arr.push(filtersCheck[el]);
-    //         }
-    //         // setFilters(arr);
-    //     })
-    //     console.log(arr)
-    //     dispatch(setActiveFilters(arr));
-    //
-    // }, [dispatch]);
-    // const isFilter = filters.length > 0;
+    const dateFromState = useSelector(state => state.applications.data.filter.date);
+    const isDateFilterActive = useSelector(state => state.applications.isFilterDateActive)
     const hash = useSelector(state => state.applications.data.hash)
     useEffect(() => {
         dispatch(clearMyInteval())
         if (!hash) return dispatch(push('/login'));
         dispatch(getCompanyData(hash));
     }, [dispatch]);
+
     useEffect(() => {
-        if (!filters.includes('дата')) {
+        if (!isDateFilterActive) {
+            console.log("FILTERS DOESNT INCLUDE DATE TIME")
             setPeriod(prevState => {
                 return {...prevState, startOrigin: 'ДД/ММ/ГГ', endOrigin: 'ДД/ММ/ГГ'}
             });
+        } else {
+            console.log("DATE IN FILTERS")
+            setPeriod(prevState => {
+                return {...prevState, startOrigin: dateFromState.from, endOrigin: dateFromState.to}
+        })
         }
     }, [filters]);
 
-    const dateFromState = useSelector(state => state.applications.data.filter.date);
-    console.log("DATE ", dateFromState)
+
 
     const dateStart = filters.includes('дата') ?  [dateFromState.from.slice(0, 4), "-", dateFromState.from.slice(4, 6), "-", dateFromState.from.slice(6)].join('') : period.startOrigin;
     const dateEnd = filters.includes('дата') ?  [dateFromState.to.slice(0, 4), "-", dateFromState.to.slice(4, 6), "-", dateFromState.to.slice(6)].join('') : period.endOrigin;
@@ -79,12 +68,12 @@ const SearchResultsPage = () => {
 
     
     
-    // const [activePage, setActivePage] = useState(1);
+
     const activePage = useSelector(state => state.applications.activePage);
     const count = useSelector(state => state.applications.count);
 
     let pagesNumbers = Math.ceil(count / 10); // получать количество страниц для пагинации и кидать число в цикл, чтобы получить массив, нужен для отрисовки
-    // let pagesNumbers = 14;
+
 
 
     let tableView;
@@ -98,7 +87,6 @@ const SearchResultsPage = () => {
     }
 
     const [deactivateBtnDate, setDeactivateBtn] = useState({});
-    // const isFilterDate = useSelector(state => state.applications.isFilterDateActive);
     const chooseDateBtnSimple = (event) => {
         const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
         for (let i = 0; i < el.length; i++) {
@@ -114,17 +102,6 @@ const SearchResultsPage = () => {
         setDeactivateBtn({[event.target.textContent]: true});
         event.target.style.color = 'white';
         event.target.style.background = '#E34A4E';
-        // let date = new Date();
-        // let year = date.getFullYear();
-        // let month = date.getMonth() + 1;
-        // if (month < 10) {
-        //     month = "0" + month;
-        // }
-        // let day = date.getDate()
-        // if (day < 10) {
-        //     day = "0" + day;
-        // }
-        // const today = `${year}${month}${day}`
         if (innerText === 'Период') {
             setCalendarModal(true);
         } else {
@@ -265,19 +242,8 @@ const SearchResultsPage = () => {
 countPagination();
 
     const choosePage = (event) => {
-        // const el = document.getElementsByClassName('PaginationNumber');
-        // for (let i = 0; i < el.length; i++) {
-        //     el[i].style.fontSize = '14px';
-        //     el[i].style.textDecoration = 'none';
-        //     el[i].style.fontWeight = 'normal';
-        // }
-        // event.target.style.fontSize = '18px';
-        // event.target.style.fontWeight = 'bold';
-        // event.target.style.textDecoration = 'underline';
-
         dispatch(setActivePage(parseInt(event.target.textContent)));
         countPagination();
-        // colorActivePage();
     }
     const colorActivePage = () => {
         const el = document.getElementsByClassName('PaginationNumber');
@@ -415,8 +381,8 @@ countPagination();
                         acceptDatePeriod={acceptDatePeriod}
                         // inputStartDateValue={(event) => {inputStartDateValue(event)}}
                         // inputEndDateValue={(event) => {inputEndDateValue(event)}}
-                        dateValueStart={period.startOrigin}
-                        dateValueEnd={period.endOrigin}
+                        // dateValueStart={period.startOrigin}
+                        // dateValueEnd={period.endOrigin}
                     />
                : null}
                 {tableView}
@@ -424,4 +390,4 @@ countPagination();
     )
 }
 
-export default WithLoader(SearchResultsPage, axios());
+export default WithLoader(SearchResultsPage, axios);

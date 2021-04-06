@@ -64,7 +64,8 @@ const ResultsItemWorker = (props) => {
                     <div className={`ResultsItemWorker__icon--widthLikeDislike ResultsItemWorker__icon--${props.classLikeDislike}`} />
                         <div className={`${props.isComment ? "ResultsItemWorker__comment" : null} ResultsItemWorker__comment--width`} onMouseEnter={props.isComment ? hoverShowQuestion: null} onMouseLeave={props.isComment ? hoverHideQuestion : null}>
                             <div style={showQuestion ? {"display" : "block"} : {"display" : "none"}} className="ResultsItemWorker__comment--modal">
-                                <p className="ResultsItemWorker__comment--modal-text">Пользователь оставил коментарий к этой задаче, для того чтобы посмотреть его проскрольте описание заявки до конца.</p>
+                                {/*<p className="ResultsItemWorker__comment--modal-text">Пользователь оставил коментарий к этой задаче, для того чтобы посмотреть его проскрольте описание заявки до конца.</p>*/}
+                                <p className="ResultsItemWorker__comment--modal-text">{props.commentMessage}</p>
                             </div>
                         </div> 
                 </div> 

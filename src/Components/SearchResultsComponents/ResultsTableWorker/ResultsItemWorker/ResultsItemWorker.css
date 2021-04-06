@@ -63,6 +63,7 @@
 }
 .ResultsItemWorker__text--subject {
     width: 120px;
+    overflow-wrap: break-word;
 }
 .ResultsItemWorker__text--workerName {
     width: 140px;

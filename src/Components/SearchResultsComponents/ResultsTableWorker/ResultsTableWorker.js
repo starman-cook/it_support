@@ -143,6 +143,7 @@ const ResultsTableWorker = (props) => {
                         isDirector={!!company.director}
                         workerId={el.employee['id']}
                         worker={el.employee['name']}
+                        commentMessage={el.rating.commentstr}
                     />
         });
     }else {

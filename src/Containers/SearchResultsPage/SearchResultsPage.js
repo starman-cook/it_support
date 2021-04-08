@@ -115,6 +115,7 @@ const SearchResultsPage = () => {
                     break;
                 case "Вчера":
                     chosenDate = moment().subtract(1, 'days').format("YYYYMMDD");
+                    today = moment().subtract(1, 'days').format("YYYYMMDD");
                     break;
                 case "Неделя":
                     chosenDate = moment().subtract(7, 'days').format("YYYYMMDD");

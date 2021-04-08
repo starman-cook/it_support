@@ -210,8 +210,8 @@ const FullApplicationInfo = (props) => {
                     </div>
                 </div>
 
-                <div className="FullApplicationInfo__content">
-                    <div className="FullApplicationInfo__content--left">
+                <div className={fileImage ? "FullApplicationInfo__content" : "FullApplicationInfo__content--noFile"}>
+                    <div className={fileImage ? "FullApplicationInfo__content--left" : "FullApplicationInfo__content--left FullApplicationInfo__content--left--noFile"}>
                         <h2 className="FullApplicationInfo__content__title">Детали заявки</h2>
                         <div className="FullApplicationInfo__content__head">
                             <div className="FullApplicationInfo__content__head--sides">
@@ -234,10 +234,10 @@ const FullApplicationInfo = (props) => {
                             {allSolution}
                         </div>
 
-
                     </div>
+                    {!fileImage && (status === "завершено" || status === "отменено") ? <p className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
 
-                    <div className="FullApplicationInfo__content--right">
+                    {fileImage ? <div className="FullApplicationInfo__content--right">
                         <h2 className="FullApplicationInfo__content--title">
                             Прикрепленные файлы:
                         </h2>
@@ -247,7 +247,8 @@ const FullApplicationInfo = (props) => {
 
 
                         {status === "завершено" || status === "отменено" ? <p className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
-                    </div>
+                    </div> : null}
+
                 </div>
 
 

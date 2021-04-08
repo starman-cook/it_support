@@ -207,6 +207,9 @@
     box-sizing: border-box;
     overflow-y: scroll;
 }
+.FullApplicationInfo__content--left--noFile {
+    width: 100%;
+}
 .FullApplicationInfo__content__title {
     font-weight: bold;
     font-size: 30px;
@@ -245,6 +248,10 @@
     align-items: flex-start;
     max-width: 1018px;
     margin: 0 auto;
+}
+.FullApplicationInfo__content--noFile {
+    display: flex;
+    flex-direction: column;
 }
 .FullApplicationInfo__title {
     font-weight: bold;

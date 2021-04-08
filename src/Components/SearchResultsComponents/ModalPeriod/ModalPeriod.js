@@ -9,7 +9,7 @@ import './ModalPeriod.css';
 import moment from 'moment';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    inputFilterDateFrom, inputFilterDateTo, isFilterDateActive,
+    inputFilterDateFrom, inputFilterDateTo, isFilterDateActive, setActivePage,
     setFirstCalendarDay,
     setSecondCalendarDay
 } from "../../../Store/ApplicationsReducer/applicationsActions";
@@ -326,6 +326,7 @@ const ModalPeriod = (props) => {
         dispatch(inputFilterDateFrom(period.start));
         dispatch(inputFilterDateTo(period.end));
         dispatch(isFilterDateActive(true));
+        dispatch(setActivePage(1));
         props.closeModal()
     }
 

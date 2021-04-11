@@ -225,7 +225,7 @@
     margin-right: 88px;
 }
 .FullApplicationInfo__content__text--title {
-    width: 200px;
+    width: 230px;
     font-weight: bold;
     font-size: 20px;
     line-height: 25px;
@@ -304,6 +304,9 @@
     text-decoration-line: underline;
     color: #E34A4E;
     cursor: pointer;
+}
+.FullApplicationInfo__backToWorkLink--pushRight {
+    margin-left: auto;
 }
 
 .FullApplicationInfo__footer {

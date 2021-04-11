@@ -282,6 +282,7 @@ const ResultsTableWorker = (props) => {
                         goRight={goRight}
                         first={indexForModal <= 0 && currentPage === 0}
                         last={indexForModal >= applications.length - 1 && activePage >= Math.ceil(count / 10)}
+                        commentMessage={applications[indexForModal].rating.commentstr}
                     />
                 </>:
                 null}

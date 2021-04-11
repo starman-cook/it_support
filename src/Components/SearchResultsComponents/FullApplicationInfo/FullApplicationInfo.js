@@ -203,7 +203,7 @@ const FullApplicationInfo = (props) => {
                             <div className={`FullApplicationInfo__icon--widthLikeDislike FullApplicationInfo__icon--${classLikeDislike}`} />
                             <div className={`${isComment ? "FullApplicationInfo__comment" : null} FullApplicationInfo__comment--width`} onMouseEnter={isComment ? hoverShowQuestionComment: null} onMouseLeave={isComment ? hoverHideQuestionComment : null}>
                                 <div style={showQuestionComment ? {"display" : "block"} : {"display" : "none"}} className="FullApplicationInfo__comment--modal">
-                                    <p className="FullApplicationInfo__comment--modal-text">Пользователь оставил коментарий к этой задаче, для того чтобы посмотреть его проскрольте описание заявки до конца.</p>
+                                    <p className="FullApplicationInfo__comment--modal-text">{props.commentMessage}</p>
                                 </div>
                             </div>
                         </div>
@@ -235,14 +235,14 @@ const FullApplicationInfo = (props) => {
                         </div>
 
                     </div>
-                    {!fileImage && (status === "завершено" || status === "отменено") ? <p className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
+                    {!fileImage && (status === "завершено" || status === "отменено") ? <p className="FullApplicationInfo__backToWorkLink FullApplicationInfo__backToWorkLink--pushRight">Вернуть заявку в работу</p> : null}
 
                     {fileImage ? <div className="FullApplicationInfo__content--right">
                         <h2 className="FullApplicationInfo__content--title">
                             Прикрепленные файлы:
                         </h2>
                         <div className="FullApplicationInfo__fileImage--canvas">
-                            {fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={fileImage} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }
+                            {fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={`data:image/gif;base64,${fileImage}`} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }
                         </div>
 
 
@@ -270,7 +270,7 @@ const FullApplicationInfo = (props) => {
             </div>
             {isFileImageModal ? <div onClick={toggleModalImage} className="FullApplicationInfo__fileImage--modal">
                 <div className="FullApplicationInfo__fileImage--modalCanvas">
-                    <img className="FullApplicationInfo__fileImage" src={fileImage} alt={subject}/>
+                    <img className="FullApplicationInfo__fileImage" src={`data:image/gif;base64,${fileImage}`} alt={subject}/>
                 </div>
             </div> : null}
         </>

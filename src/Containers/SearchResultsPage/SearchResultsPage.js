@@ -278,6 +278,7 @@ countPagination();
         }
         // console.log(el[0]);
     }
+    colorActivePage()
 
     const paginationRight = () => {
         if (activePage !== pagesNumbers) {

@@ -233,9 +233,9 @@ const FullApplicationInfo = (props) => {
                         <div >
                             {allSolution}
                         </div>
+                        {!fileImage && (status === "завершено" || status === "отменено") ? <p className="FullApplicationInfo__backToWorkLink FullApplicationInfo__backToWorkLink--pushRight">Вернуть заявку в работу</p> : null}
 
                     </div>
-                    {!fileImage && (status === "завершено" || status === "отменено") ? <p className="FullApplicationInfo__backToWorkLink FullApplicationInfo__backToWorkLink--pushRight">Вернуть заявку в работу</p> : null}
 
                     {fileImage ? <div className="FullApplicationInfo__content--right">
                         <h2 className="FullApplicationInfo__content--title">

@@ -147,6 +147,7 @@ const SearchResultsPage = () => {
          dispatch(isFilterDateActive(false));
          dispatch(inputFilterDateFrom(""));
          dispatch(inputFilterDateTo(""));
+         dispatch(setActivePage(1))
         const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
         for (let i = 0; i < el.length; i++) {
             el[i].style.color = '#E34A4E';
@@ -276,9 +277,7 @@ countPagination();
                 el[3].style.textDecoration = 'underline';
             }
         }
-        // console.log(el[0]);
     }
-    colorActivePage()
 
     const paginationRight = () => {
         if (activePage !== pagesNumbers) {

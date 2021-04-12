@@ -67,14 +67,14 @@ export const loginUser = (login, password) => {
             // await dispatch(saveId(response.data.clientId));
             await dispatch(push('/search'));
             console.log(response.data);
-        } catch (err) {
-            console.log(err.response);
+        } catch (error) {
+            console.log("FIRST CATCH *** ", error);
             // добавить условие какая именно ошибка прилетела
             try {
-                dispatch(usernameLoginError(err.response.data.result));
-                dispatch(passwordLoginError(err.response.data.result));
+                dispatch(usernameLoginError(error));
+                dispatch(passwordLoginError(error));
             } catch (err) {
-                console.log(err)
+                console.log("SECOND CATCH *** ",err)
             }
 
 

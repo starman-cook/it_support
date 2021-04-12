@@ -26,13 +26,13 @@ const LayoutSearchResults = (props) => {
         dispatch(changeNumber(event.target.value));
         dispatch(setActivePage(1));
     }
-    const initFiltersHandler = () => {
+    const initFiltersHandler = async () => {
         localStorage.removeItem('employeeFilterName');
-        dispatch(initFilters());
-        dispatch(isFilterDateActive(false));
-        dispatch(inputFilterDateFrom(""));
-        dispatch(inputFilterDateTo(""));
-        dispatch(setActiveFilters([]));
+        await dispatch(initFilters());
+        await dispatch(isFilterDateActive(false));
+        await dispatch(inputFilterDateFrom(""));
+        await dispatch(inputFilterDateTo(""));
+        await dispatch(setActiveFilters([]));
         const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
         for (let i = 0; i < el.length; i++) {
             el[i].style.color = '#E34A4E';

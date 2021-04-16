@@ -242,7 +242,7 @@ const FullApplicationInfo = (props) => {
                             Прикрепленные файлы:
                         </h2>
                         <div className="FullApplicationInfo__fileImage--canvas">
-                            {fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={`data:image/gif;base64,${fileImage}`} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }
+                            {fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={fileImage} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }
                         </div>
 
 

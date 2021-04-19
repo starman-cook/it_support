@@ -97,7 +97,7 @@ const SearchResultsPage = () => {
         if (deactivateBtnDate[innerText]) {
             setDeactivateBtn({});
             deactivateDateFilter();
-           return;
+            return;
         }
         setDeactivateBtn({[event.target.textContent]: true});
         event.target.style.color = 'white';
@@ -158,6 +158,17 @@ const SearchResultsPage = () => {
     
     const closeModal = () => {
         setCalendarModal(false);
+        setDeactivateBtn({});
+        // if (!filters.includes('дата')) {
+            const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
+            for (let i = 0; i < el.length; i++) {
+                el[i].style.color = '#E34A4E';
+                el[i].style.background = 'white';
+            }
+        // }
+        dispatch(isFilterDateActive(false))
+        dispatch(inputFilterDateFrom(""));
+        dispatch(inputFilterDateTo(""));
     }
 
 
@@ -346,7 +357,11 @@ countPagination();
         dispatch(setActivePage(1));
         dispatch(inputFilterDateFrom(period.start));
         dispatch(inputFilterDateTo(period.end));
-        closeModal();
+        setCalendarModal(false);
+    }
+    const closeModalAccepted = () => {
+        dispatch(setActivePage(1));
+        setCalendarModal(false);
     }
     return (
             <LayoutSearchResults
@@ -378,6 +393,7 @@ countPagination();
             >
                 {calendarModal ?
                     <ModalPeriod
+                        closeModalAccepted={closeModalAccepted}
                         closeModal={closeModal}
                         acceptDatePeriod={acceptDatePeriod}
                         // inputStartDateValue={(event) => {inputStartDateValue(event)}}

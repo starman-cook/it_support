@@ -328,7 +328,7 @@ const ModalPeriod = (props) => {
         dispatch(isFilterDateActive(true));
         dispatch(setActivePage(1));
         setTimeout(() => {
-            props.closeModal()
+            props.closeModalAccepted()
         }, 1000)
     }
 

@@ -141,6 +141,7 @@ const FullApplicationInfo = (props) => {
             return <p className="FullApplicationInfo__content__text">{el}</p>
         });
         fileImage = application.images[0];
+        // fileImage = true;
         problem = application.details.split("\n");
         workerName = application.employee.name;
         allProblems = problem.map(el => {
@@ -243,6 +244,7 @@ const FullApplicationInfo = (props) => {
                         </h2>
                         <div className="FullApplicationInfo__fileImage--canvas">
                             {fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={fileImage} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }
+                            {/*{fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={"https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }*/}
                         </div>
 
 
@@ -270,7 +272,8 @@ const FullApplicationInfo = (props) => {
             </div>
             {isFileImageModal ? <div onClick={toggleModalImage} className="FullApplicationInfo__fileImage--modal">
                 <div className="FullApplicationInfo__fileImage--modalCanvas">
-                    <img className="FullApplicationInfo__fileImage" src={`data:image/gif;base64,${fileImage}`} alt={subject}/>
+                    <img className="FullApplicationInfo__fileImage" src={fileImage} alt={subject}/>
+                    {/*<img className="FullApplicationInfo__fileImage" src={"https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"} alt={subject}/>*/}
                 </div>
             </div> : null}
         </>

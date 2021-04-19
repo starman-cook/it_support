@@ -61,6 +61,7 @@ const ResultsTableWorker = (props) => {
     const isFilterDepartment = useSelector(state => state.applications.data['filter'].departament.length > 0);
     const isFilterWorker = useSelector(state => state.applications.data['filter'].employee.trim() !== '');
     const filters = useSelector(state => state.applications.data['filter']);
+    const isFilterDate = useSelector(state => state.applications.isFilterDateActive)
 
     let filtersCheck = {
         isFilterStatus: useSelector(state => state.applications.data['filter'].status.length > 0) ? "статус" : null,
@@ -85,7 +86,7 @@ const ResultsTableWorker = (props) => {
     useEffect(() => {
         showFilters();
         console.log('SHOWING FILTERS');
-    }, [filters]);
+    }, [filters, isFilterDate]);
 
 
     const [isStatusModal, setIsStatusModal] = useState(false);

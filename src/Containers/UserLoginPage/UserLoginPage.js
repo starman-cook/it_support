@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginUser, saveUser, sendPhone, sendSms, setLoginStatus} from "../../Store/UsersReducer/usersActions";
 import axios from "../../axiosApi";
 import WithLoader from '../../hoc/WithLoader/WithLoader';
-import {clearMyInteval} from "../../Store/ApplicationsReducer/applicationsActions";
+import {clearMyInterval} from "../../Store/ApplicationsReducer/applicationsActions";
 
 const UserLoginPage = (props) => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const UserLoginPage = (props) => {
     // const id = "1240-02-00044";
     const id = props.match.params.id;
     useEffect(() => {
-        dispatch(clearMyInteval())
+        dispatch(clearMyInterval())
         if (id) {
             dispatch(setLoginStatus("phone"));
         }

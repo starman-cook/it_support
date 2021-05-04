@@ -8,18 +8,23 @@ import SpecialitsWindowStatus from '../../Components/ApplicationPageComponents/S
 import {push} from 'connected-react-router'
 import {useDispatch, useSelector} from "react-redux";
 import {
-    addDetailsToApplicationInProcess,
+    addDetailsToApplicationInProcess, getClientName,
     getCurrentApplicationData, getHashOfTheLastApplication,
     getLastApplication,
     postNewApplication,
     setApplicationBackInProgress, setMyInterval
 } from "../../Store/ApplicationsReducer/applicationsActions";
 
+//TODO получить имя клиента по id для приветсвия когда создаем новую заявку, какой запрос отправляем
+//TODO Посмотреть вернувшуюся в работу заявку, это модалка с данными, где взять данные по вернувшейся заявке?
+//TODO Если статус "Отменено" и мы возвращаем заявку обратно, что происходит
+//TODO Можно ли прикреплять файл к созданной заявке?
+
 const ApplicationPage = (props) => {
     const dispatch = useDispatch();
     const id = props.match.params.id;
     const idInTitle = `№ IT-${id}`;
-    const status = 'new' // Получить статус заявки при запросе данных заявки !!! Пока не пригодилось, работает и без этого
+    // const status = 'new' // Получить статус заявки при запросе данных заявки !!! Пока не пригодилось, работает и без этого
     // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
     // const applicationHash = useSelector(state => state.applications.newApplicationHash)
     const applicationHash = props.match.params.hash;
@@ -30,11 +35,12 @@ const ApplicationPage = (props) => {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [showQuestion, setShowQuestion] = useState(false);
     const [submitDisabled, setSubmitDisabled] = useState(true);
+    // const [isModalApplication, setIsModalApplication] = useState(false);
 
+    // const [isBackInProgress, setIsBackInProgress] = useState(false);
+    const [isBackInProgress, setIsBackInProgress] = useState(true);
 
-    const [isBackInProgress, setIsBackInProgress] = useState(false);
-
-    let buttonName ="";
+    let buttonName = "";
 
 
     let description = "";
@@ -42,30 +48,30 @@ const ApplicationPage = (props) => {
     let center;
     let top;
     let leftSide;
-    const userName = "Светлана";
+    // const userName = "Светлана"; // отловить имя по id и вставить сюда
 
     const lastApplication = useSelector(state => state.applications.lastApplication);
     const currentApplication = useSelector(state => state.applications.currentApplicationData);
-
+    const clientName = useSelector(state => state.applications.clientName)
 
 
     useEffect(() => {
+        dispatch(getClientName(id))
         dispatch(getLastApplication(id));
     }, [dispatch]);
     useEffect(() => {
-            console.log('Maybe STOP?')
-            if (applicationHash) {
-                dispatch(getCurrentApplicationData(applicationHash));
-            }
+        if (applicationHash) {
+            dispatch(getCurrentApplicationData(applicationHash));
+        }
     }, [applicationHash])
 
     const [inputState, setInputState] = useState({
         id: id,
-        title: '',
+        problem: '',
         catid: '',
-        body: '',
+        message: '',
         tvpass: '',
-        // images: ''
+        // files: ''
     })
 
     if (isBackInProgress) {
@@ -93,7 +99,7 @@ const ApplicationPage = (props) => {
     const chooseFile = (event) => {
         setFileNameState(event.target.files[0].name);
         setInputState(prevState => {
-            return {...prevState, "images": event.target.files[0]}
+            return {...prevState, "files": event.target.files[0]}
         });
         console.log("INPUT STATE: ", inputState);
     }
@@ -108,34 +114,51 @@ const ApplicationPage = (props) => {
         });
     }
 
-    
+
     if (fileNameState.trim() === '') {
         setFileNameState('Выберите файл')
     }
     const clearInputState = () => {
         setInputState({
             id: id,
-            title: '',
+            problem: '',
             catid: '',
-            body: '',
+            message: '',
             tvpass: '',
-            // images: ''
+            // files: ''
         });
     }
 
 
-    // не работает((((
     const isBackInProgressHandler = () => {
         if (!isBackInProgress) {
             setIsBackInProgress(true);
             dispatch(setApplicationBackInProgress(lastApplication.ref));
         }
     }
+    // const showDetailsOfReturnedApplication = () => {
+    //     setIsModalApplication(true)
+    // }
+    // const hideDetailsOfReturnedApplication = () => {
+    //     setIsModalApplication(false)
+    // }
+    // Добавить функцию просмотра деталей заявки в модальном окне
 
+
+
+    // https://itsupport.kz/itsp2/proxy.php?act=createEvent
+    //     POST
+    // problem=Заголовок title
+    // message=Текст заявки
+    // catid=ID Категории
+    // tvpass=Тимвивер пасс
+    // Сами файлы через формдату передавать. Массив с файлами можешь назвать files.
+    //     Пока это работать не будет у тебя. Мне надо будет переписать скрипт загрузки.
+    //     Чтобы сразу несколько файлов можно было грузить. На днях перепишем
     const submitFormHandler = async (event) => {
         event.preventDefault()
         let inputStateCopy = {...inputState}
-        inputStateCopy.body += "<br />"
+        inputStateCopy.message += "<br />"
 
         await dispatch(postNewApplication(inputStateCopy, id))
         // setIsApplicationsSent(true);
@@ -155,12 +178,20 @@ const ApplicationPage = (props) => {
         // setIsApplicationsSent(true);
         // dispatch(push(`/application/${id}`)); //add query params to get application by id
     }
+    // открыть вернувшуюся заявку в новом окне
+    const goToReturnedApplication = async () => {
+        clearInputState();
+        setIsBackInProgress(false);
+        await dispatch(setApplicationBackInProgress(lastApplication.ref));
+        await dispatch(getCurrentApplicationData(lastApplication.ref))
+        // добавить смену статуса на Запланировано
+    }
 
     const isDisabled = () => {
         setSubmitDisabled(false);
         Object.keys(inputState).forEach(key => {
-            if (key !== "images" && key !== "tvpass") {
-                if (!inputState[key] ) {
+            if (key !== "files" && key !== "tvpass") {
+                if (!inputState[key]) {
                     setSubmitDisabled(true);
                 }
             }
@@ -189,7 +220,7 @@ const ApplicationPage = (props) => {
 
     const parseTimerTime = (totalTime) => {
         const timeArray = totalTime.split(":")
-        return ((parseInt(timeArray[0]*60)) + parseInt(timeArray[1]))*1000
+        return ((parseInt(timeArray[0] * 60)) + parseInt(timeArray[1])) * 1000
 
     }
 
@@ -213,25 +244,24 @@ const ApplicationPage = (props) => {
 
     useEffect(() => {
 
-        if (currentApplication ? (currentApplication.timer !== "expired" && !interval.current && applicationHash) : false) {
-            interval.current = setInterval( () => {
+        // if (currentApplication.result ? ((currentApplication.status !== "Завершено" || currentApplication.status !== "Отменено") && !interval.current && applicationHash) : false) {
+        if (!!currentApplication.result) {
+            interval.current = setInterval(() => {
                 dispatch(getCurrentApplicationData(applicationHash))
                 console.log("Maybe Stop")
 
                 dispatch(setMyInterval(interval.current))
             }, 10000)
 
-        }
-        else {
+        } else {
 
             clearInterval(interval.current);
-            console.log("Maybe Stop")
         }
         return () => {
 
             clearInterval(interval.current);
         }
-    }, [applicationHash])
+    }, [currentApplication])
 
     const goToApplication = () => {
         if (id) {
@@ -249,40 +279,40 @@ const ApplicationPage = (props) => {
         dispatch(push("/search"));
     };
 
-   // useEffect(() => {
-   //     console.log("Maybe Stop")
-   //     let interval
-   //     if (currentApplication.timer ? currentApplication.timer !== "expired": null) {
-   //         interval = setInterval(() => {
-   //             dispatch(getCurrentApplicationData(applicationHash))
-   //             console.log("Maybe Stop")
-   //
-   //         }, 10000)
-   //
-   //     } else {
-   //         clearInterval(interval);
-   //         console.log("Maybe Stop")
-   //
-   //     }
-   // }, [])
+    // useEffect(() => {
+    //     console.log("Maybe Stop")
+    //     let interval
+    //     if (currentApplication.timer ? currentApplication.timer !== "expired": null) {
+    //         interval = setInterval(() => {
+    //             dispatch(getCurrentApplicationData(applicationHash))
+    //             console.log("Maybe Stop")
+    //
+    //         }, 10000)
+    //
+    //     } else {
+    //         clearInterval(interval);
+    //         console.log("Maybe Stop")
+    //
+    //     }
+    // }, [])
 
 
     // if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
     if (currentApplication ? currentApplication.result : null) {
         top = (
-            <SpecialitsWindowStatus 
+            <SpecialitsWindowStatus
                 id={id}
-                timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
+                // timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
                 timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
                 // newApplication={false}
-                newApplication={currentApplication.timer ? currentApplication.timer !== "expired" : false}
-                // specialistFound={false}
-                specialistFound={currentApplication.timer ? currentApplication.timer.trim() === "expired" : null}
+                newApplication={currentApplication.status === 'Запланировано'}
+                // specialistFound={true}
+                specialistFound={currentApplication.status === 'В работе'}
                 // jobDone={true}
-                jobDone={currentApplication.status === 'Выполнено'}
+                jobDone={currentApplication.status === 'Завершено'}
                 // isCanceled={false}
                 isCanceled={currentApplication.status === 'Отменено'}
-                name={currentApplication.contactperson ? currentApplication.contactperson : null}
+                name={currentApplication.responsible ? currentApplication.responsible : null}
                 photo={currentApplication.image ? `data:image/jpg;base64, ${currentApplication.image}` : null}
                 phone={currentApplication.phonenumber ? currentApplication.phonenumber : null}
                 specialistId={currentApplication.contactperson ? currentApplication.contactperson.split(" ")[0] : null}
@@ -290,33 +320,35 @@ const ApplicationPage = (props) => {
 
                 isLike={currentApplication ? currentApplication.rate === 1 : false}
                 isDislike={currentApplication ? currentApplication.rate === -1 : false}
-                commentResult={currentApplication ? !!currentApplication.comment: false}
-                commentText={currentApplication ? currentApplication.comment: false}
-        />
-            )
+                commentResult={currentApplication ? !!currentApplication.comment : false}
+                commentText={currentApplication ? currentApplication.comment : false}
+            />
+        )
     }
     // if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
     if (currentApplication ? currentApplication.result : null) {
         leftSide = (
-            <ApplicationStatus 
+            <ApplicationStatus
                 id={id}
-                specialistFound={currentApplication.timer ? currentApplication.timer.trim() === "expired" : null}
-                jobDone={currentApplication.status === 'Выполнено'}
+                specialistFound={currentApplication.status === 'В работе'}
+                jobDone={currentApplication.status === 'Завершено'}
                 isCanceled={currentApplication.status === 'Отменено'}
-                backInProgress={isBackInProgressHandler}
+                backInProgress={goToReturnedApplication}
             />
         )
-    } else if (lastApplication) {
+        } else if (lastApplication  && !!lastApplication.result ) {
+    // } else if (lastApplication) {
         leftSide = (
-            <PreviousApplicationMenu 
+            <PreviousApplicationMenu
                 title={title}
                 name={lastApplication.topic}
                 date={lastApplication.date}
                 description={description}
                 buttonName={buttonName}
-                clicked={isBackInProgressHandler}
+                clicked={isBackInProgress ? goToReturnedApplication : isBackInProgressHandler}
             />
-    )}
+        )
+    }
 //264 letters
 //     if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
     if (currentApplication ? currentApplication.result : null) {
@@ -327,9 +359,11 @@ const ApplicationPage = (props) => {
             result={currentApplication.eventresult}
             showDetailsButton={currentApplication.body ? currentApplication.body.length > 100 : null}
             showResultButton={currentApplication.eventresult ? currentApplication.eventresult.length > 100 : null}
-            status={status}
+            // status={status}
             oneComment={oneComment}
-            onChangeComment={(event) => {textAreaHandler(event)}}
+            onChangeComment={(event) => {
+                textAreaHandler(event)
+            }}
             submitComment={applyComment}
             // id={id}
             idInTitle={idInTitle}
@@ -338,29 +372,37 @@ const ApplicationPage = (props) => {
         />)
     } else {
         center = (
-            <ApplicationForm 
-                userName={userName}
+            <ApplicationForm
+                userName={clientName.result ? clientName.name : "Anonymous"}
                 greetings={"здравствуйте! Опишите свою проблему"}
 
                 subjectTitle={"Тема*"}
-                subjectName="title"
-                subjectChange={(event) => {inputHandler(event)}}
+                subjectName="problem"
+                subjectChange={(event) => {
+                    inputHandler(event)
+                }}
                 subjectRequired={true}
                 subjectPlaceholder={"Опишите кратко суть проблемы"}
 
                 departmentTitle={"Отдел*"}
                 departmentName="catid"
-                departmentChange={(event) => {inputHandler(event)}}
+                departmentChange={(event) => {
+                    inputHandler(event)
+                }}
                 departmentRequired={true}
                 departmentPlaceholder={"В какой отдел отправить заявку?"}
 
                 messageTitle={"Сообщение"}
-                messageName="body"
-                messageChange={(event) => {inputHandler(event)}}
+                messageName="message"
+                messageChange={(event) => {
+                    inputHandler(event)
+                }}
                 messageRequired={true}
                 messagePlaceholder={"Расскажите побробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
 
-                fileClicked={(event) => {chooseFile(event)}}
+                fileClicked={(event) => {
+                    chooseFile(event)
+                }}
                 iconClick={activateFileInput}
                 fileRef={refFile}
                 fileName={fileNameState}
@@ -372,28 +414,35 @@ const ApplicationPage = (props) => {
                 textTeamViewer={"Пароль от TeamViewer"}
                 showPassword={isShowPassword}
                 passwordName="tvpass"
-                passwordChange={(event) => {inputHandler(event)}}
+                passwordChange={(event) => {
+                    inputHandler(event)
+                }}
                 passwordRequired={false}
                 passwordPlaceholder={"Введите пароль"}
                 toggleShowPassword={toogleShowPassword}
 
                 buttonName={"Отправить заявку"}
-                submitClicked={(event) => {submitFormHandler(event)}}
+                submitClicked={(event) => {
+                    submitFormHandler(event)
+                }}
                 isDisabled={submitDisabled}
 
             />
-    )}
+        )
+    }
 
     return (
-        <LayoutApplicationPage
-            goToApplicationHistory={goToHistoryOfApplications}
-            createNewApplication={goToApplication}
-            left={leftSide}
-            center={center}
-            top={top}
-            hideButton={currentApplication ?  !currentApplication.result : true}
-        >
-        </LayoutApplicationPage>
+        <>
+            <LayoutApplicationPage
+                goToApplicationHistory={goToHistoryOfApplications}
+                createNewApplication={goToApplication}
+                left={leftSide}
+                center={center}
+                top={top}
+                hideButton={currentApplication ? !currentApplication.result : true}
+            >
+            </LayoutApplicationPage>
+        </>
     )
 }
 

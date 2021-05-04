@@ -17,7 +17,12 @@ import {
     IS_FILTER_DATE_ACTIVE,
     FIRST_CALENDAR_DAY_IN_RANGE,
     SECOND_CALENDAR_DAY_IN_RANGE,
-    GET_LAST_APPLICATION, GET_HASH_OF_THE_LAST_APPLICATION, GET_CURRENT_APPLICATION_DATA, SET_INTERVAL, CLEAR_INTERVAL
+    GET_LAST_APPLICATION,
+    GET_HASH_OF_THE_LAST_APPLICATION,
+    GET_CURRENT_APPLICATION_DATA,
+    SET_INTERVAL,
+    CLEAR_INTERVAL,
+    GET_CLIENT_NAME
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 import moment from "moment";
@@ -53,11 +58,14 @@ const initialState = {
     },
     activePage: 1,
     activeFilters: [],
-    isFilterDateActive: false
+    isFilterDateActive: false,
+    clientName: ""
 };
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_CLIENT_NAME:
+            return {...state, clientName: action.value}
         case CLEAR_INTERVAL:
             return {...state, interval: clearInterval(state.interval)}
         case SET_INTERVAL:

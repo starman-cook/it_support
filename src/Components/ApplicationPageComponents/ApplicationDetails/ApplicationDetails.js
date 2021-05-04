@@ -8,9 +8,9 @@ import {addDetailsToApplicationInProcess} from "../../../Store/ApplicationsReduc
 
 const ApplicationDetails = (props) => {
 
-    const status = props.status;
+    // const status = props.status;
     // const id = props.id;
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // const comments = useSelector(state => state.applications.comments); //Получить все комментарии по ID
     const [messageClassToggle, setMessageClassToggle] = useState("messageClassToggleHidden");
     const [messageClassButtonText, setMessageClassButtonText] = useState('показать подробнее');
@@ -63,7 +63,7 @@ const ApplicationDetails = (props) => {
     let centerComponent;
 
      // possible statusses 'new' 'in_progress' 'complete' 'canceled'
-    if (status === 'new') {
+    // if (status === 'new') {
         centerComponent = (
         <div className="ApplicationDetails">
             <h2 className="ApplicationDetails__title">Детали заявки {props.idInTitle}</h2>
@@ -104,7 +104,8 @@ const ApplicationDetails = (props) => {
                 </> 
             }
         </div>
-        )}
+        )
+// }
 
     return (
         <>

@@ -4,7 +4,7 @@ import ResultsTableWorker from '../../Components/SearchResultsComponents/Results
 import './SearchResultsPage.css';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    changePagination, clearMyInteval,
+    changePagination, clearMyInterval,
     inputFilterDateFrom,
     inputFilterDateTo, isFilterDateActive, setActivePage
 } from "../../Store/ApplicationsReducer/applicationsActions";
@@ -29,7 +29,7 @@ const SearchResultsPage = () => {
     const isDateFilterActive = useSelector(state => state.applications.isFilterDateActive)
     const hash = useSelector(state => state.applications.data.hash)
     useEffect(() => {
-        dispatch(clearMyInteval())
+        dispatch(clearMyInterval())
         if (!hash) return dispatch(push('/login'));
         dispatch(getCompanyData(hash));
     }, [dispatch]);

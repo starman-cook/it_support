@@ -4,7 +4,7 @@ import {
     CHANGE_EMPLOYEE,
     CHANGE_NUMBER,
     CHANGE_PAGINATION,
-    CHANGE_STATUS, CLEAR_INTERVAL, FIRST_CALENDAR_DAY_IN_RANGE,
+    CHANGE_STATUS, CLEAR_INTERVAL, FIRST_CALENDAR_DAY_IN_RANGE, GET_CLIENT_NAME,
     GET_COUNT_AMOUNT, GET_CURRENT_APPLICATION_DATA, GET_HASH_OF_THE_LAST_APPLICATION, GET_LAST_APPLICATION,
     GET_TEN_APPLICATIONS,
     INIT_FILTERS,
@@ -50,7 +50,11 @@ export const getHashOfTheLastApplication = (value) => ({type: GET_HASH_OF_THE_LA
 export const getCurrentApplicationDataSuccess = (value) => ({type: GET_CURRENT_APPLICATION_DATA, value});
 
 export const setMyInterval = (value) => ({type: SET_INTERVAL, value});
-export const clearMyInteval = () => ({type: CLEAR_INTERVAL});
+export const clearMyInterval = () => ({type: CLEAR_INTERVAL});
+
+export const getClientNameSuccess = (value) => ({type: GET_CLIENT_NAME, value});
+
+
 
     export const getTenApplications = (data) => {
     return async dispatch => {
@@ -78,11 +82,11 @@ export const getLastApplication = (id) => {
         }
     }
 }
-
+// https://itsupport.kz/itsp2/proxy.php?act=createEvent
 export const postNewApplication = (data, id) => {
     return async dispatch => {
         try {
-            const response = await axios.post('/CRM/hs/event/method/create', data);
+            const response = await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
             dispatch(getHashOfTheLastApplication(response.data.eventID))
             // const response = await axiosTest.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
             dispatch(push(`/application/${id}/${response.data.eventID}`))
@@ -107,7 +111,7 @@ export const getCurrentApplicationData = (id) => {
 // http://itsupport.kz:8000/CRM/hs/equeue/?document=976b60043d04c86e4936b78fa0b82b07
 
 export const addDetailsToApplicationInProcess = (data) => {
-    return async dispatch => {
+    return async () => {
         try {
             await axios.post('/CRM/hs/event/method/eventupdatebody/', data)
         } catch(err) {
@@ -116,11 +120,11 @@ export const addDetailsToApplicationInProcess = (data) => {
     }
 }
 
-// не работает((((
+
 export const setApplicationBackInProgress = (id) => {
-    return async dispatch => {
+    return async () => {
         try {
-            await axios.get(`/CRM/hs/eventupdate/?document=${id}`);
+            await axios.get(`/CRM/hs/event/method/eventupdate?document=${id}`);
             // await axiosTest.get(`https://itsupport.kz/itsp2/eventupdate/proxy.php?document=${id}`);
         } catch (err) {
             console.log(err);
@@ -129,7 +133,7 @@ export const setApplicationBackInProgress = (id) => {
 }
 
 export const leaveTheRate = (data) => {
-    return async dispatch => {
+    return async () => {
         try {
             await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=updateEventRate', data)
         } catch (err) {
@@ -139,9 +143,20 @@ export const leaveTheRate = (data) => {
 }
 
 export const addTheCommentToSpecialist = (data) => {
-    return async dispatch => {
+    return async () => {
         try {
             await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=updateEventComment', data)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
+export const getClientName = (id) => {
+    return async dispatch => {
+        try {
+            const response = await axios.get(`/CRM/hs/clientinfo/name/?ID=${id}`);
+            await dispatch(getClientNameSuccess(response.data))
         } catch (err) {
             console.log(err);
         }

@@ -245,7 +245,7 @@ const ApplicationPage = (props) => {
     useEffect(() => {
 
         // if (currentApplication.result ? ((currentApplication.status !== "Завершено" || currentApplication.status !== "Отменено") && !interval.current && applicationHash) : false) {
-        if (!!currentApplication.result) {
+        if (currentApplication ? !!currentApplication.result : false) {
             interval.current = setInterval(() => {
                 dispatch(getCurrentApplicationData(applicationHash))
                 console.log("Maybe Stop")

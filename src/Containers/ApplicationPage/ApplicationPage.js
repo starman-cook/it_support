@@ -31,7 +31,7 @@ const ApplicationPage = (props) => {
     const [oneComment, setOneComment] = useState("");
 
     const refFile = useRef();
-    const [fileNameState, setFileNameState] = useState("");
+    const [fileNameState, setFileNameState] = useState([]);
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [showQuestion, setShowQuestion] = useState(false);
     const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -71,7 +71,7 @@ const ApplicationPage = (props) => {
         catid: '',
         message: '',
         tvpass: '',
-        // files: ''
+        files: []
     })
 
     if (isBackInProgress) {
@@ -97,14 +97,32 @@ const ApplicationPage = (props) => {
         }
     }
     const chooseFile = (event) => {
-        setFileNameState(event.target.files[0].name);
+        const fileNameStateCopy = [...fileNameState]
+        fileNameStateCopy.push(event.target.files[0].name)
+        setFileNameState(fileNameStateCopy);
+        const filesCopy = inputState.files
+        filesCopy.push(event.target.files[0])
         setInputState(prevState => {
-            return {...prevState, "files": event.target.files[0]}
+            return {...prevState, "files": filesCopy}
         });
-        console.log("INPUT STATE: ", inputState);
+        console.log(inputState)
+        console.log(fileNameState)
     }
     const activateFileInput = () => {
         refFile.current.click();
+    }
+
+    const deleteFile = (i) => {
+        const fileNameStateCopy = [...fileNameState]
+        fileNameStateCopy.splice(i, 1)
+        setFileNameState(fileNameStateCopy)
+        const filesCopy = inputState.files
+        filesCopy.splice(i, 1)
+        setInputState(prevState => {
+            return {...prevState, "files": filesCopy}
+        });
+        console.log(inputState)
+        console.log(fileNameState)
     }
 
     const inputHandler = (event) => {
@@ -114,10 +132,10 @@ const ApplicationPage = (props) => {
         });
     }
 
-
-    if (fileNameState.trim() === '') {
-        setFileNameState('Выберите файл')
-    }
+    // Решить проблему если файл не выбран (когда он остался один)... по 0 индексу наверно?
+    // if (!fileNameState[0]) {
+    //     setFileNameState(['Выберите файл'])
+    // }
     const clearInputState = () => {
         setInputState({
             id: id,
@@ -125,7 +143,7 @@ const ApplicationPage = (props) => {
             catid: '',
             message: '',
             tvpass: '',
-            // files: ''
+            files: []
         });
     }
 
@@ -160,17 +178,39 @@ const ApplicationPage = (props) => {
         let inputStateCopy = {...inputState}
         inputStateCopy.message += "<br />"
 
-        await dispatch(postNewApplication(inputStateCopy, id))
+        setInputState(prevState => {
+            return {...prevState, "message": inputStateCopy.message}
+        })
+        console.log("INPUT STATE TESTING FILES *******", inputState)
+        // await dispatch(postNewApplication(inputStateCopy, id))
         // setIsApplicationsSent(true);
+
+        const formData = new FormData();
+        Object.keys(inputState).forEach(key => {
+            if (typeof inputState[key] === 'object' && inputState[key] !== null) {
+                // formData.append(key, JSON.stringify(inputState[key]));
+                console.log("JSON STRING **** ",JSON.stringify(inputState[key]))
+                for (let i = 0; i < inputState[key].length; i++) {
+                    // formData.append(key, inputState[key][i])
+                    formData.append(key + "[]", inputState[key][i], inputState[key][i].name);
+                }
+            } else {
+                formData.append(key, inputState[key]);
+            }
+        })
+        console.log("***************************************")
+        for (let pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]);
+        }
+        console.log("***************************************")
+        console.log(formData)
+        dispatch(postNewApplication(formData, id));
+
         clearInputState();
         setIsBackInProgress(false);
         // await dispatch(getCurrentApplicationData(applicationHash));
         // event.preventDefault();
-        // const formData = new FormData();
-        // Object.keys(inputState).forEach(key => {
-        //     formData.append(key, inputState[key]);
-        // })
-        // dispatch(postNewApplication(formData));
+
         // console.log(inputState);
         // setIsBackInProgress(false);
         //  // Отправка формы заявки с файлом или без файла
@@ -295,6 +335,15 @@ const ApplicationPage = (props) => {
     //
     //     }
     // }, [])
+    let fileListBlocks;
+    if (fileNameState.length) {
+        fileListBlocks = fileNameState.map((el, i) => {
+            return <div key={i} className="FileListBlocks__item">
+                <p className="FileListBlocks__text">{el}</p>
+                <div onClick={() => {deleteFile(i)}} className="FileListBlocks__iconDelete" />
+            </div>
+        })
+    }
 
 
     // if (isApplicationSent || (currentApplication ? currentApplication.result : null)) {
@@ -400,12 +449,14 @@ const ApplicationPage = (props) => {
                 messageRequired={true}
                 messagePlaceholder={"Расскажите побробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
 
-                fileClicked={(event) => {
-                    chooseFile(event)
-                }}
+                // fileClicked={(event) => {
+                //     chooseFile(event)
+                // }}
+                fileClicked={chooseFile}
                 iconClick={activateFileInput}
                 fileRef={refFile}
-                fileName={fileNameState}
+                // fileName={fileNameState}
+                fileName={"Добавить файл"}
                 inputFileName="file"
                 questionShow={hoverShowQuestion}
                 questionHide={hoverHideQuestion}
@@ -426,7 +477,7 @@ const ApplicationPage = (props) => {
                     submitFormHandler(event)
                 }}
                 isDisabled={submitDisabled}
-
+                chosenFiles={fileListBlocks}
             />
         )
     }

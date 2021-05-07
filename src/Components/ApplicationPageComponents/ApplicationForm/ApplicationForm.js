@@ -64,6 +64,11 @@ const ApplicationForm = (props) => {
                     </div>
                 </div>
 
+                <div className="FileListBlocks__block">
+                    {props.chosenFiles}
+                </div>
+
+
                 <h2 className="ApplicationForm__teamViewerTitle">{props.textTeamViewer}</h2>
             
                 <div className="ApplicationForm__teamViewer-block">

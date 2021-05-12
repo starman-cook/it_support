@@ -8,8 +8,8 @@ import {addTheCommentToSpecialist, leaveTheRate} from "../../../Store/Applicatio
 const SpecialitsWindowStatus = (props) => {
     let timerDuration = props.timerDuration; //15 минут
     const dispatch = useDispatch();
-    const status = props.status;
-    const id = props.id;
+    // const status = props.status;
+    // const id = props.id;
     let topComponent;
     const [seconds, setSeconds] = useState("00");
     const [minutes, setMinutes] = useState(15);
@@ -17,7 +17,7 @@ const SpecialitsWindowStatus = (props) => {
     const [isComment, setIsComment] = useState(false);
     const [isLike, setIsLike] = useState(false);
     const [isDisLike, setIsDisLike] = useState(false);
-    const hash = props.hashApp
+    // const hash = props.hashApp
 
     let leaveCommentBlock;
     let timer = null;
@@ -27,7 +27,8 @@ const SpecialitsWindowStatus = (props) => {
     let isCanceled = props.isCanceled;
 
     useEffect(() => {
-       if (newApplication) {
+        // timer = null;
+        if (newApplication) {
         if (timerDuration > 0 && !timer) {
             timer = setInterval(() => {
                 let seconds = (timerDuration % 60000) / 1000;
@@ -48,6 +49,8 @@ const SpecialitsWindowStatus = (props) => {
         }
         if (timerDuration <= 0) {
             clearInterval(timer);
+            setSeconds("00");
+            setMinutes("00");
             timer = null;
         }
         return(() => {

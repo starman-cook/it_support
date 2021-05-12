@@ -181,7 +181,7 @@ const ApplicationPage = (props) => {
         setInputState(prevState => {
             return {...prevState, "message": inputStateCopy.message}
         })
-        console.log("INPUT STATE TESTING FILES *******", inputState)
+        // console.log("INPUT STATE TESTING FILES *******", inputState)
         // await dispatch(postNewApplication(inputStateCopy, id))
         // setIsApplicationsSent(true);
 
@@ -189,7 +189,7 @@ const ApplicationPage = (props) => {
         Object.keys(inputState).forEach(key => {
             if (typeof inputState[key] === 'object' && inputState[key] !== null) {
                 // formData.append(key, JSON.stringify(inputState[key]));
-                console.log("JSON STRING **** ",JSON.stringify(inputState[key]))
+                // console.log("JSON STRING **** ",JSON.stringify(inputState[key]))
                 for (let i = 0; i < inputState[key].length; i++) {
                     // formData.append(key, inputState[key][i])
                     formData.append(key + "[]", inputState[key][i], inputState[key][i].name);
@@ -198,12 +198,12 @@ const ApplicationPage = (props) => {
                 formData.append(key, inputState[key]);
             }
         })
-        console.log("***************************************")
-        for (let pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        }
-        console.log("***************************************")
-        console.log(formData)
+        // console.log("***************************************")
+        // for (let pair of formData.entries()) {
+        //     console.log(pair[0]+ ', ' + pair[1]);
+        // }
+        // console.log("***************************************")
+        // console.log(formData)
         dispatch(postNewApplication(formData, id));
 
         clearInputState();
@@ -259,9 +259,9 @@ const ApplicationPage = (props) => {
     }, [inputState]);
 
     const parseTimerTime = (totalTime) => {
+        if (totalTime === "expired") return 0
         const timeArray = totalTime.split(":")
         return ((parseInt(timeArray[0] * 60)) + parseInt(timeArray[1])) * 1000
-
     }
 
 
@@ -351,11 +351,11 @@ const ApplicationPage = (props) => {
         top = (
             <SpecialitsWindowStatus
                 id={id}
-                // timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
                 timerDuration={currentApplication.timer ? parseTimerTime(currentApplication.timer) : null}
-                // newApplication={false}
+                // timerDuration={0}
+                // newApplication={true}
                 newApplication={currentApplication.status === 'Запланировано'}
-                // specialistFound={true}
+                // specialistFound={false}
                 specialistFound={currentApplication.status === 'В работе'}
                 // jobDone={true}
                 jobDone={currentApplication.status === 'Завершено'}

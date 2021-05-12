@@ -13,7 +13,7 @@ import {
 // import queryString from 'query-string';
 
 const LayoutApplicationPage = (props) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const history = useHistory();
     // const id = props;
     let id = history.location.pathname.split('/')[2];

@@ -91,6 +91,7 @@ export const postNewApplication = (data, id) => {
             // const response = await axiosTest.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
             dispatch(push(`/application/${id}/${response.data.eventID}`))
             console.log("RESPONSE! ", response.data);
+            console.log("RESPONSE2222! ", response.data.eventID);
         } catch(err) {
             console.log(err);
         }

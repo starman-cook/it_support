@@ -245,6 +245,11 @@
     padding: 0;
     margin: 5px 0 0 0;
 }
+.FullApplicationInfo__content__text--commentDate {
+    margin-top: 25px;
+    font-style: italic;
+    color: #4FC6E0;
+}
 
 .FullApplicationInfo__content {
     display: flex;

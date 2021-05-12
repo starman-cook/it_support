@@ -149,10 +149,10 @@ const FullApplicationInfo = (props) => {
                     </div>
         }) : null
         // fileImage = true;
-        problem = application.details.split("\n");
+        problem = application.details.replaceAll("<br />", "").split("\n");
         workerName = application.employee.name;
         allProblems = problem.map(el => {
-            return <p className="FullApplicationInfo__content__text">{el}</p>
+            return el.length ? <p dangerouslySetInnerHTML={{__html: `${el}`}} className={`FullApplicationInfo__content__text ${el.includes("Комментарий") ? "FullApplicationInfo__content__text--commentDate" : ""}`} /> : null
         });
         isProblem = problem.length > 1;
     }

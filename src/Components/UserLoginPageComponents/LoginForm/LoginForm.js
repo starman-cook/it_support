@@ -23,7 +23,7 @@ const LoginForm = (props) => {
                         name={props.buttonName}
                         width={props.buttonWidth}
                     />
-                    <label name="remember" for="remember">
+                    <label name="remember" htmlFor="remember">
                         <input ref={props.refCheckbox} className="LoginForm__checkbox" id="remember" name="remember" onChange={props.checkOnChange} type="checkbox" />
                         <p className="LoginForm__checkbox--text">Запомнить меня</p>
                     </label>

@@ -18,17 +18,17 @@ const ModalStatus = (props) => {
         });
     }, []);
     const [inputState, setInputState] = useState({
-        planned: null,
-        inProgress: null,
-        completed: null,
-        canceled: null
+        planned: "",
+        inProgress: "",
+        completed: "",
+        canceled: ""
     });
 
     const inputChange = (event) => {
         const {name, value} = event.target;
         if (!event.target.checked) {
             setInputState(prevState => {
-                return {...prevState, [name]: null}
+                return {...prevState, [name]: ""}
             });
         } else {
             setInputState(prevState => {
@@ -49,7 +49,7 @@ const ModalStatus = (props) => {
     const showStatusSearchResults = (event) => {
         event.preventDefault();
         let arr = [];
-        Object.keys(inputState).map(el => {
+        Object.keys(inputState).forEach(el => {
             if (inputState[el]) {
                 arr.push(el === "planned" ? "Запланировано" : el === "inProgress" ? "В работе" : el === "completed" ? "Завершено" : el === "canceled" ? "Отменено" : null);
             }

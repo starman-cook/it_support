@@ -7,13 +7,26 @@ import {useDispatch, useSelector} from "react-redux";
 
 const ModalDepartment = (props) => {
     const dispatch = useDispatch();
-    const [inputState, setInputState] = useState({});
 
     const departments = useSelector(state => state.company.departments);
+
+    const [inputState, setInputState] = useState({
+        "Выездные специалисты": "",
+        "Обслуживание серверов": "",
+        "Сервисный центр": "",
+        "Удаленная поддержка": "",
+    });
+
+
     const statusActiveFilters = useSelector(state => state.applications.data.filter.departament);
     useEffect(() => {
-        let obj = {};
-        departments.map(el => {
+        let obj = {
+            "Выездные специалисты": "",
+            "Обслуживание серверов": "",
+            "Сервисный центр": "",
+            "Удаленная поддержка": "",
+        };
+        departments.forEach(el => {
             if (statusActiveFilters.includes(el.code)) {
                 obj[el.name] = el.code;
             }
@@ -23,7 +36,7 @@ const ModalDepartment = (props) => {
     const showDepartmentSearchResults = (event) => {
         event.preventDefault();
         let arr = [];
-        Object.keys(inputState).map(el => {
+        Object.keys(inputState).forEach(el => {
             if (inputState[el]) {
                 arr.push(inputState[el]);
             }
@@ -37,7 +50,7 @@ const ModalDepartment = (props) => {
         const name = event.target.name;
         if (!event.target.checked) {
             setInputState(prevState => {
-                return {...prevState, [name]: null}
+                return {...prevState, [name]: ""}
             });
         } else {
             setInputState(prevState => {
@@ -48,8 +61,8 @@ const ModalDepartment = (props) => {
     }
     let allDepartments = null;
     if (departments.length) {
-        allDepartments = departments.map(el => {
-           return   <label className="ModalDepartment__label">
+        allDepartments = departments.map((el, i) => {
+           return   <label key={i} className="ModalDepartment__label">
                        <input checked={inputState[el.name]}  name={el.name} className="ModalDepartment__input" onChange={(event) => {inputChange(event, el.code)}} type="checkbox" />
                        <div  className="ModalDepartment__label--icon"/>
                        <p className="ModalDepartment__department">{el.name}</p>

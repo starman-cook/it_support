@@ -73,7 +73,7 @@ const ResultsTableWorker = (props) => {
 
     const showFilters = () => {
         let arr = [];
-        Object.keys(filtersCheck).map(el => {
+        Object.keys(filtersCheck).forEach(el => {
             if (filtersCheck[el]) {
                 arr.push(filtersCheck[el]);
             }

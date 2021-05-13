@@ -98,13 +98,15 @@ const ApplicationPage = (props) => {
     }
     const chooseFile = (event) => {
         const fileNameStateCopy = [...fileNameState]
-        fileNameStateCopy.push(event.target.files[0].name)
-        setFileNameState(fileNameStateCopy);
-        const filesCopy = inputState.files
-        filesCopy.push(event.target.files[0])
-        setInputState(prevState => {
-            return {...prevState, "files": filesCopy}
-        });
+        for (let i = 0; i < event.target.files.length; i++) {
+            fileNameStateCopy.push(event.target.files[i].name)
+            setFileNameState(fileNameStateCopy);
+            const filesCopy = inputState.files
+            filesCopy.push(event.target.files[i])
+            setInputState(prevState => {
+                return {...prevState, "files": filesCopy}
+            });
+        }
         console.log(inputState)
         console.log(fileNameState)
     }

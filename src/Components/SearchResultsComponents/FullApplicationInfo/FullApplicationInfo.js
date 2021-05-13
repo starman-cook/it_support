@@ -139,8 +139,8 @@ const FullApplicationInfo = (props) => {
         department = application.departament;
         subject = application.subject;
         solution = application.outcome.split("\n");
-        allSolution = solution.map(el => {
-            return <p className="FullApplicationInfo__content__text">{el}</p>
+        allSolution = solution.map((el, i) => {
+            return <p key={i} className="FullApplicationInfo__content__text">{el}</p>
         });
         fileImage = application.images.length > 0 ? application.images.map((el, i) => {
             return <div className="FullApplicationInfo__fileImage--canvas">
@@ -151,8 +151,8 @@ const FullApplicationInfo = (props) => {
         // fileImage = true;
         problem = application.details.replaceAll("<br />", "").split("\n");
         workerName = application.employee.name;
-        allProblems = problem.map(el => {
-            return el.length ? <p dangerouslySetInnerHTML={{__html: `${el}`}} className={`FullApplicationInfo__content__text ${el.includes("Комментарий") ? "FullApplicationInfo__content__text--commentDate" : ""}`} /> : null
+        allProblems = problem.map((el, i) => {
+            return el.length ? <p key={i} dangerouslySetInnerHTML={{__html: `${el}`}} className={`FullApplicationInfo__content__text ${el.includes("Комментарий") ? "FullApplicationInfo__content__text--commentDate" : ""}`} /> : null
         });
         isProblem = problem.length > 1;
     }

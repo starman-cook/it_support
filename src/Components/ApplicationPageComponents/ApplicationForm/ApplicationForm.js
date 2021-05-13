@@ -56,7 +56,7 @@ const ApplicationForm = (props) => {
                 <textarea className="ApplicationForm__inputMessage" type="text" name={props.messageName} onChange={props.messageChange} required={props.messageRequired} placeholder={props.messagePlaceholder} />
                 
                 <div className="ApplicationForm__downloadBlock">
-                    <input className="ApplicationForm__inputFile" type="file" onChange={props.fileClicked} ref={props.fileRef} name={props.inputFileName} />
+                    <input className="ApplicationForm__inputFile" type="file" multiple onChange={props.fileClicked} ref={props.fileRef} name={props.inputFileName} />
                     <div className="ApplicationForm__fileIcon" onClick={props.iconClick} />
                     <p className="ApplicationForm__fileName" onClick={props.iconClick}>{props.fileName}</p>
                     <div className="ApplicationForm__question" onMouseEnter={props.questionShow} onMouseLeave={props.questionHide}>

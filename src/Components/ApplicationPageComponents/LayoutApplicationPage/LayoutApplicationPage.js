@@ -39,6 +39,7 @@ const LayoutApplicationPage = (props) => {
                     logoLink={props.createNewApplication}
                 />
                 <div className="LayoutApplicationPage__prev-menu">{props.left}</div>
+                <div className={"WhiteButton--heightStabilizer"} />
                 <WhiteButton 
                     name="Создать новую заявку"
                     clicked={props.createNewApplication}

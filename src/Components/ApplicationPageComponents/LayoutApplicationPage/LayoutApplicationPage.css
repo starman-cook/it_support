@@ -1,27 +1,39 @@
 .LayoutApplicationPage {
-    max-width: 1170px;
+    /*max-width: 1170px;*/
+    width: 80%;
     margin: 30px auto;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
+    /*align-items: stretch;*/
 }
 
 .LayoutApplicationPage_sidebar {
+    width: 30%;
+    /*height: 1012px;*/
+    /*flex-grow: 1;*/
     display: flex;
     flex-direction: column;
+    margin-right: 30px;
 }
 .LayoutApplicationPage__prev-menu {
-    height: 518px;
+    /*height: 518px;*/
 }
 .LayoutApplicationPage__main {
+    width: 70%;
+    /*height: 1012px;*/
     display: flex;
     flex-direction: column;
 }
 .LayoutApplicationPage__top {
+    width: 100%;
+    /*flex-grow: 3;*/
     margin: 0;
     padding: 0;
 }
 .LayoutApplicationPage__center {
+    width: 100%;
+    /*flex-grow: 3;*/
     margin: 0;
     padding: 0;
 }

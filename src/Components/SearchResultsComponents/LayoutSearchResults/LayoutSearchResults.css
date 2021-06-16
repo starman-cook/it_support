@@ -1,8 +1,10 @@
 .LayoutSearchResults {
-    margin-bottom: 100px;
+    width: 80%;
+    margin: 0 auto 100px auto;
 }
 .LayoutSearchResults__header {
-    max-width: 1170px;
+    /*max-width: 1170px;*/
+    /*width: 80%;*/
     min-height: 109px;
     margin: 40px auto;
     background: #FFFFFF;
@@ -109,11 +111,13 @@
 
 
 .LayoutSearchResults__dateEngine {
-    max-width: 1170px;
+    /*max-width: 1170px;*/
+    width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .LayoutSearchResults__buttonsBlock {
     display: flex;

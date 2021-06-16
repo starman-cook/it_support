@@ -1,7 +1,18 @@
 .LogoFrame {
-    width: 370px;
-    height: 300px;
+    /*width: 370px;*/
+    width: 100%;
+    /*padding: 150px;*/
+    box-sizing: border-box;
+    min-height: 300px;
     border-radius: 8px;
     background: white url('../../../assets/images/logo_L.svg')center no-repeat;
+    background-size: 200px;
     cursor: pointer;
+}
+
+@media (max-width: 1280px) {
+    .LogoFrame {
+        background-size: 170px;
+        min-height: 220px;
+    }
 }

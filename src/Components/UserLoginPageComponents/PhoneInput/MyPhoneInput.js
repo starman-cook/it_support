@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from '../Button/Button';
-import './PhoneInput.css';
+import './MyPhoneInput.css';
 
-const PhoneInput = (props) => {
+
+const MyPhoneInput = (props) => {
     return (
         <div className="PhoneInput">
             {props.error ? <p className="PhoneInput__title">Упс...</p> : <p className="PhoneInput__title">SMS-верификация</p>}
@@ -19,4 +20,4 @@ const PhoneInput = (props) => {
     )
 }
 
-export default PhoneInput;
+export default MyPhoneInput;

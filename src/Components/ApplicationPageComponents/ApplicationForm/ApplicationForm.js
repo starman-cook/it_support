@@ -37,7 +37,7 @@ const ApplicationForm = (props) => {
     return (
         <div className="ApplicationForm">
             <h2 className="ApplicationForm__title"><span className="ApplicationForm__title-name">{props.userName}</span>, {props.greetings}</h2>
-            <form onSubmit={props.submitClicked}>
+            <form className="ApplicationForm__form" onSubmit={props.submitClicked}>
                 <h4 className="ApplicationForm__inputTitle">{props.subjectTitle}</h4>
                 <input className="ApplicationForm__input" type="text" name={props.subjectName} onChange={props.subjectChange} required={props.subjectRequired} placeholder={props.subjectPlaceholder} />
                 

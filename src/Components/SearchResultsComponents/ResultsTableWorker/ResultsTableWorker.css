@@ -1,5 +1,6 @@
 .ResultsTableWorker {
-    max-width: 1170px;
+    /*max-width: 1170px;*/
+    width: 100%;
     margin: 10px auto;
 }
 .ResultsTableWorker__filtersBlock {

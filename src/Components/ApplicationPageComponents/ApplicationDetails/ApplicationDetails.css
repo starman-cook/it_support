@@ -16,8 +16,8 @@ p {
 
 
 .ApplicationDetails {
-    width: 770px;
-    min-height: 683px;
+    width: 100%;
+    /*min-height: 383px;*/
     background: #FFFFFF;
     border-radius: 8px;
     padding: 30px 70px;
@@ -118,6 +118,9 @@ p {
       position: relative;
       overflow: hidden;
   }
+.messageClassToggleHidden--empty {
+    height: 70px;
+}
 .messageClassToggleOpen {
       margin-bottom: 50px;
       position: relative;

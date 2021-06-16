@@ -1,5 +1,6 @@
 .WhiteButton {
-    width: 370px;
+    /*width: 370px;*/
+    width: 100%;
     height: 44px;
     background: white;
     cursor: pointer;
@@ -22,5 +23,7 @@
 }
 
 .WhiteButton--heightStabilizer {
-    height: 64px;
+    /*height: 10px;*/
+    margin-top: auto;
+    display: block;
 }

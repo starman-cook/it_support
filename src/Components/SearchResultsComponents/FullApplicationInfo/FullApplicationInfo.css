@@ -1,10 +1,12 @@
  .FullApplicationInfo {
      position: fixed;
-     top: 50%;
+     top: 0;
      left: 50%;
-     transform: translate(-50%, -50%);
-     max-width: 1076px;
-     margin: 30px auto;
+     transform: translate(-50%, 0);
+     /*width: 1076px;*/
+     width: 80%;
+     height: 94vh;
+     margin: 15px auto;
      background: #f3f6f9;
      padding: 5px 25px;
      border-radius: 10px;
@@ -21,7 +23,8 @@
 }
 .FullApplicationInfo__header {
     margin: 28px auto;
-    max-width: 1018px;
+    /*max-width: 1018px;*/
+    width: 100%;
     display: flex;
     align-items: flex-start;
     background: white;
@@ -200,8 +203,9 @@
 }
 
 .FullApplicationInfo__content--left {
-    width: 672px;
-    height: 440px;
+    /*width: 672px;*/
+    width: 70%;
+    height: 65vh;
     background: #FFFFFF;
     border-radius: 8px;
     padding: 30px 70px;
@@ -254,7 +258,8 @@
 .FullApplicationInfo__content {
     display: flex;
     align-items: flex-start;
-    max-width: 1018px;
+    /*max-width: 1018px;*/
+    width: 100%;
     margin: 0 auto;
 }
 .FullApplicationInfo__content--noFile {
@@ -288,11 +293,13 @@
 }
 
 .FullApplicationInfo__content--right {
-    width: 320px;
+    /*width: 320px;*/
+    width: 30%;
     display: flex;
     flex-direction: column;
     margin-left: 30px;
-    height: 440px;
+    /*height: 440px;*/
+    height: 65vh;
     overflow-y: scroll;
 }
  .FullApplicationInfo__content--right::-webkit-scrollbar-track
@@ -338,7 +345,8 @@
 
 .FullApplicationInfo__footer {
     max-width: 1018px;
-    margin: 38px auto;
+    /*width: 100%;*/
+    margin: 15px auto;
     display: flex;
     justify-content: space-between;
 }

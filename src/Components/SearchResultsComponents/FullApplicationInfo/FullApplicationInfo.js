@@ -241,11 +241,11 @@ const FullApplicationInfo = (props) => {
                         </div>
 
 
-                        <p className="FullApplicationInfo__content__text--title">Результат</p>
+                        <p className="FullApplicationInfo__content__text--title">{status === "завершено" ? "Рузультат" : status === "отменено" ? "Причины отмены заявки" : ""}</p>
                         <div >
                             {allSolution}
                         </div>
-                        {!fileImage && (status === "завершено" || status === "отменено") ? <p className="FullApplicationInfo__backToWorkLink FullApplicationInfo__backToWorkLink--pushRight">Вернуть заявку в работу</p> : null}
+                        {!fileImage && status === "завершено" ? <p className="FullApplicationInfo__backToWorkLink FullApplicationInfo__backToWorkLink--pushRight">Вернуть заявку в работу</p> : null}
 
                     </div>
 
@@ -262,7 +262,7 @@ const FullApplicationInfo = (props) => {
                         {/*</div>*/}
 
 
-                        {status === "завершено" || status === "отменено" ? <p onClick={() => {backInProgressHandler()}} className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
+                        {status === "завершено" ? <p onClick={() => {backInProgressHandler()}} className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
                     </div> : null}
 
                 </div>

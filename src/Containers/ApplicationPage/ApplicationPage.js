@@ -23,7 +23,7 @@ import {
 const ApplicationPage = (props) => {
     const dispatch = useDispatch();
     const id = props.match.params.id;
-    const idInTitle = `№ IT-${id}`;
+    // const idInTitle = `№ IT-${id}`;
     // const status = 'new' // Получить статус заявки при запросе данных заявки !!! Пока не пригодилось, работает и без этого
     // Статусы также вызываются в компоненте окна специалиста SpecialistWindowStatus
     // const applicationHash = useSelector(state => state.applications.newApplicationHash)
@@ -417,7 +417,7 @@ const ApplicationPage = (props) => {
             }}
             submitComment={applyComment}
             // id={id}
-            idInTitle={idInTitle}
+            idInTitle={currentApplication ? currentApplication.humanId : null}
             jobDone={currentApplication.status === 'Завершено'}
             isCanceled={currentApplication.status === 'Отменено'}
         />)

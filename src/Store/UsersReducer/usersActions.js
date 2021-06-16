@@ -37,8 +37,7 @@ export const sendPhone = (phoneNumber, id) => {
             await dispatch(setLoginStatus("sms"));
 
         } catch (err) {
-            console.log("PHONE ERROR ", err);
-            dispatch(phoneLoginError(err.response.status));
+            dispatch(phoneLoginError("denied"));
         }
     }
 }
@@ -52,8 +51,7 @@ export const sendSms = (smsAndId) => {
             // await dispatch(saveId(response.data.clientId));
             await dispatch(push('/search'));
         } catch (err) {
-            console.log("SMS ", err);
-            dispatch(smsLoginError(err.response.status));
+            dispatch(smsLoginError("denied"));
         }
     }
 }

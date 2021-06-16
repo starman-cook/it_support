@@ -50,10 +50,10 @@ const LayoutApplicationPage = (props) => {
                 />
                 <SocialNetworkLinks 
                     introText={"Мы в социальных сетях"}
-                    // instagram={}
-                    // facebook={}
-                    // linkedin={}
-                    // youtube={}
+                    instagram={"https://www.instagram.com/itsupport.kz/?hl=ru"}
+                    facebook={"https://www.facebook.com/itsupport.kz/"}
+                    linkedin={"https://www.linkedin.com/company/it-support-group-kazakhstan?originalSubdomain=kz"}
+                    youtube={"https://www.youtube.com/channel/UCsnFSIp17CHdL-h69_8mgnQ"}
                 />
             </div>
             <div className="LayoutApplicationPage__main">

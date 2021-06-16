@@ -1,3 +1,7 @@
+p {
+    margin: 0;
+}
+
 .Comment {
     background: #C0C0C0;
     border-radius: 8px;
@@ -40,6 +44,7 @@
     line-height: 25px;
     letter-spacing: 0.01em;
     color: #4D525B;
+    margin-bottom: 7px;
 
 }
 .ApplicationDetails__text {
@@ -49,7 +54,7 @@
     letter-spacing: 0.01em;
     color: #4D525B;
     padding: 0;
-    margin: 0;
+    margin: 0 0 20px 0;
 }
 .ApplicationDetails__textarea {
     width: 630px;

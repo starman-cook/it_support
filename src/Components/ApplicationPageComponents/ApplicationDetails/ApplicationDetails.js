@@ -24,7 +24,9 @@ const ApplicationDetails = (props) => {
 
     const department = props.department; // Получить по id
     const subject = props.subject; // Получить по id
-    const message = props.message;
+    const basicDetailsMessage = props.message.split("Комментарий")[0]
+    const restOfMessageWithComments = props.message.replace(basicDetailsMessage, "")
+    const message = `${basicDetailsMessage}<br /><br />${restOfMessageWithComments}`
     const result = props.result;
     // let allComments;
     // if (comments) {
@@ -66,7 +68,8 @@ const ApplicationDetails = (props) => {
     // if (status === 'new') {
         centerComponent = (
         <div className="ApplicationDetails">
-            <h2 className="ApplicationDetails__title">Детали заявки {props.idInTitle}</h2>
+            {/*<h2 className="ApplicationDetails__title">Детали заявки {props.idInTitle}</h2>*/}
+            <h2 className="ApplicationDetails__title">Детали заявки</h2>
             <div className="ApplicationDetails__head">
                 <div className="ApplicationDetails__head--sides">
                     <p className="ApplicationDetails__text--title">Ответственный отдел</p>
@@ -82,7 +85,7 @@ const ApplicationDetails = (props) => {
                 <div dangerouslySetInnerHTML={{__html: `<p className="ApplicationDetails__text">${message}<p>`}} className="ApplicationDetails__text" ></div>
                 {props.showDetailsButton ? <div onClick={textShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{messageClassButtonText}</div> : null}
             </div>
-            {jobDone || isCanceled
+            {jobDone
                     ?
                 <>
                      <p className="ApplicationDetails__text--title">Результат</p>
@@ -91,6 +94,15 @@ const ApplicationDetails = (props) => {
                         {props.showResultButton ? <div onClick={resultShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{resultClassButtonText}</div> : null}
                     </div>
                 </>
+                    :
+                isCanceled ?
+                    <>
+                        <p className="ApplicationDetails__text--title">Причины отмены заявки</p>
+                        <div className={resultClassToggle}>
+                            <p className="ApplicationDetails__text">{result}</p>
+                            {props.showResultButton ? <div onClick={resultShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{resultClassButtonText}</div> : null}
+                        </div>
+                    </>
                     :
                 <>
                     <textarea value={props.oneComment} placeholder="Если вы хотите дополнить заявку, напишите комментарий" onChange={props.onChangeComment} className="ApplicationDetails__textarea" />

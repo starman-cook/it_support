@@ -157,14 +157,14 @@ const UserLoginPage = (props) => {
     if (status === "sms") {
         grey = true;
         question = "У вас возникли сложности?";
-        link = "#";
+        link = "https://wa.me/77473901112";
         textLink = "Оставьте заявку в чат-боте WatsApp";
         contacts = "или позвоните на +7 707 390 11 12, и мы что-нибудь придумаем.";
         loginContent = (
             <SmsInput
                 time={"15"}
-                wrongPassword={smsError}
-                error={smsError}
+                wrongPassword={smsError === "denied"}
+                error={smsError === "denied"}
                 buttonName={"запросить SMS повторно"}
                 buttonWidth={"303"}
                 phone={`+7 ${phoneCode} *** ** ${phoneC}`}
@@ -210,12 +210,12 @@ const UserLoginPage = (props) => {
     if (status === "phone") {
         grey = true;
         question = "У вас возникли сложности?";
-        link = "#";
+        link = "https://wa.me/77473901112";
         textLink = "Оставьте заявку в чат-боте WatsApp";
         contacts = "или позвоните на +7 707 390 11 12, и мы что-нибудь придумаем.";
         loginContent = (
             <PhoneInput
-                error={phoneError}
+                error={phoneError === "denied"}
                 // refPhone={refPhone}
                 // phoneModel={"+7 444"}
                 // activateInput={activateInput}
@@ -296,7 +296,7 @@ const UserLoginPage = (props) => {
 
     if (status === "login") {
         question = "Не помните данные для входа?";
-        link = "#";
+        link = "https://wa.me/77473901112";
         textLink = "Оставьте заявку в чат-боте WatsApp";
         contacts = "или позвоните на +7 707 390 11 12, и мы восстановим ваш логин и пароль.";
         loginContent = (
@@ -327,10 +327,10 @@ const UserLoginPage = (props) => {
                 textLink={textLink}
                 contacts={contacts}
                 grey={grey}
-                instagram={"#"}
-                facebook={"#"}
-                linkedin={"#"}
-                youtube={"#"}
+                instagram={"https://www.instagram.com/itsupport.kz/?hl=ru"}
+                facebook={"https://www.facebook.com/itsupport.kz/"}
+                linkedin={"https://www.linkedin.com/company/it-support-group-kazakhstan?originalSubdomain=kz"}
+                youtube={"https://www.youtube.com/channel/UCsnFSIp17CHdL-h69_8mgnQ"}
             />
         </div>
     )

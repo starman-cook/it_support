@@ -20,10 +20,11 @@
 }
 .ApplicationForm__inputTitle {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 30px;
     letter-spacing: 0.01em;
     color: #4D525B;
+    margin-bottom: 10px;
 }
 .ApplicationForm__input {
     color: #4D525B;
@@ -42,22 +43,22 @@
 }
 .ApplicationForm__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__input::-moz-placeholder { /* Firefox 19+ */
     color:  #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__input:-ms-input-placeholder { /* IE 10+ */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__input:-moz-placeholder { /* Firefox 18- */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__input-select {
@@ -100,22 +101,22 @@ option:checked {
 }
 .ApplicationForm__inputMessage::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 22px;
   }
 .ApplicationForm__inputMessage::-moz-placeholder { /* Firefox 19+ */
     color:  #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 22px;
   }
 .ApplicationForm__inputMessage:-ms-input-placeholder { /* IE 10+ */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 22px;
   }
 .ApplicationForm__inputMessage:-moz-placeholder { /* Firefox 18- */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 22px;
   }
 .ApplicationForm__downloadBlock {
@@ -180,10 +181,21 @@ option:checked {
 
 .ApplicationForm__teamViewerTitle {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 30px;
     letter-spacing: 0.01em;
     color: #4D525B;
+    margin-bottom: 10px;
+}
+.ApplicationForm__teamViewerTitle-block {
+    display: flex;
+    align-items: center;
+}
+.ApplicationForm__teamViewer-icon {
+    width: 30px;
+    height: 30px;
+    display: block;
+    background: url("../../../assets/icons/downloadTeamViewer.svg")center no-repeat;
 }
 .ApplicationForm__teamViewer-block {
     display: flex;
@@ -210,22 +222,22 @@ option:checked {
 }
 .ApplicationForm__inputPassword::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__inputPassword::-moz-placeholder { /* Firefox 19+ */
     color:  #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__inputPassword:-ms-input-placeholder { /* IE 10+ */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__inputPassword:-moz-placeholder { /* Firefox 18- */
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__eye {

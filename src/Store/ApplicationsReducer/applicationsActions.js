@@ -125,6 +125,7 @@ export const addDetailsToApplicationInProcess = (data) => {
 export const setApplicationBackInProgress = (id) => {
     return async () => {
         try {
+            console.log(id)
             await axios.get(`/CRM/hs/event/method/eventupdate?document=${id}`);
             // await axiosTest.get(`https://itsupport.kz/itsp2/eventupdate/proxy.php?document=${id}`);
         } catch (err) {
@@ -136,7 +137,7 @@ export const setApplicationBackInProgress = (id) => {
 export const leaveTheRate = (data) => {
     return async () => {
         try {
-            await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=updateEventRate', data)
+            await axiosOriginal.get(`https://itsupport.kz/itsp2/proxy.php?act=updateEventRate&document=${data.document}&rate=${data.rate}`)
         } catch (err) {
             console.log(err);
         }

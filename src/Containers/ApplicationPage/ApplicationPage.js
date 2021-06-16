@@ -37,8 +37,7 @@ const ApplicationPage = (props) => {
     const [submitDisabled, setSubmitDisabled] = useState(true);
     // const [isModalApplication, setIsModalApplication] = useState(false);
 
-    // const [isBackInProgress, setIsBackInProgress] = useState(false);
-    const [isBackInProgress, setIsBackInProgress] = useState(true);
+    const [isBackInProgress, setIsBackInProgress] = useState(false);
 
     let buttonName = "";
 
@@ -178,7 +177,7 @@ const ApplicationPage = (props) => {
     const submitFormHandler = async (event) => {
         event.preventDefault()
         let inputStateCopy = {...inputState}
-        inputStateCopy.message += "<br />"
+        inputStateCopy.message += "\n"
 
         setInputState(prevState => {
             return {...prevState, "message": inputStateCopy.message}
@@ -225,7 +224,8 @@ const ApplicationPage = (props) => {
         clearInputState();
         setIsBackInProgress(false);
         await dispatch(setApplicationBackInProgress(lastApplication.ref));
-        await dispatch(getCurrentApplicationData(lastApplication.ref))
+        // await dispatch(getCurrentApplicationData(lastApplication.ref))
+        dispatch(push(`/application/${id}/${lastApplication.ref}`))
         // добавить смену статуса на Запланировано
     }
 
@@ -249,7 +249,7 @@ const ApplicationPage = (props) => {
 
         const obj = {
             document: applicationHash,
-            body: `<br />${oneComment}<br />`
+            body: oneComment
         }
         dispatch(addDetailsToApplicationInProcess(obj));
         setOneComment('');
@@ -366,7 +366,7 @@ const ApplicationPage = (props) => {
                 name={currentApplication.responsible ? currentApplication.responsible : null}
                 photo={currentApplication.image ? `data:image/jpg;base64, ${currentApplication.image}` : null}
                 phone={currentApplication.phonenumber ? currentApplication.phonenumber : null}
-                specialistId={currentApplication.contactperson ? currentApplication.contactperson.split(" ")[0] : null}
+                // specialistId={currentApplication.contactperson ? currentApplication.contactperson.split(" ")[0] : null}
                 hashApp={applicationHash}
 
                 isLike={currentApplication ? currentApplication.rate === 1 : false}
@@ -384,7 +384,7 @@ const ApplicationPage = (props) => {
                 specialistFound={currentApplication.status === 'В работе'}
                 jobDone={currentApplication.status === 'Завершено'}
                 isCanceled={currentApplication.status === 'Отменено'}
-                backInProgress={goToReturnedApplication}
+                backInProgress={() => {dispatch(setApplicationBackInProgress(applicationHash))}}
             />
         )
         } else if (lastApplication  && !!lastApplication.result ) {
@@ -418,7 +418,7 @@ const ApplicationPage = (props) => {
             submitComment={applyComment}
             // id={id}
             idInTitle={idInTitle}
-            jobDone={currentApplication.status === 'Выполнено'}
+            jobDone={currentApplication.status === 'Завершено'}
             isCanceled={currentApplication.status === 'Отменено'}
         />)
     } else {

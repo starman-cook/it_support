@@ -68,9 +68,11 @@ const ApplicationForm = (props) => {
                     {props.chosenFiles}
                 </div>
 
+                <div className="ApplicationForm__teamViewerTitle-block">
+                    <h2 className="ApplicationForm__teamViewerTitle">{props.textTeamViewer}</h2>
+                    <a href={"https://itsupport.kz/TeamViewer%20IT%20Support%20idc6uwrqhv.exe"} download className="ApplicationForm__teamViewer-icon" />
+                </div>
 
-                <h2 className="ApplicationForm__teamViewerTitle">{props.textTeamViewer}</h2>
-            
                 <div className="ApplicationForm__teamViewer-block">
                     <div className="ApplicationForm__teamViewer-combine">
                         <input className="ApplicationForm__inputPassword" type={props.showPassword ? "text" : "password"} name={props.passwordName} onChange={props.passwordChange} required={props.passwordRequired} placeholder={props.passwordPlaceholder} />

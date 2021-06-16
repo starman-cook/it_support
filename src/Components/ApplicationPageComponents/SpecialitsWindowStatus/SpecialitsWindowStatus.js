@@ -63,11 +63,10 @@ const SpecialitsWindowStatus = (props) => {
         if (oneComment === undefined || oneComment.trim() === '') {
             return;
         }
-        let obj ={
-            document: props.hashApp,
-            message: oneComment
-        }
-        dispatch(addTheCommentToSpecialist(obj))
+        const formData = new FormData()
+        formData.append("document", props.hashApp)
+        formData.append("message", oneComment.toString())
+        dispatch(addTheCommentToSpecialist(formData))
         setIsComment(true);
     }
     const textAreaHandler = (event) => {
@@ -97,7 +96,7 @@ const SpecialitsWindowStatus = (props) => {
 
     const isLikeHandler = () => {
         setIsLike(true);
-        const obj={
+        let obj ={
             document: props.hashApp,
             rate: 1
         }
@@ -105,7 +104,7 @@ const SpecialitsWindowStatus = (props) => {
     }
     const isDisLikeHandler = () => {
         setIsDisLike(true);
-        const obj={
+        let obj ={
             document: props.hashApp,
             rate: -1
         }
@@ -194,10 +193,11 @@ const SpecialitsWindowStatus = (props) => {
                                 {props.name}
                             </h3>
                             <p className="SpecialistWindow__text">
-                                {props.phone}
+                                +7 727 390 1112
                             </p>
                         </div>
-                        <p className="SpecialistWindow__text">{props.specialistId}</p>
+                        {/*<p className="SpecialistWindow__text">{props.specialistId}</p>*/}
+                        <p className="SpecialistWindow__text">IT{props.phone}</p>
                     </div>
 
                 </div>

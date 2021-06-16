@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './LayoutSearchResults.css';
 import {push} from 'connected-react-router';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    changeNumber,
+    changeNumber, clearMyInterval,
     initFilters, inputFilterDateFrom, inputFilterDateTo, isFilterDateActive,
     setActiveFilters,
     setActivePage
@@ -22,6 +22,9 @@ const LayoutSearchResults = (props) => {
             dispatch(push(`/application/${company.director.id}/new`));
         }
     }
+    useEffect(() => {
+        dispatch(clearMyInterval())
+    }, [])
     const inputValue = (event) => {
         dispatch(changeNumber(event.target.value));
         dispatch(setActivePage(1));

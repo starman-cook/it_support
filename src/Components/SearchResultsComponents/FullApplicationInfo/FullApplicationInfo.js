@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './FullApplicationInfo.css';
 import {push} from 'connected-react-router';
 import { useDispatch } from "react-redux";
+import {setApplicationBackInProgress} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
 const FullApplicationInfo = (props) => {
@@ -156,7 +157,10 @@ const FullApplicationInfo = (props) => {
         });
         isProblem = problem.length > 1;
     }
-    console.log(application);
+    const backInProgressHandler = () => {
+        dispatch(setApplicationBackInProgress(application._id))
+        props.clickToClose()
+    }
     return (
         <>
             <div className="FullApplicationInfo">
@@ -258,7 +262,7 @@ const FullApplicationInfo = (props) => {
                         {/*</div>*/}
 
 
-                        {status === "завершено" || status === "отменено" ? <p className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
+                        {status === "завершено" || status === "отменено" ? <p onClick={() => {backInProgressHandler()}} className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
                     </div> : null}
 
                 </div>

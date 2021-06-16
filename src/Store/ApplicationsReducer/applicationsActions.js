@@ -6,7 +6,7 @@ import {
     CHANGE_PAGINATION,
     CHANGE_STATUS, CLEAR_INTERVAL, FIRST_CALENDAR_DAY_IN_RANGE, GET_CLIENT_NAME,
     GET_COUNT_AMOUNT, GET_CURRENT_APPLICATION_DATA, GET_HASH_OF_THE_LAST_APPLICATION, GET_LAST_APPLICATION,
-    GET_TEN_APPLICATIONS,
+    GET_TEN_APPLICATIONS, INIT_APPLICATION_STATE,
     INIT_FILTERS,
     INPUT_FILTER_DATE_FROM,
     INPUT_FILTER_DATE_TO,
@@ -53,7 +53,7 @@ export const setMyInterval = (value) => ({type: SET_INTERVAL, value});
 export const clearMyInterval = () => ({type: CLEAR_INTERVAL});
 
 export const getClientNameSuccess = (value) => ({type: GET_CLIENT_NAME, value});
-
+export const initApplicationState = () => ({type: INIT_APPLICATION_STATE})
 
 
     export const getTenApplications = (data) => {

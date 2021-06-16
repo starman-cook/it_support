@@ -39,6 +39,7 @@
     color: #828282;
     display: flex;
     cursor: pointer;
+    margin-top: 15px;
     user-select: none;
 }
 .LoginForm__checkbox--text::before {
@@ -46,12 +47,12 @@
     display: inline-block;
     width: 16px;
     height: 16px;
-    background: url('../../../assets//icons/ic-remember-frame.svg') center no-repeat;
+    background: url('../../../assets/icons/ic-remember-frame.svg') center no-repeat;
     margin-right: 7px;
 }
 .LoginForm__checkbox:checked ~ .LoginForm__checkbox--text::before {
     background:url('../../../assets/icons/ic-remember-me.svg')center no-repeat,
-               url('../../../assets//icons/ic-remember-frame.svg') center no-repeat;
+               url('../../../assets/icons/ic-remember-frame.svg') center no-repeat;
 }
 
 .LoginForm__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */

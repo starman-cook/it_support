@@ -57,7 +57,8 @@ p {
     margin: 0 0 20px 0;
 }
 .ApplicationDetails__textarea {
-    width: 630px;
+    /*width: 630px;*/
+    width: 100%;
     height: 160px;
     padding: 20px;
     box-sizing: border-box;
@@ -73,7 +74,8 @@ p {
     border: 1px solid #E34A4E;
 }
 .ApplicationDetails__btn {
-    width: 630px;
+    /*width: 630px;*/
+    width: 100%;
     display: flex;
     justify-content: flex-end;
 }

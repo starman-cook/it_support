@@ -39,7 +39,7 @@ const ApplicationStatus = (props) => {
                 <div className="ApplicationStatus__textItem">
                     <h3 className={`ApplicationStatus__title ${jobDone ? null : "ApplicationStatus__unactive"}`}>Заявка закрыта</h3>
                     <p className={`ApplicationStatus__text ${jobDone ? null : "ApplicationStatus__unactive"}`}>Поделитесь с нами обратной связью</p>
-                    <p onClick={props.backInProgress} className="ApplicationStatus__link--whenCanceled">Вернуть заявку в работу</p>
+                    <p onClick={props.backInProgress} className={`ApplicationStatus__link--whenCanceled ${jobDone ? null : "ApplicationStatus__btn--hidden"}`}>Вернуть заявку в работу</p>
                 </div>
             }
             </div>

@@ -84,3 +84,6 @@
 .ApplicationStatus__link--whenCanceled:active {
     color: #4D525B;
 }
+.ApplicationStatus__btn--hidden {
+    display: none;
+}

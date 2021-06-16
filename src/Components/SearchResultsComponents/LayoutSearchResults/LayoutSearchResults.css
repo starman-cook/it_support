@@ -167,7 +167,8 @@
     padding: 2px;
     text-align: center;
     outline: none;
-    margin-right: 8px;
+    /*margin-right: 8px;*/
+    margin: 5px 8px 0 0;
     font-size: 18px;
     line-height: 23px;
     text-align: center;

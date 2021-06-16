@@ -121,7 +121,7 @@ const ResultsTableWorker = (props) => {
     }
     const applications = useSelector(state => state.applications.applications);
 
-    if (applications !== null) {
+    if (applications ? applications.length : null) {
         allApplications = applications.map((el, i) => {
 
             const status = el.status;

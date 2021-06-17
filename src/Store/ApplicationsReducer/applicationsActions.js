@@ -82,16 +82,18 @@ export const getLastApplication = (id) => {
         }
     }
 }
+// https://itsupport.kz/itsp2/proxy_test.php
 // https://itsupport.kz/itsp2/proxy.php?act=createEvent
 export const postNewApplication = (data, id) => {
     return async dispatch => {
         try {
-            const response = await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
+            // const response = await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
+            const response = await axiosOriginal.post('https://itsupport.kz/itsp2/proxy_test.php?act=createEvent', data);
             dispatch(getHashOfTheLastApplication(response.data.eventID))
             // const response = await axiosTest.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
             dispatch(push(`/application/${id}/${response.data.eventID}`))
-            console.log("RESPONSE! ", response.data);
-            console.log("RESPONSE2222! ", response.data.eventID);
+            // console.log("RESPONSE! ", response.data);
+            // console.log("RESPONSE2222! ", response.data.eventID);
         } catch(err) {
             console.log(err);
         }
@@ -125,7 +127,7 @@ export const addDetailsToApplicationInProcess = (data) => {
 export const setApplicationBackInProgress = (id) => {
     return async () => {
         try {
-            console.log(id)
+            // console.log(id)
             await axios.get(`/CRM/hs/event/method/eventupdate?document=${id}`);
             // await axiosTest.get(`https://itsupport.kz/itsp2/eventupdate/proxy.php?document=${id}`);
         } catch (err) {

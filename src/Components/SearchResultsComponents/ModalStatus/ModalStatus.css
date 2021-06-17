@@ -45,6 +45,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    margin: 10px 0;
 }
 
 .ModalStatus__input{
@@ -52,7 +53,6 @@
     display: none;
 }
 .ModalStatus__status {
-    display: block;
     width: 109px;
     height: 16px;
     border-radius: 11px;
@@ -67,7 +67,6 @@
 }
 .ModalStatus__label--icon::before {
     content: '';
-    display: inline-block;
     width: 16px;
     height: 16px;
     display: flex;

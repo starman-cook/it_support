@@ -1,11 +1,11 @@
 import { Route, Switch } from 'react-router';
 import ErrorWindow from './Components/ApplicationPageComponents/ErrorWindow/ErrorWindow';
-import FullApplicationInfo from './Components/SearchResultsComponents/FullApplicationInfo/FullApplicationInfo';
+// import FullApplicationInfo from './Components/SearchResultsComponents/FullApplicationInfo/FullApplicationInfo';
 import ApplicationPage from './Containers/ApplicationPage/ApplicationPage';
 import SearchResultsPage from './Containers/SearchResultsPage/SearchResultsPage';
 import UserLoginPage from './Containers/UserLoginPage/UserLoginPage';
-import WithLoader from './hoc/WithLoader/WithLoader';
-import axios from "./axiosApi";
+// import WithLoader from './hoc/WithLoader/WithLoader';
+// import axios from "./axiosApi";
 function App() {
   return (
   <>

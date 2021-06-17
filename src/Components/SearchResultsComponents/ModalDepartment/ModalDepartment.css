@@ -45,6 +45,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin: 10px 0;
 }
 
 .ModalDepartment__input{

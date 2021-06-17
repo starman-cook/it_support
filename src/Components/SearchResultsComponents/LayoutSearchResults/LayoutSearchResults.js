@@ -36,6 +36,7 @@ const LayoutSearchResults = (props) => {
         await dispatch(inputFilterDateFrom(""));
         await dispatch(inputFilterDateTo(""));
         await dispatch(setActiveFilters([]));
+        await dispatch(setActivePage(1))
         const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
         for (let i = 0; i < el.length; i++) {
             el[i].style.color = '#E34A4E';

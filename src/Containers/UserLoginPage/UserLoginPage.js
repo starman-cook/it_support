@@ -47,7 +47,7 @@ const UserLoginPage = (props) => {
     }, [sms1, sms2,  sms3, sms4]);
 
     useEffect(() => {
-        localStorage.clear();
+        // localStorage.clear();
         if (id) {
             dispatch(saveUser(id));
         }

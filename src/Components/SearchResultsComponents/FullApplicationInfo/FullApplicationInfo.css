@@ -74,7 +74,6 @@
 }
 
 .FullApplicationInfo__status {
-    display: block;
     width: 109px;
     height: 16px;
     border-radius: 11px;
@@ -447,4 +446,14 @@
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 7;
+}
+.FullApplicationInfo__fileImage--link {
+    text-decoration: none;
+    display: block;
+    color: #4FC6E0;
+    overflow-wrap: break-word;
+    margin-right: 5px;
+}
+.FullApplicationInfo__fileImage--link:hover {
+    color: darkblue;
 }

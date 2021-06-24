@@ -52,8 +52,18 @@ const store = createStore(rootReducer, persistedState, enhancers);
 store.subscribe(() => {
     saveToLocalStorage({
         applications: {
-            ...store.getState().applications, data: store.getState().applications.data
-        }
+                    ...store.getState().applications, data: store.getState().applications.data
+                },
+
+        // applications: {
+        //             data: {clientId: store.getState().applications.data.clientId, hash:  store.getState().applications.data.hash}
+        //         }
+
+        // data: {
+        //     ...store.getState().applications.data, clientId: store.getState().applications.data.clientId,
+        //     hash: store.getState().applications && store.getState().applications.data.hash
+        // }
+
     })
 });
 

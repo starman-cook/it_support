@@ -106,6 +106,31 @@ const FullApplicationInfo = (props) => {
     //     fileImage = application.fileImage;
     //     problem = application.problem;
     // }
+    // const noImageHandler = (event) => {
+    //     event.target.style.display = "none"
+    // }
+    // const [isImage, setIsImage] = useState(false)
+    // const checkIfImageExists = (url) => {
+    //
+    //     const img = new Image();
+    //
+    //     img.src = url;
+    //
+    //     if (img.complete) {
+    //         return true
+    //         // callback(true);
+    //     } else {
+    //         img.onload = () => {
+    //             // callback(true);
+    //             return true
+    //         };
+    //         img.onerror = () => {
+    //             // callback(false);
+    //             return false
+    //         };
+    //     }
+    // }
+
     let color;
     let date;
     let status;
@@ -144,10 +169,21 @@ const FullApplicationInfo = (props) => {
             return <p key={i} className="FullApplicationInfo__content__text">{el}</p>
         });
         fileImage = application.images.length > 0 ? application.images.map((el, i) => {
-            return <div className="FullApplicationInfo__fileImage--canvas">
-                <img onClick={() => {toggleModalImage(el)}} className="FullApplicationInfo__fileImage" src={el} alt={subject}/>
-                {/*{fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={"https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }*/}
+            let fileExt = el.split('.').pop();
+            let isImage = ['jpg', 'jpeg', 'png', 'bmp', 'svg', 'ico'].includes(fileExt)
+            return isImage ?
+                    <div key={i} className="FullApplicationInfo__fileImage--canvas">
+                        <img onClick={() => {toggleModalImage(el)}} className="FullApplicationInfo__fileImage" src={el} alt={subject}/>
+                        {/*{inside}*/}
                     </div>
+                    :
+                    <div key={i} className="FullApplicationInfo__fileImage--canvas">
+                        <a href={el} target='blanc' className="FullApplicationInfo__fileImage--link">{el}</a>
+                    </div>
+            // return <div className="FullApplicationInfo__fileImage--canvas">
+            //     <img onClick={() => {toggleModalImage(el)}} className="FullApplicationInfo__fileImage" src={el} alt={subject}/>
+            //     {/*{fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={"https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }*/}
+            //         </div>
         }) : null
         // fileImage = true;
         problem = application.details.replaceAll("<br />", "").split("\n");

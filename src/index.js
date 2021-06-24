@@ -26,6 +26,8 @@ axios.interceptors.request.use(req => {
         // req.headers['Authorization'] = store.getState().users.user ?  store.getState().users.user.token : ''
         req.params.id = store.getState().applications.data ? store.getState().applications.data['clientId'] : '';
         req.params.hash = store.getState().applications.data ? store.getState().applications.data['hash'] : '';
+        // req.params.id = store.getState().data ? store.getState().data['clientId'] : '';
+        // req.params.hash = store.getState().data ? store.getState().data['hash'] : '';
     } catch (err) {
         console.log(err);
     }

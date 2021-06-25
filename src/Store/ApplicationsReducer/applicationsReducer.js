@@ -22,7 +22,7 @@ import {
     GET_CURRENT_APPLICATION_DATA,
     SET_INTERVAL,
     CLEAR_INTERVAL,
-    GET_CLIENT_NAME, INIT_APPLICATION_STATE
+    GET_CLIENT_NAME, INIT_APPLICATION_STATE, FORGET_ME
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
 import moment from "moment";
@@ -59,11 +59,14 @@ const initialState = {
     activePage: 1,
     activeFilters: [],
     isFilterDateActive: false,
-    clientName: ""
+    clientName: "",
+    forgetMe: false
 };
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case FORGET_ME:
+            return {...state, forgetMe: true}
         case GET_CLIENT_NAME:
             return {...state, clientName: action.value}
         case CLEAR_INTERVAL:

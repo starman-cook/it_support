@@ -170,7 +170,7 @@ const FullApplicationInfo = (props) => {
         });
         fileImage = application.images.length > 0 ? application.images.map((el, i) => {
             let fileExt = el.split('.').pop();
-            let isImage = ['jpg', 'jpeg', 'png', 'bmp', 'svg', 'ico'].includes(fileExt)
+            let isImage = ['jpg', 'jpeg', 'png', 'bmp', 'svg', 'ico'].includes(fileExt.toLowerCase())
             return isImage ?
                     <div key={i} className="FullApplicationInfo__fileImage--canvas">
                         <img onClick={() => {toggleModalImage(el)}} className="FullApplicationInfo__fileImage" src={el} alt={subject}/>
@@ -277,7 +277,7 @@ const FullApplicationInfo = (props) => {
                         </div>
 
 
-                        <p className="FullApplicationInfo__content__text--title">{status === "завершено" ? "Рузультат" : status === "отменено" ? "Причины отмены заявки" : ""}</p>
+                        <p className="FullApplicationInfo__content__text--title">{status === "завершено" ? "Результат" : status === "отменено" ? "Причины отмены заявки" : ""}</p>
                         <div >
                             {allSolution}
                         </div>

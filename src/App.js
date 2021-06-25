@@ -4,9 +4,20 @@ import ErrorWindow from './Components/ApplicationPageComponents/ErrorWindow/Erro
 import ApplicationPage from './Containers/ApplicationPage/ApplicationPage';
 import SearchResultsPage from './Containers/SearchResultsPage/SearchResultsPage';
 import UserLoginPage from './Containers/UserLoginPage/UserLoginPage';
+import {useSelector} from "react-redux";
 // import WithLoader from './hoc/WithLoader/WithLoader';
 // import axios from "./axiosApi";
 function App() {
+  const forgetMe = useSelector(state => state.applications.forgetMe)
+  // Это будет событие на кнопке "Запомнить Меня"
+  if (forgetMe) {
+    window.addEventListener("beforeunload", function (e) {
+      localStorage.clear()
+      return undefined;
+    });
+  }
+
+
   return (
   <>
   <Switch>

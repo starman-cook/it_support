@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginUser, saveUser, sendPhone, sendSms, setLoginStatus} from "../../Store/UsersReducer/usersActions";
 import axios from "../../axiosApi";
 import WithLoader from '../../hoc/WithLoader/WithLoader';
-import {clearMyInterval} from "../../Store/ApplicationsReducer/applicationsActions";
+import {clearMyInterval, forgetMe} from "../../Store/ApplicationsReducer/applicationsActions";
 import PhoneInput from 'react-phone-input-2'
 // import 'react-phone-input-2/lib/style.css'
 import "./UserLoginPage.css"
@@ -294,7 +294,8 @@ const UserLoginPage = (props) => {
 
     const [user, setUser] = useState({
         username: "",
-        password: ""
+        password: "",
+        remember: null
     });
     const inputValue = (event) => {
         const {name, value} = event.target;
@@ -304,6 +305,9 @@ const UserLoginPage = (props) => {
     }
     const submitLoginUser = (event) => {
         event.preventDefault();
+        if (user.remember !== 'on') {
+            dispatch(forgetMe())
+        }
         dispatch(loginUser(user.username, user.password));
     }
 
@@ -332,7 +336,7 @@ const UserLoginPage = (props) => {
                 submit={(event) => {submitLoginUser(event)}}
                 loginOnChange={(event) => {inputValue(event)}}
                 passwordOnChange={(event) => {inputValue(event)}}
-                // checkOnChange
+                checkOnChange={(event) => {inputValue(event)}}
                 errorUsername={usernameError}
                 errorPassword={passwordError}
                 buttonName={"войти"}

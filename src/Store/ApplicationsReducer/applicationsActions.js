@@ -4,7 +4,7 @@ import {
     CHANGE_EMPLOYEE,
     CHANGE_NUMBER,
     CHANGE_PAGINATION,
-    CHANGE_STATUS, CLEAR_INTERVAL, FIRST_CALENDAR_DAY_IN_RANGE, GET_CLIENT_NAME,
+    CHANGE_STATUS, CLEAR_INTERVAL, FIRST_CALENDAR_DAY_IN_RANGE, FORGET_ME, GET_CLIENT_NAME,
     GET_COUNT_AMOUNT, GET_CURRENT_APPLICATION_DATA, GET_HASH_OF_THE_LAST_APPLICATION, GET_LAST_APPLICATION,
     GET_TEN_APPLICATIONS, INIT_APPLICATION_STATE,
     INIT_FILTERS,
@@ -55,6 +55,7 @@ export const clearMyInterval = () => ({type: CLEAR_INTERVAL});
 export const getClientNameSuccess = (value) => ({type: GET_CLIENT_NAME, value});
 export const initApplicationState = () => ({type: INIT_APPLICATION_STATE})
 
+export const forgetMe = () => ({type: FORGET_ME})
 
     export const getTenApplications = (data) => {
     return async dispatch => {
@@ -95,6 +96,7 @@ export const postNewApplication = (data, id) => {
             // console.log("RESPONSE! ", response.data);
             // console.log("RESPONSE2222! ", response.data.eventID);
         } catch(err) {
+            dispatch(push('/error'))
             console.log(err);
         }
     }
@@ -106,6 +108,7 @@ export const getCurrentApplicationData = (id) => {
             const response = await axios.get(`/CRM/hs/equeue/?document=${id}`);
             await dispatch(getCurrentApplicationDataSuccess(response.data));
         } catch(err) {
+            dispatch(push('/error'))
             console.log(err)
         }
     }
@@ -125,12 +128,13 @@ export const addDetailsToApplicationInProcess = (data) => {
 
 
 export const setApplicationBackInProgress = (id) => {
-    return async () => {
+    return async (dispatch) => {
         try {
             // console.log(id)
             await axios.get(`/CRM/hs/event/method/eventupdate?document=${id}`);
             // await axiosTest.get(`https://itsupport.kz/itsp2/eventupdate/proxy.php?document=${id}`);
         } catch (err) {
+            dispatch(push('/error'))
             console.log(err);
         }
     }

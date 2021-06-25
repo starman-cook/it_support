@@ -72,7 +72,8 @@ export const loginUser = (login, password) => {
                 dispatch(usernameLoginError(error));
                 dispatch(passwordLoginError(error));
             } catch (err) {
-                console.log("SECOND CATCH *** ",err)
+                dispatch(push('/error'))
+                // console.log("SECOND CATCH *** ",err)
             }
 
 

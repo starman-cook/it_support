@@ -11,7 +11,7 @@ import {
     addDetailsToApplicationInProcess, getClientName,
     getCurrentApplicationData, getHashOfTheLastApplication,
     getLastApplication,
-    postNewApplication,
+    postNewApplication, saveId,
     setApplicationBackInProgress, setMyInterval
 } from "../../Store/ApplicationsReducer/applicationsActions";
 
@@ -55,8 +55,10 @@ const ApplicationPage = (props) => {
 
 
     useEffect(() => {
+        clearInputState()
         dispatch(getClientName(id))
         dispatch(getLastApplication(id));
+        dispatch(saveId(id))
     }, [dispatch]);
     useEffect(() => {
         if (applicationHash) {
@@ -88,7 +90,7 @@ const ApplicationPage = (props) => {
         setShowQuestion(false);
     }
 
-    const toogleShowPassword = () => {
+    const toggleShowPassword = () => {
         if (isShowPassword) {
             setIsShowPassword(false);
         } else {
@@ -458,12 +460,12 @@ const ApplicationPage = (props) => {
                 iconClick={activateFileInput}
                 fileRef={refFile}
                 // fileName={fileNameState}
-                fileName={"Добавить файл"}
+                fileName={"Добавить файлы"}
                 inputFileName="file"
                 questionShow={hoverShowQuestion}
                 questionHide={hoverHideQuestion}
                 showQuestionModal={showQuestion}
-                questionText={"Регистрационный номер заявки"}
+                questionText={"Прикрепите необходимые по вашему мнению файлы"}
                 textTeamViewer={"Пароль от TeamViewer"}
                 showPassword={isShowPassword}
                 passwordName="tvpass"
@@ -472,7 +474,7 @@ const ApplicationPage = (props) => {
                 }}
                 passwordRequired={false}
                 passwordPlaceholder={"Введите пароль"}
-                toggleShowPassword={toogleShowPassword}
+                toggleShowPassword={toggleShowPassword}
 
                 buttonName={"Отправить заявку"}
                 submitClicked={(event) => {

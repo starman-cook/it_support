@@ -26,7 +26,7 @@ const ApplicationDetails = (props) => {
     const subject = props.subject; // Получить по id
     const basicDetailsMessage = props.message.split("Комментарий")[0]
     const restOfMessageWithComments = props.message.replace(basicDetailsMessage, "")
-    const message = `${basicDetailsMessage}<br /><br />${restOfMessageWithComments}`
+    const message = `${basicDetailsMessage}<br /><br />${restOfMessageWithComments.replaceAll("Комментарий", `<br />Комментарий`)}`
     const result = props.result;
     // let allComments;
     // if (comments) {
@@ -82,7 +82,7 @@ const ApplicationDetails = (props) => {
             </div>
                 <p className="ApplicationDetails__text--title">Подробности</p>
             <div className={message.length > 100 ? messageClassToggle : "messageClassToggleHidden--empty"}>
-                <div dangerouslySetInnerHTML={{__html: `<p className="ApplicationDetails__text">${message}<p>`}} className="ApplicationDetails__text" ></div>
+                <div dangerouslySetInnerHTML={{__html: `<p className="ApplicationDetails__text">${message}<p>`}} className="ApplicationDetails__text" />
                 {props.showDetailsButton ? <div onClick={textShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{messageClassButtonText}</div> : null}
             </div>
             {jobDone

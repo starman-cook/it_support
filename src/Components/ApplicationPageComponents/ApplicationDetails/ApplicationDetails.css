@@ -69,6 +69,7 @@ p {
     outline: none;
     margin-bottom: 20px;
     resize: none;
+    margin-top: 40px;
 }
 .ApplicationDetails__textarea:focus {
     border: 1px solid #E34A4E;

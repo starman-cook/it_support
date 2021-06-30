@@ -28,8 +28,10 @@ const SearchResultsPage = () => {
     const dateFromState = useSelector(state => state.applications.data.filter.date);
     const isDateFilterActive = useSelector(state => state.applications.isFilterDateActive)
     const hash = useSelector(state => state.applications.data.hash)
+    const clientId = useSelector(state => state.applications.data.clientId)
     useEffect(() => {
         dispatch(clearMyInterval())
+        if (clientId && !hash) return dispatch(push(`/login/${clientId}`))
         if (!hash) return dispatch(push('/login'));
         dispatch(getCompanyData(hash));
     }, [dispatch]);

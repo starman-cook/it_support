@@ -178,7 +178,7 @@ const FullApplicationInfo = (props) => {
                     </div>
                     :
                     <div key={i} className="FullApplicationInfo__fileImage--canvas">
-                        <a href={el} target='blanc' className="FullApplicationInfo__fileImage--link">{el}</a>
+                        <a href={el} target='blanc' className="FullApplicationInfo__fileImage--link">{el.split('/').pop()}</a>
                     </div>
             // return <div className="FullApplicationInfo__fileImage--canvas">
             //     <img onClick={() => {toggleModalImage(el)}} className="FullApplicationInfo__fileImage" src={el} alt={subject}/>

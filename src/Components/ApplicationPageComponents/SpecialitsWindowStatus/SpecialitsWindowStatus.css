@@ -66,12 +66,13 @@
     display: flex;
 }
 .SpecialistWindow__avatar--frame {
-    width: 164px;
+    min-width: 164px;
+    max-height: 164px;
     /*width: 20%;*/
     /*height: 164px;*/
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     overflow: hidden;
-    background: #E34A4E;
+    /*background: #E34A4E;*/
     margin-right: 33px;
 }
 .SpecialistWindow__avatar--image {

@@ -24,9 +24,10 @@ const ApplicationDetails = (props) => {
 
     const department = props.department; // Получить по id
     const subject = props.subject; // Получить по id
-    const basicDetailsMessage = props.message.split("Комментарий")[0]
-    const restOfMessageWithComments = props.message.replace(basicDetailsMessage, "")
-    const message = `${basicDetailsMessage}<br /><br />${restOfMessageWithComments.replaceAll("Комментарий", `<br />Комментарий`)}`
+    // const basicDetailsMessage = props.message.split("Комментарий")[0]
+    // const restOfMessageWithComments = props.message.replace(basicDetailsMessage, "")
+    // const message = `${basicDetailsMessage}<br /><br />${restOfMessageWithComments.replaceAll("Комментарий", `<br />Комментарий`)}`
+    const message = props.message.split("\n").join("<br />")
     const result = props.result;
     // let allComments;
     // if (comments) {

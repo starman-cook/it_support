@@ -56,6 +56,9 @@ p {
     padding: 0;
     margin: 0 0 20px 0;
 }
+.ApplicationDetails__text--block {
+    position: relative;
+}
 .ApplicationDetails__textarea {
     /*width: 630px;*/
     width: 100%;
@@ -122,7 +125,7 @@ p {
       overflow: hidden;
   }
 .messageClassToggleHidden--empty {
-    height: 70px;
+    min-height: 70px;
 }
 .messageClassToggleOpen {
       margin-bottom: 50px;

@@ -1,8 +1,17 @@
 import React from 'react';
 import './ErrorWindow.css';
-import SocialNetworkLinks from "../SocialNetworkLinks/SocialNetworkLinks";
+import {useDispatch} from "react-redux";
+import {goBack} from "connected-react-router";
 
 const ErrorWindow = () => {
+    const dispatch = useDispatch()
+    const isConnected = window.navigator.onLine
+    if (isConnected) {
+        dispatch(goBack())
+    }
+
+
+
     return (
         <div className="ErrorWindow">
             <div className="ErrorWindow__container">
@@ -31,5 +40,6 @@ const ErrorWindow = () => {
         </div>
     )
 }
+
 
 export default ErrorWindow;

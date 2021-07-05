@@ -67,7 +67,9 @@
 }
 .SpecialistWindow__avatar--frame {
     min-width: 164px;
+    max-width: 164px;
     max-height: 164px;
+    min-height: 164px;
     /*width: 20%;*/
     /*height: 164px;*/
     /*border-radius: 50%;*/

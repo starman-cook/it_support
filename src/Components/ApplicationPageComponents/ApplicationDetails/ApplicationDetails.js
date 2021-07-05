@@ -82,15 +82,15 @@ const ApplicationDetails = (props) => {
                 </div>
             </div>
                 <p className="ApplicationDetails__text--title">Подробности</p>
-            <div className={message.length > 100 ? messageClassToggle : "messageClassToggleHidden--empty"}>
-                <div dangerouslySetInnerHTML={{__html: `<p className="ApplicationDetails__text">${message}<p>`}} className="ApplicationDetails__text" />
+            <div className={message.trim().length > 100 ? messageClassToggle : "messageClassToggleHidden--empty"}>
+                <div dangerouslySetInnerHTML={{__html: `<p className="ApplicationDetails__text">${message}<p>`}} className="ApplicationDetails__text--block" />
                 {props.showDetailsButton ? <div onClick={textShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{messageClassButtonText}</div> : null}
             </div>
             {jobDone
                     ?
                 <>
                      <p className="ApplicationDetails__text--title">Результат</p>
-                    <div className={result.length > 100 ? resultClassToggle : "messageClassToggleHidden--empty"}>
+                    <div className={result.trim().length > 100 ? resultClassToggle : "messageClassToggleHidden--empty"}>
                         <p className="ApplicationDetails__text">{result}</p>
                         {props.showResultButton ? <div onClick={resultShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{resultClassButtonText}</div> : null}
                     </div>
@@ -99,7 +99,7 @@ const ApplicationDetails = (props) => {
                 isCanceled ?
                     <>
                         <p className="ApplicationDetails__text--title">Причины отмены заявки</p>
-                        <div className={result.length > 100 ? resultClassToggle : "messageClassToggleHidden--empty"}>
+                        <div className={result.trim().length > 100 ? resultClassToggle : "messageClassToggleHidden--empty"}>
                             <p className="ApplicationDetails__text">{result}</p>
                             {props.showResultButton ? <div onClick={resultShowToggle} className="ApplicationDetails__message--button"><span className="ApplicationDetails__text">... </span>{resultClassButtonText}</div> : null}
                         </div>

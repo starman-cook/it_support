@@ -1,13 +1,31 @@
 .LayoutApplicationPage {
     /*max-width: 1170px;*/
-    width: 55%;
+    /*width: 55%;*/
+    max-width: 1170px;
     margin: 30px auto;
     display: flex;
     justify-content: space-between;
     /*align-items: flex-start;*/
     /*align-items: stretch;*/
 }
-
+@media (max-width: 1370px) {
+    .LayoutApplicationPage {
+        /*width: 60%;*/
+        max-width: 1100px;
+    }
+}
+@media (max-width: 1270px) {
+    .LayoutApplicationPage {
+        /*width: 60%;*/
+        max-width: 1000px;
+    }
+}
+@media (max-width: 1170px) {
+    .LayoutApplicationPage {
+        /*width: 60%;*/
+        max-width: 900px;
+    }
+}
 .LayoutApplicationPage_sidebar {
     width: 30%;
     /*height: 1012px;*/

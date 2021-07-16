@@ -1,5 +1,4 @@
 import {
-    ADD_COMMENT,
     CHANGE_DEPARTMENT,
     CHANGE_EMPLOYEE,
     CHANGE_NUMBER,
@@ -25,11 +24,7 @@ import {
     GET_CLIENT_NAME, INIT_APPLICATION_STATE, FORGET_ME
 } from "./applicationsActionTypes";
 import update from 'immutability-helper';
-import moment from "moment";
 
-//ID SAMPLE    1240-02-00044
-//HASH SAMPLE  4be9fd6e92f21fc38674ec51d5e4d237
-// aad6d2c1b77801e269628f235dd7cbaa hash from 1240 doesnt work
 const initialState = {
     interval: null,
     lastApplication: null,
@@ -37,7 +32,6 @@ const initialState = {
     secondCalendarRangeDay: 0,
     newApplicationHash: null,
     currentApplicationData: null,
-    // comments: [],
     applications: [],
     count: 0,
     data: {
@@ -97,8 +91,6 @@ const applicationsReducer = (state = initialState, action) => {
                     hash: {$set: action.value}
                 }
         });
-        // case ADD_COMMENT:
-        //     return {...state, comments: [...state.comments, action.value]};
         case GET_TEN_APPLICATIONS:
             return {...state, applications: action.value};
         case GET_COUNT_AMOUNT:

@@ -11,8 +11,6 @@ p {
     width: 400px;
     margin: 10px 0;
 }
-/* .Comment__date {}
-.Comment__content {} */
 
 
 .ApplicationDetails {
@@ -60,7 +58,6 @@ p {
     position: relative;
 }
 .ApplicationDetails__textarea {
-    /*width: 630px;*/
     width: 100%;
     height: 160px;
     padding: 20px;
@@ -78,7 +75,6 @@ p {
     border: 1px solid #E34A4E;
 }
 .ApplicationDetails__btn {
-    /*width: 630px;*/
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -120,7 +116,6 @@ p {
   }
 .messageClassToggleHidden {
       height: 125px;
-      margin-bottom: 50px;
       position: relative;
       overflow: hidden;
   }
@@ -128,11 +123,9 @@ p {
     min-height: 70px;
 }
 .messageClassToggleOpen {
-      margin-bottom: 50px;
       position: relative;
 }
 .messageClassToggleOpen > .ApplicationDetails__message--button {
-    margin-bottom: 50px;
     background: none;
     position: relative;
 }

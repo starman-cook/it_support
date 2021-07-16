@@ -3,7 +3,6 @@
      top: 0;
      left: 50%;
      transform: translate(-50%, 0);
-     /*width: 1076px;*/
      width: 80%;
      height: 94vh;
      margin: 15px auto;
@@ -23,7 +22,6 @@
 }
 .FullApplicationInfo__header {
     margin: 28px auto;
-    /*max-width: 1018px;*/
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -202,7 +200,6 @@
 }
 
 .FullApplicationInfo__content--left {
-    /*width: 672px;*/
     width: 70%;
     height: 65vh;
     background: #FFFFFF;
@@ -257,7 +254,6 @@
 .FullApplicationInfo__content {
     display: flex;
     align-items: flex-start;
-    /*max-width: 1018px;*/
     width: 100%;
     margin: 0 auto;
 }
@@ -292,12 +288,10 @@
 }
 
 .FullApplicationInfo__content--right {
-    /*width: 320px;*/
     width: 30%;
     display: flex;
     flex-direction: column;
     margin-left: 30px;
-    /*height: 440px;*/
     height: 65vh;
     overflow-y: scroll;
 }

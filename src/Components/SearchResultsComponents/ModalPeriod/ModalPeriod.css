@@ -112,7 +112,6 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.12px;
-    /*text-decoration-line: underline;*/
     text-transform: uppercase;
     color: #333333;
     padding-left: 11px;
@@ -137,11 +136,7 @@
     cursor: pointer;
     user-select: none;
 }
-/*.CalendarOne__column:hover {*/
-/*    background: #4FC6E0;*/
-/*    border-radius: 10px;*/
-/*    color: white;*/
-/*}*/
+
 .CalendarOne__row {}
 .CalendarOne__weekdays-block {
     display: flex;
@@ -260,34 +255,6 @@
     border: 1px solid  black;
 }
 
-
-/*.CalendarTest {*/
-/*    width: 100%;*/
-/*    background: red;*/
-/*    font-size: 40px;*/
-/*    color: red;*/
-/*}*/
-
-/*.CalendarTest2 {*/
-/*    width: 100%;*/
-/*    color: red;*/
-/*}*/
-/*.react-calendar__viewContainer {*/
-/*    color: red;*/
-/*    background: white;*/
-/*}*/
-/*.CalendarTest {*/
-/*}*/
-/*.react-calendar--doubleView {*/
-/*    background: red;*/
-/*}*/
-/*.react-calendar--doubleView {*/
-/*    width: 1700px !important;*/
-
-/*}*/
-/*.react-calendar {*/
-
-/*}*/
 
 
 /*/////////////CALENDAR*/
@@ -437,5 +404,3 @@ abbr  {
     font-weight: bold;
     font-size: 18px;
 }
-/*react-calendar__tile--range react-calendar__tile--rangeStart*/
-/*react-calendar__tile--rangeEnd*/

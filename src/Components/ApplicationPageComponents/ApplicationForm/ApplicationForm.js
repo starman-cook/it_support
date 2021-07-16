@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-// import { useSelector } from 'react-redux';
 import BlueButton from '../BlueButton/BlueButton';
 import './ApplicationForm.css';
 import axios from "../../../axiosApi";
@@ -10,18 +9,12 @@ import {useDispatch} from "react-redux";
 
 const ApplicationForm = (props) => {
     const dispatch = useDispatch()
-    // const departments = useSelector(state => state.company.departments);
     useEffect(() => {
         dispatch(getCurrentApplicationData(""))
     }, [])
     let options = (
-        // departments.map(el => {
-        //     return <option
-        //     key={el}
-        //     >{el.name}</option>
-        // })
+
         <>
-            {/*<option value="0">В какой отдел отправить заявку?</option>*/}
             <option value="1">Удаленная поддержка</option>
             <option value="2">Выездные специалисты</option>
             <option value="3">Сервисный центр</option>

@@ -36,16 +36,6 @@ const ModalStatus = (props) => {
             });
         }
     }
-    // useEffect(() => {
-    //     let arr = [];
-    //     Object.keys(inputState).map(el => {
-    //         if (inputState[el]) {
-    //             arr.push(el === "planned" ? "Запланировано" : el === "inProgress" ? "В работе" : el === "completed" ? "Завершено" : el === "canceled" ? "Отменено" : null);
-    //         }
-    //         dispatch(changeStatus(arr));
-    //         dispatch(setActivePage(1));
-    //     })
-    // }, [inputState]);
     const showStatusSearchResults = (event) => {
         event.preventDefault();
         let arr = [];

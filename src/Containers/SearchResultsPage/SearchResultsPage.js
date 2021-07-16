@@ -38,12 +38,10 @@ const SearchResultsPage = () => {
 
     useEffect(() => {
         if (!isDateFilterActive) {
-            console.log("FILTERS DOESNT INCLUDE DATE TIME")
             setPeriod(prevState => {
                 return {...prevState, startOrigin: 'ДД/ММ/ГГ', endOrigin: 'ДД/ММ/ГГ'}
             });
         } else {
-            console.log("DATE IN FILTERS")
             setPeriod(prevState => {
                 return {...prevState, startOrigin: dateFromState.from, endOrigin: dateFromState.to}
         })
@@ -161,13 +159,11 @@ const SearchResultsPage = () => {
     const closeModal = () => {
         setCalendarModal(false);
         setDeactivateBtn({});
-        // if (!filters.includes('дата')) {
             const el = document.getElementsByClassName('LayoutSearchResults__btnDate');
             for (let i = 0; i < el.length; i++) {
                 el[i].style.color = '#E34A4E';
                 el[i].style.background = 'white';
             }
-        // }
         dispatch(isFilterDateActive(false))
         dispatch(inputFilterDateFrom(""));
         dispatch(inputFilterDateTo(""));
@@ -295,15 +291,11 @@ countPagination();
     const paginationRight = () => {
         if (activePage !== pagesNumbers) {
             dispatch(setActivePage(activePage + 1));
-            // countPagination();
-            // colorActivePage();
         }
     };
     const paginationLeft = () => {
         if (activePage !== 1) {
             dispatch(setActivePage(activePage - 1));
-            // countPagination();
-            // colorActivePage();
         }
     };
 
@@ -342,19 +334,6 @@ countPagination();
         dispatch(changePagination((activePage - 1) * 10));
     }, [activePage]);
 
-
-    // const inputStartDateValue = (event) => {
-    //     const value = event.target.value.replace(new RegExp("-", "g"), '');
-    //     setPeriod(prevState => {
-    //         return {...prevState, start: value, startOrigin: event.target.value}
-    //     })
-    // }
-    // const inputEndDateValue = (event) => {
-    //     const value = event.target.value.replace(new RegExp("-", "g"), '');
-    //     setPeriod(prevState => {
-    //         return {...prevState, end: value,endOrigin: event.target.value}
-    //     })
-    // }
     const acceptDatePeriod = () => {
         dispatch(setActivePage(1));
         dispatch(inputFilterDateFrom(period.start));
@@ -398,10 +377,6 @@ countPagination();
                         closeModalAccepted={closeModalAccepted}
                         closeModal={closeModal}
                         acceptDatePeriod={acceptDatePeriod}
-                        // inputStartDateValue={(event) => {inputStartDateValue(event)}}
-                        // inputEndDateValue={(event) => {inputEndDateValue(event)}}
-                        // dateValueStart={period.startOrigin}
-                        // dateValueEnd={period.endOrigin}
                     />
                : null}
                 {tableView}

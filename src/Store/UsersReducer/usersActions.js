@@ -8,7 +8,7 @@ import {
     USERNAME_LOGIN_ERROR
 } from "./usersActionTypes";
 import {push} from 'connected-react-router';
-import {saveHash, saveId} from "../ApplicationsReducer/applicationsActions";
+import {saveHash} from "../ApplicationsReducer/applicationsActions";
 
 
 export const setLoginStatus = (value) => ({type: SET_LOGIN_STATUS, value});
@@ -22,8 +22,7 @@ export const smsLoginError = (value) => ({type: SMS_LOGIN_ERROR, value});
 export const saveUser = (id) => {
     return async dispatch => {
         try {
-            const response = await axios.get(`/users/${id}`);
-            console.log("SAVING USER ", response.data)
+            await axios.get(`/users/${id}`);
         } catch (err) {
             console.log(err);
         }
@@ -32,8 +31,7 @@ export const saveUser = (id) => {
 export const sendPhone = (phoneNumber, id) => {
     return async dispatch => {
         try {
-            const response = await axios.post(`/users/${id}`, phoneNumber);
-            console.log(response.data);
+            await axios.post(`/users/${id}`, phoneNumber);
             await dispatch(setLoginStatus("sms"));
 
         } catch (err) {
@@ -46,9 +44,7 @@ export const sendSms = (smsAndId) => {
     return async dispatch => {
         try {
             const response = await axios.post(`/users/sms_check`, smsAndId);
-            console.log("HASH ", response.data);
             await dispatch(saveHash(response.data.hash));
-            // await dispatch(saveId(response.data.clientId));
             await dispatch(push('/search'));
         } catch (err) {
             dispatch(smsLoginError("denied"));
@@ -59,21 +55,15 @@ export const sendSms = (smsAndId) => {
 export const loginUser = (login, password) => {
     return async dispatch => {
         try {
-            // const response = await axios.get(`/CRM/hs/authorizationLP/method/Login/?Login=${encodeURIComponent(login)}&Password=${encodeURIComponent(password)}`);
             const response = await axios.get(`/CRM/hs/authorizationLP/method/Login/?Login=${login}&Password=${password}`);
             await dispatch(saveHash(response.data.hash));
-            // await dispatch(saveId(response.data.clientId));
             await dispatch(push('/search'));
-            console.log(response.data);
         } catch (error) {
-            console.log("FIRST CATCH *** ", error);
-            // добавить условие какая именно ошибка прилетела
             try {
                 dispatch(usernameLoginError(error));
                 dispatch(passwordLoginError(error));
             } catch (err) {
                 dispatch(push('/error'))
-                // console.log("SECOND CATCH *** ",err)
             }
 
 

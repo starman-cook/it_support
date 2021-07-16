@@ -6,7 +6,6 @@ import NoResults from '../NoResults/NoResults';
 import ResultsItemWorker from './ResultsItemWorker/ResultsItemWorker';
 import './ResultsTableWorker.css';
 import {useDispatch, useSelector} from "react-redux";
-import {push} from 'connected-react-router'
 import FullApplicationInfo from "../FullApplicationInfo/FullApplicationInfo";
 import {
     changePagination,
@@ -17,23 +16,6 @@ import {getAllDepartments, getAllEmployees} from "../../../Store/CompanyDataRedu
 
 const ResultsTableWorker = (props) => {
     const dispatch = useDispatch();
-
-    // const body = {
-    //     clientId: "1267-02-00020",
-    //     hash: "68ace46062c33b61ac87a05e44a48198",
-    //     filter: {
-    //         date: {
-    //             from: "20200101",
-    //             to: "20201231 "
-    //         },
-    //         status: [],
-    //         employee: " ",
-    //         departament: [],
-    //         number: ""
-    //     },
-    //     limit: 10,
-    //     start: 0
-    // }
     const data = useSelector(state => state.applications.data);
 
 
@@ -47,7 +29,6 @@ const ResultsTableWorker = (props) => {
     const company = useSelector(state => state.company.companyData);
 
     useEffect(() => {
-        console.log("COMPANY ",company)
         if (company) {
             dispatch(getAllDepartments(company.departments));
             if (company.director) {
@@ -55,7 +36,6 @@ const ResultsTableWorker = (props) => {
             }
         }
     }, [company]);
-    // ResultsTableWorker__filterIcon--active
     // В редаксе будут хранится фильтры, по отдельности статус и отдел, все что будет выбрано в модальном окне попдает в стэйт и иконка закрашивается в черный
     const isFilterStatus = useSelector(state => state.applications.data['filter'].status.length > 0);
     const isFilterDepartment = useSelector(state => state.applications.data['filter'].departament.length > 0);
@@ -77,15 +57,12 @@ const ResultsTableWorker = (props) => {
             if (filtersCheck[el]) {
                 arr.push(filtersCheck[el]);
             }
-            // setFilters(arr);
         })
-        console.log("FILTERS ", arr)
         dispatch(setActiveFilters(arr));
 
     };
     useEffect(() => {
         showFilters();
-        console.log('SHOWING FILTERS');
     }, [filters, isFilterDate]);
 
 
@@ -93,29 +70,24 @@ const ResultsTableWorker = (props) => {
     const [isDepartmentModal, setIsDepartmentModal] = useState(false);
     const [isWorkerModal, setIsWorkerModal] = useState(false);
     const [isFullInfoModal, setIsFullInfoModal] = useState((false));
-    // const [oneApplication, setOneApplication] = useState({});
 
     const toggleStatusModal = () => {
         setIsStatusModal(!isStatusModal);
         setIsDepartmentModal(false);
         setIsWorkerModal(false);
-        // showFilters();
     }
     const toggleDepartmentModal = () => {
         setIsDepartmentModal(!isDepartmentModal);
         setIsStatusModal(false);
         setIsWorkerModal(false);
-        // showFilters();
     }
     const toggleWorkerModal = () => {
         setIsWorkerModal(!isWorkerModal);
         setIsStatusModal(false);
         setIsDepartmentModal(false);
-        // showFilters();
     }
     const seeFullApplicationInfo = (index) => {
         setIndexForModal(index)
-        // setOneApplication(applications[index]);
         setIsFullInfoModal(!isFullInfoModal);
 
     }
@@ -152,37 +124,8 @@ const ResultsTableWorker = (props) => {
             <NoResults />
         )
     }
-    // if (applications.length > 0) {
-    //     allApplications = applications.map((el, i) => {
-    //
-    //         const solution = el.solution.substring(0, 50) + "...";
-    //         return <ResultsItemWorker
-    //             key={i}
-    //             isLastFrame={applications.length - 1 === i}
-    //             statusColor={el.status === 'запланировано' ? "#E82024" : el.status === 'в работе' ? "#F3BB1C" : el.status === 'завершено' ? "#3CC13B" : el.status === 'отменено' ? '#828282' : null}
-    //             date={el.date}
-    //             status={el.status}
-    //             subject={el.subject}
-    //             department={el.department}
-    //             specialist={el.specialist}
-    //             specialistId={el.specialistId}
-    //             contentShort={solution}
-    //             index={i}
-    //             classLikeDislike={el.classLikeDislike}
-    //             isComment={el.isComment}
-    //             openSeeDetails={() => {seeFullApplicationInfo(i)}}
-    //             isDirector={user.role === 'director'}
-    //             workerId={el.workerId}
-    //             worker={el.worker}
-    //         />
-    //     });
-    // } else {
-    //     allApplications = (
-    //         <NoResults />
-    //     )
-    // }
+
     const currentPage = useSelector(state => state.applications.data['start']);
-    // console.log(currentPage)
     useEffect(() => {
         dispatch(setActivePage((currentPage + 10) / 10));
         if (indexForModal >=9) {
@@ -193,31 +136,16 @@ const ResultsTableWorker = (props) => {
         }
     }, [currentPage]);
 
-    // useEffect(() => {
-    //     if (indexForModal >=9) {
-    //         setIndexForModal(0);
-    //         setOneApplication(applications[0]);
-    //     }
-    // }, [indexForModal]);
-
     const goLeft = async () => {
 
-        // потом будет проверка на то что если start в оффсете будет 0 и индекс 0 тогда стоп.
         if (indexForModal <= 0 && currentPage === 0) return;
 
             if (indexForModal <=0) {
-                // ПРИХОДИТСЯ КЛИКАТЬ ДВАЖДЫ НА ГРАНИЦАХ, ПОКА НЕ ЗНАЮ КАК РЕШИТЬ
-                // ВНИМАНИЕ ЕСЛИ КОЛИЧЕСТВО ВЫВОДАЩИХ СТРАНИЦ БУДЕТ НЕ 10 ТО ЗДЕСЬ ТОЖЕ ПОМЕНЯТЬ ЧИСЛО, ЛУЧШЕ ПО ВОЗМОЖНОСТИ В ОТДЕЛЬНУЮ ПЕРЕМЕННУЮ ЭТО ЧИСЛО ЗАПИСАТЬ
                 await dispatch(changePagination(currentPage - 10));
-                // await setIndexForModal(10);
-                // console.log (applications);
-                // await dispatch(getTenApplications(data));
-                // await setOneApplication(applications[9]);
                 return
             }
             const index = indexForModal - 1;
             setIndexForModal(index);
-            // setOneApplication(applications[index]);
     };
     const activePage = useSelector(state => state.applications.activePage)
     const count = useSelector(state => state.applications.count);
@@ -225,20 +153,11 @@ const ResultsTableWorker = (props) => {
         if (indexForModal >= applications.length - 1 && activePage >= Math.ceil(count / 10)) return;
 
             if (indexForModal >=9) {
-                // ПРИХОДИТСЯ КЛИКАТЬ ДВАЖДЫ НА ГРАНИЦАХ, ПОКА НЕ ЗНАЮ КАК РЕШИТЬ
-                // ВНИМАНИЕ ЕСЛИ КОЛИЧЕСТВО ВЫВОДАЩИХ СТРАНИЦ БУДЕТ НЕ 10 ТО ЗДЕСЬ ТОЖЕ ПОМЕНЯТЬ ЧИСЛО, ЛУЧШЕ ПО ВОЗМОЖНОСТИ В ОТДЕЛЬНУЮ ПЕРЕМЕННУЮ ЭТО ЧИСЛО ЗАПИСАТЬ
                 await dispatch(changePagination(currentPage + 10));
-                // await setIndexForModal(0);
-                // console.log (applications);
-                // setOneApplication(applications[0]);
-                // await dispatch(getTenApplications(data));
-                // await setOneApplication(applications[0]);
                 return
             }
             const index = indexForModal + 1;
             setIndexForModal(index);
-            // setOneApplication(applications[index]);
-
     };
 
 
@@ -275,9 +194,7 @@ const ResultsTableWorker = (props) => {
                 <>
                 <div className="FullInfoModalBg" onClick={() => {seeFullApplicationInfo(indexForModal)}} />
                     <FullApplicationInfo
-                        // index={idForModal}
                         clickToClose={() => {seeFullApplicationInfo(indexForModal)}}
-                        // application={oneApplication}
                         application={applications[indexForModal]}
                         goLeft={goLeft}
                         goRight={goRight}

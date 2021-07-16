@@ -1,40 +1,13 @@
 import React, { useState } from 'react';
 import './FullApplicationInfo.css';
-import {push} from 'connected-react-router';
 import { useDispatch } from "react-redux";
 import {setApplicationBackInProgress} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
 const FullApplicationInfo = (props) => {
     const dispatch = useDispatch();
-    // const [index, setIndex] = useState(props.index); // передаем индекс и вытаскиваем из массива заявок нужную, всего в массиве 10 заявок, далее осуществлять дозагрузку заявок, также по 10 штук
-    // const applications = props.applications;
-    // Получаем по id подробные данные заявки
-    // const application = { // вот здесь будет использована полученная информация с редакса по id
-    //
-    //     date: "03. 11. 2019, 10:50",
-    //     status: "завершено",
-    //     subject:"Не работает вайфай",
-    //     department: "Удаленная поддержка",
-    //     specialist: "Александра Панарина",
-    //     specialistId:"IT 152",
-    //     problem: "Отправляю письма, а они не доходят до получателей, адреса ввожу правильно. Отчеты о возврате письма не приходят, то есть письмо вроде ушло, но в отправленных его нет, и когда узнаешь, пришло письмо или не пришло, то получатель говорит, что никакого письма не получал.",
-    //     solution: "Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом Были введены неправи льные настройки VPN. Исправили настройки на каждом ",
-    //     classLikeDislike: 'like',
-    //     isComment: true,
-    //     comment: 'Comment',
-    //     workerId: "ID Устройства 3245875",
-    //     specialistPhoto: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg",
-    //     applicationId: "IT-011220-039862",
-    //     worker: 'Примерный рабочий',
-    //     fileImage: "https://transitiontownguildford.files.wordpress.com/2015/06/wall-e.jpg"
-    // };
-    // let color;
-
-
 
     const application = props.application;
-    // console.log(applications);
 
 
     const [showQuestionComment, setShowQuestionComment] = useState(false);
@@ -61,75 +34,11 @@ const FullApplicationInfo = (props) => {
         setShowQuestionSpecialist(false);
     }
     const [currentFileImage, setCurrentFileImage] = useState("")
-    // const closeThisWindow = () => {
-    //     {}
-    // }
+
     const toggleModalImage = (imageSource) => {
         setCurrentFileImage(imageSource)
         setIsFileImageModal(!isFileImageModal);
     }
-    // const goLeft = () => {
-    //     setIndex(index - 1);
-    // }
-    // const goRight = () => {
-    //     setIndex(index + 1);
-    // }
-    // let color;
-    // let date;
-    // let status;
-    // let applicationId;
-    // let specialistPhoto;
-    // let specialist;
-    // let specialistId;
-    // let workerId;
-    // let classLikeDislike;
-    // let isComment;
-    // let department;
-    // let subject;
-    // let solution;
-    // let fileImage;
-    // let problem;
-    // if (application) {
-    //     color = application.status === 'запланировано' ? "#E82024" : application.status === 'в работе' ? "#F3BB1C" : application.status === 'завершено' ? "#3CC13B" : application.status === 'отменено' ? '#828282' : null;
-    //     date = application.date;
-    //     status = application.status;
-    //     applicationId = application.applicationId;
-    //     specialistPhoto = application.specialistPhoto;
-    //     specialist = application.specialist;
-    //     specialistId = application.specialistId;
-    //     workerId = application.workerId;
-    //     classLikeDislike = application.classLikeDislike;
-    //     isComment = application.isComment;
-    //     department = application.department;
-    //     subject = application.subject;
-    //     solution = application.solution;
-    //     fileImage = application.fileImage;
-    //     problem = application.problem;
-    // }
-    // const noImageHandler = (event) => {
-    //     event.target.style.display = "none"
-    // }
-    // const [isImage, setIsImage] = useState(false)
-    // const checkIfImageExists = (url) => {
-    //
-    //     const img = new Image();
-    //
-    //     img.src = url;
-    //
-    //     if (img.complete) {
-    //         return true
-    //         // callback(true);
-    //     } else {
-    //         img.onload = () => {
-    //             // callback(true);
-    //             return true
-    //         };
-    //         img.onerror = () => {
-    //             // callback(false);
-    //             return false
-    //         };
-    //     }
-    // }
 
     let color;
     let date;
@@ -180,12 +89,7 @@ const FullApplicationInfo = (props) => {
                     <div key={i} className="FullApplicationInfo__fileImage--canvas">
                         <a href={el} target='blanc' className="FullApplicationInfo__fileImage--link">{el.split('/').pop()}</a>
                     </div>
-            // return <div className="FullApplicationInfo__fileImage--canvas">
-            //     <img onClick={() => {toggleModalImage(el)}} className="FullApplicationInfo__fileImage" src={el} alt={subject}/>
-            //     {/*{fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={"https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }*/}
-            //         </div>
         }) : null
-        // fileImage = true;
         problem = application.details.replaceAll("<br />", "").split("\n");
         workerName = application.employee.name;
         allProblems = problem.map((el, i) => {
@@ -289,14 +193,7 @@ const FullApplicationInfo = (props) => {
                         <h2 className="FullApplicationInfo__content--title">
                             Прикрепленные файлы:
                         </h2>
-
-                        {/*СДЕЛАТЬ МНОЖЕСТВЕННУЮ ЗАГРУЗКУ ФАЙЛОВ */}
                         {fileImage}
-                        {/*<div className="FullApplicationInfo__fileImage--canvas">*/}
-                        {/*    {fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={fileImage} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }*/}
-                        {/*    /!*{fileImage ? <img onClick={toggleModalImage} className="FullApplicationInfo__fileImage" src={"https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"} alt={subject}/> : <p className="FullApplicationInfo__content__text">Файлов нет</p> }*!/*/}
-                        {/*</div>*/}
-
 
                         {status === "завершено" ? <p onClick={() => {backInProgressHandler()}} className="FullApplicationInfo__backToWorkLink">Вернуть заявку в работу</p> : null}
                     </div> : null}
@@ -323,7 +220,6 @@ const FullApplicationInfo = (props) => {
             {isFileImageModal ? <div onClick={toggleModalImage} className="FullApplicationInfo__fileImage--modal">
                 <div className="FullApplicationInfo__fileImage--modalCanvas">
                     <img className="FullApplicationInfo__fileImage" src={currentFileImage} alt={subject}/>
-                    {/*<img className="FullApplicationInfo__fileImage" src={"https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"} alt={subject}/>*/}
                 </div>
             </div> : null}
         </>

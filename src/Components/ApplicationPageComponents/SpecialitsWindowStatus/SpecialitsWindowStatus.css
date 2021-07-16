@@ -1,6 +1,4 @@
 .StatusNew {
-    /*width: 770px;*/
-    /*width: 100%;*/
     height: 300px;
     background: #E34A4E;
     border-radius: 8px;
@@ -23,7 +21,6 @@
     color: #FFFFFF;
     margin: 0;
 }
-/* .StatusNew__timeBlock {} */
 .StatusNew__time {
     font-style: normal;
     font-weight: 300;
@@ -32,13 +29,9 @@
     letter-spacing: 0.01em;
     color: #FFFFFF;
 }
-/* .StatusNew__time--numbers {} */
 
-
-/* APPLICATION IN PROGRESS, ISCANCELED OR DONE STYLES */
 
 .SpecialistWindow {
-    /*width: 770px;*/
     width: 100%;
     min-height: 300px;
     background: white;
@@ -70,11 +63,7 @@
     max-width: 164px;
     max-height: 164px;
     min-height: 164px;
-    /*width: 20%;*/
-    /*height: 164px;*/
-    /*border-radius: 50%;*/
     overflow: hidden;
-    /*background: #E34A4E;*/
     margin-right: 33px;
 }
 .SpecialistWindow__avatar--image {
@@ -157,8 +146,6 @@
     align-items: flex-end;
 }
 .leaveCommentBlock__textarea {
-    /*width: 400px;*/
-
     width: 100%;
     height: 160px;
     padding: 20px;

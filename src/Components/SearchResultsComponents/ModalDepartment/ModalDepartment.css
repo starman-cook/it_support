@@ -64,7 +64,6 @@
 }
 .ModalDepartment__label--icon::before {
     content: '';
-    display: inline-block;
     width: 16px;
     height: 16px;
     display: flex;

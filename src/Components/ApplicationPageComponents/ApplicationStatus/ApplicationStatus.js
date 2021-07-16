@@ -9,7 +9,6 @@ const ApplicationStatus = (props) => {
     let jobDone = props.jobDone; //take from state?
     let isCanceled = props.isCanceled;
 
-     // possible statusses 'new' 'in_progress' 'complete' 'canceled'
         leftSide = (
         <div className="ApplicationStatus">
 

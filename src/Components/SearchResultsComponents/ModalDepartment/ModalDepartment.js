@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ButtonGrey from '../UI/ButtonGrey/ButtonGrey';
 import './ModalDepartment.css';
-import {changeDepartment, changeStatus, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
+import {changeDepartment, setActivePage} from "../../../Store/ApplicationsReducer/applicationsActions";
 import {useDispatch, useSelector} from "react-redux";
 
 
@@ -57,7 +57,6 @@ const ModalDepartment = (props) => {
                 return {...prevState, [name]: code}
             });
         }
-        console.log(inputState);
     }
     let allDepartments = null;
     if (departments.length) {

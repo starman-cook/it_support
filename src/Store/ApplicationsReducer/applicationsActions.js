@@ -1,5 +1,4 @@
 import {
-    // ADD_COMMENT,
     CHANGE_DEPARTMENT,
     CHANGE_EMPLOYEE,
     CHANGE_NUMBER,
@@ -20,7 +19,6 @@ import axios from "../../axiosApi";
 import axiosOriginal from 'axios';
 import {push} from "connected-react-router";
 
-// export const addComment = (value) => ({type: ADD_COMMENT, value});
 export const getTenApplicationsSuccess = (value) => ({type: GET_TEN_APPLICATIONS, value});
 export const getCountAmount = (value) => ({type: GET_COUNT_AMOUNT, value});
 export const inputFilterDateFrom = (value) => ({type: INPUT_FILTER_DATE_FROM, value});
@@ -83,18 +81,12 @@ export const getLastApplication = (id) => {
         }
     }
 }
-// https://itsupport.kz/itsp2/proxy_test.php
-// https://itsupport.kz/itsp2/proxy.php?act=createEvent
 export const postNewApplication = (data, id) => {
     return async dispatch => {
         try {
-            // const response = await axiosOriginal.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
             const response = await axiosOriginal.post('https://itsupport.kz/itsp2/proxy_test.php?act=createEvent', data);
             dispatch(getHashOfTheLastApplication(response.data.eventID))
-            // const response = await axiosTest.post('https://itsupport.kz/itsp2/proxy.php?act=createEvent', data);
             dispatch(push(`/application/${id}/${response.data.eventID}`))
-            // console.log("RESPONSE! ", response.data);
-            // console.log("RESPONSE2222! ", response.data.eventID);
         } catch(err) {
             dispatch(push('/error'))
             console.log(err);
@@ -113,8 +105,6 @@ export const getCurrentApplicationData = (id) => {
         }
     }
 }
-// "b0137ac723e6acb741bd3b49b45f6a58"
-// http://itsupport.kz:8000/CRM/hs/equeue/?document=976b60043d04c86e4936b78fa0b82b07
 
 export const addDetailsToApplicationInProcess = (data) => {
     return async () => {
@@ -130,9 +120,7 @@ export const addDetailsToApplicationInProcess = (data) => {
 export const setApplicationBackInProgress = (id) => {
     return async (dispatch) => {
         try {
-            // console.log(id)
             await axios.get(`/CRM/hs/event/method/eventupdate?document=${id}`);
-            // await axiosTest.get(`https://itsupport.kz/itsp2/eventupdate/proxy.php?document=${id}`);
         } catch (err) {
             dispatch(push('/error'))
             console.log(err);

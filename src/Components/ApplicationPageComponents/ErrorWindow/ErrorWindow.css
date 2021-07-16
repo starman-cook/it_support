@@ -1,6 +1,5 @@
 
 .ErrorWindow {
-    /* background: radial-gradient(36.76% 69.74% at 23.14% 32.37%, #E34A4E 0%, #C53437 100%), #C4C4C4; */
     background:#C53437 url('../../../assets/images/rectangle-error-page.png');
     background-position: top right;
     background-repeat: no-repeat;
@@ -77,15 +76,3 @@
     height: 30px;
     margin-right: 9px;
 }
-/*.ErrorWindow__icon--instagram {*/
-/*    background: url('../../../assets/icons/ic-instagram-white.svg')center no-repeat;*/
-/*}*/
-/*.ErrorWindow__icon--facebook {*/
-/*    background: url('../../../assets/icons/ic-facebook-white.svg')center no-repeat;*/
-/*}*/
-/*.ErrorWindow__icon--linkedin {*/
-/*    background: url('../../../assets/icons/ic-linked-white.svg')center no-repeat;*/
-/*}*/
-/*.ErrorWindow__icon--youtube {*/
-/*    background: url('../../../assets/icons/ic-youtube-white.svg')center no-repeat;*/
-/*}*/

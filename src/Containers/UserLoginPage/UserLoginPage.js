@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthenticationModal from '../../Components/UserLoginPageComponents/AuthenticationModal/AuthenticationModal';
 import HelperInfo from '../../Components/UserLoginPageComponents/HelperInfo/HelperInfo';
 import LoginForm from '../../Components/UserLoginPageComponents/LoginForm/LoginForm';
@@ -10,13 +10,10 @@ import axios from "../../axiosApi";
 import WithLoader from '../../hoc/WithLoader/WithLoader';
 import {clearMyInterval, forgetMe} from "../../Store/ApplicationsReducer/applicationsActions";
 import PhoneInput from 'react-phone-input-2'
-// import 'react-phone-input-2/lib/style.css'
 import "./UserLoginPage.css"
 
 const UserLoginPage = (props) => {
     const dispatch = useDispatch();
-    // const id = "1267-02-00020";
-    // const id = "1240-02-00044";
     const id = props.match.params.id;
     useEffect(() => {
         dispatch(clearMyInterval())
@@ -24,11 +21,6 @@ const UserLoginPage = (props) => {
             dispatch(setLoginStatus("phone"));
         }
     }, [id]);
-    console.log("ID SAMPLE: 1240-02-00044")
-    // const [phoneCode, setPhoneCode] = useState("");
-    // const [phoneA, setPhoneA] = useState("");
-    // const [phoneB, setPhoneB] = useState("");
-    // const [phoneC, setPhoneC] = useState("");
     const [phone, setPhone] = useState("")
 
     const [sms1, setSms1] = useState("");
@@ -47,7 +39,6 @@ const UserLoginPage = (props) => {
     }, [sms1, sms2,  sms3, sms4]);
 
     useEffect(() => {
-        // localStorage.clear();
         if (id) {
             dispatch(saveUser(id));
         }
@@ -64,7 +55,6 @@ const UserLoginPage = (props) => {
     }
 
     const sendPhoneHandler = async () => {
-        // let phoneNumber = `+7${phoneCode}${phoneA}${phoneB}${phoneC}`;
         await dispatch(sendPhone({phone: "+" + phone}, id));
     }
     const resendSmsHandler = async() => {
@@ -75,8 +65,6 @@ const UserLoginPage = (props) => {
         setSms4('');
     }
 
-    // const refPhone = useRef();
-
     const status = useSelector(state => state.users.loginStatus);
     let grey = false;
     let loginContent;
@@ -84,43 +72,7 @@ const UserLoginPage = (props) => {
     let link;
     let textLink;
     let contacts;
-    // const MAX_LENGTH = 1;
 
-
-    // const handleChangePhone = (e) => {
-    //     const { maxLength, value, name } = e.target;
-    //     const [fieldName, fieldIndex] = name.split("-");
-    //     if (value.length >= maxLength) {
-    //       if (parseInt(fieldIndex, 10) < 4) {
-    //         const nextSibling = document.querySelector(
-    //           `input[name=ssn-${parseInt(fieldIndex, 10) + 1}]`
-    //         );
-    //
-    //         if (nextSibling !== null) {
-    //           nextSibling.focus();
-    //
-    //         }
-    //       }
-    //     }
-    //     if (value.length === 0) {
-    //         const prevSibling = document.querySelector(
-    //             `input[name=ssn-${parseInt(fieldIndex, 10) - 1}]`
-    //           );
-    //
-    //           if (prevSibling !== null) {
-    //             prevSibling.focus();
-    //           }
-    //     }
-    //     if (name === "ssn-1") {
-    //         setPhoneCode(e.target.value);
-    //     } else if (name === "ssn-2") {
-    //         setPhoneA(e.target.value);
-    //     } else if (name === "ssn-3") {
-    //         setPhoneB(e.target.value);
-    //     } else if (name === "ssn-4") {
-    //         setPhoneC(e.target.value);
-    //     }
-    //   }
 
       const handleChangeSms = (e) => {
         const { maxLength, value, name } = e.target;
@@ -170,7 +122,6 @@ const UserLoginPage = (props) => {
                 error={smsError === "denied"}
                 buttonName={"запросить SMS повторно"}
                 buttonWidth={"303"}
-                // phone={`+7 ${phoneCode} *** ** ${phoneC}`}
                 phone={`+7 ${phone.slice(1, 4)} *** ** ${phone.slice(9, phone.length)} `}
                 clicked={(event) => {resendSmsHandler(event)}}
             >
@@ -227,19 +178,13 @@ const UserLoginPage = (props) => {
         loginContent = (
             <MyPhoneInput
                 error={phoneError === "denied"}
-                // refPhone={refPhone}
-                // phoneModel={"+7 444"}
-                // activateInput={activateInput}
-                // phoneOnChange={(event) => {phoneOnChangeHandler(event)}}
                 buttonName={"запросить SMS-пароль"}
                 buttonWidth={"303"}
                 clicked={sendPhoneHandler}
             >
                 <PhoneInput
                     onKeyDown={(event) => {sendPhoneByPressEnter(event)}}
-                    // country={'kz'}
                     placeholder ='+7 (___) __-__-__'
-                    // onlyCountries={['kz']}
                     masks={{kz: '(...) ..-..-..'}}
                     value={phone}
                     onChange={(event) => {inputPhoneValue(event)}}
@@ -249,45 +194,6 @@ const UserLoginPage = (props) => {
                     }}
                     alwaysDefaultMask={false}
                 />
-
-                {/*<div className="PhoneInput__phoneBlock">*/}
-                {/*    <p className="PhoneInput__phoneText">+7 (</p>*/}
-                {/*    <input*/}
-                {/*        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}*/}
-                {/*        placeholder="---"*/}
-                {/*        className="PhoneInput__inputPiece PhoneInput__inputPiece--long"*/}
-                {/*        type="text"*/}
-                {/*        name="ssn-1"*/}
-                {/*        maxLength={3}*/}
-                {/*        onChange={handleChangePhone} />*/}
-                {/*    <p className="PhoneInput__phoneText">) </p>*/}
-                {/*    <input*/}
-                {/*        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}*/}
-                {/*        placeholder="---"*/}
-                {/*        className="PhoneInput__inputPiece PhoneInput__inputPiece--long"*/}
-                {/*        type="text"*/}
-                {/*        name="ssn-2"*/}
-                {/*        maxLength={3}*/}
-                {/*        onChange={handleChangePhone} />*/}
-                {/*    <p className="PhoneInput__phoneText"> - </p>*/}
-                {/*    <input*/}
-                {/*        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}*/}
-                {/*        placeholder="--"*/}
-                {/*        className="PhoneInput__inputPiece PhoneInput__inputPiece--short"*/}
-                {/*        type="text"*/}
-                {/*        name="ssn-3"*/}
-                {/*        maxLength={2}*/}
-                {/*        onChange={handleChangePhone} />*/}
-                {/*    <p className="PhoneInput__phoneText"> - </p>*/}
-                {/*    <input*/}
-                {/*        onKeyPress={(event) => {sendPhoneByPressEnter(event)}}*/}
-                {/*        placeholder="--"*/}
-                {/*        className="PhoneInput__inputPiece PhoneInput__inputPiece--short"*/}
-                {/*        type="text"*/}
-                {/*        name="ssn-4"*/}
-                {/*        maxLength={2}*/}
-                {/*        onChange={handleChangePhone} />*/}
-                {/*</div>*/}
             </MyPhoneInput>
         )
     }
@@ -341,7 +247,6 @@ const UserLoginPage = (props) => {
                 errorPassword={passwordError}
                 buttonName={"войти"}
                 buttonWidth={"142"}
-                // refCheckbox
             />
         )
     }

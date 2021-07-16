@@ -1,47 +1,24 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { addComment } from '../../../Store/ApplicationsReducer/applicationsActions';
 import BlueButton from '../BlueButton/BlueButton';
 import './ApplicationDetails.css';
-import {addDetailsToApplicationInProcess} from "../../../Store/ApplicationsReducer/applicationsActions";
 
 
 const ApplicationDetails = (props) => {
 
-    // const status = props.status;
-    // const id = props.id;
-    // const dispatch = useDispatch();
-    // const comments = useSelector(state => state.applications.comments); //Получить все комментарии по ID
     const [messageClassToggle, setMessageClassToggle] = useState("messageClassToggleHidden");
     const [messageClassButtonText, setMessageClassButtonText] = useState('показать подробнее');
 
     const [resultClassToggle, setResultClassToggle] = useState("messageClassToggleHidden");
     const [resultClassButtonText, setResultClassButtonText] = useState('показать подробнее');
-    // const applicationHash = useSelector(state => state.applications.newApplicationHash)
 
     let jobDone = props.jobDone;
     let isCanceled = props.isCanceled;
 
-    const department = props.department; // Получить по id
-    const subject = props.subject; // Получить по id
-    // const basicDetailsMessage = props.message.split("Комментарий")[0]
-    // const restOfMessageWithComments = props.message.replace(basicDetailsMessage, "")
-    // const message = `${basicDetailsMessage}<br /><br />${restOfMessageWithComments.replaceAll("Комментарий", `<br />Комментарий`)}`
+    const department = props.department;
+    const subject = props.subject;
+
     const message = props.message.split("\n").join("<br />")
     const result = props.result;
-    // let allComments;
-    // if (comments) {
-    //     allComments = (
-    //         comments.map(el => {
-    //             return <div
-    //                 key={el.id}
-    //                 className="Comment"
-    //             >
-    //                 <p className="Comment__date">{`${el.date}`}</p>
-    //                 <p className="Comment__content">{`${el.content}`}</p>
-    //             </div>
-    //         })
-    // )}
 
 
     const textShowToggle = () => {
@@ -65,12 +42,9 @@ const ApplicationDetails = (props) => {
 
     let centerComponent;
 
-     // possible statusses 'new' 'in_progress' 'complete' 'canceled'
-    // if (status === 'new') {
         centerComponent = (
         <div className="ApplicationDetails">
             <h2 className="ApplicationDetails__title">Детали заявки {props.idInTitle}</h2>
-            {/*<h2 className="ApplicationDetails__title">Детали заявки</h2>*/}
             <div className="ApplicationDetails__head">
                 <div className="ApplicationDetails__head--sides">
                     <p className="ApplicationDetails__text--title">Ответственный отдел</p>
@@ -113,8 +87,7 @@ const ApplicationDetails = (props) => {
                             clicked={props.submitComment}
                         />
                     </div>
-                    {/*{allComments}*/}
-                </> 
+                </>
             }
         </div>
         )

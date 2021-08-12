@@ -45,21 +45,25 @@
     border-radius: 4px;
 }
 .ApplicationForm__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__input::-moz-placeholder { /* Firefox 19+ */
+    font-family: "Source Sans Pro";
     color:  #C0C0C0;
     font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__input:-ms-input-placeholder { /* IE 10+ */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__input:-moz-placeholder { /* Firefox 18- */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 23px;
@@ -98,21 +102,25 @@
     border-radius: 4px;
 }
 .ApplicationForm__inputMessage::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 22px;
   }
 .ApplicationForm__inputMessage::-moz-placeholder { /* Firefox 19+ */
+    font-family: "Source Sans Pro";
     color:  #C0C0C0;
     font-size: 15px;
     line-height: 22px;
   }
 .ApplicationForm__inputMessage:-ms-input-placeholder { /* IE 10+ */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 22px;
   }
 .ApplicationForm__inputMessage:-moz-placeholder { /* Firefox 18- */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 22px;
@@ -225,21 +233,25 @@
     border-radius: 4px;
 }
 .ApplicationForm__inputPassword::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__inputPassword::-moz-placeholder { /* Firefox 19+ */
+    font-family: "Source Sans Pro";
     color:  #C0C0C0;
     font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__inputPassword:-ms-input-placeholder { /* IE 10+ */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 23px;
   }
 .ApplicationForm__inputPassword:-moz-placeholder { /* Firefox 18- */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 15px;
     line-height: 23px;

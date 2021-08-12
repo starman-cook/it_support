@@ -30,21 +30,25 @@
     margin-left: 13px;
 }
 .ModalWorker__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 18px;
     line-height: 23px;
   }
 .ModalWorker__input::-moz-placeholder { /* Firefox 19+ */
+    font-family: "Source Sans Pro";
     color:  #C0C0C0;
     font-size: 18px;
     line-height: 23px;
   }
 .ModalWorker__input:-ms-input-placeholder { /* IE 10+ */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 18px;
     line-height: 23px;
   }
 .ModalWorker__input:-moz-placeholder { /* Firefox 18- */
+    font-family: "Source Sans Pro";
     color: #C0C0C0;
     font-size: 18px;
     line-height: 23px;

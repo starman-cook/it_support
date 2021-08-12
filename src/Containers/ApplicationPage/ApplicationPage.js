@@ -325,7 +325,7 @@ const ApplicationPage = (props) => {
         center = (
             <ApplicationForm
                 userName={clientName.result ? clientName.name : "Anonymous"}
-                greetings={"здравствуйте! Опишите свою проблему"}
+                greetings={"здравствуйте! Опишите свою проблему."}
 
                 subjectTitle={"Тема*"}
                 subjectName="problem"

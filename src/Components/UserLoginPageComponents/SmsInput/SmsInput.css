@@ -68,6 +68,7 @@
 
 
 .SmsInput__inputPiece::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-family: "Source Sans Pro";
     font-weight: bold;
     font-size: 50px;
     line-height: 63px;
@@ -78,6 +79,7 @@
     color: #000000;
   }
 .SmsInput__inputPiece::-moz-placeholder { /* Firefox 19+ */
+    font-family: "Source Sans Pro";
     font-weight: bold;
     font-size: 50px;
     line-height: 63px;
@@ -88,6 +90,7 @@
     color: #000000;
   }
 .SmsInput__inputPiece:-ms-input-placeholder { /* IE 10+ */
+    font-family: "Source Sans Pro";
     font-weight: bold;
     font-size: 50px;
     line-height: 63px;
@@ -98,6 +101,7 @@
     color: #000000;
   }
 .SmsInput__inputPiece:-moz-placeholder { /* Firefox 18- */
+    font-family: "Source Sans Pro";
     font-weight: bold;
     font-size: 50px;
     line-height: 63px;

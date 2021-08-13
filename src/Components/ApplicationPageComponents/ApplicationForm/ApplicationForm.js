@@ -25,7 +25,8 @@ const ApplicationForm = (props) => {
             <option value="8">Бухгалтерия</option>
             <option value="9">Я не знаю</option>
         </>
-    ) 
+    )
+
 
     return (
         <div className="ApplicationForm">
@@ -38,7 +39,7 @@ const ApplicationForm = (props) => {
                 <h4 className="ApplicationForm__inputTitle">{props.departmentTitle}</h4>
                 
                 <div className="ApplicationForm__input-select--block">
-                    <select defaultValue={'DEFAULT'} className="ApplicationForm__input ApplicationForm__input-select" type="text" name={props.departmentName} onChange={props.departmentChange} required={props.departmentRequired}>
+                    <select id={"select"} defaultValue={'DEFAULT'} className="ApplicationForm__input ApplicationForm__input-select" type="text" name={props.departmentName} onChange={props.departmentChange} required={props.departmentRequired}>
                         <option value="DEFAULT" disabled className="ApplicationForm__input-optionDefault">{props.departmentPlaceholder}</option>
                         {options}
                     </select>

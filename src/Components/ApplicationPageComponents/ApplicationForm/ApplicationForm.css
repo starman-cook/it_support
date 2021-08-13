@@ -70,12 +70,20 @@
   }
 .ApplicationForm__input-select {
     cursor: pointer;
-    color: #4D525B;
+    /*color: #4D525B;*/
+    color: #C0C0C0;
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
     background: url('../../../assets/icons/ic_arrow_select.svg')center right no-repeat;
 }
+/*.ApplicationForm__input-select:first-child {*/
+/*    color: #C0C0C0;*/
+/*}*/
+.ApplicationForm__input-select option:not(:checked) {
+    color: black;
+}
+
 .ApplicationForm__input-select:hover {
     background: url('../../../assets/icons/ic_arrow_select_red.svg')center right no-repeat;
 }
@@ -85,6 +93,7 @@
 
 
 .ApplicationForm__input-optionDefault {
+    /*color: #C0C0C0;*/
     display: none;
 }
 .ApplicationForm__inputMessage {

@@ -15,7 +15,7 @@
 }
 
 .SocialNetwork__text {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 23px;
     letter-spacing: 0.01em;
     color: #4D525B;
@@ -58,6 +58,11 @@
 }
 .SocialNetwork__link:active {
     transform: scale(0.9);
+}
+@media (max-width: 1380px) {
+    .SocialNetwork__text {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 1301px) {

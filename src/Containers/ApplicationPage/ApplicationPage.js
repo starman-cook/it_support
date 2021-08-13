@@ -120,6 +120,9 @@ const ApplicationPage = (props) => {
 
     const inputHandler = (event) => {
         const {name, value} = event.target;
+        if (value !== "DEFAULT") {
+            event.target.style.color = "#4D525B"
+        }
         setInputState(prevState => {
             return {...prevState, [name]: value}
         });
@@ -349,7 +352,7 @@ const ApplicationPage = (props) => {
                     inputHandler(event)
                 }}
                 messageRequired={true}
-                messagePlaceholder={"Расскажите побробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
+                messagePlaceholder={"Расскажите подробнее, например: утром вайфай еще работал, а после обеда выключается каждые пять минут отправляю письма, а они не доходят до получаетелей. Можно прикрепить к сообщению снимок экрана. Это поможет нам разобраться в проблеме."}
 
                 fileClicked={chooseFile}
                 iconClick={activateFileInput}
